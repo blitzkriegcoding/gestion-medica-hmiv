@@ -1,0 +1,1 @@
+C:\xampp\htdocs\hmiv/resources/views/pacientes/index.blade.php
