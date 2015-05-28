@@ -2,11 +2,11 @@
     <div class="wizard" data-initialize="wizard" id="wizard_ingreso" >
       <ul class="steps">
         <li data-step="1" data-name="campaign" class="active">
-          <span class="badge">1</span>Datos del Paciente<span class="chevron">            
+          <span class="badge">1</span>Datos Paciente<span class="chevron">            
           </span>
         </li>
-        <li data-step="2"><span class="badge">2</span>Datos del representante<span class="chevron"></span></li>
-        <li data-step="3" data-name="template"><span class="badge">3</span>Detalles de ingreso<span class="chevron"></span></li>
+        <li data-step="2"><span class="badge">2</span>Datos Representante<span class="chevron"></span></li>
+        <li data-step="3" data-name="template"><span class="badge">3</span>Detalles de admisión<span class="chevron"></span></li>
         <li data-step="4" data-name="template"><span class="badge">4</span>Guardar datos!<span class="chevron"></span></li>
       </ul>
       <div class="actions">
@@ -24,10 +24,10 @@
                   {{-- Bloque nacionalidad y cedula --}}
                   <div class="row">
                     <div class="col-md-3 pad-controles etiquetas">
-                      {{Form::label('tipo_documento','Nacionalidad: ')}}
+                      {{Form::label('tipo_documento_paciente','Nacionalidad: ')}}
                     </div>
                     <div class="col-md-3 pad-controles">
-                      {{Form::select('tipo_documento',array(''=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE'),'',array('class'=>'form-control input-sm','style'=>'width:75%')) }}
+                      {{Form::select('tipo_documento_paciente',array(''=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE','X'=>'NO APLICA'),'',array('class'=>'form-control input-sm','style'=>'width:75%')) }}
                     </div>
                   </div>
                   <div class="row">
@@ -39,6 +39,8 @@
                     </div>
                   </div>
                   {{-- Fin bloque nacionalidad y cedula --}}
+
+                  {{--BLOQUE NOMBRES Y APELLIDOS --}}
                   <div class="row">
                     <div class="col-md-3 pad-controles etiquetas">
                       {{Form::label('primer_nombre_paciente','Primer nombre: ')}} 
@@ -67,9 +69,12 @@
                       {{Form::text('segundo_apellido_paciente',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
                     </div>
                   </div>
+                  {{--FIN BLOQUE NOMBRES Y APELLIDOS --}}
+
+                  {{--BLOQUE FECHA/NACIMIENTO, PAIS ORIGEN --}}
                   <div class="row">
                     <div class="col-md-3 pad-controles etiquetas">
-                      {{Form::label('fecha_nacimiento_paciente','Fecha de nacimiento: ')}} 
+                      {{Form::label('fecha_nacimiento_paciente_campo','Fecha de nacimiento: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles"> 
                       <div class="input-group date" id="fecha_nacimiento_paciente">
@@ -77,18 +82,21 @@
                       </div>
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
-                      {{Form::label('pais_origen','País de origen: ')}} 
+                      {{Form::label('pais_origen_paciente','País de origen: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">                      
-                      {{Form::select('pais_origen',array(''=>'SELECCIONE'),'',array('class'=>'form-control input-sm','id'=>'paciente_pais_origen','style'=>'width:90%')) }}
+                      {{Form::select('pais_origen_paciente',array(''=>'SELECCIONE'),'',array('class'=>'form-control input-sm','id'=>'paciente_pais_origen','style'=>'width:90%')) }}
                     </div>
                   </div>
+                  {{--FIN BLOQUE FECHA/NACIMIENTO, PAIS ORIGEN --}}
+                  
+                  {{--BLOQUE SEXO, LUGAR NACIMIENTO --}}
                   <div class="row">
                     <div class="col-md-3 pad-controles etiquetas">
-                      {{Form::label('sexo','Género: ')}} 
+                      {{Form::label('sexo_paciente','Género: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">
-                      {{Form::select('sexo',array(''=>'SELECCIONE','F'=>'FEMENINO','M'=>'MASCULINO'),'0',array('class'=>'form-control input-sm','style'=>'width:75%')) }}
+                      {{Form::select('sexo_paciente',array(''=>'SELECCIONE','F'=>'FEMENINO','M'=>'MASCULINO'),'0',array('class'=>'form-control input-sm','style'=>'width:75%')) }}
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('lugar_nacimiento_paciente','Lugar de nacimiento: ')}} 
@@ -96,7 +104,8 @@
                     <div class="col-md-3 pad-controles">
                       {{Form::text('lugar_nacimiento_paciente',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
                     </div>
-                  </div> 
+                  </div>
+                  {{--FIN BLOQUE SEXO, LUGAR NACIMIENTO --}}
 
           </div>
         </div>
@@ -125,6 +134,8 @@
                       {{Form::text('documento_representante',NULL ,array('class'=>'form-control input-sm','placeholder'=>'Escriba cédula'))}}
                     </div>
                     {{-- FIN BLOQUE NACIONALIDAD Y CEDULA --}}
+
+                    {{--BLOQUE SEXO NOMBRES Y APELLIDOS --}}
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('sexo_representante','Género: ')}} 
                     </div>
@@ -160,6 +171,8 @@
                       {{Form::text('segundo_apellido_representante',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
                     </div>
                   </div>
+                  {{--FIN BLOQUE SEXO NOMBRES Y APELLIDOS --}}
+                  
                   <div class="row">
                     <div class="col-md-3 pad-controles etiquetas">
                       {{Form::label('fecha_nacimiento_representante','Fecha de nacimiento: ')}} 
@@ -176,6 +189,7 @@
                       {{Form::select('pais_origen_representante',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'representante_pais_origen','style'=>'width:75%')) }}
                     </div>
                   </div>
+
                   <div class="row">
                     <div class="col-md-3 pad-controles etiquetas">
                       {{Form::label('parentesco_representante','Parentesco/Relación con el paciente: ')}} 
@@ -253,8 +267,8 @@
 
         <!--CONTENIDO DEL TERCER PANEL-->
         <div class="step-pane sample-pane bg-default alert" data-step="3">
-          <h4>Ingreso</h4>
-          <p>En éste apartado se registra la modalidad de ingreso del paciente al Hospital. </p>
+          <h4>Admisión</h4>
+          <p>En éste apartado se registra la modalidad de admisión del paciente al Hospital. </p>
           <br>
           <div class="form-inline">
               <div class="row">
@@ -290,13 +304,28 @@
                   </div>
               </div> 
               <div class="row">
-               <div class="col-md-3 pad-controles etiquetas">
-                    {{Form::label('resumen_ingreso_paciente','Resumen de ingreso: ')}} 
+                  <div class="col-md-3 pad-controles etiquetas">
+                    {{Form::label('resumen_ingreso_paciente','Resumen de admisión: ')}} 
                   </div>
                   <div class="col-md-3 pad-controles">
-                    {{Form::textarea('resumen_ingreso_paciente','',array('class'=>'form-control input-sm','size'=>'25x7','placeholder'=>'Describa brevemente el ingreso del paciente, incluyendo sus sintomas y estado físico','style'=>'resize:none'))}}
+                    {{Form::textarea('resumen_ingreso_paciente','',array('class'=>'form-control input-sm','size'=>'25x7',/*'placeholder'=>'Describa brevemente el ingreso del paciente, incluyendo sus sintomas y estado físico',*/'style'=>'resize:none'))}}
                   </div>
+                  <div class="col-md-2 pad-controles etiquetas">
+                    {{Form::label('enfermedad_actual_paciente','Enfermedad actual: ')}} 
+                  </div>
+                  <div class="col-md-3 pad-controles">
+                    {{Form::textarea('enfermedad_actual_paciente','',array('class'=>'form-control input-sm','size'=>'25x7',/*'placeholder'=>'Describa brevemente el ingreso del paciente, incluyendo sus sintomas y estado físico',*/'style'=>'resize:none'))}}
+                  </div>                  
               </div>
+              <div class="row">
+                  <div class="col-md-3 pad-controles etiquetas">
+                    {{Form::label('diagnostico_admision_paciente','Diagnóstica de admisión: ')}} 
+                  </div>
+                  <div class="col-md-3 pad-controles">
+                    {{Form::textarea('diagnostico_admision_paciente','',array('class'=>'form-control input-sm','size'=>'25x7',/*'placeholder'=>'Describa brevemente el ingreso del paciente, incluyendo sus sintomas y estado físico',*/'style'=>'resize:none'))}}
+                  </div>
+                                 
+              </div>              
           </div>
         </div>
         <!--FIN CONTENIDO DEL TERCER PANEL-->

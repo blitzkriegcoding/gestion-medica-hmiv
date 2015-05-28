@@ -32,7 +32,7 @@ $(document).ready( function () {
         ('changeDate', function(e) {
           // Revalidate the date field
           $('#formulario_principal').formValidation('revalidateField', 'fecha_nacimiento_representante');
-        });        
+        });
       //datepicker_fecha_ingreso
       $('#datepicker_fecha_ingreso').datepicker(
       {
@@ -194,11 +194,46 @@ $(document).ready( function () {
             fields: 
             {
               /*VALIDACIONES PRIMER PANEL*/
-                tipo_documento: {
+/*        tipo_documento_paciente: {
                       validators: {
                           notEmpty: { message: 'Seleccione nacionalidad'}
                                   }
-                                },                              
+                                },  */
+      tipo_documento_paciente: {
+                      validators: {
+                          callback: {
+                            message: 'Seleccione nacionalidad',
+                            callback: function(value,validator,$field)
+                                       { 
+                                          //message: 'Seleccione nacionalidad'
+                                          $('#documento_paciente').prop("disabled",false);
+                                          switch(value)
+                                            {
+                                              case 'V':                                                
+                                                return true;
+                                              break;
+
+                                              case 'E':
+                                                return true;
+                                              break;
+
+                                              case 'P':
+                                                return true;
+                                              break;
+
+                                              case 'X':
+                                                $('#documento_paciente').prop("disabled",true);
+                                                return true;
+                                              break;
+
+                                              case '':                                              
+                                                return false;
+                                              break;
+                                            }
+                                       }
+                                    }
+                                  }
+                                },                                                            
                 documento_paciente: {
                               validators: {
                                   notEmpty: { message: 'Campo cédula es obligatorio'},
@@ -208,22 +243,22 @@ $(document).ready( function () {
                 primer_nombre_paciente: {
                               validators: {
                                   notEmpty: { message: 'Campo primer nombre es obligatorio'},
-                                    regexp: { regexp: /^[a-zA-Z\s]+$/, message: 'Este campo solo acepta letras'}
+                                    regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras'}
                                   }
                 },
                 segundo_nombre_paciente: {
                                 excluded: true,
-                                validators: { regexp: { regexp: /^[a-zA-Z\s]+$/, message: 'Este campo solo acepta letras'} }
+                                validators: { regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras'} }
                 },                
               primer_apellido_paciente: {
                               validators: {
                                   notEmpty: { message: 'Campo primer apellido es obligatorio' },
-                                  regexp: { regexp: /^[a-zA-Z\s]+$/, message: 'Este campo solo acepta letras' } }
+                                  regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras' } }
                 },
               segundo_apellido_paciente: {
                               excluded: true,
                                 validators: {                                  
-                                      regexp: { regexp: /^[a-zA-Z\s]+$/, message: 'Este campo solo acepta letras' } }
+                                      regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras' } }
                 },
               fecha_nacimiento_paciente_campo: {
                                 validators: {
@@ -232,7 +267,7 @@ $(document).ready( function () {
                                 
                     }
                 },
-              pais_origen: {
+      pais_origen_paciente: {
                   validators: {
                       notEmpty: { message: 'Seleccione país de origen'}
                               }
@@ -240,10 +275,10 @@ $(document).ready( function () {
               lugar_nacimiento_paciente: {
                               validators: {
                                   notEmpty: { message: 'Campo lugar de nacimiento es obligatorio' },
-                                    regexp: { regexp: /^[a-zA-Z\s]+$/, message: 'Este campo solo debe contener letras' }
+                                    regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo debe contener letras' }
                     }
                 },
-                  sexo: {
+        sexo_paciente: {
               validators: {
                   notEmpty: { message: 'Seleccione genero'}
                           }
@@ -265,20 +300,20 @@ $(document).ready( function () {
             primer_nombre_representante: {
                                 validators: {
                                     notEmpty: { message: 'Campo primer nombre es obligatorio'},
-                                      regexp: { regexp: /^[a-zA-Z\s]+$/, message: 'Este campo solo acepta letras'}
+                                      regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras'}
                                   }
                 },
             segundo_nombre_representante: {
-                                validators: { regexp: { regexp: /^[a-zA-Z\s]+$/, message: 'Este campo solo acepta letras'} }
+                                validators: { regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras'} }
                 },                
           primer_apellido_representante: {
                               validators: {
                                   notEmpty: { message: 'Campo primer apellido es obligatorio' },
-                                  regexp: { regexp: /^[a-zA-Z\s]+$/, message: 'Este campo solo acepta letras' } }
+                                  regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras' } }
                 },
         segundo_apellido_representante: {
                               validators: {                                  
-                                  regexp: { regexp: /^[a-zA-Z\s]+$/, message: 'Este campo solo acepta letras' } }
+                                  regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras' } }
                 },
         fecha_nacimiento_representante: {
                                 validators: {
@@ -351,6 +386,7 @@ $(document).ready( function () {
                                         },                          
 
           /*FIN VALIDACIONES SEGUNDO PANEL*/
+          
           /*VALIDACIONES TERCER PANEL*/
               tipo_ingreso_paciente: {
                                 validators: {
@@ -375,11 +411,23 @@ $(document).ready( function () {
                                         notEmpty: { message: 'Campo ubicación/sala es obligatorio'}
                                               }
                                         },
-                resumen_ingreso_paciente: {
+
+              resumen_ingreso_paciente: {
                                 validators: {
                                         notEmpty: { message: 'Campo resumen de ingreso es obligatorio'}
-                                              }
+                                            }
                                         },
+
+            enfermedad_actual_paciente: {
+                                validators: {
+                                        notEmpty: { message: 'Campo enfermedad actual es obligatorio'}
+                                            }
+                                        },
+        diagnostico_admision_paciente: {
+                              validators: {
+                                        notEmpty: { message: 'Campo diagnóstico de admisión es obligatorio'}
+                                          }
+                                      },                                        
           /*FIN VALIDACIONES TERCER PANEL*/          
           //cierre campos, no tocar
             },
@@ -423,8 +471,6 @@ $(document).ready( function () {
                 // For testing purpose
                 //$('#thankModal').modal();
             }
-          });
-       
-        
+          });        
 });
 
