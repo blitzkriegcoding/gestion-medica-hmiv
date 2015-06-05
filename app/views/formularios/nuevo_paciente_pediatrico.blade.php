@@ -1,5 +1,16 @@
+        @if (Session::get('mensaje') )
+          <!-- Si hay un mensaje, entonces lo imprimimos y le damos estilo con bootstrap -->
+          <div class="container-fluid text-center">
+            <div class="col-xs- col-sm- col-md- col-lg-" style="text-align: center">
+              <div class="alert alert-success text-center" style="width: 300px; margin: 0 auto;">
+                <span class="glyphicon glyphicon-ok-sign"></span>{{ " ".Session::get('mensaje')}}
+              </div>
+            </div>
+          </div>
+          <br><br>
+        @endif
 <div class="panel-body col-xs- col-sm- col-md- col-lg- alineacion_paneles" >
-    <div class="wizard" data-initialize="wizard" id="wizard_ingreso" >
+    <div class="wizard" data-initialize="wizard" id="wizard_ingreso" href="#">
       <ul class="steps">
         <li data-step="1" data-name="campaign" class="active">
           <span class="badge">1</span>Datos Paciente<span class="chevron">            
@@ -13,7 +24,7 @@
         <button type="button" class="btn btn-default btn-prev"><span class="glyphicon glyphicon-arrow-left"></span>Anterior</button>
         <button type="button" class="btn btn-default btn-next" data-last="Guardar">Siguiente<span class="glyphicon glyphicon-arrow-right"></span></button>
       </div>
-      {{ Form::open(['action'=>'PacientesController@alta_paciente_pediatrico','method'=>'post','class'=>'clearfix','id'=>'formulario_principal'])}}
+      {{ Form::open(['action'=>'PacientesPedriatricosController@crear_paciente_pedi','method'=>'post','class'=>'clearfix','id'=>'formulario_principal'])}}
       <div class="step-content">
         <!--Contenido del primer panel-->
         <div class="step-pane active sample-pane alert" data-step="1">
@@ -77,7 +88,7 @@
                       {{Form::label('fecha_nacimiento_paciente_campo','Fecha de nacimiento: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles"> 
-                      <div class="input-group date" id="fecha_nacimiento_paciente">
+                      <div class="input-group date" id="fecha_nacimiento_paciente_campo">
                         {{Form::text('fecha_nacimiento_paciente_campo',NULL,array('class'=>'form-control input-sm','size'=>'16', 'id'=>'fecha_nacimiento_paciente_campo' ))}}<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>
@@ -96,7 +107,7 @@
                       {{Form::label('sexo_paciente','Género: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">
-                      {{Form::select('sexo_paciente',array(''=>'SELECCIONE','F'=>'FEMENINO','M'=>'MASCULINO'),'0',array('class'=>'form-control input-sm','style'=>'width:75%')) }}
+                      {{Form::select('sexo_paciente',array(''=>'SELECCIONE','F'=>'FEMENINO','M'=>'MASCULINO'),'',array('class'=>'form-control input-sm','style'=>'width:75%')) }}
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('lugar_nacimiento_paciente','Lugar de nacimiento: ')}} 
@@ -319,7 +330,7 @@
               </div>
               <div class="row">
                   <div class="col-md-3 pad-controles etiquetas">
-                    {{Form::label('diagnostico_admision_paciente','Diagnóstica de admisión: ')}} 
+                    {{Form::label('diagnostico_admision_paciente','Diagnóstico de admisión: ')}} 
                   </div>
                   <div class="col-md-3 pad-controles">
                     {{Form::textarea('diagnostico_admision_paciente','',array('class'=>'form-control input-sm','size'=>'25x7',/*'placeholder'=>'Describa brevemente el ingreso del paciente, incluyendo sus sintomas y estado físico',*/'style'=>'resize:none'))}}

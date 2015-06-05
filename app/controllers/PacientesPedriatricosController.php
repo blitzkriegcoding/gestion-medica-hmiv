@@ -1,6 +1,6 @@
 <?php
 
-class PacienteController extends \BaseController {
+class PacientesPedriatricosController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -19,11 +19,20 @@ class PacienteController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
-		//
-	}
-
+	public function /*create()*/crear_paciente_pedi()
+		{
+			//return dd(Input::all());
+			$respuesta = PacientePedriatrico::cargar_paciente_pediatrico(Input::all());
+			
+			if($respuesta['error_mensajes'] == true)
+				{				
+					return Redirect::to('creacion_pacientes_pediatricos')->withErrors($respuesta['mensaje'])->withInput();
+				}
+			else
+				{
+					return Redirect::to('creacion_pacientes_pediatricos')->with('mensaje', $respuesta['mensaje']);
+				}
+		}
 	/**
 	 * Store a newly created resource in storage.
 	 * POST /pacientes

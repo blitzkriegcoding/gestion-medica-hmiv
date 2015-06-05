@@ -1,7 +1,7 @@
  
 $(document).ready( function () {
       //fecha de nacimiento del paciente limitado hasta el dia de hoy
-      $('#fecha_nacimiento_paciente')
+      $('#fecha_nacimiento_paciente_campo')
         .datepicker
           ({
       	    language: 'es',
@@ -174,6 +174,66 @@ $(document).ready( function () {
       });
       /*FIN OCUPACION U OFICIO DEL REPRESENTANTE DEL PACIENTE*/
 
+    FormValidation.Validator.val_num_ced_pac = {
+        validate: function(validator, $field, selector_nac ,options) 
+        {
+            var value = $field.val();
+            var valor_nacionalidad = $("#tipo_documento_paciente").val();
+
+                if ((value > 31000000) && (valor_nacionalidad == 'V')) 
+                  {
+                      return {
+                                valid: false,
+                                message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                                //message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                            }
+                  };
+
+                //if ((value < 80000000) && (valor_nacionalidad == 'E')) 
+                if ((value < 80000000) && (valor_nacionalidad == 'E')) 
+                  {
+                      return {
+                                valid: false,
+                                message: 'El numero de cedula no corresponde con la nacionalidad extranjera'
+                                //message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                            }
+                  };
+                return true;
+        }
+    };
+
+    FormValidation.Validator.val_num_ced_rep = {
+        validate: function(validator, $field, selector_nac ,options) 
+        {
+            var value = $field.val();
+            var valor_nacionalidad = $("#tipo_documento_representante").val();
+
+                if ((value > 31000000) && (valor_nacionalidad == 'V')) 
+                  {
+                      return {
+                                valid: false,
+                                message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                                //message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                            }
+                  };
+
+                //if ((value < 80000000) && (valor_nacionalidad == 'E')) 
+                if ((value < 80000000) && (valor_nacionalidad == 'E')) 
+                  {
+                      return {
+                                valid: false,
+                                message: 'El numero de cedula no corresponde con la nacionalidad extranjera'
+                                //message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                            }
+                  };
+                return true;
+        }
+    };
+
+
+
+
+
  $('#formulario_principal')
     // IMPORTANT: on('init.field.fv') must be declared
     // before calling .formValidation(...)
@@ -237,7 +297,8 @@ $(document).ready( function () {
                 documento_paciente: {
                               validators: {
                                   notEmpty: { message: 'Campo cédula es obligatorio'},
-                                    regexp: { regexp: /^[0-9]+$/, message: 'Este campo solo acepta números'}
+                                    regexp: { regexp: /^[0-9]+$/, message: 'Este campo solo acepta números'},
+                                    val_num_ced_pac: { message: 'Nacionalidad invalida' }
                                   }
                 },
                 primer_nombre_paciente: {
@@ -246,19 +307,43 @@ $(document).ready( function () {
                                     regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras'}
                                   }
                 },
-                segundo_nombre_paciente: {
+/*                segundo_nombre_paciente: {
                                 excluded: true,
                                 validators: { regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras'} }
-                },                
+                },*/  
+                segundo_nombre_paciente: {                                
+                                validators: { 
+                                    callback: {
+                                          message: 'Este campo solo acepta letras',
+                                          callback:function(value, validator, $field)
+                                                 {
+                                                    if(value!=""){
+                                                      return /^[a-zA-ZñÑ\s]+$/.test(value);
+                                                    }else { return null;}
+
+                                                 }
+                                              }
+                                            }
+                },
+
               primer_apellido_paciente: {
                               validators: {
                                   notEmpty: { message: 'Campo primer apellido es obligatorio' },
                                   regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras' } }
                 },
-              segundo_apellido_paciente: {
-                              excluded: true,
+              segundo_apellido_paciente: {                              
                                 validators: {                                  
-                                      regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras' } }
+                                        callback: {
+                                          message: 'Este campo solo acepta letras',
+                                          callback:function(value, validator, $field)
+                                                 {
+                                                    if(value!=""){
+                                                      return /^[a-zA-ZñÑ\s]+$/.test(value);
+                                                    }else { return null;}
+
+                                                 }
+                                              }
+                                    }
                 },
               fecha_nacimiento_paciente_campo: {
                                 validators: {
@@ -294,7 +379,8 @@ $(document).ready( function () {
                 documento_representante: {
                               validators: {
                                   notEmpty: { message: 'La cédula es obligatoria'},
-                                    regexp: { regexp: /^[0-9]+$/, message: 'Este campo solo acepta números'}
+                                    regexp: { regexp: /^[0-9]+$/, message: 'Este campo solo acepta números'},
+                                    val_num_ced_rep: { message: 'Nacionalidad invalida' }
                                   }
                 },
             primer_nombre_representante: {
@@ -304,7 +390,19 @@ $(document).ready( function () {
                                   }
                 },
             segundo_nombre_representante: {
-                                validators: { regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras'} }
+                                validators: { 
+                                        callback: {
+                                          message: 'Este campo solo acepta letras',
+                                          callback:function(value, validator, $field)
+                                                 {
+                                                    if(value!=""){
+                                                      return /^[a-zA-ZñÑ\s]+$/.test(value);
+                                                    }else { return null;}
+
+                                                 }
+                                              }
+
+                                    }
                 },                
           primer_apellido_representante: {
                               validators: {
@@ -313,8 +411,18 @@ $(document).ready( function () {
                 },
         segundo_apellido_representante: {
                               validators: {                                  
-                                  regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras' } }
-                },
+                                        callback: {
+                                          message: 'Este campo solo acepta letras',
+                                          callback:function(value, validator, $field)
+                                                 {
+                                                    if(value!=""){
+                                                      return /^[a-zA-ZñÑ\s]+$/.test(value);
+                                                    }else { return null;}
+
+                                                 }
+                                              }
+                                          }
+                                        },
         fecha_nacimiento_representante: {
                                 validators: {
                                     notEmpty: { message: 'Campo fecha de nacimiento es obligatoria[vacia]'},
@@ -466,7 +574,7 @@ $(document).ready( function () {
             var isValidStep = fv.isValidContainer($container);
             if (isValidStep === true) {
                 // Uncomment the following line to submit the form using the defaultSubmit() method
-                // fv.defaultSubmit();
+                 fv.defaultSubmit();
 
                 // For testing purpose
                 //$('#thankModal').modal();
