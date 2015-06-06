@@ -2,7 +2,7 @@
           <!-- Si hay un mensaje, entonces lo imprimimos y le damos estilo con bootstrap -->
           <div class="container-fluid text-center">
             <div class="col-xs- col-sm- col-md- col-lg-" style="text-align: center">
-              <div class="alert alert-success text-center" style="width: 300px; margin: 0 auto;">
+              <div class={{ '"alert text-center '.Session::get('estilo').'"' }}  style="width: 400px; margin: 0 auto;">
                 <span class="glyphicon glyphicon-ok-sign"></span>{{ " ".Session::get('mensaje')}}
               </div>
             </div>

@@ -2,10 +2,13 @@
 
 class PacientePedriatrico extends \Eloquent {
 	
-	protected $table = 'pacientes';
-	protected $fillable = ['tipo_documento', 'documento', 'primer_nombre','segundo_nombre', 'primer_apellido', 'segundo_apellido', 'fecha_nacimiento', 'id_pais','fotografia', 'sexo', 'tipo_paciente','visible','lugar_nacimiento'];
+	protected $table = 'pacientes_pediatricos';
+	protected $fillable = [];
 	public $timestamps = false;
 	protected $primaryKey = 'id_paciente';
+
+
+
 	
 	public static function cargar_paciente_pediatrico($input)				
 		{
@@ -13,6 +16,7 @@ class PacientePedriatrico extends \Eloquent {
 			$respuesta = array();
 			$respuesta['error_mensajes'] = '';
 			$respuesta['mensaje'] = '';
+			$respuesta['estilo'] = '';
 
 	 		$reglas_bloques = array
 									(
@@ -110,8 +114,27 @@ class PacientePedriatrico extends \Eloquent {
 								return $input['tipo_documento_representante'] == "P";
 							});
 					break;
-				}			
+				}
+			/*CHEQUEO EXISTENCIA DEL PACIENTE PEDIATRICO EN LA BASE DE DATOS*/
+			$existe_pac = DB::table('pacientes_pediatricos')
+							->where('tipo_documento','=', $input['tipo_documento_paciente'])
+							->where('documento','=', $input['documento_paciente'])
+							->pluck('id_paciente');
+					
+			/*CHEQUEO LA EXISTENCIA DEL REPRESENTANTE EN LA BASE DE DATOS*/
+			$existe_rep = DB::table('representantes')
+								->where('tipo_documento','=', $input['tipo_documento_representante'])
+								->where('documento','=', $input['documento_representante'])
+								->pluck('id_representante');
 
+			if(!is_null($existe_pac) && !is_null($existe_rep))
+				{
+					$respuesta['mensaje'] = "Paciente y Representante existentes";
+					$respuesta['estilo'] = 'alert-warning';	
+					//dd($respuesta);
+					return $respuesta;
+				}
+			
 			if($validador_bloques->fails())
 				{	
 					$respuesta['mensaje'] = $validador_bloques;
@@ -120,82 +143,119 @@ class PacientePedriatrico extends \Eloquent {
 			else
 				{
 					$paciente = new PacientePedriatrico();
-					$representante = new Representante();
-				
-
-					$paciente->tipo_documento = $input['tipo_documento_paciente'];
-					if(!isset($input['documento_paciente']) || $input['documento_paciente'] == "")
+					$parentesco_rep = new ParentescoRepresentantes();
+					$detalles_ingreso = new IngresoPacientePediatrico();					
+					
+					if(is_null($existe_pac))
 						{
-							$paciente->documento = "NO APLICA";
+							if((!isset($input['documento_paciente']) || $input['documento_paciente'] == "") && $input['tipo_documento_paciente']=="X")
+								{
+									$paciente->documento = "NO APLICA";
+								}
+							else
+								{
+									$paciente->documento = $input['documento_paciente'];
+								}
+							$paciente->tipo_documento = $input['tipo_documento_paciente'];
+							$paciente->primer_nombre = strtoupper($input['primer_nombre_paciente']);
+							$paciente->segundo_nombre = strtoupper($input['segundo_nombre_paciente']);
+							$paciente->primer_apellido = strtoupper($input['primer_apellido_paciente']);
+							$paciente->segundo_apellido = strtoupper($input['segundo_apellido_paciente']);
+							$paciente->fecha_nacimiento	= $input['fecha_nacimiento_paciente_campo'];
+							$paciente->id_pais = $input['pais_origen_paciente'];
+							$paciente->sexo = $input['sexo_paciente'];
+							switch($input['sexo_paciente'])
+								{
+									case 'M':
+										$paciente->fotografia = asset('img/icono_chamo.jpg');
+									break;
+
+									case 'F':
+										$paciente->fotografia = asset('img/icono_chama.jpg');
+									break;
+
+								}
+							$paciente->tipo_paciente = "1";
+							$paciente->visible = "1";
+							$paciente->lugar_nacimiento = strtoupper($input['lugar_nacimiento_paciente']);
+							$paciente->save(); /*GUARDAR PACIENTE PEDIATRICO*/
+							$parentesco_rep->id_paciente = $paciente->id_paciente; /*RETORNAR ID PARA RELACION DE PARENTESCO*/
+							$detalles_ingreso->id_paciente = $paciente->id_paciente;
+						}
+					else{
+							$parentesco_rep->id_paciente = $existe_pac;
+							$detalles_ingreso->id_paciente = $existe_pac;
+
+						}
+
+					
+
+					if(!is_null($existe_rep)) 
+						{
+							#$existe_rep->id_representante;
+							$parentesco_rep->id_representante = $existe_rep;
+							$respuesta['mensaje'] = 'Paciente creado con éxito, Representante existente';
+							$respuesta['estilo'] = 'alert-success';	
+						
 						}
 					else
 						{
-							$paciente->documento = $input['documento_paciente'];
+							$representante = new Representantes();
+							$representante->tipo_documento = $input['tipo_documento_representante'];
+							$representante->documento = $input['documento_representante'];
+							$representante->primer_nombre = strtoupper($input['primer_nombre_representante']);
+							$representante->segundo_nombre = strtoupper($input['segundo_nombre_representante']);
+							$representante->primer_apellido = strtoupper($input['primer_apellido_representante']);
+							$representante->segundo_apellido = strtoupper($input['segundo_apellido_representante']);
+							$representante->fecha_nacimiento = $input['fecha_nacimiento_representante'];
+							$representante->sexo = $input['sexo_representante'];
+							$representante->id_pais = $input['pais_origen_representante'];
+							$representante->id_parroquia = $input['direccion_est_mun_par_representante'];
+							$representante->avenida_calle = $input['avenida_calle_representante'];
+							$representante->casa_edificio = $input['casa_edificio_representante'];													
+							$representante->telefono1 = $input['telefono_1'];
+							$representante->telefono2 = $input['telefono_2'];
+							$representante->correo = $input['correo_representante'];
+							$representante->id_nivel_estudio = $input['grado_instruccion_representante'];
+							$representante->id_ocupacion_oficio = $input['ocupacion_oficio_representante'];
+							$representante->id_estado_civil = $input['estado_civil_representante'];
+							
+							$representante->save();
+							$parentesco_rep->id_representante = $representante->id_representante;
+
+							$respuesta['mensaje'] = 'Paciente y Representante creados con éxito,';
+							$respuesta['estilo'] = 'alert-success';	
+
 						}
 
-					$paciente->primer_nombre = strtoupper($input['primer_nombre_paciente']);
-					$paciente->segundo_nombre = strtoupper($input['segundo_nombre_paciente']);
-					$paciente->primer_apellido = strtoupper($input['primer_apellido_paciente']);
-					$paciente->segundo_apellido = strtoupper($input['segundo_apellido_paciente']);
+					/*GUARDAR DATOS DE PARENTESCO DEL PACIENTE Y REPRESENTANTE*/
+					$parentesco_rep->id_parentesco = $input['parentesco_representante'];
+					#$parentesco_rep->id_paciente = $existe_pac;
 
-					$paciente->fecha_nacimiento	= $input['fecha_nacimiento_paciente_campo'];
-					$paciente->id_pais = $input['pais_origen_paciente'];
+					
+					$parentesco_rep->save();
 
-					$paciente->sexo = $input['sexo_paciente'];
+					/*GUARDAR DETALLES DE ADMISION DEL PACIENTE*/
+					
+					$detalles_ingreso->fecha_hora_ingreso = $input['fecha_ingreso_paciente'];
 
-					switch($input['sexo_paciente'])
-						{
-							case 'M':
-								$paciente->fotografia = asset('img/icono_chamo.jpg');
-							break;
-
-							case 'F':
-								$paciente->fotografia = asset('img/icono_chama.jpg');
-							break;
-
-						}
-
-					$paciente->tipo_paciente = "1";
-					$paciente->visible = "1";
-					$paciente->lugar_nacimiento = strtoupper($input['lugar_nacimiento_paciente']);
-
-					$paciente->save(); /*GUARDAR PACIENTE PEDIATRICO*/
-
-
-					#$representante->tipo_documento = $input[''];
-
-					$existe_rep = 
+					
+					
+					
+					$detalles_ingreso->id_tipo_ingreso = $input['tipo_ingreso_paciente'];
+					$detalles_ingreso->resumen_ingreso = $input['resumen_ingreso_paciente'];
+					$detalles_ingreso->ubicacion_sala = $input['ubicacion_hospital_paciente'];
+					$detalles_ingreso->id_medico = $input['medico_tratante'];
+					$detalles_ingreso->enfermedad_actual = $input['enfermedad_actual_paciente'];
+					$detalles_ingreso->diagnostico_ingreso = $input['diagnostico_admision_paciente'];
+					$detalles_ingreso->save();
 
 
 
-
-					$respuesta['mensaje'] = 'Paciente creado con éxito';
+					#$respuesta['mensaje'] = 'Paciente creado con éxito';
 					$respuesta['error_mensajes'] = false;
-
-					/*
-						  id_representante bigserial NOT NULL,
-						  tipo_documento character varying(1) NOT NULL,
-						  documento character varying(16) NOT NULL,
-						  primer_nombre character varying(40) NOT NULL,
-						  segundo_nombre character varying(40) NOT NULL,
-						  primer_apellido character varying(40) NOT NULL,
-						  segundo_apellido character varying(40) NOT NULL,
-						  fecha_nacimiento date NOT NULL,
-						  sexo character varying(1) NOT NULL,
-						  id_pais integer NOT NULL,
-						  telefono1 character varying(14) NOT NULL,
-						  telefono2 character varying(14) NOT NULL,
-						  correo character varying(40) NOT NULL,
-						  fotografia character varying(255) NOT NULL,
-						  id_nivel_estudio bigint NOT NULL,
-						  id_ocupacion_oficio bigint NOT NULL,
-						  id_estado_civil integer NOT NULL,					
-					*/
-
 				}
-			#$p1 = $validador_bloques->fails();
-			
-			//dd($p1);
+
 			return $respuesta;
 		}
 

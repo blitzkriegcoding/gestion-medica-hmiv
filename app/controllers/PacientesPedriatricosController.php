@@ -30,7 +30,7 @@ class PacientesPedriatricosController extends \BaseController {
 				}
 			else
 				{
-					return Redirect::to('creacion_pacientes_pediatricos')->with('mensaje', $respuesta['mensaje']);
+					return Redirect::to('creacion_pacientes_pediatricos')->with(['mensaje'=>$respuesta['mensaje'],'estilo'=>$respuesta['estilo'] ]);
 				}
 		}
 	/**

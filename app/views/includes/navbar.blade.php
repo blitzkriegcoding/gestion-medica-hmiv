@@ -7,7 +7,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="./" class="navbar-brand">Bootstrap 3 Menu Generator</a>
+                <a class="navbar-brand" href="#">
+            <img src="{{ asset('img/logo_grande_redondo_icono_brand_2.jpg')}}" class="img-circle" style="width:75%"  alt="logo" >
+      </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
