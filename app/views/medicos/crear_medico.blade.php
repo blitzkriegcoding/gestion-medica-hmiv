@@ -1,7 +1,8 @@
 @extends('layouts.master')
 @section('formularios')
-	@include('formularios.nuevo_paciente_pediatrico')	
+	{{--FORMULARIO DE CARGA DE DATOS--}}
+	@include('formularios.medicos.nuevo_medico')	
 @stop
 @section('controles_adicionales')
-	
+	{{--VALIDACIONES EN JAVASCRIPT PARA LA VISTA ACTUAL --}}
 @stop

@@ -11,30 +11,39 @@
 |
 */
 
-Route::get('/creacion_pacientes_pediatricos', function()
+
+/*RUTAS PACIENTES PEDIATRICOS*/
+Route::get('/pacientes_pediatricos/creacion_pacientes_pediatricos', function()
 {
 	return View::make('pacientes_pediatricos.crear_paciente_pediatrico');
 });
 
-Route::get('/creacion_examenes_medicos_pediatricos', function()
+Route::get('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos', function()
 {
 	return View::make('pacientes_pediatricos.crear_examenes_medicos_paciente');
 	//return "Hola";
 });
+Route::post('crear_paciente_pediatrico','PacientesPedriatricosController@crear_paciente_pedi');
+/*FIN RUTAS PACIENTES PEDIATRICOS*/
 
+/*RUTAS MEDICOS*/
+Route::get('/medicos/creacion_medicos', function()
+{
+	return View::make('medicos.crear_medico');
+});
+Route::post('crear_nuevo_medico','MedicosController@crear_nuevo_medico');
+/*FIN RUTAS MEDICOS*/
 
 Route::get('creacion_pacientes_obstetricos', function()
 {
 	return View::make('pacientes.crear_paciente_obstetrico');
 });
-#Route::get('pacientes', array('uses'=>'PacientesController@index'));
-Route::post('crear_paciente_pediatrico','PacientesPedriatricosController@crear_paciente_pedi');
 
 
-#Route::post('crear_paciente_obstetrico','PacientesController@crear_paciente_obst');
 
+/*RUTAS DE CONSULTAS AJAX*/
 Route::get('/obtener_paises/{pais}',array('uses'=>'PaisesController@mostrarPaises'))->where('pais','[a-zA-Z]+');
 Route::get('/obtener_direccion/{dir}',array('uses'=>'RepresentanteController@mostrarDireccion'))->where('dir','[a-zA-Z]+');
 Route::get('/obtener_ocupacion/{ocupacion}',array('uses'=>'RepresentanteController@mostrarOcupacionOficio'))->where('ocupacion','[a-zA-Z]+');
-
+/*FIN RUTAS DE CONSULTAS AJAX*/
 	 

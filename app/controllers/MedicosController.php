@@ -83,4 +83,9 @@ class MedicosController extends \BaseController {
 		//
 	}
 
+	public function crear_nuevo_medico()
+		{
+			
+		}
+
 }
