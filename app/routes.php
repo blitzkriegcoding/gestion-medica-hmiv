@@ -11,16 +11,25 @@
 |
 */
 
-Route::get('creacion_pacientes_pediatricos', function()
+Route::get('/creacion_pacientes_pediatricos', function()
 {
 	return View::make('pacientes_pediatricos.crear_paciente_pediatrico');
 });
+
+Route::get('/creacion_examenes_medicos_pediatricos', function()
+{
+	return View::make('pacientes_pediatricos.crear_examenes_medicos_paciente');
+	//return "Hola";
+});
+
+
 Route::get('creacion_pacientes_obstetricos', function()
 {
 	return View::make('pacientes.crear_paciente_obstetrico');
 });
 #Route::get('pacientes', array('uses'=>'PacientesController@index'));
 Route::post('crear_paciente_pediatrico','PacientesPedriatricosController@crear_paciente_pedi');
+
 
 #Route::post('crear_paciente_obstetrico','PacientesController@crear_paciente_obst');
 
