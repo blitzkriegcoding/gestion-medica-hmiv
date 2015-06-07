@@ -34,7 +34,7 @@
       </div>
       {{ Form::open(['action'=>'PacientesPedriatricosController@crear_paciente_pedi','method'=>'post','class'=>'clearfix','id'=>'formulario_principal'])}}
       <div class="step-content">
-        <!--Contenido del primer panel-->
+        <!--CONTENIDO DEL PRIMER PANEL-->
         <div class="step-pane active sample-pane alert" data-step="1">
           <h4>Identificación del Paciente</h4>
           <p>En esta sección sera identificado el/la paciente con los datos primarios para su ingreso al Hospital.</p>
