@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="container">
     <h3>
-      Creación de médicos en el SGH
+      Creación de médicos en el Sistema de Gestión Médica.
     </h3>
   </div>
 </div>
