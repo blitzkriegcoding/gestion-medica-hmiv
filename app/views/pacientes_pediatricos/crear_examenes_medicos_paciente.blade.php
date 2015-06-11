@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('formularios')
-	@include('formularios.examenes_medicos_paciente')	
+	@include('formularios.nuevo_examenes_medicos_paciente')	
 @stop
 @section('controles_adicionales')
 	
