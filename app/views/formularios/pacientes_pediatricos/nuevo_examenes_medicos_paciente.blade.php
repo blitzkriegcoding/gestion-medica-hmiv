@@ -47,7 +47,7 @@
                         $divisor_linea = 0;
                         $contador_items = 0; 
                     ?>
-                    <table width="100%" class="table">                          
+                    <table width="100%" class=" table table-condensed table-hover">                          
                       <tr>
                          @foreach($item->condicion as $l)
                            <?php $divisor_linea++;
@@ -84,7 +84,42 @@
         <br>
         <br>
         <div class="container-fluid">
-          
+          @foreach ($examen_funcional_items as $item) 
+                 <div class="panel panel-primary">
+                   <div class="panel-heading">{{$item->grupo_examen}}</div>
+                   
+                   <?php 
+                        $divisor_linea = 0;
+                        $contador_items = 0; 
+                    ?>
+                    <table width="100%" class=" table table-condensed table-hover">                          
+                      <tr>
+                         @foreach($item->CondicionFuncional as $l)
+                           <?php $divisor_linea++;
+                                $contador_items++;
+                           ?>
+                                    
+                                        <td width='10%'>
+                                         <strong>{{ $item->id_grupo_examen."-".$contador_items }} {{ $l->condicion }}</strong>
+                                        </td>
+                                        <td width='5%' class="text-left">
+                                          {{ Form::checkbox('funcional_'.$l->id_condicion_examen,$l->id_condicion_examen,false, array('class'=>'form-control')) }}
+                                        </td> 
+                                        <td width='15%'>
+                                           {{Form::text('detalle_funcional_'.$l->id_condicion_examen,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                        </td>                                                                                
+                                  {{-- $l->condicion_grupo --}}
+                            
+                           @if($divisor_linea % 2 == 0)     
+                              {{'</tr>'}}
+                           @endif
+                          @endforeach
+
+
+                    </table>
+                 </div>
+
+                @endforeach
         </div>
       </div>
       <div class="step-pane active sample-pane alert" data-step="3">
@@ -93,6 +128,42 @@
         <br>
         <br>
         <div class="container-fluid">
+          @foreach ($examen_fisico_items as $item) 
+                 <div class="panel panel-primary">
+                   <div class="panel-heading">{{$item->examen_fisico}}</div>
+                   
+                   <?php 
+                        $divisor_linea = 0;
+                        $contador_items = 0; 
+                    ?>
+                    <table width="100%" class=" table table-condensed table-hover">                          
+                      <tr>
+                         @foreach($item->CondicionFisico as $l)
+                           <?php $divisor_linea++;
+                                $contador_items++;
+                           ?>
+                                    
+                                        <td width='10%'>
+                                         <strong>{{ $item->id_grupo_examen_fisico."-".$contador_items }} {{ $l->examen_fisico_condicion }}</strong>
+                                        </td>
+                                        <td width='5%' class="text-left">
+                                          {{ Form::checkbox('fisico_'.$l->id_grupo_examen_fisico_condicion,$l->id_grupo_examen_fisico_condicion,false, array('class'=>'form-control')) }}
+                                        </td> 
+                                        <td width='15%'>
+                                           {{Form::text('detalle_fisico_'.$l->id_grupo_examen_fisico_condicion,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                        </td>                                                                                
+                                  {{-- $l->condicion_grupo --}}
+                            
+                           @if($divisor_linea % 2 == 0)     
+                              {{'</tr>'}}
+                           @endif
+                          @endforeach
+
+
+                    </table>
+                 </div>
+
+                @endforeach        
           
         </div>
       </div>
