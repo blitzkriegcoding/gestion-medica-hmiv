@@ -1,0 +1,5 @@
+<?php $__env->startSection('formularios'); ?>
+	<?php echo $__env->make('formularios.nuevo_paciente_pediatrico', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
