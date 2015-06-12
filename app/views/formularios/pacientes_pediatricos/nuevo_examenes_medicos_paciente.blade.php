@@ -1,27 +1,102 @@
-<div class="panel-body col-xs- col-sm- col-md- col-lg- alineacion_paneles" >
-  <div class="wizard" data-initialize="wizard" id="myWizard">
+{{-- dd($interrogatorio_items); --}}
+<div class="container-fluid">
+  <div class="container">
+    <h3>
+      Examenes de rutina para el ingreso del paciente al HMIV
+    </h3>
+  </div>
+</div>
+<br>
+@if (Session::get('mensaje') )
+  <!-- Si hay un mensaje, entonces lo imprimimos y le damos estilo con bootstrap -->
+  <div class="container-fluid text-center">
+    <div class="col-xs- col-sm- col-md- col-lg-" style="text-align: center">
+      <div class={{ '"alert text-center '.Session::get('estilo').'"' }}  style="width: 400px; margin: 0 auto;">
+        <span class="glyphicon glyphicon-ok-sign"></span>{{ " ".Session::get('mensaje')}}
+      </div>
+    </div>
+  </div>
+  <br><br>
+@endif
+<div class="panel-body col-xs- col-sm- col-md- col-lg- alineacion_paneles">
+  <div class="wizard" data-initialize="wizard" id="examenes_medicos_paciente_pediatrico">
     <ul class="steps">
-      <li data-step="1" data-name="campaign" class="active"><span class="badge">1</span>Campaign<span class="chevron"></span></li>
-      <li data-step="2"><span class="badge">2</span>Recipients<span class="chevron"></span></li>
-      <li data-step="3" data-name="template"><span class="badge">3</span>Template<span class="chevron"></span></li>
+      <li data-step="1" data-name="campaign" class="active"><span class="badge">1</span>Parte I<span class="chevron"></span></li>
+      <li data-step="2"><span class="badge">2</span>Parte II<span class="chevron"></span></li>
+      <li data-step="3" data-name="template"><span class="badge">3</span>Parte III<span class="chevron"></span></li>
     </ul>
     <div class="actions">
-      <button type="button" class="btn btn-default btn-prev"><span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
-      <button type="button" class="btn btn-default btn-next" data-last="Complete">Next<span class="glyphicon glyphicon-arrow-right"></span></button>
+      <button type="button" class="btn btn-default btn-prev"><span class="glyphicon glyphicon-arrow-left">
+        </span>Anterior</button>
+      <button type="button" class="btn btn-default btn-next" data-last="Guardar">Siguiente<span class="glyphicon glyphicon-arrow-right"></span></button>
     </div>
+    {{ Form::open()}}
     <div class="step-content">
       <div class="step-pane active sample-pane alert" data-step="1">
-        <h4>Setup Campaign</h4>
-        <p>Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean garlic. Beetroot water spinach okra water chestnut ricebean pea catsear courgette.</p>
+        <h4>Interrogatorio</h4>
+        <p>Apartado para cargar los datos suministrados por el representante del paciente pediátrico.</p>
+        <br>
+        <br>
+        <div class="container-fluid">
+                 @foreach ($interrogatorio_items as $item) 
+
+                 <div class="panel panel-primary">
+                   <div class="panel-heading">{{$item->grupo}}</div>
+                   
+                   <?php 
+                        $divisor_linea = 0;
+                        $contador_items = 0; 
+                    ?>
+                    <table width="100%" class="table">                          
+                      <tr>
+                         @foreach($item->condicion as $l)
+                           <?php $divisor_linea++;
+                                $contador_items++;
+                           ?>
+                                    
+                                        <td width='10%'>
+                                         <strong>{{ $item->id_grupo."-".$contador_items }} {{ $l->condicion_grupo }}</strong>
+                                        </td>
+                                        <td width='2%'>
+                                          {{ Form::checkbox('interrogatorio_'.$l->id_condicion_grupo,$l->id_condicion_grupo,false, array('class'=>'form-control')) }}
+                                        </td> 
+                                        <td width='15%'>
+                                           {{Form::text('detalle_'.$l->id_condicion_grupo,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                        </td>                                                                                
+                                  {{-- $l->condicion_grupo --}}
+                            
+                           @if($divisor_linea % 2 == 0)     
+                              {{'</tr>'}}
+                           @endif
+                          @endforeach
+
+
+                    </table>
+                 </div>
+
+                @endforeach
+
+        </div>
       </div>
-      <div class="step-pane sample-pane bg-info alert" data-step="2">
-        <h4>Choose Recipients</h4>
-        <p>Celery quandong swiss chard chicory earthnut pea potato. Salsify taro catsear garlic gram celery bitterleaf wattle seed collard greens nori. Grape wattle seed kombu beetroot horseradish carrot squash brussels sprout chard. </p>
+      <div class="step-pane active sample-pane alert" data-step="2">
+        <h4>Exámen funcional</h4>
+        <p>El paciente será verificado por el médico para identificar indicios de patologías. </p>
+        <br>
+        <br>
+        <div class="container-fluid">
+          
+        </div>
       </div>
-      <div class="step-pane sample-pane bg-danger alert" data-step="3">
-        <h4>Design Template</h4>
-        <p>Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. Sea lettuce lettuce water chestnut eggplant winter purslane fennel azuki bean earthnut pea sierra leone bologi leek soko chicory celtuce parsley jÃ­cama salsify. </p>
+      <div class="step-pane active sample-pane alert" data-step="3">
+        <h4>Exámen físico</h4>
+        <p>Verificación rutinaria del médico al paciente. </p>
+        <br>
+        <br>
+        <div class="container-fluid">
+          
+        </div>
       </div>
     </div>
+    {{ Form::close()}}
 </div>
 </div>
