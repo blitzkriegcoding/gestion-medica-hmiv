@@ -7,6 +7,11 @@ class PacientePedriatrico extends \Eloquent {
 	public $timestamps = false;
 	protected $primaryKey = 'id_paciente';
 
+	public function ParentescoRepresentante()
+		{
+			return $this->hasMany('ParentescoRepresentantes','id_paciente','id_paciente');	
+		}
+
 
 
 	

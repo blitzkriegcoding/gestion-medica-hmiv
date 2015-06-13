@@ -26,11 +26,11 @@ class PacientesPedriatricosController extends \BaseController {
 			
 			if($respuesta['error_mensajes'] == true)
 				{				
-					return Redirect::to('creacion_pacientes_pediatricos')->withErrors($respuesta['mensaje'])->withInput();
+					return Redirect::to('/pacientes_pediatricos/creacion_pacientes_pediatricos')->withErrors($respuesta['mensaje'])->withInput();
 				}
 			else
 				{
-					return Redirect::to('creacion_pacientes_pediatricos')->with(['mensaje'=>$respuesta['mensaje'],'estilo'=>$respuesta['estilo'] ]);
+					return Redirect::to('/pacientes_pediatricos/creacion_pacientes_pediatricos')->with(['mensaje'=>$respuesta['mensaje'],'estilo'=>$respuesta['estilo'] ]);
 				}
 		}
 	/**

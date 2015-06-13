@@ -20,34 +20,13 @@ Route::get('/pacientes_pediatricos/creacion_pacientes_pediatricos', function()
 
 Route::get('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos', function()
 {
-/*		
-		$interrogatorio_items = 
-			DB::table('grupo_interrogatorio')
-			->join('condicion_interrogatorio','grupo_interrogatorio.id_grupo' ,'=','condicion_interrogatorio.id_grupo')
-			->select('grupo', 'id_condicion_grupo','condicion_grupo')
-			->orderBy('grupo_interrogatorio.id_grupo','asc')
-			->get();*/
 
-			/*->toSql();*/
-			#dd($interrogatorio);
 		$interrogatorio_items = GrupoInterrogatorio::all();
 		$interrogatorio_item = CondicionInterrogatorio::all();
-				
-/*		$examen_funcional_items = 
-			DB::table('grupo_examen_funcional')
-			->join('condicion_examen_funcional','grupo_examen_funcional.id_grupo_examen','=','condicion_examen_funcional.id_grupo_examen')
-			->select('grupo_examen', 'id_condicion_examen','condicion')
-			->orderBy('grupo_examen_funcional.id_grupo_examen','asc')
-			->get();*/
+
 		$examen_funcional_items = GrupoExamenFuncional::all();
 		$examen_funcional_item = CondicionExamenFuncional::all();
 
-/*		$examen_fisico_items = 
-			DB::table('grupo_examen_fisico')
-			->join('condicion_examen_fisico','grupo_examen_fisico.id_grupo_examen_fisico','=','condicion_examen_fisico.id_grupo_examen_fisico')
-			->select('examen_fisico','id_grupo_examen_fisico_condicion','examen_fisico_condicion')
-			->orderBy('grupo_examen_fisico.id_grupo_examen_fisico','asc')
-			->get();*/
 		$examen_fisico_items = GrupoExamenFisico::all();
 		$examen_fisico_item = CondicionExamenFisico::all();
 		
@@ -64,8 +43,7 @@ Route::get('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos', funct
 								'examen_fisico_items'		=> $examen_fisico_items,
 								'examen_fisico_item'		=> $examen_fisico_item
 
-							/*'examen_funcional_items' => $examen_funcional_items, 
-							'examen_fisico_items' => $examen_fisico_items*/));
+							));
 
 	
 });

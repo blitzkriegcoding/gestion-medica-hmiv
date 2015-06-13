@@ -41,7 +41,7 @@
                  @foreach ($interrogatorio_items as $item) 
 
                  <div class="panel panel-primary">
-                   <div class="panel-heading">{{$item->grupo}}</div>
+                   <div class="panel-heading">{{$item->item_grupo_interrogatorio}}</div>
                    
                    <?php 
                         $divisor_linea = 0;
@@ -49,19 +49,19 @@
                     ?>
                     <table width="100%" class=" table table-condensed table-hover">                          
                       <tr>
-                         @foreach($item->condicion as $l)
+                         @foreach($item->CondicionInterrogatorio as $l)
                            <?php $divisor_linea++;
                                 $contador_items++;
                            ?>
                                     
-                                        <td width='10%'>
-                                         <strong>{{ $item->id_grupo."-".$contador_items }} {{ $l->condicion_grupo }}</strong>
+                                        <td width='10%' class="text-left" valign="middle">
+                                         <strong>{{ $item->id_grupo_interrogatorio."-".$contador_items }} {{ $l->item_interrogatorio }}</strong>
                                         </td>
                                         <td width='2%'>
-                                          {{ Form::checkbox('interrogatorio_'.$l->id_condicion_grupo,$l->id_condicion_grupo,false, array('class'=>'form-control')) }}
+                                          {{ Form::checkbox('interrogatorio[]',$l->id_condicion_interrogatorio,false, array('class'=>'form-control')) }}
                                         </td> 
-                                        <td width='15%'>
-                                           {{Form::text('detalle_'.$l->id_condicion_grupo,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                        <td width='10%'>
+                                           {{Form::text('detalle_'.$l->id_condicion_interrogatorio,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
                                         </td>                                                                                
                                   {{-- $l->condicion_grupo --}}
                             
@@ -86,7 +86,7 @@
         <div class="container-fluid">
           @foreach ($examen_funcional_items as $item) 
                  <div class="panel panel-primary">
-                   <div class="panel-heading">{{$item->grupo_examen}}</div>
+                   <div class="panel-heading">{{$item->item_grupo_funcional}}</div>
                    
                    <?php 
                         $divisor_linea = 0;
@@ -97,16 +97,15 @@
                          @foreach($item->CondicionFuncional as $l)
                            <?php $divisor_linea++;
                                 $contador_items++;
-                           ?>
-                                    
+                           ?>                                    
                                         <td width='10%'>
-                                         <strong>{{ $item->id_grupo_examen."-".$contador_items }} {{ $l->condicion }}</strong>
+                                         <strong>{{ $item->id_grupo_funcional."-".$contador_items }} {{ $l->item_examen_funcional }}</strong>
                                         </td>
                                         <td width='5%' class="text-left">
-                                          {{ Form::checkbox('funcional_'.$l->id_condicion_examen,$l->id_condicion_examen,false, array('class'=>'form-control')) }}
+                                          {{ Form::checkbox('funcional[]', $l->id_condicion_examen_funcional,false, array('class'=>'form-control')) }}
                                         </td> 
                                         <td width='15%'>
-                                           {{Form::text('detalle_funcional_'.$l->id_condicion_examen,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                           {{Form::text('detalle_funcional_'.$l->id_condicion_examen_funcional,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
                                         </td>                                                                                
                                   {{-- $l->condicion_grupo --}}
                             
@@ -128,15 +127,62 @@
         <br>
         <br>
         <div class="container-fluid">
+          <div class="panel panel-primary">
+             <div class="panel-heading">SIGNOS VITALES</div>
+              <table width="100%" class="table table-responsive table-hover" >                          
+                <tr >                                    
+                  <td width='150px' class="text-right" style="vertical-align:middle">
+                      {{ Form::label('frecuencia_respiratoria','Frecuencia respiratoria (rpm): ') }}
+                  </td>
+                  <td width='50px' class="text-left" style="vertical-align:middle">
+                    {{ Form::text('frecuencia_respiratoria',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 45px' )) }} 
+                  </td> 
+                  <td width='150px' class="text-right" style="vertical-align:middle">
+                      {{ Form::label('frecuencia_cardiaca','Frecuencia cardíaca (lpm): ') }}
+                  </td>
+                  <td width='50px' class="text-left" style="vertical-align:middle">
+                    {{ Form::text('frecuencia_cardiaca',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 45px')) }}
+                  </td>
+                  <td width='150px' class="text-right" style="vertical-align:middle">
+                      {{ Form::label('peso','Peso (Kg): ') }} 
+                  </td>
+                  <td width='50px' class="text-left" style="vertical-align:middle">
+                    {{ Form::text('peso',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 45px')) }}
+                  </td>                          
+                </tr>
+                <tr>                                    
+                  <td width='150px' class="text-right" style="vertical-align:middle">
+                      {{ Form::label('talla','Talla (cm): ') }}
+                  </td>
+                  <td width='50px' class="text-left" style="vertical-align:middle">
+                    {{ Form::text('talla',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 45px')) }}
+                  </td> 
+                  <td width='150px' class="text-right" style="vertical-align:middle">
+                      {{ Form::label('tension_arterial','Tensión arterial (mmHg): ') }}
+                  </td>
+                  <td width='50px' class="text-left" style="vertical-align:middle">
+                    {{ Form::text('tension_arterial',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 45px')) }}
+                  </td>
+                  <td width='150px' class="text-right" style="vertical-align:middle">
+                      {{ Form::label('temperatura','Temperatura (°C): ') }} 
+                  </td>
+                  <td width='50px' class="text-left" style="vertical-align:middle">
+                    {{ Form::text('temperatura',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 45px')) }}
+                  </td>                          
+                </tr>                
+              </table>                   
+          </div>
+
+
           @foreach ($examen_fisico_items as $item) 
                  <div class="panel panel-primary">
-                   <div class="panel-heading">{{$item->examen_fisico}}</div>
+                   <div class="panel-heading">{{$item->item_grupo_fisico}}</div>
                    
                    <?php 
                         $divisor_linea = 0;
                         $contador_items = 0; 
                     ?>
-                    <table width="100%" class=" table table-condensed table-hover">                          
+                    <table width="100%" class=" table table-responsive table-hover">                          
                       <tr>
                          @foreach($item->CondicionFisico as $l)
                            <?php $divisor_linea++;
@@ -144,13 +190,13 @@
                            ?>
                                     
                                         <td width='10%'>
-                                         <strong>{{ $item->id_grupo_examen_fisico."-".$contador_items }} {{ $l->examen_fisico_condicion }}</strong>
+                                         <strong>{{ $item->id_grupo_fisico."-".$contador_items }} {{ $l->item_examen_fisico }}</strong>
                                         </td>
                                         <td width='5%' class="text-left">
-                                          {{ Form::checkbox('fisico_'.$l->id_grupo_examen_fisico_condicion,$l->id_grupo_examen_fisico_condicion,false, array('class'=>'form-control')) }}
+                                          {{ Form::checkbox('fisico[]',$l->id_condicion_examen_fisico,false, array('class'=>'form-control')) }}
                                         </td> 
                                         <td width='15%'>
-                                           {{Form::text('detalle_fisico_'.$l->id_grupo_examen_fisico_condicion,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                           {{Form::text('detalle_fisico_'.$l->id_condicion_examen_fisico,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
                                         </td>                                                                                
                                   {{-- $l->condicion_grupo --}}
                             
