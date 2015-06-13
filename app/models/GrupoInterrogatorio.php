@@ -6,6 +6,6 @@ class GrupoInterrogatorio extends \Eloquent {
 
 	public function condicion()
 		{
-			return $this->hasMany('CondicionInterrogatorio','id_grupo','id_grupo');
+			return $this->hasMany('CondicionInterrogatorio','id_grupo_interrogatorio','id_grupo_interrogatorio');
 		}
 }

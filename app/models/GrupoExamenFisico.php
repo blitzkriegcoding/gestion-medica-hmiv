@@ -6,7 +6,7 @@ class GrupoExamenFisico extends \Eloquent {
 
 	public function CondicionFisico()
 		{
-			return $this->hasMany('CondicionExamenFisico','id_grupo_examen_fisico','id_grupo_examen_fisico');
+			return $this->hasMany('CondicionExamenFisico','id_grupo_fisico','id_grupo_fisico');
 		}
 
 }

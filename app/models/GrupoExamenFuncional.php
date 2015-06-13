@@ -6,6 +6,6 @@ class GrupoExamenFuncional extends \Eloquent {
 
 	public function CondicionFuncional()
 		{
-			return $this->hasMany('CondicionExamenFuncional','id_grupo_examen','id_grupo_examen');
+			return $this->hasMany('CondicionExamenFuncional','id_grupo_funcional','id_grupo_funcional');
 		}
 }
