@@ -2,7 +2,7 @@
 	<?php echo $__env->make('formularios.pacientes_pediatricos.nuevo_examenes_medicos_paciente', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>	
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('controles_adicionales'); ?>
-	
+	<?php echo $__env->make('includes.validaciones_examenes_medicos', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

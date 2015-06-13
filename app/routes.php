@@ -45,6 +45,7 @@ Route::get('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos/{id_pac
 
 	});
 Route::post('crear_paciente_pediatrico','PacientesPedriatricosController@crear_paciente_pedi');
+Route::post('crear_examenes_medicos_paciente',['uses'=>'ExamenesPediatricosController@crear_examenes_paciente_pediatrico']);
 /*FIN RUTAS PACIENTES PEDIATRICOS*/
 
 /*RUTAS MEDICOS*/

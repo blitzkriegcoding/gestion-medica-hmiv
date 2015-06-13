@@ -1,10 +1,10 @@
 <?php
 
-class ExamenesPacienteController extends \BaseController {
+class PacientesPedriatricosController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /examenespaciente
+	 * GET /pacientes
 	 *
 	 * @return Response
 	 */
@@ -15,29 +15,38 @@ class ExamenesPacienteController extends \BaseController {
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /examenespaciente/create
+	 * GET /pacientes/create
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
-		//
-	}
-
+	public function crear_paciente_pedi()
+		{
+			//return dd(Input::all());
+			$respuesta = PacientePediatrico::cargar_paciente_pediatrico(Input::all());
+			
+			if($respuesta['error_mensajes'] == true)
+				{				
+					return Redirect::to('/pacientes_pediatricos/creacion_pacientes_pediatricos')->withErrors($respuesta['mensaje'])->withInput();
+				}
+			else
+				{
+					return Redirect::to('/pacientes_pediatricos/creacion_pacientes_pediatricos')->with(['mensaje'=>$respuesta['mensaje'],'estilo'=>$respuesta['estilo'] ]);
+				}
+		}
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /examenespaciente
+	 * POST /pacientes
 	 *
 	 * @return Response
 	 */
 	public function store()
-	{
-		//
-	}
+		{
+			
+		}
 
 	/**
 	 * Display the specified resource.
-	 * GET /examenespaciente/{id}
+	 * GET /pacientes/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -49,7 +58,7 @@ class ExamenesPacienteController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /examenespaciente/{id}/edit
+	 * GET /pacientes/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -61,7 +70,7 @@ class ExamenesPacienteController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /examenespaciente/{id}
+	 * PUT /pacientes/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -73,7 +82,7 @@ class ExamenesPacienteController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /examenespaciente/{id}
+	 * DELETE /pacientes/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -82,5 +91,6 @@ class ExamenesPacienteController extends \BaseController {
 	{
 		//
 	}
+
 
 }

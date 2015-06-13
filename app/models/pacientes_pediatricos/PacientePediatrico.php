@@ -12,9 +12,28 @@ class PacientePediatrico extends \Eloquent {
 			return $this->hasMany('ParentescoRepresentantes','id_paciente','id_paciente');	
 		}
 
-	public static function cargar_paciente_pediatrico($input)				
+	public function PacienteInterrogatorio()
 		{
-			
+			return $this->hasMany('InterrogatorioPediatrico','id_paciente','id_paciente');
+		}
+	public function PacienteExamenFuncional()
+		{
+			return $this->hasMany('ExamenFuncionalPediatrico','id_paciente','id_paciente');
+		}
+	public function PacienteExamenFisico()
+		{
+			return $this->hasMany('')
+		}
+
+
+	public static function crear_examenes_paciente($input)
+		{
+
+		}
+
+
+	public static function cargar_paciente_pediatrico($input)				
+		{			
 			$respuesta = array();
 			$respuesta['error_mensajes'] = '';
 			$respuesta['mensaje'] = '';

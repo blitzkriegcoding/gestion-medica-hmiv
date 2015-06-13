@@ -1,4 +1,3 @@
- 
 $(document).ready( function () {
       //fecha de nacimiento del paciente limitado hasta el dia de hoy
       $('#fecha_nacimiento_paciente_campo')
@@ -575,9 +574,6 @@ $(document).ready( function () {
             if (isValidStep === true) {
                 // Uncomment the following line to submit the form using the defaultSubmit() method
                  fv.defaultSubmit();
-
-                // For testing purpose
-                //$('#thankModal').modal();
             }
           });        
 });

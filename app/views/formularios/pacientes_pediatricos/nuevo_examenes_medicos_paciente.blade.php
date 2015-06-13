@@ -18,7 +18,7 @@
   </div>
   <br><br>
 @endif
-
+<div class="fuelux">
 <div class="alert text-center alert-info"style="width: 400px; margin: 0 auto;">
   <span class="glyphicon glyphicon-paperclip"> </span> <strong>PACIENTE:</strong> {{ $paciente['primer_apellido']." ".$paciente['segundo_apellido'].", ".$paciente['primer_nombre']." ".$paciente['segundo_nombre'] }}
 </div>
@@ -35,11 +35,12 @@
         </span>Anterior</button>
       <button type="button" class="btn btn-default btn-next" data-last="Guardar">Siguiente<span class="glyphicon glyphicon-arrow-right"></span></button>
     </div>
-    {{ Form::open()}}
+    {{ Form::open(['action'=>'ExamenesPediatricosController@crear_examenes_paciente_pediatrico','method'=>'post','class'=>'clearfix','id'=>'formulario_principal'])}}
     <div class="step-content">
       <div class="step-pane active sample-pane alert" data-step="1">
         <h4>Interrogatorio</h4>
         <p>Apartado para cargar los datos suministrados por el representante del paciente pediátrico.</p>
+        <p><strong>Instrucciones: </strong>Seleccione cada item si fue encontrado normal durante el interrogatorio, de no ser asi colocar observación.</p>        
         <br>
         <br>
         <div class="container-fluid">
@@ -62,11 +63,12 @@
                                         <td width='10%' class="text-left" valign="middle">
                                          <strong>{{ $item->id_grupo_interrogatorio."-".$contador_items }} {{ $l->item_interrogatorio }}</strong>
                                         </td>
-                                        <td width='2%'>
-                                          {{ Form::checkbox('interrogatorio[]',$l->id_condicion_interrogatorio,false, array('class'=>'form-control')) }}
+                                        <td width='10%'>
+                                          {{-- Form::checkbox('interrogatorio[]',$l->id_condicion_interrogatorio,false, array('class'=>'form-control')) --}}
+                                           {{Form::select('interrogatorio['.$l->id_condicion_interrogatorio.']'/*.$l->id_condicion_interrogatorio*/,array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
                                         </td> 
                                         <td width='10%'>
-                                           {{Form::text('detalle_'.$l->id_condicion_interrogatorio,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                           {{Form::text('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']'/*.$l->id_condicion_interrogatorio.*/,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
                                         </td>                                                                                
                                   {{-- $l->condicion_grupo --}}
                             
@@ -106,11 +108,12 @@
                                         <td width='10%'>
                                          <strong>{{ $item->id_grupo_funcional."-".$contador_items }} {{ $l->item_examen_funcional }}</strong>
                                         </td>
-                                        <td width='5%' class="text-left">
-                                          {{ Form::checkbox('funcional[]', $l->id_condicion_examen_funcional,false, array('class'=>'form-control')) }}
+                                        <td width='10%' class="text-left">
+                                          {{-- Form::checkbox('funcional[]', $l->id_condicion_examen_funcional,false, array('class'=>'form-control')) --}}
+                                          {{Form::select('funcional['.$l->id_condicion_examen_funcional.']'/*.$l->id_condicion_examen_funcional.*/,array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
                                         </td> 
-                                        <td width='15%'>
-                                           {{Form::text('detalle_funcional_'.$l->id_condicion_examen_funcional,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                        <td width='10%'>
+                                           {{Form::text('detalle_funcional['.$l->id_condicion_examen_funcional.']'/*.$l->id_condicion_examen_funcional.*/,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
                                         </td>                                                                                
                                   {{-- $l->condicion_grupo --}}
                             
@@ -197,11 +200,12 @@
                                         <td width='10%'>
                                          <strong>{{ $item->id_grupo_fisico."-".$contador_items }} {{ $l->item_examen_fisico }}</strong>
                                         </td>
-                                        <td width='5%' class="text-left">
-                                          {{ Form::checkbox('fisico[]',$l->id_condicion_examen_fisico,false, array('class'=>'form-control')) }}
+                                        <td width='10%' class="text-left">
+                                          {{-- Form::checkbox('fisico[]',$l->id_condicion_examen_fisico,false, array('class'=>'form-control')) --}}
+                                          {{Form::select('fisico['.$l->id_condicion_examen_fisico.']'/*.$l->id_condicion_examen_fisico.*/, array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
                                         </td> 
-                                        <td width='15%'>
-                                           {{Form::text('detalle_fisico_'.$l->id_condicion_examen_fisico,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                        <td width='10%'>
+                                           {{Form::text('detalle_fisico['.$l->id_condicion_examen_fisico.']'/*.$l->id_condicion_examen_fisico.*/, NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
                                         </td>                                                                                
                                   {{-- $l->condicion_grupo --}}
                             
@@ -218,11 +222,8 @@
           
         </div>
       </div>
-
-
-
-
     </div>
     {{ Form::close()}}
+</div>
 </div>
 </div>
