@@ -1,6 +1,6 @@
 <?php
 
-class PacientePedriatrico extends \Eloquent {
+class PacientePediatrico extends \Eloquent {
 	
 	protected $table = 'pacientes_pediatricos';
 	protected $fillable = [];
@@ -12,9 +12,6 @@ class PacientePedriatrico extends \Eloquent {
 			return $this->hasMany('ParentescoRepresentantes','id_paciente','id_paciente');	
 		}
 
-
-
-	
 	public static function cargar_paciente_pediatrico($input)				
 		{
 			
@@ -147,7 +144,7 @@ class PacientePedriatrico extends \Eloquent {
 				}
 			else
 				{
-					$paciente = new PacientePedriatrico();
+					$paciente = new PacientePediatrico();
 					$parentesco_rep = new ParentescoRepresentantes();
 					$detalles_ingreso = new IngresoPacientePediatrico();					
 					

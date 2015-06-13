@@ -18,6 +18,11 @@
   </div>
   <br><br>
 @endif
+
+<div class="alert text-center alert-info"style="width: 400px; margin: 0 auto;">
+  <span class="glyphicon glyphicon-paperclip"> </span> <strong>PACIENTE:</strong> {{ $paciente['primer_apellido']." ".$paciente['segundo_apellido'].", ".$paciente['primer_nombre']." ".$paciente['segundo_nombre'] }}
+</div>
+<br>
 <div class="panel-body col-xs- col-sm- col-md- col-lg- alineacion_paneles">
   <div class="wizard" data-initialize="wizard" id="examenes_medicos_paciente_pediatrico">
     <ul class="steps">
@@ -41,7 +46,7 @@
                  @foreach ($interrogatorio_items as $item) 
 
                  <div class="panel panel-primary">
-                   <div class="panel-heading">{{$item->item_grupo_interrogatorio}}</div>
+                   <div class="panel-heading"><strong>{{$item->item_grupo_interrogatorio}}</strong></div>
                    
                    <?php 
                         $divisor_linea = 0;
@@ -86,7 +91,7 @@
         <div class="container-fluid">
           @foreach ($examen_funcional_items as $item) 
                  <div class="panel panel-primary">
-                   <div class="panel-heading">{{$item->item_grupo_funcional}}</div>
+                   <div class="panel-heading"><strong>{{$item->item_grupo_funcional}}</strong></div>
                    
                    <?php 
                         $divisor_linea = 0;
@@ -134,40 +139,40 @@
                   <td width='150px' class="text-right" style="vertical-align:middle">
                       {{ Form::label('frecuencia_respiratoria','Frecuencia respiratoria (rpm): ') }}
                   </td>
-                  <td width='50px' class="text-left" style="vertical-align:middle">
-                    {{ Form::text('frecuencia_respiratoria',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 45px' )) }} 
+                  <td width='60px' class="text-left" style="vertical-align:middle">
+                    {{ Form::text('frecuencia_respiratoria',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px' )) }} 
                   </td> 
                   <td width='150px' class="text-right" style="vertical-align:middle">
                       {{ Form::label('frecuencia_cardiaca','Frecuencia cardíaca (lpm): ') }}
                   </td>
-                  <td width='50px' class="text-left" style="vertical-align:middle">
-                    {{ Form::text('frecuencia_cardiaca',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 45px')) }}
+                  <td width='60px' class="text-left" style="vertical-align:middle">
+                    {{ Form::text('frecuencia_cardiaca',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px')) }}
                   </td>
                   <td width='150px' class="text-right" style="vertical-align:middle">
                       {{ Form::label('peso','Peso (Kg): ') }} 
                   </td>
-                  <td width='50px' class="text-left" style="vertical-align:middle">
-                    {{ Form::text('peso',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 45px')) }}
+                  <td width='60px' class="text-left" style="vertical-align:middle">
+                    {{ Form::text('peso',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px')) }}
                   </td>                          
                 </tr>
                 <tr>                                    
                   <td width='150px' class="text-right" style="vertical-align:middle">
                       {{ Form::label('talla','Talla (cm): ') }}
                   </td>
-                  <td width='50px' class="text-left" style="vertical-align:middle">
-                    {{ Form::text('talla',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 45px')) }}
+                  <td width='60px' class="text-left" style="vertical-align:middle">
+                    {{ Form::text('talla',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px')) }}
                   </td> 
                   <td width='150px' class="text-right" style="vertical-align:middle">
                       {{ Form::label('tension_arterial','Tensión arterial (mmHg): ') }}
                   </td>
-                  <td width='50px' class="text-left" style="vertical-align:middle">
-                    {{ Form::text('tension_arterial',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 45px')) }}
+                  <td width='60px' class="text-left" style="vertical-align:middle">
+                    {{ Form::text('tension_arterial',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px')) }}
                   </td>
                   <td width='150px' class="text-right" style="vertical-align:middle">
                       {{ Form::label('temperatura','Temperatura (°C): ') }} 
                   </td>
-                  <td width='50px' class="text-left" style="vertical-align:middle">
-                    {{ Form::text('temperatura',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 45px')) }}
+                  <td width='60px' class="text-left" style="vertical-align:middle">
+                    {{ Form::text('temperatura',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px')) }}
                   </td>                          
                 </tr>                
               </table>                   
@@ -213,6 +218,10 @@
           
         </div>
       </div>
+
+
+
+
     </div>
     {{ Form::close()}}
 </div>

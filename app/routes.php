@@ -14,13 +14,13 @@
 
 /*RUTAS PACIENTES PEDIATRICOS*/
 Route::get('/pacientes_pediatricos/creacion_pacientes_pediatricos', function()
-{
-	return View::make('pacientes_pediatricos.crear_paciente_pediatrico');
-});
+	{	
+		return View::make('pacientes_pediatricos.crear_paciente_pediatrico');
+	});
 
-Route::get('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos', function()
-{
-
+Route::pattern('id_paciente_pediatrico','[0-9]+');
+Route::get('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}', function($id_paciente_pediatrico)
+	{
 		$interrogatorio_items = GrupoInterrogatorio::all();
 		$interrogatorio_item = CondicionInterrogatorio::all();
 
@@ -30,38 +30,35 @@ Route::get('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos', funct
 		$examen_fisico_items = GrupoExamenFisico::all();
 		$examen_fisico_item = CondicionExamenFisico::all();
 		
-		
+		$paciente = PacientePediatrico::find($id_paciente_pediatrico);
 
-	
-
-	return View::make('pacientes_pediatricos.crear_examenes_medicos_paciente')
+		return View::make('pacientes_pediatricos.crear_examenes_medicos_paciente')
 				->with(array(	
 								'interrogatorio_items'		=> $interrogatorio_items,
 								'interrogatorio_item' 		=> $interrogatorio_item,
 								'examen_funcional_items' 	=> $examen_funcional_items,
 								'examen_funcional_item'		=> $examen_funcional_item,
 								'examen_fisico_items'		=> $examen_fisico_items,
-								'examen_fisico_item'		=> $examen_fisico_item
-
+								'examen_fisico_item'		=> $examen_fisico_item,
+								'paciente'					=> $paciente,
 							));
 
-	
-});
+	});
 Route::post('crear_paciente_pediatrico','PacientesPedriatricosController@crear_paciente_pedi');
 /*FIN RUTAS PACIENTES PEDIATRICOS*/
 
 /*RUTAS MEDICOS*/
 Route::get('/medicos/creacion_medicos', function()
-{
-	return View::make('medicos.crear_medico');
-});
+	{
+		return View::make('medicos.crear_medico');
+	});
 Route::post('crear_nuevo_medico','MedicosController@crear_nuevo_medico');
 /*FIN RUTAS MEDICOS*/
 
 Route::get('creacion_pacientes_obstetricos', function()
-{
-	return View::make('pacientes.crear_paciente_obstetrico');
-});
+	{
+		return View::make('pacientes.crear_paciente_obstetrico');
+	});
 
 
 

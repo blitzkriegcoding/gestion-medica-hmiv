@@ -324,7 +324,7 @@
               </div> 
               <div class="row">
                   <div class="col-md-3 pad-controles etiquetas">
-                    {{Form::label('resumen_ingreso_paciente','Resumen de admisión: ')}} 
+                    {{Form::label('resumen_ingreso_paciente','Motivo de admisión: ')}} 
                   </div>
                   <div class="col-md-3 pad-controles">
                     {{Form::textarea('resumen_ingreso_paciente','',array('class'=>'form-control input-sm','size'=>'25x7',/*'placeholder'=>'Describa brevemente el ingreso del paciente, incluyendo sus sintomas y estado físico',*/'style'=>'resize:none'))}}

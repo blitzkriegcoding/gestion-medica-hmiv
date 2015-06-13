@@ -22,7 +22,7 @@ class PacientesPedriatricosController extends \BaseController {
 	public function /*create()*/crear_paciente_pedi()
 		{
 			//return dd(Input::all());
-			$respuesta = PacientePedriatrico::cargar_paciente_pediatrico(Input::all());
+			$respuesta = PacientePediatrico::cargar_paciente_pediatrico(Input::all());
 			
 			if($respuesta['error_mensajes'] == true)
 				{				
