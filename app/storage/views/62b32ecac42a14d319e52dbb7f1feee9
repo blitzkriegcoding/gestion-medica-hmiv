@@ -10,15 +10,15 @@
 <?php if(Session::get('mensaje') ): ?>
   <!-- Si hay un mensaje, entonces lo imprimimos y le damos estilo con bootstrap -->
   <div class="container-fluid text-center">
-    <div class="col-xs- col-sm- col-md- col-lg-" style="text-align: center">
-      <div class=<?php echo '"alert text-center '.Session::get('estilo').'"'; ?>  style="width: 400px; margin: 0 auto;">
-        <span class="glyphicon glyphicon-ok-sign"></span><?php echo " ".Session::get('mensaje'); ?>
+    <div class="col-xs- col-sm- col-md- col-lg-" style="width: 400px; margin: 0 auto; text-align: center">
+      <div class=<?php echo '"alert alert-success text-center '; ?> >
+         <span class="glyphicon glyphicon-ok-sign"></span><?php echo " ".Session::get('mensaje'); ?>
 
       </div>
     </div>
-  </div>
-  <br><br>
+  </div>  
 <?php endif; ?>
+<br><br>
 <div class="fuelux">
 <div class="alert text-center alert-info"style="width: 400px; margin: 0 auto;">
   <span class="glyphicon glyphicon-paperclip"> </span> <strong>PACIENTE:</strong> <?php echo $paciente['primer_apellido']." ".$paciente['segundo_apellido'].", ".$paciente['primer_nombre']." ".$paciente['segundo_nombre']; ?>
@@ -43,7 +43,7 @@
       <div class="step-pane active sample-pane alert" data-step="1">
         <h4>Interrogatorio</h4>
         <p>Apartado para cargar los datos suministrados por el representante del paciente pediátrico.</p>
-        <p><strong>Instrucciones: </strong>Seleccione cada item si fue encontrado normal durante el interrogatorio, de no ser asi colocar observación.</p>        
+        <p><strong>Instrucciones: </strong>Seleccione cada item si fue encontrado normal o anormal durante el interrogatorio, de no ser asi colocar observación. <strong>Se le recomienda verificar su seleccion antes de ser cargada en el sistema</strong></p>        
         <br>
         <br>
         <div class="container-fluid">
@@ -124,6 +124,14 @@
                                         <td width='10%'>
                                            <?php echo Form::text('detalle_funcional['.$l->id_condicion_examen_funcional.']'/*.$l->id_condicion_examen_funcional.*/,NULL ,array('class'=>'form-control input-sm','size'=>'12')); ?>
 
+                                            <?php if($errors->has('detalle_funcional['.$l->id_condicion_examen_funcional.']')): ?>
+                                                  <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                    <?php foreach($errors->get('detalle_funcional['.$l->id_condicion_examen_funcional.']') as $error ): ?>
+                                                        <?php echo $error; ?>
+
+                                                    <?php endforeach; ?>
+                                                  </div>
+                                            <?php endif; ?>                                           
                                         </td>                                                                                
                                   <?php /* $l->condicion_grupo */ ?>
                             
@@ -153,9 +161,18 @@
                   <td width='150px' class="text-right" style="vertical-align:middle">
                       <?php echo Form::label('frecuencia_respiratoria','Frecuencia respiratoria (rpm): '); ?>
 
+
                   </td>
                   <td width='60px' class="text-left" style="vertical-align:middle">
                     <?php echo Form::text('frecuencia_respiratoria',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px' )); ?> 
+                      <?php if($errors->has('frecuencia_respiratoria')): ?>
+                            <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                              <?php foreach($errors->get('frecuencia_respiratoria') as $error ): ?>
+                                  <?php echo $error; ?>
+
+                              <?php endforeach; ?>
+                            </div>
+                      <?php endif; ?>                      
                   </td> 
                   <td width='150px' class="text-right" style="vertical-align:middle">
                       <?php echo Form::label('frecuencia_cardiaca','Frecuencia cardíaca (lpm): '); ?>
@@ -164,6 +181,14 @@
                   <td width='60px' class="text-left" style="vertical-align:middle">
                     <?php echo Form::text('frecuencia_cardiaca',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px')); ?>
 
+                      <?php if($errors->has('frecuencia_cardiaca')): ?>
+                            <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                              <?php foreach($errors->get('frecuencia_cardiaca') as $error ): ?>
+                                  <?php echo $error; ?>
+
+                              <?php endforeach; ?>
+                            </div>
+                      <?php endif; ?>                      
                   </td>
                   <td width='150px' class="text-right" style="vertical-align:middle">
                       <?php echo Form::label('peso','Peso (Kg): '); ?> 
@@ -171,6 +196,14 @@
                   <td width='60px' class="text-left" style="vertical-align:middle">
                     <?php echo Form::text('peso',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px')); ?>
 
+                      <?php if($errors->has('peso')): ?>
+                            <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                              <?php foreach($errors->get('peso') as $error ): ?>
+                                  <?php echo $error; ?>
+
+                              <?php endforeach; ?>
+                            </div>
+                      <?php endif; ?>                   
                   </td>                          
                 </tr>
                 <tr>                                    
@@ -181,6 +214,14 @@
                   <td width='60px' class="text-left" style="vertical-align:middle">
                     <?php echo Form::text('talla',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px')); ?>
 
+                      <?php if($errors->has('talla')): ?>
+                            <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                              <?php foreach($errors->get('talla') as $error ): ?>
+                                  <?php echo $error; ?>
+
+                              <?php endforeach; ?>
+                            </div>
+                      <?php endif; ?>                   
                   </td> 
                   <td width='150px' class="text-right" style="vertical-align:middle">
                       <?php echo Form::label('tension_arterial','Tensión arterial (mmHg): '); ?>
@@ -189,6 +230,14 @@
                   <td width='60px' class="text-left" style="vertical-align:middle">
                     <?php echo Form::text('tension_arterial',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px')); ?>
 
+                      <?php if($errors->has('tension_arterial')): ?>
+                            <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                              <?php foreach($errors->get('tension_arterial') as $error ): ?>
+                                  <?php echo $error; ?>
+
+                              <?php endforeach; ?>
+                            </div>
+                      <?php endif; ?>                    
                   </td>
                   <td width='150px' class="text-right" style="vertical-align:middle">
                       <?php echo Form::label('temperatura','Temperatura (°C): '); ?> 
@@ -196,12 +245,18 @@
                   <td width='60px' class="text-left" style="vertical-align:middle">
                     <?php echo Form::text('temperatura',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px')); ?>
 
+                      <?php if($errors->has('temperatura')): ?>
+                            <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                              <?php foreach($errors->get('temperatura') as $error ): ?>
+                                  <?php echo $error; ?>
+
+                              <?php endforeach; ?>
+                            </div>
+                      <?php endif; ?>                   
                   </td>                          
                 </tr>                
               </table>                   
           </div>
-
-
           <?php foreach($examen_fisico_items as $item): ?> 
                  <div class="panel panel-primary">
                    <div class="panel-heading"><?php echo $item->item_grupo_fisico; ?></div>
@@ -228,6 +283,14 @@
                                         <td width='10%'>
                                            <?php echo Form::text('detalle_fisico['.$l->id_condicion_examen_fisico.']'/*.$l->id_condicion_examen_fisico.*/, NULL ,array('class'=>'form-control input-sm','size'=>'12')); ?>
 
+                                            <?php if($errors->has('detalle_fisico['.$l->id_condicion_examen_fisico.']')): ?>
+                                                  <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                    <?php foreach($errors->get('detalle_fisico['.$l->id_condicion_examen_fisico.']') as $error ): ?>
+                                                        <?php echo $error; ?>
+
+                                                    <?php endforeach; ?>
+                                                  </div>
+                                            <?php endif; ?> 
                                         </td>                                                                                
                                   <?php /* $l->condicion_grupo */ ?>
                             

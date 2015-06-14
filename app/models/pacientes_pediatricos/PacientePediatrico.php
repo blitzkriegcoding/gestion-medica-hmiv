@@ -29,20 +29,26 @@ class PacientePediatrico extends \Eloquent {
 	public static function crear_examenes_paciente($input)
 		{
 			$respuesta = [];
+			$reglas_examenes = [];
+			$reglas_signos_vitales = [];
 			$respuesta['error_mensajes'] = '';
 			$respuesta['mensaje'] = '';
-			$respuesta['estilo'] = '';			
+			$respuesta['estilo'] = '';
 			$mensajes_error = [
 								'required'		=>	'¿Que observó anormal?',
 								'integer'		=>	'El campo ":attribute" solo acepta numeros',
-								'numeric'		=>	'El campo ":attribute" solo acepta numeros y decimales',
-								
+								'numeric'		=>	'El campo ":attribute" solo acepta numeros y decimales',								
 								];
+			$mensajes_error_signos_vitales = [
+												'required'		=>	'Este campo es obligatorio',
+												'integer'		=>	'Este campo solo acepta numeros',
+												'numeric'		=>	'Este campo solo acepta numeros y decimales',								
+												];
 
 
 			
 			#[frecuencia_respiratoria] => [frecuencia_cardiaca] => [peso] => [talla] => [tension_arterial] => [temperatura] 
-			$reglas_examenes = [
+			$reglas_signos_vitales = [
 									'frecuencia_respiratoria'	=>	'required|integer',
 									'frecuencia_cardiaca'		=>	'required|integer',
 									'peso'						=>	'required|integer',
@@ -50,6 +56,10 @@ class PacientePediatrico extends \Eloquent {
 									'tension_arterial'			=> 	'required|integer',
 									'temperatura'				=> 	'required|numeric',
 								];
+
+
+
+			
 			
 
 			foreach($input['interrogatorio'] as $llave=>$valor)
@@ -76,22 +86,72 @@ class PacientePediatrico extends \Eloquent {
 				}
 			
 			$validador_examenes = Validator::make($input,$reglas_examenes,$mensajes_error);	
+			$validador_signos_vitales = Validator::make($input,$reglas_signos_vitales, $mensajes_error_signos_vitales);
 			#print_r($reglas_examenes);
 
 			
-			if($validador_examenes->fails())
+			if($validador_examenes->fails() || $validador_signos_vitales->fails())
 				{
 					$respuesta['mensaje'] = $validador_examenes;
+					$respuesta['mensaje'] = $validador_signos_vitales;
 					$respuesta['error_mensajes'] = true;
-
+					
 				}
 			else
 				{
+					$paciente = PacientePediatrico::find(Session::get('id_paciente_pediatrico'));
+					
+
+					$examen_interrogatorio;
+					$examen_fisico = "";
+					$examen_funcional;
+
+					foreach($input['interrogatorio'] as $llave=>$valor)
+						{
+							$examen_interrogatorio = new InterrogatorioPediatrico([
+														'id_paciente' => $paciente->id_paciente,
+														'id_condicion_interrogatorio' => $llave,
+														'fecha_interrogatorio' => date('Y-m-d'),
+														'detalles' => $input['detalle_interrogatorio'][$llave],
+														'status' => $valor]);
+							$paciente->PacienteInterrogatorio()->save($examen_interrogatorio);	
+
+
+						}
+					foreach ($input['funcional'] as $llave => $valor) 
+						{
+							$examen_fisico = new ExamenFuncionalPediatrico([
+														'id_paciente' => $paciente->id_paciente,
+														'id_condicion_examen_funcional' => $llave, 
+														'fecha_examen_funcional' => date('Y-m-d'),
+														'detalles' => $input['detalle_funcional'][$llave],
+														'status' => $valor]);
+							$paciente->PacienteExamenFuncional()->save($examen_fisico);
+
+						}						
+					foreach ($input['fisico'] as $llave => $valor) 
+						{
+									$examen_fisico = new ExamenFisicoPediatrico(array(
+														'id_paciente' => $paciente->id_paciente,
+														'id_condicion_examen_fisico' => $llave, 
+														'fecha_examen_pediatrico' => date('Y-m-d'),
+														'detalles' => $input['detalle_fisico'][$llave],
+														'status' => $valor));
+							$paciente->PacienteExamenFisico()->save($examen_fisico);									
+						}
+
+
+					#dd($examen_fisico);
+
+					
+					
+					
+
 					$respuesta['mensaje'] = "Examenes generados exitosamente";
 					$respuesta['error_mensajes'] = false;
+
 				}
 			return $respuesta;
-
 		}
 
 
