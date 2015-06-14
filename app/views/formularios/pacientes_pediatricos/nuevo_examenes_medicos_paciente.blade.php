@@ -18,7 +18,7 @@
   </div>  
 @endif
 <br><br>
-<div class="fuelux">
+{{-- <div class="fuelux"> --}}
 <div class="alert text-center alert-info"style="width: 400px; margin: 0 auto;">
   <span class="glyphicon glyphicon-paperclip"> </span> <strong>PACIENTE:</strong> {{ $paciente['primer_apellido']." ".$paciente['segundo_apellido'].", ".$paciente['primer_nombre']." ".$paciente['segundo_nombre'] }}
 </div>
@@ -63,10 +63,19 @@
                                         </td>
                                         <td width='10%'>
                                           {{-- Form::checkbox('interrogatorio[]',$l->id_condicion_interrogatorio,false, array('class'=>'form-control')) --}}
-                                           {{Form::select('interrogatorio['.$l->id_condicion_interrogatorio.']'/*.$l->id_condicion_interrogatorio*/,array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
+                                           {{Form::select('interrogatorio['.$l->id_condicion_interrogatorio.']',array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
+                                           {{--VALIDACION ERRORES EN LOS COMBOS --}}
+                                            @if($errors->has('interrogatorio['.$l->id_condicion_interrogatorio.']'))
+                                                  <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                    @foreach($errors->get('interrogatorio['.$l->id_condicion_interrogatorio.']') as $error )
+                                                        {{ $error }}
+                                                    @endforeach
+                                                  </div>
+                                            @endif                                           
                                         </td> 
                                         <td width='10%'>
-                                           {{Form::text('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']'/*.$l->id_condicion_interrogatorio.*/,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                          {{-- VALIDACION DEL TEXTO SI LA CONDICION ES ANORMAL --}}
+                                           {{Form::text('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']',NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
                                             @if($errors->has('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']'))
                                                   <div class="alert alert-danger col-xs text-center" style="padding: 2px">
                                                     @foreach($errors->get('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']') as $error )
@@ -111,7 +120,14 @@
                                         </td>
                                         <td width='10%' class="text-left">
                                           {{-- Form::checkbox('funcional[]', $l->id_condicion_examen_funcional,false, array('class'=>'form-control')) --}}
-                                          {{Form::select('funcional['.$l->id_condicion_examen_funcional.']'/*.$l->id_condicion_examen_funcional.*/,array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
+                                          {{Form::select('funcional['.$l->id_condicion_examen_funcional.']', array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm')) }}
+                                          @if($errors->has('funcional['.$l->id_condicion_examen_funcional.']'))
+                                                <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                  @foreach($errors->get('funcional['.$l->id_condicion_examen_funcional.']') as $error )
+                                                      {{ $error }}
+                                                  @endforeach
+                                                </div>
+                                          @endif
                                         </td> 
                                         <td width='10%'>
                                            {{Form::text('detalle_funcional['.$l->id_condicion_examen_funcional.']'/*.$l->id_condicion_examen_funcional.*/,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
@@ -251,7 +267,14 @@
                                         </td>
                                         <td width='10%' class="text-left">
                                           {{-- Form::checkbox('fisico[]',$l->id_condicion_examen_fisico,false, array('class'=>'form-control')) --}}
-                                          {{Form::select('fisico['.$l->id_condicion_examen_fisico.']'/*.$l->id_condicion_examen_fisico.*/, array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
+                                          {{Form::select('fisico['.$l->id_condicion_examen_fisico.']', array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
+                                          @if($errors->has('fisico['.$l->id_condicion_examen_fisico.']'))
+                                                <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                  @foreach($errors->get('fisico['.$l->id_condicion_examen_fisico.']') as $error )
+                                                      {{ $error }}
+                                                  @endforeach
+                                                </div>
+                                          @endif                                        
                                         </td> 
                                         <td width='10%'>
                                            {{Form::text('detalle_fisico['.$l->id_condicion_examen_fisico.']'/*.$l->id_condicion_examen_fisico.*/, NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
@@ -282,4 +305,4 @@
     {{ Form::close()}}
 </div>
 </div>
-</div>
+{{-- </div> --}}

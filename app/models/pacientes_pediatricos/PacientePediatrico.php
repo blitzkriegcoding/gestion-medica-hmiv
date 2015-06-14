@@ -31,6 +31,8 @@ class PacientePediatrico extends \Eloquent {
 			$respuesta = [];
 			$reglas_examenes = [];
 			$reglas_signos_vitales = [];
+			$reglas_condiciones = [];
+			$mensaje_error_condiciones = [];
 			$respuesta['error_mensajes'] = '';
 			$respuesta['mensaje'] = '';
 			$respuesta['estilo'] = '';
@@ -39,14 +41,18 @@ class PacientePediatrico extends \Eloquent {
 								'integer'		=>	'El campo ":attribute" solo acepta numeros',
 								'numeric'		=>	'El campo ":attribute" solo acepta numeros y decimales',								
 								];
+
+			$mensaje_error_condiciones = [
+										'required'	=>	'Este campo es obligatorio',
+										'in:1,2'	=>	'Debe seleccionar un valor válido'
+									];
+
 			$mensajes_error_signos_vitales = [
 												'required'		=>	'Este campo es obligatorio',
 												'integer'		=>	'Este campo solo acepta numeros',
 												'numeric'		=>	'Este campo solo acepta numeros y decimales',								
 												];
 
-
-			
 			#[frecuencia_respiratoria] => [frecuencia_cardiaca] => [peso] => [talla] => [tension_arterial] => [temperatura] 
 			$reglas_signos_vitales = [
 									'frecuencia_respiratoria'	=>	'required|integer',
@@ -57,17 +63,13 @@ class PacientePediatrico extends \Eloquent {
 									'temperatura'				=> 	'required|numeric',
 								];
 
-
-
-			
-			
-
 			foreach($input['interrogatorio'] as $llave=>$valor)
 				{
 					if($input['interrogatorio'][$llave] == 2 && $input['detalle_interrogatorio'][$llave] =="")
 						{
 							$reglas_examenes['detalle_interrogatorio['.$llave.']'] = 'required'; 
 						}
+					$reglas_condiciones['interrogatorio['.$llave.']'] = 'required';
 				}
 
 			foreach ($input['funcional'] as $llave => $valor) 
@@ -75,35 +77,39 @@ class PacientePediatrico extends \Eloquent {
 					if($input['funcional'][$llave] == 2 && $input['detalle_funcional'][$llave] =="")
 						{
 							$reglas_examenes['detalle_funcional['.$llave.']'] = 'required'; 
-						}					
+						}
+					$reglas_condiciones['funcional['.$llave.']'] = 'required';
+
 				}
 			foreach ($input['fisico'] as $llave => $valor) 
 				{
 					if($input['fisico'][$llave] == 2 && $input['detalle_fisico'][$llave] =="")
 						{
 							$reglas_examenes['detalle_fisico['.$llave.']'] = 'required'; 
-						}					
+						}
+					$reglas_condiciones['fisico['.$llave.']'] = 'required';
 				}
 			
 			$validador_examenes = Validator::make($input,$reglas_examenes,$mensajes_error);	
 			$validador_signos_vitales = Validator::make($input,$reglas_signos_vitales, $mensajes_error_signos_vitales);
+			$validador_condiciones = Validator::make($input,$reglas_condiciones,$mensaje_error_condiciones);
 			#print_r($reglas_examenes);
 
 			
-			if($validador_examenes->fails() || $validador_signos_vitales->fails())
+			if($validador_examenes->fails() || $validador_signos_vitales->fails() || $validador_condiciones->fails())
 				{
-					$respuesta['mensaje'] = $validador_examenes;
-					$respuesta['mensaje'] = $validador_signos_vitales;
-					$respuesta['error_mensajes'] = true;
 					
+					$errores = $validador_examenes->messages()->merge($validador_signos_vitales->messages()->merge($validador_condiciones->messages()));
+					$respuesta['mensaje'] = $errores;					
+					$respuesta['error_mensajes'] = true;
+					#dd($errores);
 				}
 			else
 				{
-					$paciente = PacientePediatrico::find(Session::get('id_paciente_pediatrico'));
-					
+					$paciente = PacientePediatrico::find(Session::get('id_paciente_pediatrico'));				
 
 					$examen_interrogatorio;
-					$examen_fisico = "";
+					$examen_fisico;
 					$examen_funcional;
 
 					foreach($input['interrogatorio'] as $llave=>$valor)
@@ -114,7 +120,7 @@ class PacientePediatrico extends \Eloquent {
 														'fecha_interrogatorio' => date('Y-m-d'),
 														'detalles' => $input['detalle_interrogatorio'][$llave],
 														'status' => $valor]);
-							$paciente->PacienteInterrogatorio()->save($examen_interrogatorio);	
+							#$paciente->PacienteInterrogatorio()->save($examen_interrogatorio);	
 
 
 						}
@@ -126,7 +132,7 @@ class PacientePediatrico extends \Eloquent {
 														'fecha_examen_funcional' => date('Y-m-d'),
 														'detalles' => $input['detalle_funcional'][$llave],
 														'status' => $valor]);
-							$paciente->PacienteExamenFuncional()->save($examen_fisico);
+							#$paciente->PacienteExamenFuncional()->save($examen_fisico);
 
 						}						
 					foreach ($input['fisico'] as $llave => $valor) 
@@ -137,7 +143,7 @@ class PacientePediatrico extends \Eloquent {
 														'fecha_examen_pediatrico' => date('Y-m-d'),
 														'detalles' => $input['detalle_fisico'][$llave],
 														'status' => $valor));
-							$paciente->PacienteExamenFisico()->save($examen_fisico);									
+							#$paciente->PacienteExamenFisico()->save($examen_fisico);									
 						}
 
 

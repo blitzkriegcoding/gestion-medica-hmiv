@@ -11,7 +11,9 @@ class ExamenesPediatricosController extends \BaseController
 
 			if($respuesta['error_mensajes'] == true)
 				{					
+					#dd();
 					return Redirect::to('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos/'.Session::get('id_paciente_pediatrico'))->withErrors($respuesta['mensaje'])->withInput();
+
 				}
 			else
 				{					

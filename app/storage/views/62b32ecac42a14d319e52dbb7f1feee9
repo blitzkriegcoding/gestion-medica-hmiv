@@ -19,7 +19,7 @@
   </div>  
 <?php endif; ?>
 <br><br>
-<div class="fuelux">
+<?php /* <div class="fuelux"> */ ?>
 <div class="alert text-center alert-info"style="width: 400px; margin: 0 auto;">
   <span class="glyphicon glyphicon-paperclip"> </span> <strong>PACIENTE:</strong> <?php echo $paciente['primer_apellido']." ".$paciente['segundo_apellido'].", ".$paciente['primer_nombre']." ".$paciente['segundo_nombre']; ?>
 
@@ -66,11 +66,21 @@
                                         </td>
                                         <td width='10%'>
                                           <?php /* Form::checkbox('interrogatorio[]',$l->id_condicion_interrogatorio,false, array('class'=>'form-control')) */ ?>
-                                           <?php echo Form::select('interrogatorio['.$l->id_condicion_interrogatorio.']'/*.$l->id_condicion_interrogatorio*/,array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)); ?>
+                                           <?php echo Form::select('interrogatorio['.$l->id_condicion_interrogatorio.']',array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)); ?>
 
+                                           <?php /*VALIDACION ERRORES EN LOS COMBOS */ ?>
+                                            <?php if($errors->has('interrogatorio['.$l->id_condicion_interrogatorio.']')): ?>
+                                                  <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                    <?php foreach($errors->get('interrogatorio['.$l->id_condicion_interrogatorio.']') as $error ): ?>
+                                                        <?php echo $error; ?>
+
+                                                    <?php endforeach; ?>
+                                                  </div>
+                                            <?php endif; ?>                                           
                                         </td> 
                                         <td width='10%'>
-                                           <?php echo Form::text('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']'/*.$l->id_condicion_interrogatorio.*/,NULL ,array('class'=>'form-control input-sm','size'=>'12')); ?>
+                                          <?php /* VALIDACION DEL TEXTO SI LA CONDICION ES ANORMAL */ ?>
+                                           <?php echo Form::text('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']',NULL ,array('class'=>'form-control input-sm','size'=>'12')); ?>
 
                                             <?php if($errors->has('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']')): ?>
                                                   <div class="alert alert-danger col-xs text-center" style="padding: 2px">
@@ -118,8 +128,16 @@
                                         </td>
                                         <td width='10%' class="text-left">
                                           <?php /* Form::checkbox('funcional[]', $l->id_condicion_examen_funcional,false, array('class'=>'form-control')) */ ?>
-                                          <?php echo Form::select('funcional['.$l->id_condicion_examen_funcional.']'/*.$l->id_condicion_examen_funcional.*/,array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)); ?>
+                                          <?php echo Form::select('funcional['.$l->id_condicion_examen_funcional.']', array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm')); ?>
 
+                                          <?php if($errors->has('funcional['.$l->id_condicion_examen_funcional.']')): ?>
+                                                <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                  <?php foreach($errors->get('funcional['.$l->id_condicion_examen_funcional.']') as $error ): ?>
+                                                      <?php echo $error; ?>
+
+                                                  <?php endforeach; ?>
+                                                </div>
+                                          <?php endif; ?>
                                         </td> 
                                         <td width='10%'>
                                            <?php echo Form::text('detalle_funcional['.$l->id_condicion_examen_funcional.']'/*.$l->id_condicion_examen_funcional.*/,NULL ,array('class'=>'form-control input-sm','size'=>'12')); ?>
@@ -277,8 +295,16 @@
                                         </td>
                                         <td width='10%' class="text-left">
                                           <?php /* Form::checkbox('fisico[]',$l->id_condicion_examen_fisico,false, array('class'=>'form-control')) */ ?>
-                                          <?php echo Form::select('fisico['.$l->id_condicion_examen_fisico.']'/*.$l->id_condicion_examen_fisico.*/, array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)); ?>
+                                          <?php echo Form::select('fisico['.$l->id_condicion_examen_fisico.']', array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)); ?>
 
+                                          <?php if($errors->has('fisico['.$l->id_condicion_examen_fisico.']')): ?>
+                                                <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                  <?php foreach($errors->get('fisico['.$l->id_condicion_examen_fisico.']') as $error ): ?>
+                                                      <?php echo $error; ?>
+
+                                                  <?php endforeach; ?>
+                                                </div>
+                                          <?php endif; ?>                                        
                                         </td> 
                                         <td width='10%'>
                                            <?php echo Form::text('detalle_fisico['.$l->id_condicion_examen_fisico.']'/*.$l->id_condicion_examen_fisico.*/, NULL ,array('class'=>'form-control input-sm','size'=>'12')); ?>
@@ -313,4 +339,4 @@
 
 </div>
 </div>
-</div>
+<?php /* </div> */ ?>
