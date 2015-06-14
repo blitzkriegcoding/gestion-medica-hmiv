@@ -22,12 +22,75 @@ class PacientePediatrico extends \Eloquent {
 		}
 	public function PacienteExamenFisico()
 		{
-			return $this->hasMany('')
+			return $this->hasMany('ExamenFisicoPediatrico','id_paciente','id_paciente');
 		}
 
 
 	public static function crear_examenes_paciente($input)
 		{
+			$respuesta = [];
+			$respuesta['error_mensajes'] = '';
+			$respuesta['mensaje'] = '';
+			$respuesta['estilo'] = '';			
+			$mensajes_error = [
+								'required'		=>	'¿Que observó anormal?',
+								'integer'		=>	'El campo ":attribute" solo acepta numeros',
+								'numeric'		=>	'El campo ":attribute" solo acepta numeros y decimales',
+								
+								];
+
+
+			
+			#[frecuencia_respiratoria] => [frecuencia_cardiaca] => [peso] => [talla] => [tension_arterial] => [temperatura] 
+			$reglas_examenes = [
+									'frecuencia_respiratoria'	=>	'required|integer',
+									'frecuencia_cardiaca'		=>	'required|integer',
+									'peso'						=>	'required|integer',
+									'talla'						=>	'required|integer',
+									'tension_arterial'			=> 	'required|integer',
+									'temperatura'				=> 	'required|numeric',
+								];
+			
+
+			foreach($input['interrogatorio'] as $llave=>$valor)
+				{
+					if($input['interrogatorio'][$llave] == 2 && $input['detalle_interrogatorio'][$llave] =="")
+						{
+							$reglas_examenes['detalle_interrogatorio['.$llave.']'] = 'required'; 
+						}
+				}
+
+			foreach ($input['funcional'] as $llave => $valor) 
+				{
+					if($input['funcional'][$llave] == 2 && $input['detalle_funcional'][$llave] =="")
+						{
+							$reglas_examenes['detalle_funcional['.$llave.']'] = 'required'; 
+						}					
+				}
+			foreach ($input['fisico'] as $llave => $valor) 
+				{
+					if($input['fisico'][$llave] == 2 && $input['detalle_fisico'][$llave] =="")
+						{
+							$reglas_examenes['detalle_fisico['.$llave.']'] = 'required'; 
+						}					
+				}
+			
+			$validador_examenes = Validator::make($input,$reglas_examenes,$mensajes_error);	
+			#print_r($reglas_examenes);
+
+			
+			if($validador_examenes->fails())
+				{
+					$respuesta['mensaje'] = $validador_examenes;
+					$respuesta['error_mensajes'] = true;
+
+				}
+			else
+				{
+					$respuesta['mensaje'] = "Examenes generados exitosamente";
+					$respuesta['error_mensajes'] = false;
+				}
+			return $respuesta;
 
 		}
 

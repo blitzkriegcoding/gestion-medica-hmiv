@@ -48,10 +48,8 @@
         <br>
         <div class="container-fluid">
                  <?php foreach($interrogatorio_items as $item): ?> 
-
                  <div class="panel panel-primary">
                    <div class="panel-heading"><strong><?php echo $item->item_grupo_interrogatorio; ?></strong></div>
-                   
                    <?php 
                         $divisor_linea = 0;
                         $contador_items = 0; 
@@ -74,21 +72,25 @@
                                         <td width='10%'>
                                            <?php echo Form::text('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']'/*.$l->id_condicion_interrogatorio.*/,NULL ,array('class'=>'form-control input-sm','size'=>'12')); ?>
 
+                                            <?php if($errors->has('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']')): ?>
+                                                  <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                    <?php foreach($errors->get('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']') as $error ): ?>
+                                                        <?php echo $error; ?>
+
+                                                    <?php endforeach; ?>
+                                                  </div>
+                                            <?php endif; ?>
                                         </td>                                                                                
-                                  <?php /* $l->condicion_grupo */ ?>
+                                  
                             
                            <?php if($divisor_linea % 2 == 0): ?>     
                               <?php echo '</tr>'; ?>
 
                            <?php endif; ?>
                           <?php endforeach; ?>
-
-
                     </table>
                  </div>
-
                 <?php endforeach; ?>
-
         </div>
       </div>
       <div class="step-pane active sample-pane alert" data-step="2">

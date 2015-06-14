@@ -32,6 +32,8 @@ Route::get('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos/{id_pac
 		
 		$paciente = PacientePediatrico::find($id_paciente_pediatrico);
 
+		Session::put('id_paciente_pediatrico', $id_paciente_pediatrico);
+
 		return View::make('pacientes_pediatricos.crear_examenes_medicos_paciente')
 				->with(array(	
 								'interrogatorio_items'		=> $interrogatorio_items,

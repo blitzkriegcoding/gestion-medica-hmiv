@@ -45,10 +45,8 @@
         <br>
         <div class="container-fluid">
                  @foreach ($interrogatorio_items as $item) 
-
                  <div class="panel panel-primary">
                    <div class="panel-heading"><strong>{{$item->item_grupo_interrogatorio}}</strong></div>
-                   
                    <?php 
                         $divisor_linea = 0;
                         $contador_items = 0; 
@@ -69,20 +67,23 @@
                                         </td> 
                                         <td width='10%'>
                                            {{Form::text('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']'/*.$l->id_condicion_interrogatorio.*/,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                            @if($errors->has('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']'))
+                                                  <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                    @foreach($errors->get('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']') as $error )
+                                                        {{ $error }}
+                                                    @endforeach
+                                                  </div>
+                                            @endif
                                         </td>                                                                                
-                                  {{-- $l->condicion_grupo --}}
+                                  
                             
                            @if($divisor_linea % 2 == 0)     
                               {{'</tr>'}}
                            @endif
                           @endforeach
-
-
                     </table>
                  </div>
-
                 @endforeach
-
         </div>
       </div>
       <div class="step-pane active sample-pane alert" data-step="2">

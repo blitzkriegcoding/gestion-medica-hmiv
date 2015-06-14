@@ -7,19 +7,15 @@ class ExamenesPediatricosController extends \BaseController
 
 	public function crear_examenes_paciente_pediatrico()
 		{
-			//print_r(array_count_values(Input::all()));
-			#echo Input::get('interrogatorio_1')." ".Input::get('detalle_interrogatorio_1');
-			#print_r(Input::get('interrogatorio'));
-			//$cuenta = 1;
-
-			foreach(Input::get('interrogatorio') as $d=>$f):
-				print_r($d."\t");
-			endforeach;
-
-			#$respuesta = PacientePediatrico
-
-
-
+			$respuesta = PacientePediatrico::crear_examenes_paciente(Input::all());
+			if($respuesta['error_mensajes'] == true)
+				{
+					return Redirect::to('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos/'.Session::get('id_paciente_pediatrico'))->withErrors($respuesta['mensaje'])->withInput();
+				}
+			else
+				{
+					return Redirect::to('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos/'.Session::get('id_paciente_pediatrico'))->with(['respuesta'=>$respuesta['mensaje']]);
+				}
 		}
 
 
