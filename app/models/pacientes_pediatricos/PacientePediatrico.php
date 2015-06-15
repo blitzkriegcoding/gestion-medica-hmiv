@@ -44,8 +44,9 @@ class PacientePediatrico extends \Eloquent {
 
 
 			$mensaje_error_condiciones = [
-										'in:1,2'	=>	'El campo :attribute es invalido',										
+										'in'		=>	'El campo :attribute es invalido',										
 										'required'	=>	'¿Normal o anormal?',
+										'integer'	=>	''
 										
 									];
 
@@ -66,7 +67,7 @@ class PacientePediatrico extends \Eloquent {
 								];
 
 			$buffer_condiciones = [
-									'interrogatorio'			=> 	array_fill(1, count($input['interrogatorio']),'required|in:1,2'),
+									'interrogatorio'			=> 	array_fill(1, count($input['interrogatorio']),['required','in:1,2','integer']),
 									'funcional'					=>	range(1,array_count_values($input['funcional'])),
 									'fisico' 					=>	range(1,array_count_values($input['fisico'])),									
 								];
@@ -79,15 +80,15 @@ class PacientePediatrico extends \Eloquent {
 
 			$reglas_condiciones = [
 									'interrogatorio'			=> 	array_fill(1, count($input['interrogatorio']),''),									
-									 'funcional'				=>	array_fill(1, count($input['funcional']), ['min:1,2']),
-									 'fisico' 					=>	array_fill(1, count($input['fisico']), ['min:1,2']),									
+									 'funcional'				=>	array_fill(1, count($input['funcional']),''),
+									 'fisico' 					=>	array_fill(1, count($input['fisico']),''),									
 								];
 
 
 			
 
 			
-			$c = [];
+			$condiciones_combinado = [];
 			#dd($input['interrogatorio']);
 			foreach($input['interrogatorio'] as $llave=>$valor)
 				{
@@ -101,13 +102,11 @@ class PacientePediatrico extends \Eloquent {
 					$reglas_condiciones['interrogatorio'][$llave] = "interrogatorio.$llave";
 				}
 			
-			$c = array_combine($reglas_condiciones['interrogatorio'], $buffer_condiciones['interrogatorio']);
+			$condiciones_combinado = array_combine($reglas_condiciones['interrogatorio'], $buffer_condiciones['interrogatorio']);
 			
-			
-			$validador_condiciones = Validator::make($input,$c,$mensaje_error_condiciones);
-
+			$validador_condiciones = Validator::make($input,$condiciones_combinado,$mensaje_error_condiciones);
+		
 			dd($validador_condiciones->messages());
-
 				
 				#dd($a);
 			
@@ -117,8 +116,11 @@ class PacientePediatrico extends \Eloquent {
 						{							
 							$buffer_examenes['detalle_funcional'][$llave] = 'required';
 						}					
-					#array_push($buffer_condiciones['funcional'], 'required|in:1,2|integer');					
+					#array_push($buffer_condiciones['funcional'], 'required|in:1,2|integer');
+					$reglas_condiciones['funcional'][$llave] = "funcional.$llave";
 				}
+
+
 			
 			foreach ($input['fisico'] as $llave => $valor) 
 				{
@@ -132,10 +134,8 @@ class PacientePediatrico extends \Eloquent {
 
 			$validador_examenes = Validator::make($input,$buffer_examenes,$mensajes_error);
 			$validador_signos_vitales = Validator::make($input,$reglas_signos_vitales, $mensajes_error_signos_vitales);			
-			$validador_condiciones = Validator::make($input,$buffer_condiciones,$mensaje_error_condiciones);
-
 			
-			dd($validador_condiciones->messages());
+
 
 			if($validador_condiciones->fails() || $validador_signos_vitales->fails() /* || $validador_examenes->fails()  */)
 				{
