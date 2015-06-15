@@ -13,9 +13,6 @@
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-{{--         <li>
-          <a href="#">Getting started</a>
-        </li> --}}
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pacientes <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -54,6 +51,27 @@
             <li><a href="#">Something else here</a></li>
             <li><a href="#">Separated link</a></li>
             <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Estadísticas <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li><a href="#">Separated link</a></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>        
+      </ul>
+      <ul class="nav navbar-nav navbar-right navbar-collapse collapse">        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Sesión&nbsp;<span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">            
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Cerrar sesión</a></li>
           </ul>
         </li>
       </ul>

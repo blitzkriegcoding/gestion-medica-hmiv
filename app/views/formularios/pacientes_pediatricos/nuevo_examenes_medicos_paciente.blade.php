@@ -1,11 +1,7 @@
-{{-- dd($interrogatorio_items); --}}
-<div class="container-fluid">
-  <div class="container">
-    <h3>
+    <p class="lead">
       Examenes de rutina para el ingreso del paciente al HMIV
-    </h3>
-  </div>
-</div>
+    </p>
+
 <br>
 @if (Session::get('mensaje') )
   <!-- Si hay un mensaje, entonces lo imprimimos y le damos estilo con bootstrap -->
@@ -17,8 +13,16 @@
     </div>
   </div>  
 @endif
+
+
+
+<?php 
+  $abanico_abierto_signos_vitales ="";
+  
+
+?>
 <br><br>
-{{-- <div class="fuelux"> --}}
+<div class="fuelux">
 <div class="alert text-center alert-info"style="width: 400px; margin: 0 auto;">
   <span class="glyphicon glyphicon-paperclip"> </span> <strong>PACIENTE:</strong> {{ $paciente['primer_apellido']." ".$paciente['segundo_apellido'].", ".$paciente['primer_nombre']." ".$paciente['segundo_nombre'] }}
 </div>
@@ -41,56 +45,75 @@
         <h4>Interrogatorio</h4>
         <p>Apartado para cargar los datos suministrados por el representante del paciente pediátrico.</p>
         <p><strong>Instrucciones: </strong>Seleccione cada item si fue encontrado normal o anormal durante el interrogatorio, de no ser asi colocar observación. <strong>Se le recomienda verificar su seleccion antes de ser cargada en el sistema</strong></p>        
-        <br>
-        <br>
-        <div class="container-fluid">
+        <br>        
+        <div class="container-fluid panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
+                 <?php $tabs = 0; ?>
                  @foreach ($interrogatorio_items as $item) 
+                 <?php 
+                    $tabs++; 
+                 ?>
+                {{-- {{ $aria_expanded }} --}}
+
                  <div class="panel panel-primary">
-                   <div class="panel-heading"><strong>{{$item->item_grupo_interrogatorio}}</strong></div>
+                   <div class="panel-heading"  role="tab" id="headingOne{{$tabs}}">
+                    <h4 class="panel-title">
+                        <a  class="collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne{{$tabs}}" aria-expanded="false"  aria-controls="collapseOne{{$tabs}}">                        
+                        {{$item->item_grupo_interrogatorio}}
+                        </a>
+                      </h4>
+                    </div>
                    <?php 
                         $divisor_linea = 0;
-                        $contador_items = 0; 
+                        $contador_items = 0;
+
+/*                        
+                        $acordeon_interrogatorio = "";
+                        foreach($item->CondicionInterrogatorio as $condicion):
+                            if($errors->has('interrogatorio['.$condicion->id_condicion_interrogatorio.']')):
+                                $acordeon_interrogatorio = "in";
+                            endif;
+                        endforeach;
+                        {{ $acordeon_interrogatorio }}
+                        */
                     ?>
-                    <table width="100%" class=" table table-condensed table-hover">                          
-                      <tr>
-                         @foreach($item->CondicionInterrogatorio as $l)
-                           <?php $divisor_linea++;
-                                $contador_items++;
-                           ?>
-                                    
-                                        <td width='10%' class="text-left" valign="middle">
-                                         <strong>{{ $item->id_grupo_interrogatorio."-".$contador_items }} {{ $l->item_interrogatorio }}</strong>
-                                        </td>
-                                        <td width='10%'>
-                                          {{-- Form::checkbox('interrogatorio[]',$l->id_condicion_interrogatorio,false, array('class'=>'form-control')) --}}
-                                           {{Form::select('interrogatorio['.$l->id_condicion_interrogatorio.']',array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
-                                           {{--VALIDACION ERRORES EN LOS COMBOS --}}
-                                            @if($errors->has('interrogatorio['.$l->id_condicion_interrogatorio.']'))
-                                                  <div class="alert alert-danger col-xs text-center" style="padding: 2px">
-                                                    @foreach($errors->get('interrogatorio['.$l->id_condicion_interrogatorio.']') as $error )
-                                                        {{ $error }}
-                                                    @endforeach
-                                                  </div>
-                                            @endif                                           
-                                        </td> 
-                                        <td width='10%'>
-                                          {{-- VALIDACION DEL TEXTO SI LA CONDICION ES ANORMAL --}}
-                                           {{Form::text('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']',NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
-                                            @if($errors->has('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']'))
-                                                  <div class="alert alert-danger col-xs text-center" style="padding: 2px">
-                                                    @foreach($errors->get('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']') as $error )
-                                                        {{ $error }}
-                                                    @endforeach
-                                                  </div>
-                                            @endif
-                                        </td>                                                                                
-                                  
-                            
-                           @if($divisor_linea % 2 == 0)     
-                              {{'</tr>'}}
-                           @endif
-                          @endforeach
-                    </table>
+                    <div id="collapseOne{{$tabs}}" class="panel-collapse collapse  " role="tabpanel" aria-labelledby="headingOne{{$tabs}}">
+                      <table width="95%" class=" table table-condensed table-hover">
+                        <tr>
+                           @foreach($item->CondicionInterrogatorio as $l)
+                             <?php $divisor_linea++;
+                                  $contador_items++;
+                             ?>                                      
+                                          <td width='10%' class="text-left" valign="middle">
+                                           <strong>{{ $item->id_grupo_interrogatorio."-".$contador_items }} {{ $l->item_interrogatorio }}</strong>
+                                          </td>
+                                          <td width='10%'>                                            
+                                             {{Form::select('interrogatorio['.$l->id_condicion_interrogatorio.']',array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
+                                             {{--VALIDACION ERRORES EN LOS COMBOS --}}
+                                              @if($errors->has('interrogatorio['.$l->id_condicion_interrogatorio.']'))
+                                                    <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                      @foreach($errors->get('interrogatorio['.$l->id_condicion_interrogatorio.']') as $error )
+                                                          {{ $error }}
+                                                      @endforeach
+                                                    </div>
+                                              @endif                                           
+                                          </td> 
+                                          <td width='10%'>
+                                            {{-- VALIDACION DEL TEXTO SI LA CONDICION ES ANORMAL --}}
+                                             {{Form::text('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']',NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                              @if($errors->has('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']'))
+                                                    <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                      @foreach($errors->get('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']') as $error )
+                                                          {{ $error }}
+                                                      @endforeach
+                                                    </div>
+                                              @endif
+                                          </td>
+                             @if($divisor_linea % 2 == 0)     
+                                {{'</tr>'}}
+                             @endif
+                            @endforeach
+                      </table>
+                    </div>
                  </div>
                 @endforeach
         </div>
@@ -98,59 +121,62 @@
       <div class="step-pane active sample-pane alert" data-step="2">
         <h4>Exámen funcional</h4>
         <p>El paciente será verificado por el médico para identificar indicios de patologías. </p>
-        <br>
-        <br>
-        <div class="container-fluid">
-          @foreach ($examen_funcional_items as $item) 
+        <br>        
+        <div class="container-fluid panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+          <?php $tabs = 0; ?>
+
+          @foreach ($examen_funcional_items as $item)
+            <?php $tabs++; ?> 
                  <div class="panel panel-primary">
-                   <div class="panel-heading"><strong>{{$item->item_grupo_funcional}}</strong></div>
-                   
+                    <div class="panel-heading"  role="tab" id="headingTwo{{$tabs}}">
+                      <h4 class="panel-title">
+                        <a  class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo{{$tabs}}" aria-expanded="false"  aria-controls="collapseTwo{{$tabs}}">                        
+                          {{$item->item_grupo_funcional}}
+                        </a>
+                      </h4>
+                    </div>
                    <?php 
                         $divisor_linea = 0;
                         $contador_items = 0; 
                     ?>
-                    <table width="100%" class=" table table-condensed table-hover">                          
-                      <tr>
-                         @foreach($item->CondicionFuncional as $l)
-                           <?php $divisor_linea++;
-                                $contador_items++;
-                           ?>                                    
-                                        <td width='10%'>
-                                         <strong>{{ $item->id_grupo_funcional."-".$contador_items }} {{ $l->item_examen_funcional }}</strong>
-                                        </td>
-                                        <td width='10%' class="text-left">
-                                          {{-- Form::checkbox('funcional[]', $l->id_condicion_examen_funcional,false, array('class'=>'form-control')) --}}
-                                          {{Form::select('funcional['.$l->id_condicion_examen_funcional.']', array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm')) }}
-                                          @if($errors->has('funcional['.$l->id_condicion_examen_funcional.']'))
-                                                <div class="alert alert-danger col-xs text-center" style="padding: 2px">
-                                                  @foreach($errors->get('funcional['.$l->id_condicion_examen_funcional.']') as $error )
-                                                      {{ $error }}
-                                                  @endforeach
-                                                </div>
-                                          @endif
-                                        </td> 
-                                        <td width='10%'>
-                                           {{Form::text('detalle_funcional['.$l->id_condicion_examen_funcional.']'/*.$l->id_condicion_examen_funcional.*/,NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
-                                            @if($errors->has('detalle_funcional['.$l->id_condicion_examen_funcional.']'))
-                                                  <div class="alert alert-danger col-xs text-center" style="padding: 2px">
-                                                    @foreach($errors->get('detalle_funcional['.$l->id_condicion_examen_funcional.']') as $error )
-                                                        {{ $error }}
-                                                    @endforeach
-                                                  </div>
-                                            @endif                                           
-                                        </td>                                                                                
-                                  {{-- $l->condicion_grupo --}}
-                            
-                           @if($divisor_linea % 2 == 0)     
-                              {{'</tr>'}}
-                           @endif
-                          @endforeach
-
-
-                    </table>
+                    <div id="collapseTwo{{$tabs}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo{{$tabs}}">
+                        <table width="95%" class=" table table-condensed table-hover">                          
+                          <tr>
+                             @foreach($item->CondicionFuncional as $l)
+                               <?php $divisor_linea++;
+                                    $contador_items++;
+                               ?>                                    
+                                            <td width='10%'>
+                                             <strong>{{ $item->id_grupo_funcional."-".$contador_items }} {{ $l->item_examen_funcional }}</strong>
+                                            </td>
+                                            <td width='10%' class="text-left">                                              
+                                              {{Form::select('funcional['.$l->id_condicion_examen_funcional.']', array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm')) }}
+                                              @if($errors->has('funcional['.$l->id_condicion_examen_funcional.']'))
+                                                    <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                      @foreach($errors->get('funcional['.$l->id_condicion_examen_funcional.']') as $error )
+                                                          {{ $error }}
+                                                      @endforeach
+                                                    </div>
+                                              @endif
+                                            </td> 
+                                            <td width='10%'>
+                                               {{Form::text('detalle_funcional['.$l->id_condicion_examen_funcional.']',NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
+                                                @if($errors->has('detalle_funcional['.$l->id_condicion_examen_funcional.']'))
+                                                      <div class="alert alert-danger col-xs text-center" style="padding: 2px">
+                                                        @foreach($errors->get('detalle_funcional['.$l->id_condicion_examen_funcional.']') as $error )
+                                                            {{ $error }}
+                                                        @endforeach
+                                                      </div>
+                                                @endif                                           
+                                            </td>
+                               @if($divisor_linea % 2 == 0)     
+                                  {{'</tr>'}}
+                               @endif
+                              @endforeach
+                        </table>
+                    </div>
                  </div>
-
-                @endforeach
+            @endforeach
         </div>
       </div>
       <div class="step-pane active sample-pane alert" data-step="3">
@@ -158,14 +184,25 @@
         <p>Verificación rutinaria del médico al paciente. </p>
         <br>
         <br>
-        <div class="container-fluid">
+        <div class="container-fluid panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
+          <?php $tabs = 0; ?>
           <div class="panel panel-primary">
-             <div class="panel-heading">SIGNOS VITALES</div>
-              <table width="100%" class="table table-responsive table-hover" >                          
+              <div class="panel-heading"  role="tab" id="headingFour">
+                <h4 class="panel-title">
+                  <a  class="collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapseFour" aria-expanded="false"  aria-controls="collapseFour">                        
+                    SIGNOS VITALES
+                  </a>
+                </h4>
+              </div>                   
+           <?php 
+                $divisor_linea = 0;
+                $contador_items = 0; 
+            ?>
+            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">                           
+              <table width="95%" class="table table-responsive table-hover" >                          
                 <tr >                                    
                   <td width='150px' class="text-right" style="vertical-align:middle">
                       {{ Form::label('frecuencia_respiratoria','Frecuencia respiratoria (rpm): ') }}
-
                   </td>
                   <td width='60px' class="text-left" style="vertical-align:middle">
                     {{ Form::text('frecuencia_respiratoria',NULL,array('class'=>'form-control','size'=>'4','maxlength'=>'4','style'=>'width: 60px' )) }} 
@@ -245,17 +282,26 @@
                       @endif                   
                   </td>                          
                 </tr>                
-              </table>                   
+              </table>
+              </div>                   
           </div>
-          @foreach ($examen_fisico_items as $item) 
-                 <div class="panel panel-primary">
-                   <div class="panel-heading">{{$item->item_grupo_fisico}}</div>
-                   
+
+          @foreach ($examen_fisico_items as $item)
+          <?php $tabs++; ?> 
+                   <div class="panel panel-primary">
+                      <div class="panel-heading"  role="tab" id="headingThree{{$tabs}}">
+                        <h4 class="panel-title">
+                          <a  class="collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapseThree{{$tabs}}" aria-expanded="false"  aria-controls="collapseThree{{$tabs}}">                        
+                            {{$item->item_grupo_fisico}}
+                          </a>
+                        </h4>
+                      </div>                   
                    <?php 
                         $divisor_linea = 0;
                         $contador_items = 0; 
                     ?>
-                    <table width="100%" class=" table table-responsive table-hover">                          
+                    <div id="collapseThree{{$tabs}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree{{$tabs}}">
+                    <table width="95%" class=" table table-responsive table-hover">                          
                       <tr>
                          @foreach($item->CondicionFisico as $l)
                            <?php $divisor_linea++;
@@ -296,6 +342,7 @@
 
                     </table>
                  </div>
+                </div>
 
                 @endforeach        
           
@@ -305,4 +352,4 @@
     {{ Form::close()}}
 </div>
 </div>
-{{-- </div> --}}
+</div>

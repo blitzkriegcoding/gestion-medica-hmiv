@@ -24,10 +24,9 @@ class PacientePediatrico extends \Eloquent {
 		{
 			return $this->hasMany('ExamenFisicoPediatrico','id_paciente','id_paciente');
 		}
-
-
 	public static function crear_examenes_paciente($input)
 		{
+			$errores = "";
 			$respuesta = [];
 			$reglas_examenes = [];
 			$reglas_signos_vitales = [];
@@ -36,15 +35,18 @@ class PacientePediatrico extends \Eloquent {
 			$respuesta['error_mensajes'] = '';
 			$respuesta['mensaje'] = '';
 			$respuesta['estilo'] = '';
+			
 			$mensajes_error = [
 								'required'		=>	'¿Que observó anormal?',
 								'integer'		=>	'El campo ":attribute" solo acepta numeros',
 								'numeric'		=>	'El campo ":attribute" solo acepta numeros y decimales',								
 								];
 
+
 			$mensaje_error_condiciones = [
-										'required'	=>	'Este campo es obligatorio',
-										'in:1,2'	=>	'Debe seleccionar un valor válido'
+										'in:1,2'	=>	'El campo :attribute es invalido',										
+										'required'	=>	'¿Normal o anormal?',
+										
 									];
 
 			$mensajes_error_signos_vitales = [
@@ -53,56 +55,96 @@ class PacientePediatrico extends \Eloquent {
 												'numeric'		=>	'Este campo solo acepta numeros y decimales',								
 												];
 
-			#[frecuencia_respiratoria] => [frecuencia_cardiaca] => [peso] => [talla] => [tension_arterial] => [temperatura] 
+			
 			$reglas_signos_vitales = [
 									'frecuencia_respiratoria'	=>	'required|integer',
 									'frecuencia_cardiaca'		=>	'required|integer',
 									'peso'						=>	'required|integer',
 									'talla'						=>	'required|integer',
 									'tension_arterial'			=> 	'required|integer',
-									'temperatura'				=> 	'required|numeric',
+									'temperatura'				=> 	'required|integer',
 								];
 
+			$buffer_condiciones = [
+									'interrogatorio'			=> 	array_fill(1, count($input['interrogatorio']),'required|in:1,2'),
+									'funcional'					=>	range(1,array_count_values($input['funcional'])),
+									'fisico' 					=>	range(1,array_count_values($input['fisico'])),									
+								];
+
+			$buffer_examenes = [
+									'detalle_interrogatorio'	=> 	range(1,array_count_values($input['detalle_interrogatorio'])),
+									'detalle_funcional'			=>	range(1,array_count_values($input['detalle_funcional'])),
+									'detalle_fisico'			=>	range(1,array_count_values($input['detalle_fisico'])),
+							];
+
+			$reglas_condiciones = [
+									'interrogatorio'			=> 	array_fill(1, count($input['interrogatorio']),''),									
+									 'funcional'				=>	array_fill(1, count($input['funcional']), ['min:1,2']),
+									 'fisico' 					=>	array_fill(1, count($input['fisico']), ['min:1,2']),									
+								];
+
+
+			
+
+			
+			$c = [];
+			#dd($input['interrogatorio']);
 			foreach($input['interrogatorio'] as $llave=>$valor)
 				{
 					if($input['interrogatorio'][$llave] == 2 && $input['detalle_interrogatorio'][$llave] =="")
-						{
-							$reglas_examenes['detalle_interrogatorio['.$llave.']'] = 'required'; 
+						{							
+							$buffer_examenes['detalle_interrogatorio'][$llave] = 'required';
 						}
-					$reglas_condiciones['interrogatorio['.$llave.']'] = 'required';
+					#$reglas_condiciones['interrogatorio.'.$llave] = 'required|in:1,2';	
+					#echo 'interrogatorio.'.$llave."<br>";	
+					#$c[] = ('interrogatorio.'.$llave);
+					$reglas_condiciones['interrogatorio'][$llave] = "interrogatorio.$llave";
 				}
+			
+			$c = array_combine($reglas_condiciones['interrogatorio'], $buffer_condiciones['interrogatorio']);
+			
+			
+			$validador_condiciones = Validator::make($input,$c,$mensaje_error_condiciones);
 
+			dd($validador_condiciones->messages());
+
+				
+				#dd($a);
+			
 			foreach ($input['funcional'] as $llave => $valor) 
 				{
 					if($input['funcional'][$llave] == 2 && $input['detalle_funcional'][$llave] =="")
-						{
-							$reglas_examenes['detalle_funcional['.$llave.']'] = 'required'; 
-						}
-					$reglas_condiciones['funcional['.$llave.']'] = 'required';
-
+						{							
+							$buffer_examenes['detalle_funcional'][$llave] = 'required';
+						}					
+					#array_push($buffer_condiciones['funcional'], 'required|in:1,2|integer');					
 				}
+			
 			foreach ($input['fisico'] as $llave => $valor) 
 				{
 					if($input['fisico'][$llave] == 2 && $input['detalle_fisico'][$llave] =="")
-						{
-							$reglas_examenes['detalle_fisico['.$llave.']'] = 'required'; 
-						}
-					$reglas_condiciones['fisico['.$llave.']'] = 'required';
+						{							
+							$buffer_examenes['detalle_fisico'][$llave] = 'required';
+						}					
+					#array_push($buffer_condiciones['fisico'], 'required|in:1,2|integer');
 				}
 			
-			$validador_examenes = Validator::make($input,$reglas_examenes,$mensajes_error);	
-			$validador_signos_vitales = Validator::make($input,$reglas_signos_vitales, $mensajes_error_signos_vitales);
-			$validador_condiciones = Validator::make($input,$reglas_condiciones,$mensaje_error_condiciones);
-			#print_r($reglas_examenes);
+
+			$validador_examenes = Validator::make($input,$buffer_examenes,$mensajes_error);
+			$validador_signos_vitales = Validator::make($input,$reglas_signos_vitales, $mensajes_error_signos_vitales);			
+			$validador_condiciones = Validator::make($input,$buffer_condiciones,$mensaje_error_condiciones);
 
 			
-			if($validador_examenes->fails() || $validador_signos_vitales->fails() || $validador_condiciones->fails())
+			dd($validador_condiciones->messages());
+
+			if($validador_condiciones->fails() || $validador_signos_vitales->fails() /* || $validador_examenes->fails()  */)
 				{
 					
 					$errores = $validador_examenes->messages()->merge($validador_signos_vitales->messages()->merge($validador_condiciones->messages()));
 					$respuesta['mensaje'] = $errores;					
 					$respuesta['error_mensajes'] = true;
-					#dd($errores);
+					
+
 				}
 			else
 				{
@@ -145,20 +187,14 @@ class PacientePediatrico extends \Eloquent {
 														'status' => $valor));
 							#$paciente->PacienteExamenFisico()->save($examen_fisico);									
 						}
-
-
-					#dd($examen_fisico);
-
-					
-					
-					
-
 					$respuesta['mensaje'] = "Examenes generados exitosamente";
 					$respuesta['error_mensajes'] = false;
-
 				}
 			return $respuesta;
 		}
+
+
+
 
 
 	public static function cargar_paciente_pediatrico($input)				
