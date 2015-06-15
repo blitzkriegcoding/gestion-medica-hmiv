@@ -18,7 +18,10 @@
 
 <?php 
   $abanico_abierto_signos_vitales ="";
-  
+  if(isset($errors))
+    {
+        #dd($errors);
+    }
 
 ?>
 <br><br>
@@ -89,9 +92,9 @@
                                           <td width='10%'>                                            
                                              {{Form::select('interrogatorio['.$l->id_condicion_interrogatorio.']',array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
                                              {{--VALIDACION ERRORES EN LOS COMBOS --}}
-                                              @if($errors->has('interrogatorio['.$l->id_condicion_interrogatorio.']'))
+                                              @if($errors->has('interrogatorio.'.$l->id_condicion_interrogatorio))
                                                     <div class="alert alert-danger col-xs text-center" style="padding: 2px">
-                                                      @foreach($errors->get('interrogatorio['.$l->id_condicion_interrogatorio.']') as $error )
+                                                      @foreach($errors->get('interrogatorio.'.$l->id_condicion_interrogatorio) as $error )
                                                           {{ $error }}
                                                       @endforeach
                                                     </div>
@@ -100,9 +103,9 @@
                                           <td width='10%'>
                                             {{-- VALIDACION DEL TEXTO SI LA CONDICION ES ANORMAL --}}
                                              {{Form::text('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']',NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
-                                              @if($errors->has('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']'))
+                                              @if($errors->has('detalle_interrogatorio.'.$l->id_condicion_interrogatorio))
                                                     <div class="alert alert-danger col-xs text-center" style="padding: 2px">
-                                                      @foreach($errors->get('detalle_interrogatorio['.$l->id_condicion_interrogatorio.']') as $error )
+                                                      @foreach($errors->get('detalle_interrogatorio.'.$l->id_condicion_interrogatorio) as $error )
                                                           {{ $error }}
                                                       @endforeach
                                                     </div>
@@ -151,9 +154,9 @@
                                             </td>
                                             <td width='10%' class="text-left">                                              
                                               {{Form::select('funcional['.$l->id_condicion_examen_funcional.']', array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm')) }}
-                                              @if($errors->has('funcional['.$l->id_condicion_examen_funcional.']'))
+                                              @if($errors->has('funcional.'.$l->id_condicion_examen_funcional))
                                                     <div class="alert alert-danger col-xs text-center" style="padding: 2px">
-                                                      @foreach($errors->get('funcional['.$l->id_condicion_examen_funcional.']') as $error )
+                                                      @foreach($errors->get('funcional.'.$l->id_condicion_examen_funcional) as $error )
                                                           {{ $error }}
                                                       @endforeach
                                                     </div>
@@ -161,9 +164,9 @@
                                             </td> 
                                             <td width='10%'>
                                                {{Form::text('detalle_funcional['.$l->id_condicion_examen_funcional.']',NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
-                                                @if($errors->has('detalle_funcional['.$l->id_condicion_examen_funcional.']'))
+                                                @if($errors->has('detalle_funcional.'.$l->id_condicion_examen_funcional))
                                                       <div class="alert alert-danger col-xs text-center" style="padding: 2px">
-                                                        @foreach($errors->get('detalle_funcional['.$l->id_condicion_examen_funcional.']') as $error )
+                                                        @foreach($errors->get('detalle_funcional.'.$l->id_condicion_examen_funcional) as $error )
                                                             {{ $error }}
                                                         @endforeach
                                                       </div>
@@ -314,9 +317,9 @@
                                         <td width='10%' class="text-left">
                                           {{-- Form::checkbox('fisico[]',$l->id_condicion_examen_fisico,false, array('class'=>'form-control')) --}}
                                           {{Form::select('fisico['.$l->id_condicion_examen_fisico.']', array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
-                                          @if($errors->has('fisico['.$l->id_condicion_examen_fisico.']'))
+                                          @if($errors->has('fisico.'.$l->id_condicion_examen_fisico))
                                                 <div class="alert alert-danger col-xs text-center" style="padding: 2px">
-                                                  @foreach($errors->get('fisico['.$l->id_condicion_examen_fisico.']') as $error )
+                                                  @foreach($errors->get('fisico.'.$l->id_condicion_examen_fisico) as $error )
                                                       {{ $error }}
                                                   @endforeach
                                                 </div>
@@ -324,9 +327,9 @@
                                         </td> 
                                         <td width='10%'>
                                            {{Form::text('detalle_fisico['.$l->id_condicion_examen_fisico.']'/*.$l->id_condicion_examen_fisico.*/, NULL ,array('class'=>'form-control input-sm','size'=>'12'))}}
-                                            @if($errors->has('detalle_fisico['.$l->id_condicion_examen_fisico.']'))
+                                            @if($errors->has('detalle_fisico.'.$l->id_condicion_examen_fisico))
                                                   <div class="alert alert-danger col-xs text-center" style="padding: 2px">
-                                                    @foreach($errors->get('detalle_fisico['.$l->id_condicion_examen_fisico.']') as $error )
+                                                    @foreach($errors->get('detalle_fisico.'.$l->id_condicion_examen_fisico) as $error )
                                                         {{ $error }}
                                                     @endforeach
                                                   </div>

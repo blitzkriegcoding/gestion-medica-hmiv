@@ -44,7 +44,7 @@ class PacientePediatrico extends \Eloquent {
 
 
 			$mensaje_error_condiciones = [
-										'in'		=>	'El campo :attribute es invalido',										
+										'in'		=>	'Debe seleccionar una condición',										
 										'required'	=>	'¿Normal o anormal?',
 										'integer'	=>	''
 										
@@ -67,16 +67,23 @@ class PacientePediatrico extends \Eloquent {
 								];
 
 			$buffer_condiciones = [
-									'interrogatorio'			=> 	array_fill(1, count($input['interrogatorio']),['required','in:1,2','integer']),
-									'funcional'					=>	range(1,array_count_values($input['funcional'])),
-									'fisico' 					=>	range(1,array_count_values($input['fisico'])),									
+									'interrogatorio'			=> 	array_fill(1, count($input['interrogatorio']), ['required','in:1,2','integer']),
+									'funcional'					=>	array_fill(1, count($input['funcional']), ['required','in:1,2','integer']),
+									'fisico' 					=>	array_fill(1, count($input['fisico']), ['required','in:1,2','integer']),
 								];
 
+			
 			$buffer_examenes = [
-									'detalle_interrogatorio'	=> 	range(1,array_count_values($input['detalle_interrogatorio'])),
-									'detalle_funcional'			=>	range(1,array_count_values($input['detalle_funcional'])),
-									'detalle_fisico'			=>	range(1,array_count_values($input['detalle_fisico'])),
+									'detalle_interrogatorio'	=> 	array(),
+									'detalle_funcional'			=>	array(),
+									'detalle_fisico'			=>	array(),
 							];
+			$reglas_examenes = [
+									'detalle_interrogatorio'	=> 	array(),
+									'detalle_funcional'			=>	array(),
+									'detalle_fisico'			=>	array(),									
+
+							];				
 
 			$reglas_condiciones = [
 									'interrogatorio'			=> 	array_fill(1, count($input['interrogatorio']),''),									
@@ -87,62 +94,85 @@ class PacientePediatrico extends \Eloquent {
 
 			
 
+			/*Finalmente para poder colocar las reglas de validacion es necesario combinar el arreglo 
+			que tiene los nombres de los campos en notacion "arreglo.posicion", con el arreglo
+			que tiene las reglas de validacion "buffer.tipo"
+			*/
+			$condiciones_combinado_interrogatorio = [];
+			$condiciones_combinado_funcional = [];
+			$condiciones_combinado_fisico = [];
+
+			//Arreglos para los combinados de validacion de examenes
+
+			$combinado_detalles_interrogatorio = [];
+			$combinado_detalles_funcional = [];
+			$combinado_detalles_fisico = [];
+
+
 			
-			$condiciones_combinado = [];
-			#dd($input['interrogatorio']);
 			foreach($input['interrogatorio'] as $llave=>$valor)
 				{
 					if($input['interrogatorio'][$llave] == 2 && $input['detalle_interrogatorio'][$llave] =="")
 						{							
-							$buffer_examenes['detalle_interrogatorio'][$llave] = 'required';
+							$buffer_examenes['detalle_interrogatorio'][$llave] = "detalle_interrogatorio.$llave";
+							$reglas_examenes['detalle_interrogatorio'][$llave] = 'required';
 						}
-					#$reglas_condiciones['interrogatorio.'.$llave] = 'required|in:1,2';	
-					#echo 'interrogatorio.'.$llave."<br>";	
-					#$c[] = ('interrogatorio.'.$llave);
 					$reglas_condiciones['interrogatorio'][$llave] = "interrogatorio.$llave";
 				}
 			
-			$condiciones_combinado = array_combine($reglas_condiciones['interrogatorio'], $buffer_condiciones['interrogatorio']);
-			
-			$validador_condiciones = Validator::make($input,$condiciones_combinado,$mensaje_error_condiciones);
-		
-			dd($validador_condiciones->messages());
-				
-				#dd($a);
+
 			
 			foreach ($input['funcional'] as $llave => $valor) 
 				{
 					if($input['funcional'][$llave] == 2 && $input['detalle_funcional'][$llave] =="")
-						{							
-							$buffer_examenes['detalle_funcional'][$llave] = 'required';
-						}					
-					#array_push($buffer_condiciones['funcional'], 'required|in:1,2|integer');
+						{	
+							$buffer_examenes['detalle_funcional'][$llave] = "detalle_funcional.$llave";
+							$reglas_examenes['detalle_funcional'][$llave] = 'required';
+
+						}
 					$reglas_condiciones['funcional'][$llave] = "funcional.$llave";
-				}
-
-
-			
+				}			
 			foreach ($input['fisico'] as $llave => $valor) 
 				{
 					if($input['fisico'][$llave] == 2 && $input['detalle_fisico'][$llave] =="")
 						{							
-							$buffer_examenes['detalle_fisico'][$llave] = 'required';
-						}					
-					#array_push($buffer_condiciones['fisico'], 'required|in:1,2|integer');
+							
+							$buffer_examenes['detalle_fisico'][$llave] = "detalle_fisico.$llave";
+							$reglas_examenes['detalle_fisico'][$llave] = 'required';							
+						}
+					$reglas_condiciones['fisico'][$llave] = "fisico.$llave";
 				}
 			
+			/*COMBINADOS DE ARREGLOS DE CAMPOS/REGLAS DE VALIDACION EN CONDICIONES: NORMAL Y ANORMAL */
+			$condiciones_combinado_interrogatorio = array_combine($reglas_condiciones['interrogatorio'], $buffer_condiciones['interrogatorio']);
+			$condiciones_combinado_funcional = array_combine($reglas_condiciones['funcional'], $buffer_condiciones['funcional']);
+			$condiciones_combinado_fisico = array_combine($reglas_condiciones['fisico'], $buffer_condiciones['fisico']);
+			
+			/*COMBINADOS DE ARREGLOS DE CAMPOS/REGLAS DE VALIDACION EN SELECCION ANORMAL Y RESUMEN*/
+			$combinado_detalles_interrogatorio = array_combine($buffer_examenes['detalle_interrogatorio'], $reglas_examenes['detalle_interrogatorio']);
+			$combinado_detalles_funcional = array_combine($buffer_examenes['detalle_funcional'], $reglas_examenes['detalle_funcional']);
+			$combinado_detalles_fisico = array_combine($buffer_examenes['detalle_fisico'], $reglas_examenes['detalle_fisico']);
 
-			$validador_examenes = Validator::make($input,$buffer_examenes,$mensajes_error);
+
+			$condiciones_totales = array_merge($condiciones_combinado_interrogatorio,$condiciones_combinado_funcional,$condiciones_combinado_fisico);
+
+			$examenes_totales = array_merge($combinado_detalles_interrogatorio,$combinado_detalles_funcional,$combinado_detalles_fisico);
+		
+
+			$validador_examenes = Validator::make($input,$examenes_totales,$mensajes_error);
 			$validador_signos_vitales = Validator::make($input,$reglas_signos_vitales, $mensajes_error_signos_vitales);			
+			$validador_condiciones = Validator::make($input,$condiciones_totales,$mensaje_error_condiciones);
+
 			
 
-
-			if($validador_condiciones->fails() || $validador_signos_vitales->fails() /* || $validador_examenes->fails()  */)
+			if($validador_condiciones->fails() || $validador_signos_vitales->fails()  || $validador_examenes->fails())
 				{
 					
+					#dd($validador_condiciones->messages());
 					$errores = $validador_examenes->messages()->merge($validador_signos_vitales->messages()->merge($validador_condiciones->messages()));
 					$respuesta['mensaje'] = $errores;					
 					$respuesta['error_mensajes'] = true;
+
 					
 
 				}
