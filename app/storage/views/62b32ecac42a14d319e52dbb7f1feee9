@@ -20,7 +20,6 @@
     {
         #dd($errors);
     }
-
 ?>
 <br><br>
 <div class="fuelux">

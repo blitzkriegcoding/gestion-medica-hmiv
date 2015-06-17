@@ -121,7 +121,7 @@
 
                     </div>
                     <div class="col-md-3 pad-controles">
-                      <?php echo Form::select('tipo_documento_representante',array('0'=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE'),'0',array('class'=>'form-control')); ?>
+                      <?php echo Form::select('tipo_documento_representante',array('0'=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE'),'0',array('class'=>'form-control','style'=>'width:70%' )); ?>
 
                     </div>
                   </div>
@@ -141,7 +141,7 @@
                       <?php echo Form::label('sexo_representante','Género: '); ?> 
                     </div>
                     <div class="col-md-3 pad-controles ">
-                      <?php echo Form::select('sexo_representante',array('0'=>'---','F'=>'FEMENINO','M'=>'MASCULINO'),'0',array('class'=>'form-control select2','style'=>'width:75%')); ?>
+                      <?php echo Form::select('sexo_representante',array('0'=>'---','F'=>'FEMENINO','M'=>'MASCULINO'),'0',array('class'=>'form-control','style'=>'width:75%')); ?>
 
                     </div>
                   </div>

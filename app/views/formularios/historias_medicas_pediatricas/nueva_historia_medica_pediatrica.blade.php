@@ -115,7 +115,7 @@
                       {{Form::label('tipo_documento_representante','Nacionalidad: ')}}
                     </div>
                     <div class="col-md-3 pad-controles">
-                      {{Form::select('tipo_documento_representante',array('0'=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE'),'0',array('class'=>'form-control')) }}
+                      {{Form::select('tipo_documento_representante',array('0'=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE'),'0',array('class'=>'form-control','style'=>'width:70%' )) }}
                     </div>
                   </div>
                   <div class="row">

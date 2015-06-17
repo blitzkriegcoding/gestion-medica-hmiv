@@ -24,15 +24,23 @@ class HistoriaMedicaPediatricaController extends \BaseController {
 								'paciente_edad'		=> PacientePediatrico::CalculoEdad($id_paciente_pediatrico),
 							];
 
-			
+
 
 			Session::put('id_paciente_pediatrico', $id_paciente_pediatrico);
 			return View::make('historias_medicas_pediatricas.crear_historia_medica_pediatrica')->with($datos_vista);	
 		}
-
 	public function crear_historia_medica_pediatrica()	
 		{
-			#dd(Input::all());
+			$respuesta = HistoriaMediaPediatrica::cargar_paciente_pediatrico(Input::all());
+			
+			if($respuesta['error_mensajes'] == true)
+				{				
+					return Redirect::to('/pacientes_pediatricos/creacion_pacientes_pediatricos')->withErrors($respuesta['mensaje'])->withInput();
+				}
+			else
+				{
+					return Redirect::to('/pacientes_pediatricos/creacion_pacientes_pediatricos')->with(['mensaje'=>$respuesta['mensaje'],'estilo'=>$respuesta['estilo'] ]);
+				}				
 		}
 
 }
