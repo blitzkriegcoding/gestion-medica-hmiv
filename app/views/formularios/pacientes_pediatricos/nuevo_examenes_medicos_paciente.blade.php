@@ -13,21 +13,37 @@
     </div>
   </div>  
 @endif
-
-
-
 <?php 
   $abanico_abierto_signos_vitales ="";
   if(isset($errors))
     {
         #dd($errors);
     }
-
 ?>
 <br><br>
 <div class="fuelux">
-<div class="alert text-center alert-info"style="width: 400px; margin: 0 auto;">
-  <span class="glyphicon glyphicon-paperclip"> </span> <strong>PACIENTE:</strong> {{ $paciente['primer_apellido']." ".$paciente['segundo_apellido'].", ".$paciente['primer_nombre']." ".$paciente['segundo_nombre'] }}
+<div class="alert text-left alert-info"style="width: 400px; margin: 0 auto;">
+    <ul class="list-unstyled" >
+      <li>
+      <strong>
+        PACIENTE: 
+      </strong>
+        {{ $paciente['primer_apellido']." ".$paciente['segundo_apellido'].", ".$paciente['primer_nombre']." ".$paciente['segundo_nombre'] }}        
+      </li>
+      <li>
+        <strong>
+          EDAD: 
+        </strong> 
+        {{ $paciente_edad[0]->edad }}      
+      </li>
+      <li>
+        <strong>
+          SEXO: 
+        </strong> 
+        {{ $paciente['sexo'] }}      
+      </li>      
+
+    </ul>
 </div>
 <br>
 <div class="panel-body col-xs- col-sm- col-md- col-lg- alineacion_paneles">

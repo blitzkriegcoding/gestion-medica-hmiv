@@ -30,9 +30,26 @@ class PacientePediatrico extends \Eloquent {
 			return $this->hasOne('HistoriaMedicaPediatrica','id_paciente','id_paciente');
 		}
 
-	public static function CalculoEdad()
+	public static function CalculoEdad($id_paciente_pediatrico)
 		{
-			
+			return $paciente_edad = DB::table('pacientes_pediatricos') 
+                     ->select(DB::raw
+                     	( " 
+						    REPLACE(
+						      REPLACE(
+						        REPLACE(
+						          REPLACE(
+						            REPLACE(
+						              REPLACE(
+						                AGE(current_date, fecha_nacimiento)::TEXT,
+						              'years','años'),
+						            'year','año'),
+						          'mons','meses'),
+						        'mon','mes'),
+						       'days','días'),
+						    'day','día') as edad"))
+                     ->where('id_paciente', '=', $id_paciente_pediatrico)                     
+                     ->get();
 		}
 	public static function crear_examenes_paciente($input)
 		{

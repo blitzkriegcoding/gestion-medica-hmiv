@@ -7,7 +7,9 @@ class Intolerancias extends \Eloquent {
 
 	public static function mostrarIntolerancia($intolerancia)
 		{
-			
+			return Response::json(Intolerancias::where('intolerancia','LIKE',strtoupper($intolerancia).'%')->get());
 		}
+
+	#public function 	
 
 }
