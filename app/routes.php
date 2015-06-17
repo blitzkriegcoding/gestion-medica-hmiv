@@ -12,43 +12,22 @@
 */
 
 
-/*RUTAS PACIENTES PEDIATRICOS*/
+/**************************RUTAS PACIENTES PEDIATRICOS********************************/
 Route::get('/pacientes_pediatricos/creacion_pacientes_pediatricos', function()
 	{	
 		return View::make('pacientes_pediatricos.crear_paciente_pediatrico');
 	});
 
 Route::pattern('id_paciente_pediatrico','[0-9]+');
-Route::get('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}', function($id_paciente_pediatrico)
-	{
-		$interrogatorio_items = GrupoInterrogatorio::all();
-		$interrogatorio_item = CondicionInterrogatorio::all();
+Route::get('/pacientes_pediatricos/creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}',['uses'	=>	'ExamenesMedicosPediatricosController@crear_examenes_medicos_pediatricos']);
+Route::get('pacientes_pediatricos/creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',['uses'	=>	'HistoriaMedicaPediatricaController@crear_historia_medica_pediatrica']);
 
-		$examen_funcional_items = GrupoExamenFuncional::all();
-		$examen_funcional_item = CondicionExamenFuncional::all();
+/*ENVIO DE FORMULARIOS CON DATOS DE PACIENTES PEDIATRICOS*/
+Route::post('crear_paciente_pediatrico',['uses'	=>	'PacientesPedriatricosController@crear_paciente_pedi']);
+Route::post('crear_examenes_medicos_paciente',['uses'	=>	'ExamenesPediatricosController@crear_examenes_paciente_pediatrico']);
+/*FIN BLOQUE ENVIO DE FORMULARIOS CON DATOS DE PACIENTES PEDIATRICOS*/
 
-		$examen_fisico_items = GrupoExamenFisico::all();
-		$examen_fisico_item = CondicionExamenFisico::all();
-		
-		$paciente = PacientePediatrico::find($id_paciente_pediatrico);
-
-		Session::put('id_paciente_pediatrico', $id_paciente_pediatrico);
-
-		return View::make('pacientes_pediatricos.crear_examenes_medicos_paciente')
-				->with(array(	
-								'interrogatorio_items'		=> $interrogatorio_items,
-								'interrogatorio_item' 		=> $interrogatorio_item,
-								'examen_funcional_items' 	=> $examen_funcional_items,
-								'examen_funcional_item'		=> $examen_funcional_item,
-								'examen_fisico_items'		=> $examen_fisico_items,
-								'examen_fisico_item'		=> $examen_fisico_item,
-								'paciente'					=> $paciente,
-							));
-
-	});
-Route::post('crear_paciente_pediatrico','PacientesPedriatricosController@crear_paciente_pedi');
-Route::post('crear_examenes_medicos_paciente',['uses'=>'ExamenesPediatricosController@crear_examenes_paciente_pediatrico']);
-/*FIN RUTAS PACIENTES PEDIATRICOS*/
+/********************FIN RUTAS PACIENTES PEDIATRICOS***********************************/
 
 /*RUTAS MEDICOS*/
 Route::get('/medicos/creacion_medicos', function()
@@ -66,8 +45,11 @@ Route::get('creacion_pacientes_obstetricos', function()
 
 
 /*RUTAS DE CONSULTAS AJAX*/
-Route::get('/obtener_paises/{pais}',array('uses'=>'PaisesController@mostrarPaises'))->where('pais','[a-zA-Z]+');
-Route::get('/obtener_direccion/{dir}',array('uses'=>'RepresentanteController@mostrarDireccion'))->where('dir','[a-zA-Z]+');
-Route::get('/obtener_ocupacion/{ocupacion}',array('uses'=>'RepresentanteController@mostrarOcupacionOficio'))->where('ocupacion','[a-zA-Z]+');
+Route::get('pacientes_pediatricos/obtener_paises/{pais}',array('uses'=>'PaisesController@mostrarPaises'))->where('pais','[a-zA-Z]+');
+Route::get('pacientes_pediatricos/obtener_direccion/{dir}',array('uses'=>'RepresentanteController@mostrarDireccion'))->where('dir','[a-zA-Z]+');
+Route::get('pacientes_pediatricos/obtener_ocupacion/{ocupacion}',array('uses'=>'RepresentanteController@mostrarOcupacionOficio'))->where('ocupacion','[a-zA-Z]+');
+Route::get('pacientes_pediatricos/obtener_alergia/{alergia}',array('uses'=>'AlergiasController@mostrarAlergia'))->where('alergia','[a-zA-Z\s]+');
+Route::get('pacientes_pediatricos/obtener_patologia/{patologia}',array('uses'=>'PatologiasController@mostrarPatologia'))->where('patologia','[a-zA-Z\s]+');
+Route::get('pacientes_pediatricos/obtener_intolerancia/{intolerancia}',array('uses'=>'IntoleranciasController@mostrarIntolerancia'))->where('alergia','[a-zA-Z\s]+');
 /*FIN RUTAS DE CONSULTAS AJAX*/
 	 

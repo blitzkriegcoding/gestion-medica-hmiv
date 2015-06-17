@@ -1,10 +1,10 @@
 <?php
 
-class RepresentantesController extends \BaseController {
+class IntoleranciasController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /representantes
+	 * GET /controladores_diversos/intolerancias
 	 *
 	 * @return Response
 	 */
@@ -15,7 +15,7 @@ class RepresentantesController extends \BaseController {
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /representantes/create
+	 * GET /controladores_diversos/intolerancias/create
 	 *
 	 * @return Response
 	 */
@@ -26,7 +26,7 @@ class RepresentantesController extends \BaseController {
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /representantes
+	 * POST /controladores_diversos/intolerancias
 	 *
 	 * @return Response
 	 */
@@ -37,7 +37,7 @@ class RepresentantesController extends \BaseController {
 
 	/**
 	 * Display the specified resource.
-	 * GET /representantes/{id}
+	 * GET /controladores_diversos/intolerancias/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -49,7 +49,7 @@ class RepresentantesController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /representantes/{id}/edit
+	 * GET /controladores_diversos/intolerancias/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -61,7 +61,7 @@ class RepresentantesController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /representantes/{id}
+	 * PUT /controladores_diversos/intolerancias/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -73,7 +73,7 @@ class RepresentantesController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /representantes/{id}
+	 * DELETE /controladores_diversos/intolerancias/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response

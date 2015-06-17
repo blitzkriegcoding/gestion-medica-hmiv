@@ -1,11 +1,11 @@
-<div class="container-fluid">
-  <div class="container">
-    <h3>
-      Creación de pacientes pediátricos de nuevo ingreso al HMIV
-    </h3>
-  </div>
-</div>
-<br>
+        <div class="container-fluid">
+          <div class="container">
+            <h3>
+              Creación de pacientes pediátricos de nuevo ingreso al HMIV
+            </h3>
+          </div>
+        </div>
+        <br>
         <?php if(Session::get('mensaje') ): ?>
           <!-- Si hay un mensaje, entonces lo imprimimos y le damos estilo con bootstrap -->
           <div class="container-fluid text-center">

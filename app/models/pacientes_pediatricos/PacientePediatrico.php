@@ -24,6 +24,16 @@ class PacientePediatrico extends \Eloquent {
 		{
 			return $this->hasMany('ExamenFisicoPediatrico','id_paciente','id_paciente');
 		}
+
+	public function HistoriaMedicaPediatrica()
+		{
+			return $this->hasOne('HistoriaMedicaPediatrica','id_paciente','id_paciente');
+		}
+
+	public static function CalculoEdad()
+		{
+			
+		}
 	public static function crear_examenes_paciente($input)
 		{
 			$errores = "";
@@ -192,7 +202,7 @@ class PacientePediatrico extends \Eloquent {
 														'fecha_interrogatorio' => date('Y-m-d'),
 														'detalles' => $input['detalle_interrogatorio'][$llave],
 														'status' => $valor]);
-							#$paciente->PacienteInterrogatorio()->save($examen_interrogatorio);	
+							$paciente->PacienteInterrogatorio()->save($examen_interrogatorio);	
 
 
 						}
@@ -204,7 +214,7 @@ class PacientePediatrico extends \Eloquent {
 														'fecha_examen_funcional' => date('Y-m-d'),
 														'detalles' => $input['detalle_funcional'][$llave],
 														'status' => $valor]);
-							#$paciente->PacienteExamenFuncional()->save($examen_fisico);
+							$paciente->PacienteExamenFuncional()->save($examen_fisico);
 
 						}						
 					foreach ($input['fisico'] as $llave => $valor) 
@@ -215,14 +225,13 @@ class PacientePediatrico extends \Eloquent {
 														'fecha_examen_pediatrico' => date('Y-m-d'),
 														'detalles' => $input['detalle_fisico'][$llave],
 														'status' => $valor));
-							#$paciente->PacienteExamenFisico()->save($examen_fisico);									
+							$paciente->PacienteExamenFisico()->save($examen_fisico);									
 						}
 					$respuesta['mensaje'] = "Examenes generados exitosamente";
 					$respuesta['error_mensajes'] = false;
 				}
 			return $respuesta;
 		}
-
 
 
 
@@ -473,6 +482,10 @@ class PacientePediatrico extends \Eloquent {
 				}
 
 			return $respuesta;
+		}
+	public static function representante_legal($input,$id_paciente_pediatrico)
+		{
+
 		}
 
 }
