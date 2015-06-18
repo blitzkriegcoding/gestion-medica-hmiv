@@ -19,7 +19,7 @@ Route::get('/pacientes_pediatricos/creacion_pacientes_pediatricos', function()
 	});
 
 Route::pattern('id_paciente_pediatrico','[0-9]+');
-Route::get('pacientes_pediatricos/creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}',['uses'	=>	'ExamenesMedicosPediatricosController@crear_examenes_medicos_pediatricos']);
+Route::get('pacientes_pediatricos/creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}',['uses'	=>	'ExamenesPediatricosController@crear_examenes_medicos_pediatricos']);
 Route::get('pacientes_pediatricos/creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',['uses'	=>	'HistoriaMedicaPediatricaController@nueva_historia_medica_pediatrica']);
 #Route::get('pacientes_pediatricos/nueva_historia_medica_pediatrica');
 
@@ -50,7 +50,7 @@ Route::get('creacion_pacientes_obstetricos', function()
 
 /*RUTAS DE CONSULTAS AJAX*/
 
-/*La recomendacion mas obvia seria la agrupacion de las rutas*/
+/*LA RECOMENDACION MAS OBVIA SERIA LA AGRUPACION DE LAS RUTAS*/
 Route::get('pacientes_pediatricos/obtener_paises/{pais}',array('uses'=>'PaisesController@mostrarPaises'))->where('pais','[a-zA-Z]+');
 Route::get('pacientes_pediatricos/obtener_direccion/{dir}',array('uses'=>'RepresentanteController@mostrarDireccion'))->where('dir','[a-zA-Z]+');
 Route::get('pacientes_pediatricos/obtener_ocupacion/{ocupacion}',array('uses'=>'RepresentanteController@mostrarOcupacionOficio'))->where('ocupacion','[a-zA-Z]+');

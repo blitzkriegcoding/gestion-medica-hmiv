@@ -16,9 +16,9 @@
 		  <div class="step-content">
 		    <div class="step-pane active sample-pane alert" data-step="1">
 		      <h4>Resumen sobre el/la paciente</h4>
-				<div class="panel panel-info" style="width: 75%; margin: 0 auto">
+				<div class="panel panel-primary" style="width: 75%; margin: 0 auto">
 				  <!-- Default panel contents -->
-				  <div class="panel-heading"><h4>Datos del/la paciente</h4> </div>
+				  <div class="panel-heading"> <strong> DATOS BÁSICOS DEL PACIENTE</strong></div>
 				  <div class="panel-body " >	
 						<div class="row clearfix">
 							<div class="col-md-12 column">
@@ -26,67 +26,62 @@
 									<div class="col-md-2 column">
 									</div>
 									<div class="col-md-6 column">
-										<dl>
-											<dt> <h4></h4>
-												Nombres:
-											</dt>
-											<dd>
-												{{ $paciente['primer_nombre']." ".$paciente['segundo_nombre'] }}
-												<br><br>
-											</dd>
-											<dt>
-												Apellidos:
-											</dt>
-											<dd>
-												{{ $paciente['primer_apellido']." ".$paciente['segundo_apellido'] }}
-												<br><br>
-											</dd>
-											<dt>
-												Fecha de nacimiento:
-											</dt>											
-											<dd>
-												{{ date('d/m/Y', strtotime($paciente['fecha_nacimiento'])) }}
-												<br><br>
-											</dd>
-											<dt>
-												Edad: 
-											</dt>
-											<dd>
-												{{ $paciente_edad[0]->edad }}
-											</dd>
-											<br><br>
-											<dt>
-												Datos adicionales:
-											</dt>
-											<dd>
-												<ul>
-													<li>
-														¿Le han efectuado el interrogatorio,<br>														
-														exámen funcional y exámen físico?
-													</li>
-													<li>
-														Fecha de última visita: 
-													</li>													
-												</ul>
-											</dd>
-										</dl>
+										
+										<div class="list-group">
+										  <a href="#" class="list-group-item">
+										    <h4 class="list-group-item-heading">
+										    	Nombres:
+										    </h4>
+										    <p class="list-group-item-text">
+										    	{{ $paciente['primer_nombre']." ".$paciente['segundo_nombre'] }}
+										    </p>
+										  </a>
+										  <a href="#" class="list-group-item">
+										    <h4 class="list-group-item-heading">
+										    	Apellidos: 
+										    </h4>
+										    <p class="list-group-item-text">
+										    	{{ $paciente['primer_apellido']." ".$paciente['segundo_apellido'] }}
+										    </p>
+										  </a>
+										  <a href="#" class="list-group-item">
+										    <h4 class="list-group-item-heading">
+										    	Fecha de nacimiento: 
+										    </h4>
+										    <p class="list-group-item-text">
+										    	{{ date('d/m/Y', strtotime($paciente['fecha_nacimiento'])) }}
+										    </p>
+										  </a>
+										  <a href="#" class="list-group-item">
+										    <h4 class="list-group-item-heading">
+										    	Edad: 
+										    </h4>
+										    <p class="list-group-item-text">
+										    	{{ $paciente_edad[0]->edad }}
+										    </p>
+										  </a>	
+										  <a href="#" class="list-group-item">
+										    <h4 class="list-group-item-heading">
+										    	Datos adicionales:
+										    </h4>
+										    <p class="list-group-item-text">
+										    	Interrogatorio médico: <span class="{{ $interrogatorio['clase'] }} " >{{ $interrogatorio['interrogatorio_medico'] }}</span><br>
+										    	Examen físico: <span class="{{ $examen_fisico['clase'] }} " >{{ $examen_fisico['examen_fisico'] }}</span><br>
+										    	Examen Funcional: <span class="{{ $examen_funcional['clase'] }} " >{{ $examen_funcional['examen_funcional'] }}</span><br>
+										    </p>
+										  </a>
+										</div>
+
+
+	
 									</div>
 									<div class="col-md-2 column">
-										<dl>
-											<dt>
-												<div class="text-center">
-													Fotografía
-												</div>
-												
-											</dt>
-											<dd>
-												<div style="align: center">
-													<img src="{{ $paciente['fotografia'] }}" class="thumbnail" style="width:125%; margin: 0 auto"  alt="imagen_paciente" >													
-												</div>
-												
-											</dd>
-										</dl>																				
-										 
+										<div style="align: center" class="thumbnail">
+											<img src="{{ $paciente['fotografia'] }}"  style="width:125%; margin: 0 auto"  alt="imagen_paciente" >													
+											<div class="caption">
+												<p class="text-center">Fotografía del paciente</p>
+											</div>
+										</div>
 									</div>
 									<div class="col-md-2 column">
 									</div>									
@@ -113,27 +108,51 @@
                   <div class="row">
                     <div class="col-md-3 pad-controles etiquetas">
                       {{Form::label('tipo_documento_representante','Nacionalidad: ')}}
+                      
                     </div>
                     <div class="col-md-3 pad-controles">
                       {{Form::select('tipo_documento_representante',array('0'=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE'),'0',array('class'=>'form-control','style'=>'width:70%' )) }}
+                        @if($errors->has('tipo_documento_representante'))
+                              <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                                @foreach($errors->get('tipo_documento_representante') as $error )
+                                    {{ $error }}<br>
+                                @endforeach
+                              </div>
+                        @endif                      
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-3 pad-controles etiquetas">
-                      {{Form::label('documento_representante','Cédula: ')}}
+                      {{Form::label('documento_representante','Cédula: ')}}                      
                     </div>                  
                     <div class="col-md-3 pad-controles">
                       {{Form::text('documento_representante',NULL ,array('class'=>'form-control','placeholder'=>'Escriba cédula'))}}
+                        @if($errors->has('documento_representante'))
+                              <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                                @foreach($errors->get('documento_representante') as $error )
+                                    {{ $error }}<br>
+                                @endforeach
+                              </div>
+                        @endif                        
+
                     </div>
                     {{-- FIN BLOQUE NACIONALIDAD Y CEDULA --}}
 
                     {{--BLOQUE SEXO NOMBRES Y APELLIDOS --}}
                     <div class="col-md-2 pad-controles etiquetas">
-                      {{Form::label('sexo_representante','Género: ')}} 
+                      {{Form::label('sexo_representante','Sexo: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">
-                      {{Form::select('sexo_representante',array('0'=>'---','F'=>'FEMENINO','M'=>'MASCULINO'),'0',array('class'=>'form-control','style'=>'width:75%')) }}
+                      {{Form::select('sexo_representante',array(''=>'SELECCIONE','F'=>'FEMENINO','M'=>'MASCULINO'),'0',array('class'=>'form-control','style'=>'width:75%')) }}
+                        @if($errors->has('sexo_representante'))
+                              <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                                @foreach($errors->get('sexo_representante') as $error )
+                                    {{ $error }}<br>
+                                @endforeach
+                              </div>
+                        @endif                      
                     </div>
+                  
                   </div>
                   <div class="row">
                     <div class="col-md-3 pad-controles etiquetas">
@@ -141,12 +160,27 @@
                     </div>
                     <div class="col-md-3 pad-controles">
                       {{Form::text('primer_nombre_representante',NULL ,array('class'=>'form-control','size'=>'30','placeholder'=>'Escriba primer nombre'))}}
+                        @if($errors->has('primer_nombre_representante'))
+                              <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                                @foreach($errors->get('primer_nombre_representante') as $error )
+                                    {{ $error }}<br>
+                                @endforeach
+                              </div>
+                        @endif                        
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('segundo_nombre_representante','Segundo nombre: ')}} 
+
                     </div>
                     <div class="col-md-3 pad-controles">
                       {{Form::text('segundo_nombre_representante',NULL ,array('class'=>'form-control','size'=>'30','placeholder'=>'Escriba segundo nombre'))}}
+                        @if($errors->has('segundo_nombre_representante'))
+                              <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                                @foreach($errors->get('segundo_nombre_representante') as $error )
+                                    {{ $error }}<br>
+                                @endforeach
+                              </div>
+                        @endif                         
                     </div>
                   </div>
                   <div class="row">
@@ -155,12 +189,26 @@
                     </div>
                     <div class="col-md-3 pad-controles">
                       {{Form::text('primer_apellido_representante',NULL ,array('class'=>'form-control','size'=>'30','placeholder'=>'Escriba primer apellido'))}}
+                        @if($errors->has('primer_apellido_representante'))
+                              <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                                @foreach($errors->get('primer_apellido_representante') as $error )
+                                    {{ $error }}<br>
+                                @endforeach
+                              </div>
+                        @endif                       
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('segundo_apellido_representante','Segundo apellido: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">
                       {{Form::text('segundo_apellido_representante',NULL ,array('class'=>'form-control','size'=>'30', 'placeholder'=>'Escriba segundo apellido'))}}
+                        @if($errors->has('segundo_apellido_representante'))
+                              <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                                @foreach($errors->get('segundo_apellido_representante') as $error )
+                                    {{ $error }}<br>
+                                @endforeach
+                              </div>
+                        @endif                        
                     </div>
                   </div>
                   {{--FIN BLOQUE SEXO NOMBRES Y APELLIDOS --}}
@@ -172,28 +220,57 @@
                     <div class="col-md-3 pad-controles">
                         <div class="input-group date" id='fecha_nacimiento_representante'>
                           {{Form::text('fecha_nacimiento_representante',NULL ,array('class'=>'form-control','size'=>'16', 'readonly'=>''))}}<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        </div>                     
+                         
+                        </div>                          @if($errors->has('fecha_nacimiento_representante'))
+                                <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                                  @foreach($errors->get('fecha_nacimiento_representante') as $error )
+                                      {{ $error }}<br>
+                                  @endforeach
+                                </div>
+                          @endif 
+                                            
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('pais_origen_representante','País de origen: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles">                      
                       {{Form::select('pais_origen_representante',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'representante_pais_origen','style'=>'width:100%')) }}
+                      @if($errors->has('pais_origen_representante'))
+                            <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                              @foreach($errors->get('pais_origen_representante') as $error )
+                                  {{ $error }}<br>
+                              @endforeach
+                            </div>
+                      @endif                     
                     </div>
+
                   </div>
                   <div class="row">
                     <div class="col-md-3 pad-controles etiquetas">
                       {{Form::label('parentesco_representante','Parentesco con el/la paciente: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles">
-                      {{Form::select('parentesco_representante',$parentesco ,'0',array('class'=>'form-control ','style'=>'width:100%')) }}
+                      {{Form::select('parentesco_representante',$parentesco ,'',array('class'=>'form-control ','style'=>'width:100%')) }}
+                      @if($errors->has('parentesco_representante'))
+                            <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                              @foreach($errors->get('parentesco_representante') as $error )
+                                  {{ $error }}<br>
+                              @endforeach
+                            </div>
+                      @endif                    
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('estado_civil_representante','Estado civil: ')}} 
                     </div>
-                    <div class="col-md-3 pad-controles">
-                      {{-- {{Form::select('estado_civil_representante', array(''=>'SELECCIONE','1'=>'SOLTERO[A]','2'=>'CASADO[A]', '3'=>'CONCUBINO[A]','4'=>'VIUDO[A]','5'=>'INDEFINIDO'),'',array('class'=>'form-control input-sm')) }} --}}
-                      {{Form::select('estado_civil_representante', $estado_civil,'0',array('class'=>'form-control','style'=>'width:100%')) }}
+                    <div class="col-md-3 pad-controles">                   
+                      {{Form::select('estado_civil_representante', $estado_civil,'',array('class'=>'form-control','style'=>'width:100%')) }}
+                      @if($errors->has('estado_civil_representante'))
+                            <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                              @foreach($errors->get('estado_civil_representante') as $error )
+                                  {{ $error }}<br>
+                              @endforeach
+                            </div>
+                      @endif                     
                     </div>
                   </div>
                   <div class="row">
@@ -202,12 +279,26 @@
                     </div>
                     <div class="col-md-3 pad-controles">
                       {{Form::select('direccion_est_mun_par_representante',array(''=>'Estado/Mun/Parroquia'),'',array('class'=>'form-control','style'=>'width:100%','id'=>'direccion_est_mun_par')) }}
+                      @if($errors->has('direccion_est_mun_par_representante'))
+                            <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                              @foreach($errors->get('direccion_est_mun_par_representante') as $error )
+                                  {{ $error }}<br>
+                              @endforeach
+                            </div>
+                      @endif                      
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('avenida_calle_representante','Avenida/Calle: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">
                       {{Form::text('avenida_calle_representante','',array('class'=>'form-control','placeholder'=>'Indique avenida/calle','size'=>'30')) }}
+                      @if($errors->has('avenida_calle_representante'))
+                            <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                              @foreach($errors->get('avenida_calle_representante') as $error )
+                                  {{ $error }}<br>
+                              @endforeach
+                            </div>
+                      @endif                     
                     </div>
                   </div>
                   <div class="row">
@@ -216,12 +307,26 @@
                     </div>
                     <div class="col-md-3 pad-controles">
                       {{Form::text('casa_edificio_representante','',array('class'=>'form-control','placeholder'=>'Indique casa o edificio','size'=>'30')) }}
+                      @if($errors->has('casa_edificio_representante'))
+                            <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                              @foreach($errors->get('casa_edificio_representante') as $error )
+                                  {{ $error }}<br>
+                              @endforeach
+                            </div>
+                      @endif                     
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('telefono_1','Teléfono: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">
                       {{Form::text('telefono_1','',array('class'=>'form-control','placeholder'=>'Indique teléfono','size'=>'30')) }}
+                      @if($errors->has('telefono_1'))
+                            <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                              @foreach($errors->get('telefono_1') as $error )
+                                  {{ $error }}<br>
+                              @endforeach
+                            </div>
+                      @endif                      
                     </div>
                   </div>
                   <div class="row">
@@ -230,12 +335,26 @@
                     </div>
                     <div class="col-md-3 pad-controles">
                       {{Form::text('telefono_2','',array('class'=>'form-control','placeholder'=>'Indique telefono adicional','size'=>'30')) }}
+                      @if($errors->has('telefono_2'))
+                            <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                              @foreach($errors->get('telefono_2') as $error )
+                                  {{ $error }}<br>
+                              @endforeach
+                            </div>
+                      @endif                      
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('correo_representante','Correo electrónico: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles">
                       {{Form::text('correo_representante','',array('class'=>'form-control','placeholder'=>'Indique correo electrónico','size'=>'30')) }}
+                      @if($errors->has('correo_representante'))
+                            <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                              @foreach($errors->get('correo_representante') as $error )
+                                  {{ $error }}<br>
+                              @endforeach
+                            </div>
+                      @endif                     
                     </div>    
                   </div>
                   <div class="row">
@@ -244,16 +363,29 @@
                     </div>
                     <div class="col-md-3 pad-controles">
                       {{Form::select('ocupacion_oficio_representante', array(''=>'SELECCIONE'),'',array('class'=>'form-control','style'=>'width:100%')) }}
+                      @if($errors->has('ocupacion_oficio_representante'))
+                            <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                              @foreach($errors->get('ocupacion_oficio_representante') as $error )
+                                  {{ $error }}<br>
+                              @endforeach
+                            </div>
+                      @endif                     
                     </div> 
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('grado_instruccion_representante','Grado de instrucción: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles">
                       {{Form::select('grado_instruccion_representante', $grado_instruccion,'0',array('class'=>'form-control','style'=>'width:100%')) }}
+                      @if($errors->has('grado_instruccion_representante'))
+                            <div class="alert alert-danger col-xs text-left" style="padding: 2px">
+                              @foreach($errors->get('grado_instruccion_representante') as $error )
+                                  {{ $error }}<br>
+                              @endforeach
+                            </div>
+                      @endif                      
                     </div>
-                  </div>                  
-                 
-          </div>
+                  </div>
+          	</div>
 		    </div>
 		    <div class="step-pane active sample-pane alert" data-step="3">
 		      <h4>Patologías Crónicas, alergias y tratamientos previos activos</h4>		

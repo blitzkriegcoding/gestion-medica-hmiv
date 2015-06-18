@@ -94,9 +94,9 @@ class PacientePediatrico extends \Eloquent {
 								];
 
 			$buffer_condiciones = [
-									'interrogatorio'			=> 	array_fill(1, count($input['interrogatorio']), ['required','in:1,2','integer']),
-									'funcional'					=>	array_fill(1, count($input['funcional']), ['required','in:1,2','integer']),
-									'fisico' 					=>	array_fill(1, count($input['fisico']), ['required','in:1,2','integer']),
+									'interrogatorio'			=> 	array_fill(1, count($input['interrogatorio']), ['required','in:1,2,3','integer']),
+									'funcional'					=>	array_fill(1, count($input['funcional']), ['required','in:1,2,3','integer']),
+									'fisico' 					=>	array_fill(1, count($input['fisico']), ['required','in:1,2,3','integer']),
 								];
 
 			
@@ -200,8 +200,6 @@ class PacientePediatrico extends \Eloquent {
 					$respuesta['mensaje'] = $errores;					
 					$respuesta['error_mensajes'] = true;
 
-					
-
 				}
 			else
 				{
@@ -213,7 +211,7 @@ class PacientePediatrico extends \Eloquent {
 
 					foreach($input['interrogatorio'] as $llave=>$valor)
 						{
-							$examen_interrogatorio = new InterrogatorioPediatrico([
+							$examen_interrogatorio = new ExamenInterrogatorioPediatrico([
 														'id_paciente' => $paciente->id_paciente,
 														'id_condicion_interrogatorio' => $llave,
 														'fecha_interrogatorio' => date('Y-m-d'),

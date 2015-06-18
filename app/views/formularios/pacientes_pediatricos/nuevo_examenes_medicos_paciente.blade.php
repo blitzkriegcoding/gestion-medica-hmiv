@@ -20,32 +20,8 @@
         #dd($errors);
     }
 ?>
-<br><br>
 <div class="fuelux">
-<div class="alert text-left alert-info"style="width: 400px; margin: 0 auto;">
-    <ul class="list-unstyled" >
-      <li>
-      <strong>
-        PACIENTE: 
-      </strong>
-        {{ $paciente['primer_apellido']." ".$paciente['segundo_apellido'].", ".$paciente['primer_nombre']." ".$paciente['segundo_nombre'] }}        
-      </li>
-      <li>
-        <strong>
-          EDAD: 
-        </strong> 
-        {{ $paciente_edad[0]->edad }}      
-      </li>
-      <li>
-        <strong>
-          SEXO: 
-        </strong> 
-        {{ $paciente['sexo'] }}      
-      </li>      
 
-    </ul>
-</div>
-<br>
 <div class="panel-body col-xs- col-sm- col-md- col-lg- alineacion_paneles">
   <div class="wizard" data-initialize="wizard" id="examenes_medicos_paciente_pediatrico">
     <ul class="steps">
@@ -61,10 +37,22 @@
     {{ Form::open(['action'=>'ExamenesPediatricosController@crear_examenes_paciente_pediatrico','method'=>'post','class'=>'clearfix','id'=>'formulario_principal'])}}
     <div class="step-content">
       <div class="step-pane active sample-pane alert" data-step="1">
-        <h4>Interrogatorio</h4>
-        <p>Apartado para cargar los datos suministrados por el representante del paciente pediátrico.</p>
-        <p><strong>Instrucciones: </strong>Seleccione cada item si fue encontrado normal o anormal durante el interrogatorio, de no ser asi colocar observación. <strong>Se le recomienda verificar su seleccion antes de ser cargada en el sistema</strong></p>        
-        <br>        
+        <h4>INTERROGATORIO MÉDICO</h4>
+        <p>
+          <strong>PACIENTE: </strong>{{ $paciente['primer_nombre']." ".$paciente['segundo_nombre']." ".$paciente['primer_apellido']." ".$paciente['segundo_apellido']}}, <strong>EDAD: </strong> {{ $paciente_edad[0]->edad }} <strong>SEXO: </strong>{{ $paciente['sexo'] }}          
+        </p>
+        
+              <div class="alert alert-info col-md-12 column">
+                <div class="col-md-1 column">
+                  <span class="glyphicon glyphicon-exclamation-sign" style='font-size: 50px;' aria-hidden="true"></span>  
+                </div>
+                <div class="col-md-11 column">
+                    Apartado para cargar los datos suministrados por el representante del paciente pediátrico.<br>
+                      <strong>Instrucciones: </strong>Seleccione cada item si fue encontrado NORMAL, ANORMAL o NO/NO APLICA durante el interrogatorio, de no ser asi colocar observación. <strong>Se le recomienda verificar su seleccion antes de ser cargada en el sistema</strong>
+                </div>
+
+              </div> 
+<div>&nbsp;</div>
         <div class="container-fluid panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
                  <?php $tabs = 0; ?>
                  @foreach ($interrogatorio_items as $item) 
@@ -106,7 +94,7 @@
                                            <strong>{{ $item->id_grupo_interrogatorio."-".$contador_items }} {{ $l->item_interrogatorio }}</strong>
                                           </td>
                                           <td width='10%'>                                            
-                                             {{Form::select('interrogatorio['.$l->id_condicion_interrogatorio.']',array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
+                                             {{Form::select('interrogatorio['.$l->id_condicion_interrogatorio.']',array('0'=>'SELECCIONE','1'=>'NORMAL','2'=>'ANORMAL','3'=>'NO/NO APLICA'),'0',array('class'=>'form-control input-sm',/*'style'=>'width:75%'*/)) }}
                                              {{--VALIDACION ERRORES EN LOS COMBOS --}}
                                               @if($errors->has('interrogatorio.'.$l->id_condicion_interrogatorio))
                                                     <div class="alert alert-danger col-xs text-center" style="padding: 2px">
@@ -138,9 +126,21 @@
         </div>
       </div>
       <div class="step-pane active sample-pane alert" data-step="2">
-        <h4>Exámen funcional</h4>
-        <p>El paciente será verificado por el médico para identificar indicios de patologías. </p>
-        <br>        
+        <h4>EXÁMEN FUNCIONAL</h4>
+        <p>
+        <strong>PACIENTE: </strong>{{ $paciente['primer_nombre']." ".$paciente['segundo_nombre']." ".$paciente['primer_apellido']." ".$paciente['segundo_apellido']}}, <strong>EDAD: </strong> {{ $paciente_edad[0]->edad }} <strong>SEXO: </strong>{{ $paciente['sexo'] }}          
+          
+        </p>
+              <div class="alert alert-info col-md-12 column">
+                <div class="col-md-1 column">
+                  <span class="glyphicon glyphicon-exclamation-sign" style='font-size: 50px;' aria-hidden="true"></span>  
+                </div>
+                <div class="col-md-11 column">
+                    El paciente será examinado por el médico para identificar indicios de patologías en el funcionamiento del cuerpo del paciente.<br>
+                      <strong>Instrucciones: </strong>Seleccione cada item si fue encontrado NORMAL, ANORMAL o NO/NO APLICA durante el interrogatorio, de no ser asi colocar observación. <strong>Se le recomienda verificar su seleccion antes de ser cargada en el sistema</strong>
+                </div>
+              </div>         
+        <div>&nbsp;</div>
         <div class="container-fluid panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
           <?php $tabs = 0; ?>
 
@@ -199,10 +199,22 @@
         </div>
       </div>
       <div class="step-pane active sample-pane alert" data-step="3">
-        <h4>Exámen físico</h4>
-        <p>Verificación rutinaria del médico al paciente. </p>
-        <br>
-        <br>
+        <h4>EXÁMEN FÍSICO</h4>
+        <p>
+          <strong>PACIENTE: </strong>{{ $paciente['primer_nombre']." ".$paciente['segundo_nombre']." ".$paciente['primer_apellido']." ".$paciente['segundo_apellido']}}, <strong>EDAD: </strong> {{ $paciente_edad[0]->edad }} <strong>SEXO: </strong>{{ $paciente['sexo'] }}          
+        </p>
+
+        <div class="alert alert-info col-md-12 column">
+          <div class="col-md-1 column">
+            <span class="glyphicon glyphicon-exclamation-sign" style='font-size: 50px;' aria-hidden="true"></span>  
+          </div>
+          <div class="col-md-11 column">
+              El paciente será examinado por el médico para identificar indicios de patologías en extremidades u órganos externos   del cuerpo del paciente.<br>
+                <strong>Instrucciones: </strong>Seleccione cada item si fue encontrado NORMAL, ANORMAL o NO/NO APLICA durante el interrogatorio, de no ser asi colocar observación. <strong>Se le recomienda verificar su seleccion antes de ser cargada en el sistema</strong>
+          </div>
+        </div>         
+        <div>&nbsp;</div>
+        
         <div class="container-fluid panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
           <?php $tabs = 0; ?>
           <div class="panel panel-primary">
