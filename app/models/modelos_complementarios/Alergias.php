@@ -10,5 +10,9 @@ class Alergias extends \Eloquent {
 		{
 			return Response::json(Alergias::where('alergia','LIKE',strtoupper($alergia).'%')->get());
 		}
+	public function AlergiasPacientePediatrico()	
+		{
+			return $this->hasMany('AlergiasPacientePediatrico','id_alergia','id_alergia');
+		}
 
 }

@@ -113,9 +113,9 @@ class PacientePediatrico extends \Eloquent {
 							];				
 
 			$reglas_condiciones = [
-									'interrogatorio'			=> 	array_fill(1, count($input['interrogatorio']),''),									
-									 'funcional'				=>	array_fill(1, count($input['funcional']),''),
-									 'fisico' 					=>	array_fill(1, count($input['fisico']),''),									
+									'interrogatorio'		=> 	array_fill(1, count($input['interrogatorio']),''),									
+									'funcional'				=>	array_fill(1, count($input['funcional']),''),
+									'fisico' 				=>	array_fill(1, count($input['fisico']),''),									
 								];
 
 

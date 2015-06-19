@@ -241,6 +241,11 @@ $(document).ready( function () {
         //templateResult: formatRepo, // omitted for brevity, see the source of this page
         //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
       });
+   $("#tratamientos_paciente_pediatrico").select2({
+        language: "es",        
+        tags: true,
+        tokenSeparators: [',','.','-'],
+      });
 
     $('#formulario_principal').formValidation({
         framework: 'bootstrap',
