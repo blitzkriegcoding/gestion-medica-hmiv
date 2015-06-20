@@ -247,16 +247,241 @@ $(document).ready( function () {
         tokenSeparators: [',','.','-'],
       });
 
-    $('#formulario_principal').formValidation({
-        framework: 'bootstrap',
-        icon: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        // This option will not ignore invisible fields which belong to inactive panels
-       
-    });
+    FormValidation.Validator.val_num_ced_pac = {
+        validate: function(validator, $field, selector_nac ,options) 
+        {
+            var value = $field.val();
+            var valor_nacionalidad = $("#tipo_documento_paciente").val();
+
+                if ((value > 31000000) && (valor_nacionalidad == 'V')) 
+                  {
+                      return {
+                                valid: false,
+                                message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                                //message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                            }
+                  };
+
+                //if ((value < 80000000) && (valor_nacionalidad == 'E')) 
+                if ((value < 80000000) && (valor_nacionalidad == 'E')) 
+                  {
+                      return {
+                                valid: false,
+                                message: 'El numero de cedula no corresponde con la nacionalidad extranjera'
+                                //message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                            }
+                  };
+                return true;
+        }
+    };
+
+    FormValidation.Validator.val_num_ced_rep = {
+        validate: function(validator, $field, selector_nac ,options) 
+        {
+            var value = $field.val();
+            var valor_nacionalidad = $("#tipo_documento_representante").val();
+
+                if ((value > 31000000) && (valor_nacionalidad == 'V')) 
+                  {
+                      return {
+                                valid: false,
+                                message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                                //message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                            }
+                  };
+
+                //if ((value < 80000000) && (valor_nacionalidad == 'E')) 
+                if ((value < 80000000) && (valor_nacionalidad == 'E')) 
+                  {
+                      return {
+                                valid: false,
+                                message: 'El numero de cedula no corresponde con la nacionalidad extranjera'
+                                //message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                            }
+                  };
+                return true;
+        }
+    };
+
+ $('#formulario_principal')
+    // IMPORTANT: on('init.field.fv') must be declared
+    // before calling .formValidation(...)
+    .on('init.field.fv', function(e, data) {
+        var $field    = data.element,               // Field element
+            $icon     = $field.data('fv.icon'),     // Icon element
+            $messages = $field.data('fv.messages'); // Message container
+
+        $icon.appendTo($messages);
+    }).formValidation({
+            framework: 'bootstrap',
+           excluded: ':disabled',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            addOns: {
+                mandatoryIcon: {
+                    icon: 'glyphicon glyphicon-pencil'
+                }
+            },      
+            fields: 
+            {
+
+
+                /*VALIDACIONES DEL SEGUNDO PANEL */        
+                tipo_documento_representante: {
+                                    validators: { 
+                                            notEmpty: { message: 'Seleccione nacionalidad'},
+
+                                                    },
+                                        
+
+                        },
+                documento_representante: {
+                              validators: {
+                                  notEmpty: { message: 'La cédula es obligatoria'},
+                                    regexp: { regexp: /^[0-9]+$/, message: 'Este campo solo acepta números'},
+                                    val_num_ced_rep: { message: 'Nacionalidad invalida' }
+                                  }
+                        },
+                primer_nombre_representante: {
+                                    validators: {
+                                        notEmpty: { message: 'Campo primer nombre es obligatorio'},
+                                          regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras'}
+                                      }
+                        },
+            segundo_nombre_representante: {
+                                validators: { 
+                                        callback: {
+                                          message: 'Este campo solo acepta letras',
+                                          callback:function(value, validator, $field)
+                                                 {
+                                                    if(value!=""){
+                                                      return /^[a-zA-ZñÑ\s]+$/.test(value);
+                                                    }else { return null;}
+
+                                                 }
+                                              }
+                                    }
+                        },                
+          primer_apellido_representante: {
+                              validators: {
+                                  notEmpty: { message: 'Campo primer apellido es obligatorio' },
+                                  regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras' } }
+                },
+        segundo_apellido_representante: {
+                              validators: {                                  
+                                        callback: {
+                                          message: 'Este campo solo acepta letras',
+                                          callback:function(value, validator, $field)
+                                                 {
+                                                    if(value!=""){
+                                                      return /^[a-zA-ZñÑ\s]+$/.test(value);
+                                                    }else { return null;}
+
+                                                 }
+                                              }
+                                          }
+                                        },
+        fecha_nacimiento_representante: {
+                                validators: {
+                                    notEmpty: { message: 'Campo fecha de nacimiento es obligatoria[vacia]'},
+                                        date: { format: 'DD/MM/YYYY', message: 'La fecha de nacimiento esta en formato incorrecto'}
+                                
+                    }
+                },
+                parentesco_representante: {
+                                    
+                                    validators: { 
+                                    notEmpty: { message: 'Seleccione parentesco'},                                       
+                                      greaterThan: {
+                                        value: '1',
+                                        message: 'Seleccione parentesco'
+                                    },
+
+
+
+                          }
+                        },
+      direccion_est_mun_par_representante: {
+                                  validators: {
+                                      notEmpty: { message: 'Campo Estado/Municipio/Parroquia obligatorio'}
+                                              }
+                                        },
+                casa_edificio_representante: {
+                                  validators: {
+                                      notEmpty: { message: 'Campo Casa/Edificio es obligatorio'}
+                                              }
+                                        },
+            ocupacion_oficio_representante: {
+                                  validators: {
+                                      notEmpty: { message: 'Campo ocupación u oficio es obligatorio'}
+                                              }
+                                        },
+                        sexo_representante: {
+                                  validators: {
+                                      notEmpty: { message: 'Campo género es obligatorio'}
+                                              }
+                                        },
+              pais_origen_representante: {
+                                validators: {
+                                    notEmpty: { message: 'Seleccione país de origen'}
+                                            }
+                                      },
+              estado_civil_representante: {
+                                validators: {
+                                    notEmpty: { message: 'Seleccione estado civil'},                                    
+                                    greaterThan: { value: 1, message: 'Seleccione estado civil' }
+
+                                            }
+                                      },                                      
+            avenida_calle_representante: {
+                                validators: {
+                                        notEmpty: { message: 'Campo Avenida/Calle es obligatorio'}
+                                              }
+                                        },
+                            telefono_1: {
+                              validators: {
+                                        phone: {
+                                        country: 'VE',
+                                        message: 'Número telefónico no válido'
+                                        },
+                        notEmpty: { message: 'Campo teléfono  es obligatorio'}
+
+                    }
+                },
+                  correo_representante: {
+                              validators: {
+/*                                  emailAddress: {
+                                      message: 'Correo electrónico inválido'
+                                  },*/
+                                  callback: {
+                                          message: 'Correo eléctronico inválido',
+                                          callback:function(value, validator, $field)
+                                                 {
+                                                    if(value!="")
+                                                      {
+                                                        return /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(value);
+                                                      }
+                                                    else 
+                                                      { 
+                                                        return null; 
+                                                      }
+                                                 }
+                                  }
+                              }
+                          },
+        grado_instruccion_representante: {
+                                validators: {
+                                        notEmpty: { message: 'Seleccion grado de instrucción'},
+                                        greaterThan: {value:1, message: 'Seleccion grado de instrucción' }
+                                              },
+                                        },
+          /*FIN VALIDACIONES SEGUNDO PANEL*/
+          //cierre campos, no tocar
+            },   
+      });
 
     $('#historia_medica_pediatrica')
         // Call the wizard plugin
@@ -297,9 +522,4 @@ $(document).ready( function () {
                 //$('#thankModal').modal();
             }
         });
-
-
-
-
-
 });

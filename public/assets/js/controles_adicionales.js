@@ -8,7 +8,9 @@ $(document).ready( function () {
       	    autoclose: true,      	    
             endDate: new Date(),
             todayBtn: true,
-            todayHighlight: true
+            todayHighlight: true,
+            startView: 2
+
           })
         .on
           ('changeDate', function(e) {
@@ -25,7 +27,9 @@ $(document).ready( function () {
             autoclose: true,
             endDate: new Date(),
             todayBtn: true,
-            todayHighlight: true
+            todayHighlight: true,
+            startView: 2
+            
         })
       .on
         ('changeDate', function(e) {
@@ -41,15 +45,19 @@ $(document).ready( function () {
           endDate: new Date(),
           todayBtn: true,
           todayHighlight: true
-      });
+      })
+      .on
+        ('changeDate', function(e) {
+          // Revalidate the date field
+          $('#formulario_principal').formValidation('revalidateField', 'fecha_ingreso_paciente');
+        });
 
 
       $("#paciente_pais_origen").select2({  
-        language: "es",
-        theme: "classic",
+        language: "es",        
         ajax: {
           url: function (params) {
-            return "http://localhost/hmiv/public/obtener_paises/"+params.term;
+            return "http://localhost/hmiv/public/pacientes_pediatricos/obtener_paises/"+params.term;
           },
           dataType: 'json',
           delay: 50,
@@ -85,11 +93,10 @@ $(document).ready( function () {
       });
 
       $("#representante_pais_origen").select2({
-        language: "es",
-        theme: "classic",  
+        language: "es",        
         ajax: {
           url: function (params) {
-            return "http://localhost/hmiv/public/obtener_paises/"+params.term;
+            return "http://localhost/hmiv/public/pacientes_pediatricos/obtener_paises/"+params.term;
           },
           dataType: 'json',
           delay: 50,
@@ -122,11 +129,9 @@ $(document).ready( function () {
         //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
       });
       $("#direccion_est_mun_par").select2({
-        language: "es",
-        theme: "classic",
-
+        language: "es",        
         ajax: {    
-          url: function(params) {  return "http://localhost/hmiv/public/obtener_direccion/"+params.term; },
+          url: function(params) {  return "http://localhost/hmiv/public/pacientes_pediatricos/obtener_direccion/"+params.term; },
           dataType: 'json',
           delay: 50,
           data: function (params) {
@@ -148,10 +153,9 @@ $(document).ready( function () {
       });
       /*OCUPACION U OFICIO DEL REPRESENTANTE DEL PACIENTE*/
       $("#ocupacion_oficio_representante").select2({
-        language: "es",
-        theme: "classic",
+        language: "es",        
         ajax: {    
-          url: function(params) {  return "http://localhost/hmiv/public/obtener_ocupacion/"+params.term; },
+          url: function(params) {  return "http://localhost/hmiv/public/pacientes_pediatricos/obtener_ocupacion/"+params.term; },
           dataType: 'json',
           delay: 50,
           data: function (params) {
@@ -250,6 +254,11 @@ $(document).ready( function () {
                 invalid: 'glyphicon glyphicon-remove',
                 validating: 'glyphicon glyphicon-refresh'
             },
+            addOns: {
+                mandatoryIcon: {
+                    icon: 'glyphicon glyphicon-pencil'
+                }
+            },              
             fields: 
             {
               /*VALIDACIONES PRIMER PANEL*/
@@ -360,8 +369,13 @@ $(document).ready( function () {
                               validators: {
                                   notEmpty: { message: 'Campo lugar de nacimiento es obligatorio' },
                                     regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo debe contener letras' }
-                    }
-                },
+                                        }
+                                    },
+              representante_legal: {
+                              validators: {
+                                  notEmpty: { message: 'Debe señalar si es representante legal del paciente' },                                    
+                                        }
+                                    },                                    
         sexo_paciente: {
               validators: {
                   notEmpty: { message: 'Seleccione genero'}
@@ -431,7 +445,8 @@ $(document).ready( function () {
                 },
                 parentesco_representante: {
                                     validators: {
-                                        notEmpty: { message: 'Campo Parentesco/Relación es obligatorio'}
+                                        notEmpty: { message: 'Seleccione Parentesco/Relación'},
+                                        greaterThan: { value: 1, message: 'Seleccione Parentesco/Relación ' }
                           }
                         },
       direccion_est_mun_par_representante: {
@@ -461,7 +476,8 @@ $(document).ready( function () {
                                       },
               estado_civil_representante: {
                                 validators: {
-                                    notEmpty: { message: 'Seleccione estado civil'}
+                                    notEmpty: { message: 'Seleccione estado civil'},
+                                    greaterThan: { value: 1, message: 'Seleccione estado civil' }
                                             }
                                       },                                      
             avenida_calle_representante: {
@@ -488,7 +504,8 @@ $(document).ready( function () {
                           },
         grado_instruccion_representante: {
                                 validators: {
-                                        notEmpty: { message: 'Seleccion grado de instrucción'}
+                                        notEmpty: { message: 'Seleccion grado de instrucción'},
+                                        greaterThan: { value: 1, message: 'Seleccion grado de instrucción'}
                                               }
                                         },                          
 
@@ -502,7 +519,8 @@ $(document).ready( function () {
                                         },
                     medico_tratante: {
                                 validators: {
-                                        notEmpty: { message: 'Seleccion medico tratante al ingreso'}
+                                        notEmpty: { message: 'Seleccion medico tratante al ingreso'},
+                                        greaterThan: { value: 1, message: 'Seleccion medico tratante al ingreso'}
                                               }
                                         },
               fecha_ingreso_paciente: {

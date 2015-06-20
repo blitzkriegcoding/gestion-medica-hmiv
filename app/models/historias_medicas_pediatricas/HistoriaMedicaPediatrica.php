@@ -277,9 +277,6 @@ class HistoriaMedicaPediatrica extends \Eloquent {
 															'id_historia_medica' 	=>	$historia_medica->id_historia_medica, 
 															'id_alergia'			=>	$valor
 															]);
-								#echo "LLAVE: ".$llave." VALOR: ".$valor." ID: ".$id_historia_medica;
-								
-
 							}	
 						
 					}
@@ -329,6 +326,7 @@ class HistoriaMedicaPediatrica extends \Eloquent {
 				}
 			else
 				{
+					#dd($representante);
 					/*REPRESENTANTE NUEVO Y LEGAL*/
 
 

@@ -38,7 +38,7 @@ return array(
     'NivelEstudio' => $baseDir . '/app/models/modelos_complementarios/NivelEstudio.php',
     'OcupacionOficio' => $baseDir . '/app/models/modelos_complementarios/OcupacionOficio.php',
     'PacientePediatrico' => $baseDir . '/app/models/pacientes_pediatricos/PacientePediatrico.php',
-    'PacientesPedriatricosController' => $baseDir . '/app/controllers/pacientes_pediatricos/PacientesPedriatricosController.php',
+    'PacientesPediatricosController' => $baseDir . '/app/controllers/pacientes_pediatricos/PacientesPediatricosController.php',
     'PacientesTableSeeder' => $baseDir . '/app/database/seeds/PacientesTableSeeder.php',
     'Paises' => $baseDir . '/app/models/modelos_ubicaciones/Paises.php',
     'PaisesController' => $baseDir . '/app/controllers/controladores_diversos/PaisesController.php',

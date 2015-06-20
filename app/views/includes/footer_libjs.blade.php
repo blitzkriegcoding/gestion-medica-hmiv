@@ -13,6 +13,7 @@
     {{--Libreria formValidation.io para validar el wizard --}}
     <script src="{{ asset('assets/formvalidation/dist/js/formValidation.0.6.3.min.js')}}" type="text/javascript"></script>    
     <script src="{{ asset('assets/formvalidation/dist/js/bootstrap.0.6.3.min.js')}}" type="text/javascript"></script>    
+    <script src="{{ asset('assets/formvalidation/dist/js/mandatoryIcon.min.js')}}" type="text/javascript"></script>    
     {{--Fin Libreria formValidation.io para validar el wizard --}}
     
     {{--Libreria de FuelUX para el wizard--}}

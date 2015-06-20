@@ -13,20 +13,17 @@
 
 
 /**************************RUTAS PACIENTES PEDIATRICOS********************************/
-Route::get('/pacientes_pediatricos/creacion_pacientes_pediatricos', function()
-	{	
-		return View::make('pacientes_pediatricos.crear_paciente_pediatrico');
-	});
+Route::get('/pacientes_pediatricos/creacion_pacientes_pediatricos',	['uses'=>'PacientesPediatricosController@nuevo_paciente_pediatrico'] );
 
-Route::pattern('id_paciente_pediatrico','[0-9]+');
-Route::get('pacientes_pediatricos/creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}',['uses'	=>	'ExamenesPediatricosController@crear_examenes_medicos_pediatricos']);
-Route::get('pacientes_pediatricos/creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',['uses'	=>	'HistoriaMedicaPediatricaController@nueva_historia_medica_pediatrica']);
+
+Route::get('pacientes_pediatricos/creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}',	['uses'	=>	'ExamenesPediatricosController@crear_examenes_medicos_pediatricos']);
+Route::get('pacientes_pediatricos/creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',	['uses'	=>	'HistoriaMedicaPediatricaController@nueva_historia_medica_pediatrica']);
 #Route::get('pacientes_pediatricos/nueva_historia_medica_pediatrica');
 
 /*ENVIO DE FORMULARIOS CON DATOS DE PACIENTES PEDIATRICOS*/
-Route::post('crear_paciente_pediatrico',		['uses'	=>	'PacientesPedriatricosController@crear_paciente_pedi']);
-Route::post('crear_examenes_medicos_paciente',	['uses'	=>	'ExamenesPediatricosController@crear_examenes_paciente_pediatrico']);
-Route::post('crear_historia_medica_pediatrica',	['uses'	=>	'HistoriaMedicaPediatricaController@crear_historia_medica_pediatrica' ] );
+Route::post('pacientes_pediatricos/crear_paciente_pediatrico',			['uses'	=>	'PacientesPediatricosController@crear_paciente_pediatrico']);
+Route::post('pacientes_pediatricos/crear_examenes_medicos_paciente',	['uses'	=>	'ExamenesPediatricosController@crear_examenes_paciente_pediatrico']);
+Route::post('pacientes_pediatricos/crear_historia_medica_pediatrica',	['uses'	=>	'HistoriaMedicaPediatricaController@crear_historia_medica_pediatrica' ] );
 
 /*FIN BLOQUE ENVIO DE FORMULARIOS CON DATOS DE PACIENTES PEDIATRICOS*/
 
@@ -41,12 +38,17 @@ Route::post('crear_nuevo_medico','MedicosController@crear_nuevo_medico');
 /*****************FIN RUTAS MEDICOS*********************/
 
 
-/*********************RUTAS PACIENTES OBSTETRICOS********************/
+/**********************RUTAS PACIENTES OBSTETRICOS***********************/
 Route::get('creacion_pacientes_obstetricos', function()
 	{
 		return View::make('pacientes.crear_paciente_obstetrico');
 	});
-/*********************RUTAS PACIENTES OBSTETRICOS********************/
+/*********************FIN RUTAS PACIENTES OBSTETRICOS********************/
+
+/***PATRONES DE SEGURIDAD BASADOS EN EXPRESIONES REGULARES***/
+Route::pattern('id_paciente_pediatrico','[0-9]+');
+/*FIN PATRONES DE SEGURIDAD BASADOS EN EXPRESIONES REGULARES*/
+
 
 /*RUTAS DE CONSULTAS AJAX*/
 
