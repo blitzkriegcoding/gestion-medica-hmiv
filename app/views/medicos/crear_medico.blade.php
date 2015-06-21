@@ -5,4 +5,5 @@
 @stop
 @section('controles_adicionales')
 	{{--VALIDACIONES EN JAVASCRIPT PARA LA VISTA ACTUAL --}}
+	@include('includes.controles_adicionales_medicos')
 @stop

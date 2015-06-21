@@ -32,15 +32,15 @@
                     <div class="col-md-3 pad-controles etiquetas">
                       {{Form::label('tipo_documento_medico','Nacionalidad: ')}}
                     </div>
-                    <div class="col-md-3 pad-controles">
-                      {{Form::select('tipo_documento_medico',array(''=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE'),'',array('class'=>'form-control input-sm','style'=>'width:75%')) }}
+                    <div class="col-md-3 pad-controles" id='fecha_nacimiento_medico'>
+                      {{Form::select('tipo_documento_medico',array(''=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE'),'',array('class'=>'form-control ','style'=>'width:100%')) }}
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('fecha_nacimiento_medico_campo','Fecha de nacimiento: ')}}
                     </div>
                     <div class="col-md-3 pad-controles"> 
                       <div class="input-group date" id="fecha_nacimiento_medico_campo">
-                        {{Form::text('fecha_nacimiento_medico_campo',NULL,array('class'=>'form-control input-sm','size'=>'16', 'id'=>'fecha_nacimiento_medico_campo' ))}}<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        {{Form::text('fecha_nacimiento_medico_campo',NULL,array('class'=>'form-control','style'=>'width:100%', 'id'=>'fecha_nacimiento_medico_campo' ))}}<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                       </div>
                     </div>                    
 
@@ -50,13 +50,13 @@
                       {{Form::label('documento_medico','Cédula: ')}}
                     </div>
                     <div class="col-md-3 pad-controles">
-                      {{Form::text('documento_medico',NULL ,array('class'=>'form-control input-sm','placeholder'=>'Cédula','size'=>'25'))}}
+                      {{Form::text('documento_medico',NULL ,array('class'=>'form-control ','placeholder'=>'Indique cédula','style'=>'width:100%'))}}
                     </div>
                    <div class="col-md-2 pad-controles etiquetas">
-                      {{Form::label('sexo_medico','Género: ')}} 
+                      {{Form::label('sexo_medico','Sexo: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">
-                      {{Form::select('sexo_medico',array(''=>'SELECCIONE','F'=>'FEMENINO','M'=>'MASCULINO'),'',array('class'=>'form-control input-sm','style'=>'width:75%')) }}
+                      {{Form::select('sexo_medico',array(''=>'SELECCIONE','F'=>'FEMENINO','M'=>'MASCULINO'),'',array('class'=>'form-control ','style'=>'width:100%')) }}
                     </div>                    
                   </div>
                   {{-- Fin bloque nacionalidad y cedula --}}
@@ -67,13 +67,13 @@
                       {{Form::label('primer_nombre_medico','Primer nombre: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles">
-                      {{Form::text('primer_nombre_medico',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
+                      {{Form::text('primer_nombre_medico',NULL ,array('class'=>'form-control ','placeholder'=>'Indique primer nombre', 'style'=>'width:100%'))}}
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('segundo_nombre_medico','Segundo nombre: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles">
-                      {{Form::text('segundo_nombre_medico',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
+                      {{Form::text('segundo_nombre_medico',NULL ,array('class'=>'form-control ','placeholder'=>'Indique segundo nombre','style'=>'width:100%'))}}
                     </div>
                   </div>
                   <div class="row">
@@ -81,13 +81,13 @@
                       {{Form::label('primer_apellido_medico','Primer apellido: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles">
-                      {{Form::text('primer_apellido_medico',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
+                      {{Form::text('primer_apellido_medico',NULL ,array('class'=>'form-control ','placeholder'=>'Indique primer apellido','style'=>'width:100%'))}}
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('segundo_apellido_medico','Segundo apellido: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles">
-                      {{Form::text('segundo_apellido_medico',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
+                      {{Form::text('segundo_apellido_medico',NULL ,array('class'=>'form-control ','placeholder'=>'Indique segundo apellido','style'=>'width:100%'))}}
                     </div>
                   </div>
                   {{--FIN BLOQUE NOMBRES Y APELLIDOS --}}
@@ -98,13 +98,13 @@
                       {{Form::label('pais_origen_medico','País de origen: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">                      
-                      {{Form::select('pais_origen_medico',array(''=>'SELECCIONE'),'',array('class'=>'form-control input-sm','id'=>'medico_pais_origen','style'=>'width:90%')) }}
+                      {{Form::select('pais_origen_medico',array(''=>'SELECCIONE'),'',array('class'=>'form-control ','id'=>'pais_origen_medico','style'=>'width:100%')) }}
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('lugar_nacimiento_medico','Lugar de nacimiento: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles">
-                      {{Form::text('lugar_nacimiento_medico',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
+                      {{Form::text('lugar_nacimiento_medico',NULL ,array('class'=>'form-control ','style'=>'width:100%'))}}
                     </div>                    
                   </div>
                   {{--FIN BLOQUE FECHA/NACIMIENTO, PAIS ORIGEN --}}
@@ -115,13 +115,13 @@
                       {{Form::label('estado_civil_medico','Estado civil: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">                      
-                      {{Form::select('estado_civil_medico',array(''=>'SELECCIONE'),'',array('class'=>'form-control input-sm','id'=>'estado_civil_medico','style'=>'width:90%')) }}
+                      {{Form::select('estado_civil_medico',array(''=>'SELECCIONE'),'',array('class'=>'form-control ','id'=>'estado_civil_medico','style'=>'width:100%')) }}
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
-                      {{Form::label('parroquia_medico','Estado/Mun/Parroquia: ')}} 
+                      {{Form::label('parroquia_medico','Estado/Municipio/Parroquia: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles">
-                      {{Form::select('parroquia_medico',array(''=>'SELECCIONE'),'',array('class'=>'form-control input-sm','id'=>'parroquia_medico','style'=>'width:90%')) }}
+                      {{Form::select('parroquia_medico',array(''=>'SELECCIONE'),'',array('class'=>'form-control ','id'=>'parroquia_medico','style'=>'width:100%')) }}
                     </div>                    
                   </div>
                   <div class="row">                    
@@ -129,13 +129,13 @@
                       {{Form::label('calle_avenida_medico','Avenida/Calle: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">                      
-                      {{Form::text('calle_avenida_medico',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
+                      {{Form::text('calle_avenida_medico',NULL ,array('class'=>'form-control ','id'=>'calle_avenida_medico', 'style'=>'width:100%'))}}
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
-                      {{Form::label('casa_edificio','Casa/Edificio: ')}} 
+                      {{Form::label('casa_edificio_medico','Casa/Edificio: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles">
-                      {{Form::text('casa_edificio',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
+                      {{Form::text('casa_edificio_medico',NULL ,array('class'=>'form-control ','id'=>'casa_edificio_medico' ,'style'=>'width:100%'))}}
                     </div>                    
                   </div>
                   <div class="row">                    
@@ -143,21 +143,21 @@
                       {{Form::label('telefono1:','Teléfono 1: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">                      
-                      {{Form::text('telefono1',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
+                      {{Form::text('telefono1',NULL ,array('class'=>'form-control ','style'=>'width:100%'))}}
                     </div>
                     <div class="col-md-2 pad-controles etiquetas">
                       {{Form::label('telefono2','Teléfono 2: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles">
-                      {{Form::text('telefono2',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
+                      {{Form::text('telefono2',NULL ,array('class'=>'form-control ','style'=>'width:100%'))}}
                     </div>                    
                   </div>  
                   <div class="row">                    
                     <div class="col-md-3 pad-controles etiquetas">
-                      {{Form::label('correo:','Correo electrónico: ')}} 
+                      {{Form::label('correo_medico:','Correo electrónico: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">                      
-                      {{Form::text('correo',NULL ,array('class'=>'form-control input-sm','size'=>'30'))}}
+                      {{Form::text('correo_medico',NULL ,array('class'=>'form-control ', 'id' => 'correo_medico', 'style'=>'width:100%'))}}
                     </div>                 
                   </div>  
                   {{--FIN BLOQUE ESTADO CIVIL, DIRECCION TELEFONO Y CORREO--}}

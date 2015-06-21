@@ -52,6 +52,7 @@ return array(
     'Representantes' => $baseDir . '/app/models/representantes/Representantes.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'TestCase' => $baseDir . '/app/tests/TestCase.php',
+    'TipoMedico' => $baseDir . '/app/models/medicos/TipoMedico.php',
     'TratamientosController' => $baseDir . '/app/controllers/controladores_diversos/TratamientosController.php',
     'TratamientosSostenidos' => $baseDir . '/app/models/historias_medicas_pediatricas/TratamientosSostenidos.php',
     'User' => $baseDir . '/app/models/User.php',

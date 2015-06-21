@@ -11,7 +11,4 @@ class Medicos extends \Eloquent {
 			return $this->hasMany('IngresoPacientePediatrico','id_medico','id_medico');
 		}
 
-
-
-
 }
