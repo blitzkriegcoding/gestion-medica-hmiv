@@ -8,6 +8,6 @@ class ParentescoRepresentantes extends \Eloquent {
 
 	public function PacientePediatrico()
 		{
-			return $this->belongsTo('PacientePedriatrico');
+			return $this->belongsTo('PacientePedriatrico','id_paciente','id_paciente');
 		}
 }

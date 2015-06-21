@@ -30,7 +30,7 @@ Route::post('pacientes_pediatricos/crear_historia_medica_pediatrica',	['uses'	=>
 /********************FIN RUTAS PACIENTES PEDIATRICOS***********************************/
 
 /*********************RUTAS MEDICOS*********************/
-Route::get('/medicos/creacion_medicos', function()
+Route::get('medicos/creacion_medicos', function()
 	{
 		return View::make('medicos.crear_medico');
 	});

@@ -8,7 +8,8 @@ $(document).ready( function () {
             autoclose: true,
             endDate: new Date(),
             todayBtn: true,
-            todayHighlight: true
+            todayHighlight: true,
+            startView: 2
         })
       .on
         ('changeDate', function(e) {

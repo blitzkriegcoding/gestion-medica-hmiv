@@ -189,7 +189,6 @@
 	              <?php echo Form::label('tratamientos_paciente_pediatrico','Tratamientos sostenidos: '); ?> 
 						</div>
 						<div class="col-md-3 pad-controles">
-							<?php /* <?php echo Form::select('tratamientos_paciente_pediatrico',array(''=>'SELECCIONE'),'',array('class'=>'form-control','style'=>'width:100%')); ?> */ ?>
               <?php echo Form::select('tratamientos_paciente_pediatrico',[],json_encode(Input::old('alergias_paciente_pediatrico')),['name'=>'tratamientos_paciente_pediatrico[]', 'class'=>'form-control select2','style'=>'width:100%','multiple'=>'multiple']); ?>
 
 						</div>						
