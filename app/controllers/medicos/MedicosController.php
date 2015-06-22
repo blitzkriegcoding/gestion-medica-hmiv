@@ -9,7 +9,6 @@ class MedicosController extends \BaseController
 								'estado_civil'		=>	array_merge ([ 0 =>'SELECCIONE'], EstadoCivil::lists('estado_civil','id_estado_civil')),
 								'grado_instruccion'	=>	array_merge ([ 0 =>'SELECCIONE'], NivelEstudio::lists('nivel_estudio','id_nivel_estudio')),								
 							];
-
 			return View::make('medicos.crear_medico')->with($datos_vista);
 		}
 

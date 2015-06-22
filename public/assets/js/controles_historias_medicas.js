@@ -104,33 +104,7 @@ $(document).ready( function () {
         minimumInputLength: 1,  
         //templateResult: formatRepo, // omitted for brevity, see the source of this page
         //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
-      });   
-      
-      $("#ocupacion_oficio_representante").select2({
-        language: "es",
-        
-        ajax: {    
-          url: function(params) {  return "http://localhost/hmiv/public/pacientes_pediatricos/obtener_ocupacion/"+params.term; },
-          dataType: 'json',
-          delay: 50,
-          data: function (params) {
-          },
-          processResults: function (data, page) {
-            // parse the results into the format expected by Select2.
-            // since we are using custom formatting functions we do not need to
-            // alter the remote JSON data
-            return {
-              results: data
-            }
-          },
-          cache: true
-        },
-        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-        minimumInputLength: 1,  
-        //templateResult: formatRepo, // omitted for brevity, see the source of this page
-        //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
       });
-
      
 	 $("#alergias_paciente_pediatrico").select2({
         language: "es",        

@@ -1,5 +1,55 @@
 $(document).ready( function () {
 
+    /*VALIDADORES DE LOS CONOCIMIENTOS DEL MEDICO*/
+    var institucionValidators = {
+            row: '.col-xs-3',   // The title is placed inside a <div class="col-xs-4"> element
+            validators: {
+                notEmpty: {
+                    message: 'Indique la Institución donde obtuvo el título'
+                }
+            }
+        },
+      tituloObtenidoValidators = {
+            row: '.col-xs-3',
+            validators: {
+                notEmpty: {
+                    message: 'Indique el título otorgado por la Institución'
+                },
+            }
+        },
+      anioGraduacionValidator = {
+            row: '.col-xs-2',
+            validators: {
+                notEmpty: {
+                    message: 'Indique año de graduación'
+                },
+                integer: {
+                    message: 'El año de gradución debe ser numérico'
+                }
+            }
+        },
+      paisGraduacionValidator = {
+            row: '.col-xs-2',
+            validators: {
+                notEmpty: {
+                    message: 'Indique país de graduación'
+                },
+                integer: {
+                    message: 'El país de gradución debe ser numérico'
+                }
+            }
+        },
+
+        /*
+          VARIABLE GLOBAL PARA EL CONTEO DEL INDICE DE CAMPOS
+          NO CAMBIÉ EL IDENTIFICADOR DADO QUE SE ME COMPLICARIA
+          AL CAMBIARLO EN EL RESTO DE LA FUNCIÓN LO QUE ESTABA
+          MAS PROPENSO A FALLOS
+        */
+        bookIndex = 0;
+
+/**********************************************************/
+
       $('#fecha_nacimiento_medico_campo')
       .datepicker
         ({
@@ -135,8 +185,7 @@ $(document).ready( function () {
             };
           },
           cache: true
-        },
-        
+        },        
         escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
         minimumInputLength: 1,  
         //templateResult: formatRepo, // omitted for brevity, see the source of this page
@@ -281,6 +330,7 @@ $(document).ready( function () {
  $('#formulario_principal')
     // IMPORTANT: on('init.field.fv') must be declared
     // before calling .formValidation(...)
+
     .on('init.field.fv', function(e, data) {
         var $field    = data.element,               // Field element
             $icon     = $field.data('fv.icon'),     // Icon element
@@ -302,24 +352,24 @@ $(document).ready( function () {
             },      
             fields: 
             {
-
-
+              'experiencia[0].institucion'    : institucionValidators,
+              'experiencia[0].titulo_obtenido': tituloObtenidoValidators,
+              'experiencia[0].anio_graduacion': anioGraduacionValidator,
+              'experiencia[0].pais_graduacion': paisGraduacionValidator,
                 /*VALIDACIONES DEL SEGUNDO PANEL */        
               tipo_documento_medico: {
                                     validators: { 
                                             notEmpty: { message: 'Seleccione nacionalidad'},
                                                 },
-                                        
-
                         },
-                    documento_medico: {
+                   documento_medico: {
                               validators: {
                                   notEmpty: { message: 'La cédula es obligatoria'},
                                     regexp: { regexp: /^[0-9]+$/, message: 'Este campo solo acepta números'},
                                     val_num_ced_rep: { message: 'Nacionalidad invalida' }
                                   }
                         },
-                primer_nombre_medico: {
+               primer_nombre_medico: {
                                     validators: {
                                         notEmpty: { message: 'Campo primer nombre es obligatorio'},
                                           regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras'}
@@ -343,7 +393,7 @@ $(document).ready( function () {
                               validators: {
                                   notEmpty: { message: 'Campo primer apellido es obligatorio' },
                                   regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras' } }
-                },
+                        },
             segundo_apellido_medico: {
                               validators: {                                  
                                         callback: {
@@ -365,12 +415,12 @@ $(document).ready( function () {
                                 
                     }
                 },
-                  parroquia_medico: {
+                   parroquia_medico: {
                                   validators: {
                                       notEmpty: { message: 'Campo Estado/Municipio/Parroquia obligatorio'}
                                               }
                                         },
-              casa_edificio_medico: {
+               casa_edificio_medico: {
                                   validators: {
                                       notEmpty: { message: 'Campo Casa/Edificio es obligatorio'}
                                               }
@@ -380,47 +430,54 @@ $(document).ready( function () {
                                       notEmpty: { message: 'Debe seleccionar sexo'}
                                               }
                                         },
-                  pais_origen_medico: {
+                 pais_origen_medico: {
                                 validators: {
                                     notEmpty: { message: 'Seleccione país de origen'}
                                             }
                                       },
-              estado_civil_medico: {
+                estado_civil_medico: {
                                 validators: {
                                     notEmpty: { message: 'Seleccione estado civil'},                                    
                                     greaterThan: { value: 1, message: 'Seleccione estado civil' }
 
                                             }
                                       },                                      
-             calle_avenida_medico: {
+               calle_avenida_medico: {
                                 validators: {
                                         notEmpty: { message: 'Campo Avenida/Calle es obligatorio'}
                                               }
                                         },
-                            telefono1: {
+                          telefono1: {
                               validators: {
                                         phone: {
                                         country: 'VE',
                                         message: 'Número telefónico no válido'
                                         },
-                        notEmpty: { message: 'Telefono 1 es obligatorio'}
+                              notEmpty: { 
+                                    message: 'Telefono 1 es obligatorio'
+                                        }
+                                   }
+                              },
+                          telefono2: {
+                              validators: {                                        
+                              callback: {
+                                          message: 'Telefono 2 no es válido',
+                                          callback: function(value, validator, $field)
+                                            {
+                                              if(value!="") {
+                                                return /^([0-9]{11})+$/.test(value);
+                                              }
+                                              else{
+                                                return null;
+                                              }
+                                            }
+                                        }                      
 
-                    }
-                },
-                            telefono2: {
-                              validators: {
-                                        phone: {
-                                        country: 'VE',
-                                        message: 'Número telefónico no válido'
-                                        },                        
-
-                    }
-                },                
+                                      }
+                                  },                
                   correo_medico: {
                               validators: {
-/*                                  emailAddress: {
-                                      message: 'Correo electrónico inválido'
-                                  },*/
+
                                   notEmpty: { message: 'Correo electrónico es obligatorio'},
                                   callback: {
                                           message: 'Correo eléctronico inválido',
@@ -451,9 +508,159 @@ $(document).ready( function () {
                                               },
                                         },
           /*FIN VALIDACIONES SEGUNDO PANEL*/
+
+          /* VALIDACIONES CONTACTO DEL MEDICO */
+                   documento_contacto: {
+                              validators: {                                        
+                                  callback: {
+                                              message: 'Cédula solo acepta numeros',
+                                              callback: function(value, validator, $field)
+                                                {
+                                                  if(value!="") 
+                                                    {
+                                                      return /^([0-9])+$/.test(value);
+                                                    }
+                                                  else
+                                                    {
+                                                      return null;
+                                                    }
+                                                }
+                                            }
+                                          }
+                                        },                                                   
+               primer_nombre_contacto: {
+                                    validators: {
+                                        notEmpty: { message: 'El primer nombre es obligatorio'},
+                                          regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras'}
+                                                }
+                                      },
+              segundo_nombre_contacto: {
+                                validators: { 
+                                        callback: {
+                                          message: 'Este campo solo acepta letras',
+                                          callback:function(value, validator, $field)
+                                                 {
+                                                    if(value!=""){
+                                                      return /^[a-zA-ZñÑ\s]+$/.test(value);
+                                                    }else { return null;}
+
+                                                 }
+                                              }
+                                            }
+                                      },
+             primer_apellido_contacto: {
+                              validators: {
+                                  notEmpty: { message: 'Campo primer apellido es obligatorio' },
+                                  regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo acepta letras' } }
+                                      },
+              segundo_nombre_contacto: {
+                                validators: { 
+                                        callback: {
+                                          message: 'Este campo solo acepta letras',
+                                          callback:function(value, validator, $field)
+                                                     {
+                                                        if(value!=""){
+                                                          return /^[a-zA-ZñÑ\s]+$/.test(value);
+                                                        }else { return null;}
+
+                                                     }
+                                                  }
+                                            }
+                                        },
+                   telefono1_contacto: {
+                                validators: {
+                                          phone: {
+                                          country: 'VE',
+                                          message: 'Número telefónico no válido'
+                                          },
+                                notEmpty: { 
+                                      message: 'Telefono 1 es obligatorio'
+                                          }
+                                     }
+                                },                        
+                   telefono2_contacto: {
+                              validators: {                                        
+                              callback: {
+                                          message: 'Telefono 2 no es válido',
+                                          callback: function(value, validator, $field)
+                                            {
+                                              if(value!="") {
+                                                return /^([0-9]{11})+$/.test(value);
+                                              }
+                                              else{
+                                                return null;
+                                              }
+                                            }
+                                        }                      
+
+                                      }
+                                  },  
+                   direccion_contacto: {
+                                  validators: {
+                                      notEmpty: { message: 'La dirección del contacto es obligatorio'}
+                                              }
+                                        },
+        /*FIN VALIDACIONES CONTACTO DEL MEDICO */
+
+
+
+
           //cierre campos, no tocar
-            },   
-      });
+            
+
+            },
+
+
+
+
+
+
+      })
+        // Add button click handler
+        .on('click', '.addButton', function() {
+            bookIndex++;
+            var $template = $('#plantilla_experiencia'),
+                $clone    = $template
+                                .clone()
+                                .removeClass('hide')
+                                .removeAttr('id')
+                                .attr('data-book-index', bookIndex)
+                                .insertBefore($template);
+
+            // Update the name attributes
+
+            $clone
+                .find('[name="institucion"]').attr('name', 'experiencia[' + bookIndex + '].institucion').end()
+                .find('[name="titulo_obtenido"]').attr('name', 'experiencia[' + bookIndex + '].titulo_obtenido').end()
+                .find('[name="anio_graduacion"]').attr('name', 'experiencia[' + bookIndex + '].anio_graduacion').end()
+                .find('[name="pais_graduacion"]').attr('name', 'experiencia[' + bookIndex + '].pais_graduacion').end();
+
+            // Add new fields
+            // Note that we also pass the validator rules for new field as the third parameter
+            $('#formulario_principal')
+                .formValidation('addField', 'experiencia[' + bookIndex + '].institucion', institucionValidators)
+                .formValidation('addField', 'experiencia[' + bookIndex + '].titulo_obtenido', tituloObtenidoValidators)
+                .formValidation('addField', 'experiencia[' + bookIndex + '].anio_graduacion', anioGraduacionValidator)
+                .formValidation('addField', 'experiencia[' + bookIndex + '].pais_graduacion', paisGraduacionValidator);
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton', function() {
+            var $row  = $(this).parents('.form-group'),
+                index = $row.attr('data-book-index');
+
+            // Remove fields
+            $('#formulario_principal')
+                .formValidation('removeField', $row.find('[name="experiencia[' + index + '].institucion"]'))
+                .formValidation('removeField', $row.find('[name="experiencia[' + index + '].titulo_obtenido"]'))
+                .formValidation('removeField', $row.find('[name="experiencia[' + index + '].anio_graduacion"]'))
+                .formValidation('removeField', $row.find('[name="experiencia[' + index + '].pais_graduacion"]'));
+
+            // Remove element containing the fields
+            $row.remove();
+        });
+
+
 
     $('#nuevo_medico_wizard')
         // Call the wizard plugin
@@ -494,4 +701,47 @@ $(document).ready( function () {
                 //$('#thankModal').modal();
             }
         });
+
+   $("#especialidades_medicas").select2({
+        language: "es",        
+        //tags: true,
+        //tokenSeparators: [',', ' ', '.','-'],
+        ajax: {    
+          url: function(params) {  return "http://localhost/hmiv/public/pacientes_pediatricos/obtener_alergia/"+params.term; },
+          dataType: 'json',
+          delay: 50,
+          data: function (params) {
+          },
+          processResults: function (data, page) {
+            // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data
+            //alert(data);
+            var resultados = [];
+            $.each(data, function (index, item) {
+                  resultados.push({
+                      'id': item.id_alergia,
+                      'text': item.alergia
+                  });
+              });
+                  
+            return {        
+              //results: data
+              results: resultados
+            };
+          },
+          cache: true
+        },
+        
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 1,  
+        //templateResult: formatRepo, // omitted for brevity, see the source of this page
+        //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+      });
+
+
+
+
+
+/*PENDIENTE FIN DE $(document).ready(funct....*/        
 });
