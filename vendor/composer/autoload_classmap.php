@@ -15,6 +15,8 @@ return array(
     'CondicionInterrogatorio' => $baseDir . '/app/models/pacientes_pediatricos/CondicionInterrogatorio.php',
     'CreatePacientesTable' => $baseDir . '/app/database/migrations/2015_05_06_032558_create_pacientes_table.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
+    'EspecialidadesMedicas' => $baseDir . '/app/models/modelos_complementarios/EspecialidadesMedicas.php',
+    'EspecialidadesMedicasController' => $baseDir . '/app/controllers/medicos/EspecialidadesMedicasController.php',
     'Estado' => $baseDir . '/app/models/modelos_ubicaciones/Estado.php',
     'EstadoCivil' => $baseDir . '/app/models/modelos_complementarios/EstadoCivil.php',
     'ExamenFisicoPediatrico' => $baseDir . '/app/models/examenes_pediatricos_diversos/ExamenFisicoPediatrico.php',

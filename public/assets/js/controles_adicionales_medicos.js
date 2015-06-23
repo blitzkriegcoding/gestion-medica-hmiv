@@ -105,6 +105,46 @@ $(document).ready( function () {
         //templateResult: formatRepo, // omitted for brevity, see the source of this page
         //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
       });
+
+      $("#pais_graduacion").select2({
+        language: "es",
+        
+        ajax: {
+          url: function (params) {
+            return "http://localhost/hmiv/public/pacientes_pediatricos/obtener_paises/"+params.term;
+          },
+          dataType: 'json',
+          delay: 50,
+          data: function (params) {
+
+          },
+          processResults: function (data, page) {
+            // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data
+            //alert(data);
+            var resultados = [];
+            $.each(data, function (index, item) {
+                  resultados.push({
+                      'id': item.id_pais,
+                      'text': item.pais
+                  });
+              });
+                  
+            return {        
+              //results: data
+              results: resultados
+            };
+          },
+          cache: true
+        },        
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 1,  
+        //templateResult: formatRepo, // omitted for brevity, see the source of this page
+        //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+      });
+
+
       $("#parroquia_medico").select2({
         language: "es",
         ajax: {    
@@ -271,11 +311,11 @@ $(document).ready( function () {
         tokenSeparators: [',','.','-'],
       });
 
-    FormValidation.Validator.val_num_ced_pac = {
+    FormValidation.Validator.val_num_ced_med = {
         validate: function(validator, $field, selector_nac ,options) 
         {
             var value = $field.val();
-            var valor_nacionalidad = $("#tipo_documento_paciente").val();
+            var valor_nacionalidad = $("#tipo_documento_medico").val();
 
                 if ((value > 31000000) && (valor_nacionalidad == 'V')) 
                   {
@@ -299,18 +339,18 @@ $(document).ready( function () {
         }
     };
 
-    FormValidation.Validator.val_num_ced_rep = {
+    FormValidation.Validator.val_num_ced_con = {
         validate: function(validator, $field, selector_nac ,options) 
         {
             var value = $field.val();
-            var valor_nacionalidad = $("#tipo_documento_representante").val();
+
+            var valor_nacionalidad = $("#tipo_documento_contacto").val();
 
                 if ((value > 31000000) && (valor_nacionalidad == 'V')) 
                   {
                       return {
                                 valid: false,
-                                message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
-                                //message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                                message: 'El numero de cedula no corresponde con la nacionalidad venezolana'                                
                             }
                   };
 
@@ -319,17 +359,33 @@ $(document).ready( function () {
                   {
                       return {
                                 valid: false,
-                                message: 'El numero de cedula no corresponde con la nacionalidad extranjera'
-                                //message: 'El numero de cedula no corresponde con la nacionalidad venezolana'
+                                message: 'El numero de cedula no corresponde con la nacionalidad extranjera'                                
                             }
                   };
+                if((valor_nacionalidad != "") && (value != ""))
+                  {
+                      alert(value);
+                      return {
+                                valid: false,
+                                message: "Si introdujo una cedula, seleccione una nacionalidad"
+                              }
+                  };
                 return true;
+
+
         }
     };
 
  $('#formulario_principal')
     // IMPORTANT: on('init.field.fv') must be declared
     // before calling .formValidation(...)
+    .find('#especialidades_medicas')
+        .select2()
+        // Revalidate the color when it is changed
+        .change(function(e) {
+            $('#formulario_principal').formValidation('revalidateField', 'especialidades_medicas');
+        })
+        .end()    
 
     .on('init.field.fv', function(e, data) {
         var $field    = data.element,               // Field element
@@ -366,7 +422,7 @@ $(document).ready( function () {
                               validators: {
                                   notEmpty: { message: 'La cédula es obligatoria'},
                                     regexp: { regexp: /^[0-9]+$/, message: 'Este campo solo acepta números'},
-                                    val_num_ced_rep: { message: 'Nacionalidad invalida' }
+                                    val_num_ced_med: { message: 'Nacionalidad invalida' }
                                   }
                         },
                primer_nombre_medico: {
@@ -500,7 +556,8 @@ $(document).ready( function () {
                                   notEmpty: { message: 'Campo lugar de nacimiento es obligatorio' },
                                     regexp: { regexp: /^[a-zA-ZñÑ\s]+$/, message: 'Este campo solo debe contener letras' }
                                         }
-                                    },                          
+                                    },
+          
         grado_instruccion_representante: {
                                 validators: {
                                         notEmpty: { message: 'Seleccion grado de instrucción'},
@@ -508,6 +565,26 @@ $(document).ready( function () {
                                               },
                                         },
           /*FIN VALIDACIONES SEGUNDO PANEL*/
+          
+
+
+          /*VALIDACIONES ESPECIALIDADES*/
+            'especialidades_medicas[]': {
+                    validators: {
+                        callback: {
+                            message: 'Seleccione entre 1 y 5 especialidades',
+                            callback: function(value, validator, $field) {
+                                // Get the selected options
+                                var options = validator.getFieldElements('especialidades_medicas[]').val();
+
+                                return (options != null && options.length >= 1 && options.length <= 5);
+                            }
+                        }
+                    }
+                },   
+          /*FIN VALIDACIONES ESPECIALIDADES*/
+
+
 
           /* VALIDACIONES CONTACTO DEL MEDICO */
                    documento_contacto: {
@@ -526,6 +603,7 @@ $(document).ready( function () {
                                                     }
                                                 }
                                             }
+                                            /*val_num_ced_con: {  message: 'Si introdujo una cedula, seleccione nacionalidad'}*/
                                           }
                                         },                                                   
                primer_nombre_contacto: {
@@ -605,6 +683,7 @@ $(document).ready( function () {
 
 
 
+
           //cierre campos, no tocar
             
 
@@ -633,7 +712,45 @@ $(document).ready( function () {
                 .find('[name="institucion"]').attr('name', 'experiencia[' + bookIndex + '].institucion').end()
                 .find('[name="titulo_obtenido"]').attr('name', 'experiencia[' + bookIndex + '].titulo_obtenido').end()
                 .find('[name="anio_graduacion"]').attr('name', 'experiencia[' + bookIndex + '].anio_graduacion').end()
-                .find('[name="pais_graduacion"]').attr('name', 'experiencia[' + bookIndex + '].pais_graduacion').end();
+                /*.find('[name="pais_graduacion"]').attr('name', 'experiencia[' + bookIndex + '].pais_graduacion').end();*/
+                .find('[name="pais_graduacion"]').attr('name', 'experiencia[' + bookIndex + '].pais_graduacion')
+                  .select2({
+                      language: "es",
+                      
+                      ajax: {
+                        url: function (params) {
+                          return "http://localhost/hmiv/public/pacientes_pediatricos/obtener_paises/"+params.term;
+                        },
+                        dataType: 'json',
+                        delay: 250,
+                        data: function (params) {
+
+                        },
+                        processResults: function (data, page) {
+                          // parse the results into the format expected by Select2.
+                          // since we are using custom formatting functions we do not need to
+                          // alter the remote JSON data
+                          //alert(data);
+                          var resultados = [];
+                          $.each(data, function (index, item) {
+                                resultados.push({
+                                    'id': item.id_pais,
+                                    'text': item.pais
+                                });
+                            });
+                                
+                          return {                            
+                            results: resultados
+                          };
+                        },
+                        cache: true
+                      },        
+                      escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                      minimumInputLength: 1,  
+                      //templateResult: formatRepo, // omitted for brevity, see the source of this page
+                      //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+                    })
+                .end();
 
             // Add new fields
             // Note that we also pass the validator rules for new field as the third parameter
@@ -706,8 +823,12 @@ $(document).ready( function () {
         language: "es",        
         //tags: true,
         //tokenSeparators: [',', ' ', '.','-'],
+        maximumSelectionLength: 5,
         ajax: {    
-          url: function(params) {  return "http://localhost/hmiv/public/pacientes_pediatricos/obtener_alergia/"+params.term; },
+          url: function(params) {  
+              //return "http://localhost/hmiv/public/medicos/obtener_especialidades_medicas/"+params.term; 
+              return "obtener_especialidades_medicas/"+params.term; 
+            },
           dataType: 'json',
           delay: 50,
           data: function (params) {
@@ -720,8 +841,8 @@ $(document).ready( function () {
             var resultados = [];
             $.each(data, function (index, item) {
                   resultados.push({
-                      'id': item.id_alergia,
-                      'text': item.alergia
+                      'id': item.id_especialidad,
+                      'text': item.especialidad
                   });
               });
                   

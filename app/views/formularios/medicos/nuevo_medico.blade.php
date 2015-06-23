@@ -247,7 +247,7 @@
             </div>
             <div class="col-md-4 pad-controles">
               {{-- {{Form::text('especialidades_medicas','' ,array('class'=>'form-control ','placeholder'=>'Seleccione especialidades','style'=>'width:100%'))}} --}}
-              {{Form::select('especialidades_medicas',[],'',['name'=>'especialidades_medicas[]', 'class'=>'form-control select2','style'=>'width:100%','multiple'=>'multiple']) }}              
+              {{Form::select('especialidades_medicas',[],'',['name'=>'especialidades_medicas[]', 'id'=>'especialidades_medicas', 'class'=>'form-control select2','style'=>'width:100%','multiple'=>'multiple']) }}              
             </div>                
           </div>      
       </div>
@@ -269,7 +269,7 @@
               {{Form::label('tipo_documento_contacto','Nacionalidad: ')}}
             </div>
             <div class="col-md-3 pad-controles">
-              {{Form::select('tipo_documento_contacto',array(''=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE'),'',array('class'=>'form-control ','style'=>'width:100%')) }}
+              {{Form::select('tipo_documento_contacto',array(''=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE'),'',array('class'=>'form-control ', 'id'=>'tipo_documento_contacto', 'style'=>'width:100%')) }}
             </div>            
           </div>
           <div class="row">
@@ -277,7 +277,7 @@
               {{Form::label('documento_contacto','Cédula: ')}}
             </div>
             <div class="col-md-3 pad-controles">
-              {{Form::text('documento_contacto',NULL ,array('class'=>'form-control ','placeholder'=>'Indique cédula','style'=>'width:100%'))}}
+              {{Form::text('documento_contacto',NULL ,array('class'=>'form-control ','placeholder'=>'Indique cédula', 'id'=>'documento_contacto', 'style'=>'width:100%'))}}
             </div>                   
           </div>
           <div class="row">

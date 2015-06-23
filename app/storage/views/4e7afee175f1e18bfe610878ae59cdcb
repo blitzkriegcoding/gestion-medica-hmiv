@@ -267,8 +267,8 @@
 
             </div>
             <div class="col-md-4 pad-controles">
-              <?php echo Form::text('especialidades_medicas','' ,array('class'=>'form-control ','placeholder'=>'Seleccione especialidades','style'=>'width:100%')); ?>
-
+              <?php /* <?php echo Form::text('especialidades_medicas','' ,array('class'=>'form-control ','placeholder'=>'Seleccione especialidades','style'=>'width:100%')); ?> */ ?>
+              <?php echo Form::select('especialidades_medicas',[],'',['name'=>'especialidades_medicas[]', 'id'=>'especialidades_medicas', 'class'=>'form-control select2','style'=>'width:100%','multiple'=>'multiple']); ?>              
             </div>                
           </div>      
       </div>
@@ -291,7 +291,7 @@
 
             </div>
             <div class="col-md-3 pad-controles">
-              <?php echo Form::select('tipo_documento_contacto',array(''=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE'),'',array('class'=>'form-control ','style'=>'width:100%')); ?>
+              <?php echo Form::select('tipo_documento_contacto',array(''=>'SELECCIONE','V'=>'VENEZOLANA','E'=>'EXTRANJERA','P'=>'PASAPORTE'),'',array('class'=>'form-control ', 'id'=>'tipo_documento_contacto', 'style'=>'width:100%')); ?>
 
             </div>            
           </div>
@@ -301,7 +301,7 @@
 
             </div>
             <div class="col-md-3 pad-controles">
-              <?php echo Form::text('documento_contacto',NULL ,array('class'=>'form-control ','placeholder'=>'Indique cédula','style'=>'width:100%')); ?>
+              <?php echo Form::text('documento_contacto',NULL ,array('class'=>'form-control ','placeholder'=>'Indique cédula', 'id'=>'documento_contacto', 'style'=>'width:100%')); ?>
 
             </div>                   
           </div>
