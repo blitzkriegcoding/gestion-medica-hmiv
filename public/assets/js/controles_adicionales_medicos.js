@@ -106,7 +106,7 @@ $(document).ready( function () {
         //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
       });
 
-      $("#pais_graduacion").select2({
+      $('#pais_graduacion').select2({
         language: "es",
         
         ajax: {
@@ -712,7 +712,6 @@ $(document).ready( function () {
                 .find('[name="institucion"]').attr('name', 'experiencia[' + bookIndex + '].institucion').end()
                 .find('[name="titulo_obtenido"]').attr('name', 'experiencia[' + bookIndex + '].titulo_obtenido').end()
                 .find('[name="anio_graduacion"]').attr('name', 'experiencia[' + bookIndex + '].anio_graduacion').end()
-                /*.find('[name="pais_graduacion"]').attr('name', 'experiencia[' + bookIndex + '].pais_graduacion').end();*/
                 .find('[name="pais_graduacion"]').attr('name', 'experiencia[' + bookIndex + '].pais_graduacion')
                   .select2({
                       language: "es",
@@ -722,7 +721,7 @@ $(document).ready( function () {
                           return "http://localhost/hmiv/public/pacientes_pediatricos/obtener_paises/"+params.term;
                         },
                         dataType: 'json',
-                        delay: 250,
+                        delay: 50,
                         data: function (params) {
 
                         },
@@ -739,7 +738,8 @@ $(document).ready( function () {
                                 });
                             });
                                 
-                          return {                            
+                          return {        
+                            //results: data
                             results: resultados
                           };
                         },
@@ -751,6 +751,7 @@ $(document).ready( function () {
                       //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
                     })
                 .end();
+                
 
             // Add new fields
             // Note that we also pass the validator rules for new field as the third parameter

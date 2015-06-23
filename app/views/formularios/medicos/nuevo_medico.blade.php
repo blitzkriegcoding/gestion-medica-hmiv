@@ -195,11 +195,11 @@
               <div class="col-xs-3 ">
                   <input type="text" class="form-control" style="width: 100%" name="experiencia[0].titulo_obtenido" placeholder="Título obtenido" />
               </div>
-              <div class="col-xs-2 ">
-                  <input type="text" class="form-control" style="width: 100%" name="experiencia[0].anio_graduacion" placeholder="Año de graduación" />
+              <div class="col-xs-2 ">                  
+                  {{Form::selectRange('experiencia[0].anio_graduacion',date("Y"), 1950, date("Y"), array('name' => 'experiencia[0].anio_graduacion', 'class'=>'form-control ','style'=>'width:100%')) }}
               </div>
-              <div class="col-xs-2 ">
-                  <input type="text" class="form-control" style="width: 100%" name="experiencia[0].pais_graduacion" placeholder="País" />
+              <div class="col-xs-2 ">                  
+                  {{Form::select('experiencia[0].pais_graduacion',array(''=>'SELECCIONE'),'',array('name' => 'experiencia[0].pais_graduacion', 'class'=>'form-control ','id'=>'pais_graduacion','style'=>'width:100%')) }}
               </div>
               <div class="col-xs-1">
                   <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
@@ -219,10 +219,12 @@
                   <input type="text" class="form-control" style="width: 100%" name="titulo_obtenido" placeholder="Título obtenido" />
               </div>
               <div class="col-xs-2 ">
-                  <input type="text" class="form-control" style="width: 100%" name="anio_graduacion" placeholder="Año de graduación" />
+                  {{Form::selectRange('anio_graduacion',date("Y"), 1950, date("Y"), array('name' => 'anio_graduacion', 'class'=>'form-control ','style'=>'width:100%')) }}
+                  
               </div>
               <div class="col-xs-2 ">
-                  <input type="text" class="form-control" style="width: 100%" name="pais_graduacion" placeholder="País" />
+                  
+                  {{Form::select('pais_graduacion',array(''=>'SELECCIONE'),'',array('name' => 'pais_graduacion', 'class'=>'form-control ','style'=>'width:100%')) }}                  
               </div>
               <div class="col-xs-1 ">
                   <button type="button" class="btn btn-default removeButton"><i class="glyphicon glyphicon-minus"></i></button>
