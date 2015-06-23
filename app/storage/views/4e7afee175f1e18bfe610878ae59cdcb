@@ -20,7 +20,7 @@
       <button type="button" class="btn btn-default btn-prev"><span class="glyphicon glyphicon-arrow-left"></span>Anterior</button>
       <button type="button" class="btn btn-default btn-next" data-last="Guardar Datos">Siguiente<span class="glyphicon glyphicon-arrow-right"></span></button>
     </div>
-    <?php echo Form::open(['action'=>'MedicosController@crear_nuevo_medico','method'=>'post','class'=>'clearfix form-horizontal','id'=>'formulario_principal']); ?>
+    <?php echo Form::open(['action'=>'MedicosController@nuevo_medico','method'=>'post','class'=>'clearfix form-horizontal','id'=>'formulario_principal']); ?>
 
     <div class="step-content">
       <div class="step-pane active sample-pane alert" data-step="1">
@@ -210,17 +210,21 @@
           <div class="form-group">
               <label class="col-xs-1 control-label ">Estudios: </label>
               <div class="col-xs-3 ">
-                  <input type="text" class="form-control" style="width: 100%" name="experiencia[0].institucion" placeholder="Institución" />
+                  <?php /* <input type="text" class="form-control" style="width: 100%" name="experiencia[0].institucion" placeholder="Institución" /> */ ?>
+                  <?php echo Form::text('institucion[0]','',['class'=>'form-control ', 'placeholder'=>'Institución', 'style'=>'width:100%'] ); ?>
+
               </div>
               <div class="col-xs-3 ">
-                  <input type="text" class="form-control" style="width: 100%" name="experiencia[0].titulo_obtenido" placeholder="Título obtenido" />
-              </div>
-              <div class="col-xs-2 ">                  
-                  <?php echo Form::selectRange('experiencia[0].anio_graduacion',date("Y"), 1950, date("Y"), array('name' => 'experiencia[0].anio_graduacion', 'class'=>'form-control ','style'=>'width:100%')); ?>
+                  <?php /* <input type="text" class="form-control" style="width: 100%" name="experiencia[0].titulo_obtenido" placeholder="Título obtenido" /> */ ?>
+                  <?php echo Form::text('titulo_obtenido[0]','',['class'=>'form-control ', 'placeholder'=>'Título obtenido', 'style'=>'width:100%'] ); ?>
 
               </div>
               <div class="col-xs-2 ">                  
-                  <?php echo Form::select('experiencia[0].pais_graduacion',array(''=>'SELECCIONE'),'',array('name' => 'experiencia[0].pais_graduacion', 'class'=>'form-control ','id'=>'pais_graduacion','style'=>'width:100%')); ?>
+                  <?php echo Form::selectRange('anio_graduacion[0]',date("Y"), 1960, date("Y"), array('class'=>'form-control ','style'=>'width:100%')); ?>
+
+              </div>
+              <div class="col-xs-2 ">                  
+                  <?php echo Form::select('pais_graduacion[0]',[],'',array('class'=>'form-control ','id'=>'pais_graduacion','style'=>'width:100%')); ?>
 
               </div>
               <div class="col-xs-1">
@@ -235,19 +239,22 @@
                 &nbsp;
               </div>
               <div class="col-xs-3 ">
-                  <input type="text" class="form-control" style="width: 100%" name="institucion" placeholder="Institución" />
+                  <?php /* <input type="text" class="form-control" style="width: 100%" name="institucion" placeholder="Institución" /> */ ?>
+                  <?php echo Form::text('institucion[]',NULL ,array('class'=>'form-control ', 'placeholder' => 'Institución', 'style'=>'width:100%')); ?>
+
               </div>
               <div class="col-xs-3 ">
-                  <input type="text" class="form-control" style="width: 100%" name="titulo_obtenido" placeholder="Título obtenido" />
+                  <?php /* <input type="text" class="form-control" style="width: 100%" name="titulo_obtenido" placeholder="Título obtenido" /> */ ?>
+                  <?php echo Form::text('titulo_obtenido[]',NULL ,array('class'=>'form-control ', 'placeholder' => 'Título obtenido', 'style'=>'width:100%')); ?>
+
               </div>
               <div class="col-xs-2 ">
-                  <?php echo Form::selectRange('anio_graduacion',date("Y"), 1950, date("Y"), array('name' => 'anio_graduacion', 'class'=>'form-control ','style'=>'width:100%')); ?>
+                  <?php echo Form::selectRange('anio_graduacion[]',date("Y"), 1960, date("Y"), array('class'=>'form-control ','style'=>'width:100%')); ?>
 
                   
               </div>
-              <div class="col-xs-2 ">
-                  
-                  <?php echo Form::select('pais_graduacion',array(''=>'SELECCIONE'),'',array('name' => 'pais_graduacion', 'class'=>'form-control ','style'=>'width:100%')); ?>                  
+              <div class="col-xs-2 ">                  
+                  <?php echo Form::select('pais_graduacion',[] ,'',array('class'=>'form-control ','style'=>'width:100%')); ?>                  
               </div>
               <div class="col-xs-1 ">
                   <button type="button" class="btn btn-default removeButton"><i class="glyphicon glyphicon-minus"></i></button>

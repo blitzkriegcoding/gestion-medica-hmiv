@@ -20,7 +20,7 @@
       <button type="button" class="btn btn-default btn-prev"><span class="glyphicon glyphicon-arrow-left"></span>Anterior</button>
       <button type="button" class="btn btn-default btn-next" data-last="Guardar Datos">Siguiente<span class="glyphicon glyphicon-arrow-right"></span></button>
     </div>
-    {{Form::open(['action'=>'MedicosController@crear_nuevo_medico','method'=>'post','class'=>'clearfix form-horizontal','id'=>'formulario_principal'])}}
+    {{Form::open(['action'=>'MedicosController@nuevo_medico','method'=>'post','class'=>'clearfix form-horizontal','id'=>'formulario_principal'])}}
     <div class="step-content">
       <div class="step-pane active sample-pane alert" data-step="1">
           <h4>Identificación del/la Médico(a)</h4>          
@@ -190,16 +190,18 @@
           <div class="form-group">
               <label class="col-xs-1 control-label ">Estudios: </label>
               <div class="col-xs-3 ">
-                  <input type="text" class="form-control" style="width: 100%" name="experiencia[0].institucion" placeholder="Institución" />
+                  {{-- <input type="text" class="form-control" style="width: 100%" name="experiencia[0].institucion" placeholder="Institución" /> --}}
+                  {{Form::text('institucion[0]','',['class'=>'form-control ', 'placeholder'=>'Institución', 'style'=>'width:100%'] )}}
               </div>
               <div class="col-xs-3 ">
-                  <input type="text" class="form-control" style="width: 100%" name="experiencia[0].titulo_obtenido" placeholder="Título obtenido" />
+                  {{-- <input type="text" class="form-control" style="width: 100%" name="experiencia[0].titulo_obtenido" placeholder="Título obtenido" /> --}}
+                  {{Form::text('titulo_obtenido[0]','',['class'=>'form-control ', 'placeholder'=>'Título obtenido', 'style'=>'width:100%'] )}}
               </div>
               <div class="col-xs-2 ">                  
-                  {{Form::selectRange('experiencia[0].anio_graduacion',date("Y"), 1950, date("Y"), array('name' => 'experiencia[0].anio_graduacion', 'class'=>'form-control ','style'=>'width:100%')) }}
+                  {{Form::selectRange('anio_graduacion[0]',date("Y"), 1960, date("Y"), array('class'=>'form-control ','style'=>'width:100%')) }}
               </div>
               <div class="col-xs-2 ">                  
-                  {{Form::select('experiencia[0].pais_graduacion',array(''=>'SELECCIONE'),'',array('name' => 'experiencia[0].pais_graduacion', 'class'=>'form-control ','id'=>'pais_graduacion','style'=>'width:100%')) }}
+                  {{Form::select('pais_graduacion[0]',[],'',array('class'=>'form-control ','id'=>'pais_graduacion','style'=>'width:100%')) }}
               </div>
               <div class="col-xs-1">
                   <button type="button" class="btn btn-default addButton"><i class="glyphicon glyphicon-plus"></i></button>
@@ -213,18 +215,19 @@
                 &nbsp;
               </div>
               <div class="col-xs-3 ">
-                  <input type="text" class="form-control" style="width: 100%" name="institucion" placeholder="Institución" />
+                  {{-- <input type="text" class="form-control" style="width: 100%" name="institucion" placeholder="Institución" /> --}}
+                  {{Form::text('institucion[]',NULL ,array('class'=>'form-control ', 'placeholder' => 'Institución', 'style'=>'width:100%'))}}
               </div>
               <div class="col-xs-3 ">
-                  <input type="text" class="form-control" style="width: 100%" name="titulo_obtenido" placeholder="Título obtenido" />
+                  {{-- <input type="text" class="form-control" style="width: 100%" name="titulo_obtenido" placeholder="Título obtenido" /> --}}
+                  {{Form::text('titulo_obtenido[]',NULL ,array('class'=>'form-control ', 'placeholder' => 'Título obtenido', 'style'=>'width:100%'))}}
               </div>
               <div class="col-xs-2 ">
-                  {{Form::selectRange('anio_graduacion',date("Y"), 1950, date("Y"), array('name' => 'anio_graduacion', 'class'=>'form-control ','style'=>'width:100%')) }}
+                  {{Form::selectRange('anio_graduacion[]',date("Y"), 1960, date("Y"), array('class'=>'form-control ','style'=>'width:100%')) }}
                   
               </div>
-              <div class="col-xs-2 ">
-                  
-                  {{Form::select('pais_graduacion',array(''=>'SELECCIONE'),'',array('name' => 'pais_graduacion', 'class'=>'form-control ','style'=>'width:100%')) }}                  
+              <div class="col-xs-2 ">                  
+                  {{Form::select('pais_graduacion',[] ,'',array('class'=>'form-control ','style'=>'width:100%')) }}                  
               </div>
               <div class="col-xs-1 ">
                   <button type="button" class="btn btn-default removeButton"><i class="glyphicon glyphicon-minus"></i></button>
@@ -335,10 +338,16 @@
 
       </div> 
       <div class="step-pane active sample-pane alert" data-step="5">
-        <h4>Design Template</h4>
-            <h2 class="">
-              GUARDAR DATOS
-            </h2>
+        <h4>Guardar datos</h4>
+          <div class="alert alert-warning col-md-12 column">
+            <div class="col-md-1 column">
+              <span class="glyphicon glyphicon-pencil" style='font-size: 50px;' aria-hidden="true"></span>  
+            </div>
+            <div class="col-md-11 column">
+              En esta seccíon seran seleccionadas las especialidades médicas que puede ejercer el galeno en el Hospital, <strong>en un límite de cinco (5) especialidades.</strong>
+              <strong>Rellene los campos necesarios para incluir los estudios de formación-actualización del/la médico.</strong>
+            </div>
+          </div>
       </div>            
     </div>
     {{Form::close()}}

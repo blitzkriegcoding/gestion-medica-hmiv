@@ -9,5 +9,13 @@ class Medicos extends \Eloquent {
 		{
 			return $this->hasMany('IngresoPacientePediatrico','id_medico','id_medico');
 		}
+	public function EspecialidadesMedicas()
+		{
+
+		}
+	public static function cargarMedico($input)
+		{
+			dd($input);
+		}
 
 }

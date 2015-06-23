@@ -408,10 +408,10 @@ $(document).ready( function () {
             },      
             fields: 
             {
-              'experiencia[0].institucion'    : institucionValidators,
-              'experiencia[0].titulo_obtenido': tituloObtenidoValidators,
-              'experiencia[0].anio_graduacion': anioGraduacionValidator,
-              'experiencia[0].pais_graduacion': paisGraduacionValidator,
+              'institucion[0]'    : institucionValidators,
+              'titulo_obtenido[0]': tituloObtenidoValidators,
+              'anio_graduacion[0]': anioGraduacionValidator,
+              'pais_graduacion[0]': paisGraduacionValidator,
                 /*VALIDACIONES DEL SEGUNDO PANEL */        
               tipo_documento_medico: {
                                     validators: { 
@@ -689,12 +689,8 @@ $(document).ready( function () {
 
             },
 
-
-
-
-
-
       })
+
         // Add button click handler
         .on('click', '.addButton', function() {
             bookIndex++;
@@ -708,11 +704,12 @@ $(document).ready( function () {
 
             // Update the name attributes
 
+
             $clone
-                .find('[name="institucion"]').attr('name', 'experiencia[' + bookIndex + '].institucion').end()
-                .find('[name="titulo_obtenido"]').attr('name', 'experiencia[' + bookIndex + '].titulo_obtenido').end()
-                .find('[name="anio_graduacion"]').attr('name', 'experiencia[' + bookIndex + '].anio_graduacion').end()
-                .find('[name="pais_graduacion"]').attr('name', 'experiencia[' + bookIndex + '].pais_graduacion')
+                .find('[name="institucion[]"]').attr('name', 'institucion[' + bookIndex + ']').end()
+                .find('[name="titulo_obtenido[]"]').attr('name', 'titulo_obtenido[' + bookIndex + ']').end()
+                .find('[name="anio_graduacion[]"]').attr('name', 'anio_graduacion[' + bookIndex + ']').end()
+                .find('[name="pais_graduacion"]').attr('name', 'pais_graduacion[' + bookIndex + ']')
                   .select2({
                       language: "es",
                       
@@ -756,10 +753,10 @@ $(document).ready( function () {
             // Add new fields
             // Note that we also pass the validator rules for new field as the third parameter
             $('#formulario_principal')
-                .formValidation('addField', 'experiencia[' + bookIndex + '].institucion', institucionValidators)
-                .formValidation('addField', 'experiencia[' + bookIndex + '].titulo_obtenido', tituloObtenidoValidators)
-                .formValidation('addField', 'experiencia[' + bookIndex + '].anio_graduacion', anioGraduacionValidator)
-                .formValidation('addField', 'experiencia[' + bookIndex + '].pais_graduacion', paisGraduacionValidator);
+                .formValidation('addField', 'institucion[' + bookIndex + ']', institucionValidators)
+                .formValidation('addField', 'titulo_obtenido[' + bookIndex + ']', tituloObtenidoValidators)
+                .formValidation('addField', 'anio_graduacion[' + bookIndex + ']', anioGraduacionValidator)
+                .formValidation('addField', 'pais_graduacion[' + bookIndex + ']', paisGraduacionValidator);
         })
 
         // Remove button click handler
@@ -769,10 +766,10 @@ $(document).ready( function () {
 
             // Remove fields
             $('#formulario_principal')
-                .formValidation('removeField', $row.find('[name="experiencia[' + index + '].institucion"]'))
-                .formValidation('removeField', $row.find('[name="experiencia[' + index + '].titulo_obtenido"]'))
-                .formValidation('removeField', $row.find('[name="experiencia[' + index + '].anio_graduacion"]'))
-                .formValidation('removeField', $row.find('[name="experiencia[' + index + '].pais_graduacion"]'));
+                .formValidation('removeField', $row.find('[name="institucion[' + index + ']"]'))
+                .formValidation('removeField', $row.find('[name="titulo_obtenido[' + index + ']"]'))
+                .formValidation('removeField', $row.find('[name="anio_graduacion[' + index + ']"]'))
+                .formValidation('removeField', $row.find('[name="pais_graduacion[' + index + ']"]'));
 
             // Remove element containing the fields
             $row.remove();

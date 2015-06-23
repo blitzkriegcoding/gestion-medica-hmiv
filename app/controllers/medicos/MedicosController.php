@@ -11,5 +11,21 @@ class MedicosController extends \BaseController
 							];
 			return View::make('medicos.crear_medico')->with($datos_vista);
 		}
+	public function nuevo_medico()
+		{
+			#dd(Input::get('institucion'),'<br>----------------<br>',Input::get('titulo_obtenido'),'<br>----------------<br>',Input::get('anio_graduacion'),'<br>----------------<br>',Input::get('pais_graduacion'));
+			$respuesta = Medicos::cargarMedico(Input::all());
+			
+			if($respuesta['error_mensajes'] == true)
+				{	
+					
+					return Redirect::to('medicos/crear_nuevo_medico/')->withErrors($respuesta['mensaje'])->withInput();
+				}
+			else
+				{
+					return Redirect::to('medicos/crear_nuevo_medico/')->with(['mensaje'=>$respuesta['mensaje'],'estilo'=>$respuesta['estilo'],'codigo_historia_medica'=>$respuesta['codigo_historia_medica'],'bandera'=>$respuesta['bandera']]);
+
+				}			
+		}
 
 }

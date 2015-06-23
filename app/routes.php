@@ -66,7 +66,7 @@ Route::group(['prefix' => 'medicos'], function()
 		Route::get('creacion_medicos', 		['uses'	=>	'MedicosController@crear_nuevo_medico']);
 
 		/*TODOS LOS POST*/
-		Route::post('crear_nuevo_medico',	['uses' => 	'MedicosController@crear_nuevo_medico']);		
+		Route::post('nuevo_medico',			['uses' => 	'MedicosController@nuevo_medico']);		
 
 		/*RUTAS PARA CONSULTAS VIA AJAX*/
 		Route::get('obtener_especialidades_medicas/{especialidad_medica}',['uses' => 'EspecialidadesMedicasController@mostrarEspecialidades'] );
