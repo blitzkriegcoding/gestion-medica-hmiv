@@ -13,7 +13,7 @@ class MedicosController extends \BaseController
 		}
 	public function nuevo_medico()
 		{
-			#dd(Input::get('institucion'),'<br>----------------<br>',Input::get('titulo_obtenido'),'<br>----------------<br>',Input::get('anio_graduacion'),'<br>----------------<br>',Input::get('pais_graduacion'));
+			
 			$respuesta = Medicos::cargarMedico(Input::all());
 			
 			if($respuesta['error_mensajes'] == true)
