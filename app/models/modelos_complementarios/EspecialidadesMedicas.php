@@ -10,6 +10,10 @@ class EspecialidadesMedicas extends \Eloquent {
 		{
 			$especialidades = self::where('especialidad','LIKE',strtoupper($especialidad_medica).'%')->get();
 			return Response::json($especialidades);
-		}	
+		}
+	public function EspecialidadesMedicasGaleno()
+		{
+			return $this->hasMany('EspecialidadesMedicasGaleno','id_especialidad','id_especialidad');
+		}
 
 }

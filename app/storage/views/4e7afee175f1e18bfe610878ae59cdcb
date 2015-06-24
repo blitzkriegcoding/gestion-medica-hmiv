@@ -187,7 +187,14 @@
                     <div class="col-md-3 pad-controles ">                      
                       <?php echo Form::text('correo_medico',NULL ,array('class'=>'form-control ', 'id' => 'correo_medico', 'style'=>'width:100%')); ?>
 
-                    </div>                 
+                    </div>
+                    <div class="col-md-2 pad-controles etiquetas">
+                      <?php echo Form::label('cargo_medico:','Cargo médico: '); ?> 
+                    </div>
+                    <div class="col-md-3 pad-controles ">                      
+                      <?php echo Form::select('cargo_medico',$tipo_medico,'',array('class'=>'form-control ','id'=>'cargo_medico','style'=>'width:100%')); ?>
+
+                    </div>                      
                   </div>  
                   <?php /*FIN BLOQUE ESTADO CIVIL, DIRECCION TELEFONO Y CORREO*/ ?>
 
@@ -240,21 +247,21 @@
               </div>
               <div class="col-xs-3 ">
                   <?php /* <input type="text" class="form-control" style="width: 100%" name="institucion" placeholder="Institución" /> */ ?>
-                  <?php echo Form::text('institucion[]',NULL ,array('class'=>'form-control ', 'placeholder' => 'Institución', 'style'=>'width:100%')); ?>
+                  <?php echo Form::text('institucion[]',NULL ,array('class'=>'form-control ', 'placeholder' => 'Institución', 'style'=>'width:100%','disabled'=>'disabled')); ?>
 
               </div>
               <div class="col-xs-3 ">
                   <?php /* <input type="text" class="form-control" style="width: 100%" name="titulo_obtenido" placeholder="Título obtenido" /> */ ?>
-                  <?php echo Form::text('titulo_obtenido[]',NULL ,array('class'=>'form-control ', 'placeholder' => 'Título obtenido', 'style'=>'width:100%')); ?>
+                  <?php echo Form::text('titulo_obtenido[]',NULL ,array('class'=>'form-control ', 'placeholder' => 'Título obtenido', 'style'=>'width:100%','disabled'=>'disabled')); ?>
 
               </div>
               <div class="col-xs-2 ">
-                  <?php echo Form::selectRange('anio_graduacion[]',date("Y"), 1960, date("Y"), array('class'=>'form-control ','style'=>'width:100%')); ?>
+                  <?php echo Form::selectRange('anio_graduacion[]',date("Y"), 1960, date("Y"), array('class'=>'form-control ','style'=>'width:100%','disabled'=>'disabled')); ?>
 
                   
               </div>
               <div class="col-xs-2 ">                  
-                  <?php echo Form::select('pais_graduacion',[] ,'',array('class'=>'form-control ','style'=>'width:100%')); ?>                  
+                  <?php echo Form::select('pais_graduacion',[] ,'',array('class'=>'form-control ','style'=>'width:100%','disabled'=>'disabled')); ?>                  
               </div>
               <div class="col-xs-1 ">
                   <button type="button" class="btn btn-default removeButton"><i class="glyphicon glyphicon-minus"></i></button>
@@ -270,7 +277,7 @@
             </div>
             <div class="col-md-11 column">
               En esta seccíon seran seleccionadas las especialidades médicas que puede ejercer el galeno en el Hospital, <strong>en un límite de cinco (5) especialidades.</strong>
-              <strong>Rellene los campos necesarios para incluir los estudios de formación-actualización del/la médico.</strong>
+              <strong>Seleccione entre las diversas especialidades médicas, de las cuales el galeno puede .</strong>
             </div>
           </div>
           <div class="row">
@@ -315,7 +322,14 @@
             <div class="col-md-3 pad-controles">
               <?php echo Form::text('documento_contacto',NULL ,array('class'=>'form-control ','placeholder'=>'Indique cédula', 'id'=>'documento_contacto', 'style'=>'width:100%')); ?>
 
-            </div>                   
+             </div>                   
+            <div class="col-md-2 pad-controles etiquetas">
+                <?php echo Form::label('relacion_medico_contacto','Relación: '); ?> 
+              </div>
+              <div class="col-md-3 pad-controles">
+                <?php echo Form::select('relacion_medico_contacto',$relacion_medico,'',array('class'=>'form-control ', 'id'=>'relacion_medico_contacto', 'style'=>'width:100%')); ?>
+
+              </div>              
           </div>
           <div class="row">
             <div class="col-md-3 pad-controles etiquetas">
@@ -331,7 +345,7 @@
             <div class="col-md-3 pad-controles">
               <?php echo Form::text('segundo_nombre_contacto',NULL ,array('class'=>'form-control ','placeholder'=>'Indique segundo nombre','style'=>'width:100%')); ?>
 
-          </div>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-3 pad-controles etiquetas">
@@ -377,10 +391,16 @@
 
       </div> 
       <div class="step-pane active sample-pane alert" data-step="5">
-        <h4>Design Template</h4>
-            <h2 class="">
-              GUARDAR DATOS
-            </h2>
+        <h4>Guardar datos</h4>
+          <div class="alert alert-warning col-md-12 column">
+            <div class="col-md-1 column">
+              <span class="glyphicon glyphicon-exclamation-sign" style='font-size: 50px;' aria-hidden="true"></span>  
+            </div>
+            <div class="col-md-11 column">
+              <strong>Antes de guardar los datos, se le recomienda revisar si alguno presenta un error de transcripción.</strong>
+              <strong>Rellene los campos necesarios segun indican las validaciones del sistema.</strong>
+            </div>
+          </div>
       </div>            
     </div>
     <?php echo Form::close(); ?>

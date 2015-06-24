@@ -558,13 +558,13 @@ $(document).ready( function () {
                                         }
                                     },
           
-        grado_instruccion_representante: {
+                        cargo_medico: {
                                 validators: {
-                                        notEmpty: { message: 'Seleccion grado de instrucción'},
-                                        greaterThan: {value:1, message: 'Seleccion grado de instrucción' }
+                                        notEmpty: { message: 'Seleccione el cargo del médico'},
+                                        greaterThan: {value:1, message: 'Seleccione el cargo del médico' }
                                               },
                                         },
-          /*FIN VALIDACIONES SEGUNDO PANEL*/
+          /*FIN VALIDACIONES PANEL MEDICO*/
           
 
 
@@ -678,6 +678,12 @@ $(document).ready( function () {
                                       notEmpty: { message: 'La dirección del contacto es obligatorio'}
                                               }
                                         },
+            relacion_medico_contacto: {
+                                validators: {
+                                        notEmpty: { message: 'Seleccione la relación del médico y el contacto'},
+                                        greaterThan: {value:1, message: 'Seleccione la relación del médico y el contacto' }
+                                              },
+                                        },                                        
         /*FIN VALIDACIONES CONTACTO DEL MEDICO */
 
 
@@ -706,10 +712,10 @@ $(document).ready( function () {
 
 
             $clone
-                .find('[name="institucion[]"]').attr('name', 'institucion[' + bookIndex + ']').end()
-                .find('[name="titulo_obtenido[]"]').attr('name', 'titulo_obtenido[' + bookIndex + ']').end()
-                .find('[name="anio_graduacion[]"]').attr('name', 'anio_graduacion[' + bookIndex + ']').end()
-                .find('[name="pais_graduacion"]').attr('name', 'pais_graduacion[' + bookIndex + ']')
+                .find('[name="institucion[]"]').attr('name', 'institucion[' + bookIndex + ']').removeAttr('disabled').end()
+                .find('[name="titulo_obtenido[]"]').attr('name', 'titulo_obtenido[' + bookIndex + ']').removeAttr('disabled').end()
+                .find('[name="anio_graduacion[]"]').attr('name', 'anio_graduacion[' + bookIndex + ']').removeAttr('disabled').end()
+                .find('[name="pais_graduacion"]').attr('name', 'pais_graduacion[' + bookIndex + ']').removeAttr('disabled')
                   .select2({
                       language: "es",
                       

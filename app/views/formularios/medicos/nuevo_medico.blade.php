@@ -167,7 +167,13 @@
                     </div>
                     <div class="col-md-3 pad-controles ">                      
                       {{Form::text('correo_medico',NULL ,array('class'=>'form-control ', 'id' => 'correo_medico', 'style'=>'width:100%'))}}
-                    </div>                 
+                    </div>
+                    <div class="col-md-2 pad-controles etiquetas">
+                      {{Form::label('cargo_medico:','Cargo médico: ')}} 
+                    </div>
+                    <div class="col-md-3 pad-controles ">                      
+                      {{Form::select('cargo_medico',$tipo_medico,'',array('class'=>'form-control ','id'=>'cargo_medico','style'=>'width:100%')) }}
+                    </div>                      
                   </div>  
                   {{--FIN BLOQUE ESTADO CIVIL, DIRECCION TELEFONO Y CORREO--}}
 
@@ -216,18 +222,18 @@
               </div>
               <div class="col-xs-3 ">
                   {{-- <input type="text" class="form-control" style="width: 100%" name="institucion" placeholder="Institución" /> --}}
-                  {{Form::text('institucion[]',NULL ,array('class'=>'form-control ', 'placeholder' => 'Institución', 'style'=>'width:100%'))}}
+                  {{Form::text('institucion[]',NULL ,array('class'=>'form-control ', 'placeholder' => 'Institución', 'style'=>'width:100%','disabled'=>'disabled'))}}
               </div>
               <div class="col-xs-3 ">
                   {{-- <input type="text" class="form-control" style="width: 100%" name="titulo_obtenido" placeholder="Título obtenido" /> --}}
-                  {{Form::text('titulo_obtenido[]',NULL ,array('class'=>'form-control ', 'placeholder' => 'Título obtenido', 'style'=>'width:100%'))}}
+                  {{Form::text('titulo_obtenido[]',NULL ,array('class'=>'form-control ', 'placeholder' => 'Título obtenido', 'style'=>'width:100%','disabled'=>'disabled'))}}
               </div>
               <div class="col-xs-2 ">
-                  {{Form::selectRange('anio_graduacion[]',date("Y"), 1960, date("Y"), array('class'=>'form-control ','style'=>'width:100%')) }}
+                  {{Form::selectRange('anio_graduacion[]',date("Y"), 1960, date("Y"), array('class'=>'form-control ','style'=>'width:100%','disabled'=>'disabled')) }}
                   
               </div>
               <div class="col-xs-2 ">                  
-                  {{Form::select('pais_graduacion',[] ,'',array('class'=>'form-control ','style'=>'width:100%')) }}                  
+                  {{Form::select('pais_graduacion',[] ,'',array('class'=>'form-control ','style'=>'width:100%','disabled'=>'disabled')) }}                  
               </div>
               <div class="col-xs-1 ">
                   <button type="button" class="btn btn-default removeButton"><i class="glyphicon glyphicon-minus"></i></button>
@@ -243,7 +249,7 @@
             </div>
             <div class="col-md-11 column">
               En esta seccíon seran seleccionadas las especialidades médicas que puede ejercer el galeno en el Hospital, <strong>en un límite de cinco (5) especialidades.</strong>
-              <strong>Rellene los campos necesarios para incluir los estudios de formación-actualización del/la médico.</strong>
+              <strong>Seleccione entre las diversas especialidades médicas, de las cuales el galeno puede .</strong>
             </div>
           </div>
           <div class="row">
@@ -283,7 +289,13 @@
             </div>
             <div class="col-md-3 pad-controles">
               {{Form::text('documento_contacto',NULL ,array('class'=>'form-control ','placeholder'=>'Indique cédula', 'id'=>'documento_contacto', 'style'=>'width:100%'))}}
-            </div>                   
+             </div>                   
+            <div class="col-md-2 pad-controles etiquetas">
+                {{Form::label('relacion_medico_contacto','Relación: ')}} 
+              </div>
+              <div class="col-md-3 pad-controles">
+                {{Form::select('relacion_medico_contacto',$relacion_medico,'',array('class'=>'form-control ', 'id'=>'relacion_medico_contacto', 'style'=>'width:100%')) }}
+              </div>              
           </div>
           <div class="row">
             <div class="col-md-3 pad-controles etiquetas">
@@ -297,7 +309,7 @@
             </div>
             <div class="col-md-3 pad-controles">
               {{Form::text('segundo_nombre_contacto',NULL ,array('class'=>'form-control ','placeholder'=>'Indique segundo nombre','style'=>'width:100%'))}}
-          </div>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-3 pad-controles etiquetas">
@@ -341,11 +353,11 @@
         <h4>Guardar datos</h4>
           <div class="alert alert-warning col-md-12 column">
             <div class="col-md-1 column">
-              <span class="glyphicon glyphicon-pencil" style='font-size: 50px;' aria-hidden="true"></span>  
+              <span class="glyphicon glyphicon-exclamation-sign" style='font-size: 50px;' aria-hidden="true"></span>  
             </div>
             <div class="col-md-11 column">
-              En esta seccíon seran seleccionadas las especialidades médicas que puede ejercer el galeno en el Hospital, <strong>en un límite de cinco (5) especialidades.</strong>
-              <strong>Rellene los campos necesarios para incluir los estudios de formación-actualización del/la médico.</strong>
+              <strong>Antes de guardar los datos, se le recomienda revisar si alguno presenta un error de transcripción.</strong>
+              <strong>Rellene los campos necesarios segun indican las validaciones del sistema.</strong>
             </div>
           </div>
       </div>            
