@@ -35,24 +35,33 @@ class Medicos extends \Eloquent {
 	public static function verificarMedico($input)
 		{
 			$id_medico = "";
-			$id_medico = self::where('tipo_documento','=',/*$input['tipo_documento_medico']*/'E')
-								->where('documento','=',/*$input['documento_medico']*/'1232')
+			$id_medico = self::where('tipo_documento','=',$input['tipo_documento_medico'])
+								->where('documento','=',$input['documento_medico'])
 								->pluck('id_medico');
-			echo is_null($id_medico) ? true : false;
-			echo "<br><br>";
-			dd($id_medico);
-
+			return is_null($id_medico) ? true : false;
 
 		}
 	public static function cargarMedico($input)
 		{
-
+			/*
+				VERIFICACION DEL MEDICO EN LA BASE DE DATOS PARA EVITAR HACER
+				OTRAS OPERACIONES
+			*/
+			if(self::verificarMedico($input) == false)
+				{
+					return 	[	'error_mensajes' 	=> 	false,
+								'mensaje'			=> 	'Médico existente, verifique los datos',
+								'estilo'			=>	'alert alert-danger',
+								'bandera'			=>	'glyphicon glyphicon-warning-sign'
+							];
+				}				
+			dd(self::verificarMedico($input));
 			/*CUMPLIMIENTO DEL PATRON "SINGLE RESPONSABILITY PRINCIPLE" */
-			#$medico_nuevo 			= 	self::validacionDatosMedico($input);
-			#$contacto_medico_nuevo	= 	self::validacionDatosContacto($input); 
-			#$especialidades_medicas	= 	self::validacionDatosEspecialidades($input);
-			#$estudios_realizados 	=	self::validacionesEstudios($input);
-			self::verificarMedico(1);
+			$medico_nuevo 			= 	self::validacionDatosMedico($input);
+			$contacto_medico_nuevo	= 	self::validacionDatosContacto($input); 
+			$especialidades_medicas	= 	self::validacionDatosEspecialidades($input);
+			$estudios_realizados 	=	self::validacionesEstudios($input);
+			#self::verificarMedico($input);
 
 			/*GUARDAR AL NUEVO MEDICO EN LA BASE DE DATOS LUEGO DE HABER VALIDADO SUS DATOS*/
 			if($medico_nuevo['error_mensajes'] == true)
@@ -61,6 +70,8 @@ class Medicos extends \Eloquent {
 				}
 			else
 				{
+				
+
 					$id_medico = self::create(	[
 														'tipo_documento'		=>	$input['tipo_documento_medico'],
 														'documento'				=>	$input['documento_medico'],
@@ -90,6 +101,7 @@ class Medicos extends \Eloquent {
 				}
 			else
 				{
+
 					 $id_contacto = DatosMedicoContacto::create([
 				  													'id_medico'				=>	$id_medico['id_medico'],
 				  													'tipo_documento'		=>	$input['tipo_documento_contacto'],

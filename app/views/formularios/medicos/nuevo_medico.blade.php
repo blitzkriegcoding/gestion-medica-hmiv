@@ -1,4 +1,16 @@
-
+@if (Session::get('mensaje'))
+  <!-- Si hay un mensaje, entonces lo imprimimos y le damos estilo con bootstrap -->
+  <div class="container-fluid" style="width: 430px; margin: 0 auto;">
+    <div class="{{Session::get('estilo')}} col-md-12 column" >
+      <div class="col-md-2 column text-center" >
+        <span class="{{Session::get('bandera')}}" style='font-size: 25px;' aria-hidden="true"></span>  
+      </div>
+      <div class="col-md-10 column">
+        {{ Session::get('mensaje')."<br>"}}
+      </div>
+    </div>
+  </div>
+@endif
 <div class="container-fluid">
   <div class="container">
     <h3>

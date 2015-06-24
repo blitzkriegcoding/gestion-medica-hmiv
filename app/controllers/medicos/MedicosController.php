@@ -15,17 +15,16 @@ class MedicosController extends \BaseController
 	public function nuevo_medico()
 		{
 			
-			$respuesta = Medicos::cargarMedico(Input::all());
-			
-			dd($respuesta);
+			$respuesta = Medicos::cargarMedico(Input::all());			
+
 			if($respuesta['error_mensajes'] == true)
 				{	
 					
-					return Redirect::to('medicos/crear_nuevo_medico/')->withErrors($respuesta['mensaje'])->withInput();
+					return Redirect::to('medicos/creacion_medicos/')->withErrors($respuesta['mensaje'])->withInput();
 				}
 			else
 				{
-					return Redirect::to('medicos/crear_nuevo_medico/')->with(['mensaje'=>$respuesta['mensaje'],'estilo'=>$respuesta['estilo'],'codigo_historia_medica'=>$respuesta['codigo_historia_medica'],'bandera'=>$respuesta['bandera']]);
+					return Redirect::to('medicos/creacion_medicos/')->with(['mensaje'=>$respuesta['mensaje'],'estilo'=>$respuesta['estilo'],'bandera'=>$respuesta['bandera']]);
 
 				}			
 		}
