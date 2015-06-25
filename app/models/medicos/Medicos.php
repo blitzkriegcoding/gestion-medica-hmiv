@@ -55,12 +55,12 @@ class Medicos extends \Eloquent {
 								'bandera'			=>	'glyphicon glyphicon-warning-sign'
 							];
 				}				
-			dd(self::verificarMedico($input));
+			#dd(self::verificarMedico($input));
 			/*CUMPLIMIENTO DEL PATRON "SINGLE RESPONSABILITY PRINCIPLE" */
 			$medico_nuevo 			= 	self::validacionDatosMedico($input);
 			$contacto_medico_nuevo	= 	self::validacionDatosContacto($input); 
 			$especialidades_medicas	= 	self::validacionDatosEspecialidades($input);
-			$estudios_realizados 	=	self::validacionesEstudios($input);
+			$estudios_realizados 	=	self::validacionEstudios($input);
 			#self::verificarMedico($input);
 
 			/*GUARDAR AL NUEVO MEDICO EN LA BASE DE DATOS LUEGO DE HABER VALIDADO SUS DATOS*/
@@ -240,7 +240,7 @@ class Medicos extends \Eloquent {
 							];
 				}
 		}
-	private static function validacionesEstudios($input)
+	private static function validacionEstudios($input)
 		{
 			$validador_estudios_realizados = NULL;
 			$estudios_realizados = 			[
