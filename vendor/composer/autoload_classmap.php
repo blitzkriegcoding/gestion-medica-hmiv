@@ -30,6 +30,7 @@ return array(
     'GrupoInterrogatorio' => $baseDir . '/app/models/pacientes_pediatricos/GrupoInterrogatorio.php',
     'HistoriaMedicaPediatrica' => $baseDir . '/app/models/historias_medicas_pediatricas/HistoriaMedicaPediatrica.php',
     'HistoriaMedicaPediatricaController' => $baseDir . '/app/controllers/historias_medicas_pediatricas/HistoriaMedicaPediatricaController.php',
+    'Historias_medicas_pediatricas' => $baseDir . '/app/models/historias_medicas_pediatricas/HistoriaMedicaFederada.php',
     'HomeController' => $baseDir . '/app/controllers/HomeController.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
     'IngresoPacientePediatrico' => $baseDir . '/app/models/pacientes_pediatricos/IngresoPacientePediatrico.php',

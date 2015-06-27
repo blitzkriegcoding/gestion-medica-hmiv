@@ -17,9 +17,10 @@
 Route::group(['prefix' =>'pacientes_pediatricos'] ,function()
 	{
 		/*TODOS LOS GET*/
-		Route::get('creacion_pacientes_pediatricos',	['uses'=>'PacientesPediatricosController@nuevo_paciente_pediatrico'] );
+		Route::get('creacion_pacientes_pediatricos',									['uses'=>	'PacientesPediatricosController@nuevo_paciente_pediatrico'] );
 		Route::get('creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}',	['uses'	=>	'ExamenesPediatricosController@crear_examenes_medicos_pediatricos']);
-		Route::get('creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',	['uses'	=>	'HistoriaMedicaPediatricaController@nueva_historia_medica_pediatrica']);		
+		Route::get('creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',		['uses'	=>	'HistoriaMedicaPediatricaController@nueva_historia_medica_pediatrica']);		
+		Route::get('creacion_historia_medica_federada/{id_paciente_pediatrico}',		['uses' =>	'HistoriaMedicaFederadaController@nueva_historia_medica_federada']);
 		
 		/*TODOS LOS POST*/
 		Route::post('crear_paciente_pediatrico',		['uses'	=>	'PacientesPediatricosController@crear_paciente_pediatrico']);
@@ -27,35 +28,15 @@ Route::group(['prefix' =>'pacientes_pediatricos'] ,function()
 		Route::post('crear_historia_medica_pediatrica',	['uses'	=>	'HistoriaMedicaPediatricaController@crear_historia_medica_pediatrica' ] );
 
 		/*RUTAS PARA CONSULTAS VIA AJAX*/
-		Route::get('obtener_paises/{pais}',array('uses'=>'PaisesController@mostrarPaises'))->where('pais','[a-zA-Z]+');
-		Route::get('obtener_direccion/{dir}',array('uses'=>'RepresentanteController@mostrarDireccion'))->where('dir','[a-zA-Z]+');
-		Route::get('obtener_ocupacion/{ocupacion}',array('uses'=>'RepresentanteController@mostrarOcupacionOficio'))->where('ocupacion','[a-zA-Z]+');
-		Route::get('obtener_alergia/{alergia}',array('uses'=>'AlergiasController@mostrarAlergia'))->where('alergia','[a-zA-Z\s]+');
-		Route::get('obtener_patologia/{patologia}',array('uses'=>'PatologiasController@mostrarPatologia'))->where('patologia','[a-zA-Z\s]+');
-		Route::get('obtener_intolerancia/{intolerancia}',array('uses'=>'IntoleranciasController@mostrarIntolerancia'))->where('intolerancia','[a-zA-Z\s]+');
+		Route::get('obtener_paises/{pais}',					['uses'=>'PaisesController@mostrarPaises'])->where('pais','[a-zA-Z]+');
+		Route::get('obtener_direccion/{dir}',				['uses'=>'RepresentanteController@mostrarDireccion'])->where('dir','[a-zA-Z]+');
+		Route::get('obtener_ocupacion/{ocupacion}',			['uses'=>'RepresentanteController@mostrarOcupacionOficio'])->where('ocupacion','[a-zA-Z]+');
+		Route::get('obtener_alergia/{alergia}',				['uses'=>'AlergiasController@mostrarAlergia'])->where('alergia','[a-zA-Z\s]+');
+		Route::get('obtener_patologia/{patologia}',			['uses'=>'PatologiasController@mostrarPatologia'])->where('patologia','[a-zA-Z\s]+');
+		Route::get('obtener_intolerancia/{intolerancia}',	['uses'=>'IntoleranciasController@mostrarIntolerancia'])->where('intolerancia','[a-zA-Z\s]+');
 	});
 
 
-/*
-Route::get('pacientes_pediatricos/creacion_pacientes_pediatricos',	['uses'=>'PacientesPediatricosController@nuevo_paciente_pediatrico'] );
-Route::get('pacientes_pediatricos/creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}',	['uses'	=>	'ExamenesPediatricosController@crear_examenes_medicos_pediatricos']);
-Route::get('pacientes_pediatricos/creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',	['uses'	=>	'HistoriaMedicaPediatricaController@nueva_historia_medica_pediatrica']);
-*/
-#Route::get('pacientes_pediatricos/nueva_historia_medica_pediatrica');
-
-/*ENVIO DE FORMULARIOS CON DATOS DE PACIENTES PEDIATRICOS*/
-
-// Route::group(['prefix' => 'pacientes_pediatricos' ], function()
-// 	{
-// 	});
-
-// Route::post('pacientes_pediatricos/crear_paciente_pediatrico',			['uses'	=>	'PacientesPediatricosController@crear_paciente_pediatrico']);
-// Route::post('pacientes_pediatricos/crear_examenes_medicos_paciente',	['uses'	=>	'ExamenesPediatricosController@crear_examenes_paciente_pediatrico']);
-// Route::post('pacientes_pediatricos/crear_historia_medica_pediatrica',	['uses'	=>	'HistoriaMedicaPediatricaController@crear_historia_medica_pediatrica' ] );
-
-/*FIN BLOQUE ENVIO DE FORMULARIOS CON DATOS DE PACIENTES PEDIATRICOS*/
-
-/********************FIN RUTAS PACIENTES PEDIATRICOS***********************************/
 
 /*********************RUTAS MEDICOS*********************/
 
@@ -87,31 +68,4 @@ Route::get('creacion_pacientes_obstetricos', function()
 Route::pattern('id_paciente_pediatrico','[0-9]+');
 /*FIN PATRONES DE SEGURIDAD BASADOS EN EXPRESIONES REGULARES*/
 
-
-/*RUTAS DE CONSULTAS AJAX*/
-
-
-
-/*AGRUPACION DE RUTAS SIMILARES*/
-/*Route::group(['prefix'=>'pacientes_pediatricos'], function()
-	{
-		Route::get('obtener_paises/{pais}',array('uses'=>'PaisesController@mostrarPaises'))->where('pais','[a-zA-Z]+');
-		Route::get('obtener_direccion/{dir}',array('uses'=>'RepresentanteController@mostrarDireccion'))->where('dir','[a-zA-Z]+');
-		Route::get('obtener_ocupacion/{ocupacion}',array('uses'=>'RepresentanteController@mostrarOcupacionOficio'))->where('ocupacion','[a-zA-Z]+');
-		Route::get('obtener_alergia/{alergia}',array('uses'=>'AlergiasController@mostrarAlergia'))->where('alergia','[a-zA-Z\s]+');
-		Route::get('obtener_patologia/{patologia}',array('uses'=>'PatologiasController@mostrarPatologia'))->where('patologia','[a-zA-Z\s]+');
-		Route::get('obtener_intolerancia/{intolerancia}',array('uses'=>'IntoleranciasController@mostrarIntolerancia'))->where('intolerancia','[a-zA-Z\s]+');
-	}
-);
-*/
-/*LA RECOMENDACION MAS OBVIA SERIA LA AGRUPACION DE LAS RUTAS*/ //<-LISTO
-
-// Route::get('pacientes_pediatricos/obtener_paises/{pais}',array('uses'=>'PaisesController@mostrarPaises'))->where('pais','[a-zA-Z]+');
-// Route::get('pacientes_pediatricos/obtener_direccion/{dir}',array('uses'=>'RepresentanteController@mostrarDireccion'))->where('dir','[a-zA-Z]+');
-// Route::get('pacientes_pediatricos/obtener_ocupacion/{ocupacion}',array('uses'=>'RepresentanteController@mostrarOcupacionOficio'))->where('ocupacion','[a-zA-Z]+');
-// Route::get('pacientes_pediatricos/obtener_alergia/{alergia}',array('uses'=>'AlergiasController@mostrarAlergia'))->where('alergia','[a-zA-Z\s]+');
-// Route::get('pacientes_pediatricos/obtener_patologia/{patologia}',array('uses'=>'PatologiasController@mostrarPatologia'))->where('patologia','[a-zA-Z\s]+');
-// Route::get('pacientes_pediatricos/obtener_intolerancia/{intolerancia}',array('uses'=>'IntoleranciasController@mostrarIntolerancia'))->where('intolerancia','[a-zA-Z\s]+');
-
-/*FIN RUTAS DE CONSULTAS AJAX*/
 	 
