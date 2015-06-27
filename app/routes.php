@@ -14,13 +14,13 @@
 
 /**************************RUTAS PACIENTES PEDIATRICOS********************************/
 
-Route::group(['prefix' =>'pacientes_pediatricos'] ,function()
+Route::group(['prefix' => 'pacientes_pediatricos'] ,function()
 	{
 		/*TODOS LOS GET*/
 		Route::get('creacion_pacientes_pediatricos',									['uses'=>	'PacientesPediatricosController@nuevo_paciente_pediatrico'] );
 		Route::get('creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}',	['uses'	=>	'ExamenesPediatricosController@crear_examenes_medicos_pediatricos']);
-		Route::get('creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',		['uses'	=>	'HistoriaMedicaPediatricaController@nueva_historia_medica_pediatrica']);		
-		Route::get('creacion_historia_medica_federada/{id_paciente_pediatrico}',		['uses' =>	'HistoriaMedicaFederadaController@nueva_historia_medica_federada']);
+		
+		
 		
 		/*TODOS LOS POST*/
 		Route::post('crear_paciente_pediatrico',		['uses'	=>	'PacientesPediatricosController@crear_paciente_pediatrico']);
@@ -36,6 +36,15 @@ Route::group(['prefix' =>'pacientes_pediatricos'] ,function()
 		Route::get('obtener_intolerancia/{intolerancia}',	['uses'=>'IntoleranciasController@mostrarIntolerancia'])->where('intolerancia','[a-zA-Z\s]+');
 	});
 
+Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
+	{
+		/*TODOS LOS GET*/
+		Route::get('creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',		['uses'	=>	'HistoriaMedicaPediatricaController@nueva_historia_medica_pediatrica']);		
+		Route::get('creacion_historia_medica_federada/{id_paciente_pediatrico}',		['uses' =>	'HistoriaMedicaFederadaController@nueva_historia_medica_federada']);
+
+
+
+	});
 
 
 /*********************RUTAS MEDICOS*********************/
