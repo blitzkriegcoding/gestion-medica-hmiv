@@ -13,6 +13,7 @@ return array(
     'CondicionExamenFisico' => $baseDir . '/app/models/pacientes_pediatricos/CondicionExamenFisico.php',
     'CondicionExamenFuncional' => $baseDir . '/app/models/pacientes_pediatricos/CondicionExamenFuncional.php',
     'CondicionInterrogatorio' => $baseDir . '/app/models/pacientes_pediatricos/CondicionInterrogatorio.php',
+    'ConsultasPacientePediatrico' => $baseDir . '/app/models/historias_medicas_pediatricas/ConsultasPacientePediatrico.php',
     'CreatePacientesTable' => $baseDir . '/app/database/migrations/2015_05_06_032558_create_pacientes_table.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'DatosMedicoContacto' => $baseDir . '/app/models/medicos/DatosMedicoContacto.php',

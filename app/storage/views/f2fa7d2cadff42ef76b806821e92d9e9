@@ -1,0 +1,4 @@
+    <?php /*COLOCAR LA SIGUIENTE LIBRERIA SIEMPRE DE ULTIMA */ ?>
+    <script src="<?php echo asset('assets/js/controles_historias_medicas_federadas.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo asset('assets/datatables/media/js/jquery.dataTables.js'); ?>" type="text/javascript"></script>
+    <?php /*FIN BLOQUE */ ?>
