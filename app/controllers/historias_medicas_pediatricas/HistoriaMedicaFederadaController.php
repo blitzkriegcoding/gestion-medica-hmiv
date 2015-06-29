@@ -10,7 +10,7 @@ class HistoriaMedicaFederadaController extends \BaseController
 			}
 		public function verificar_cola_consultas()
 			{				
-				$respuesta = ConsultasPacientePediatrico::verificarColaConsultas(Input::all());
+				$respuesta = ConsultasPacientePediatrico::verificarColaConsultas(Input::all());				
 				return $respuesta;
 			}
 		public function cargar_consulta_nueva()
@@ -24,9 +24,9 @@ class HistoriaMedicaFederadaController extends \BaseController
 				$tabla = ConsultasPacientePediatrico::listarConsultasHistoricoJSON();
 				return $tabla;
 			}
-		public function anular_nueva_consulta_medica()
+		public function anular_consulta_medica()
 			{
-
+				return ConsultasPacientePediatrico::anularConsultaMedica(Input::all());
 			}
 		public function cargar_nuevo_examen_medico()	
 			{

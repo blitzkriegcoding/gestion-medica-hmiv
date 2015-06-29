@@ -18,7 +18,33 @@ $(document).ready( function () {
                           ],
         });
 
-      //fecha de nacimiento del paciente limitado hasta el dia de hoy
+      $('#consultas_historico').delegate("button","click", function(event)
+              {
+                    var obj = this;                    
+                    $.ajax({
+                      url: "http://localhost/hmiv/public/historias_medicas_pediatricas/anular_consulta_medica",
+                      type: "POST",
+                      data: { 'id_consulta_paciente': obj.id },
+                      contentType: 'application/x-www-form-urlencoded',
+                      dataType: 'json',
+                      success: function(respuesta) 
+                        {                 
+                          //alert(respuesta['cola']);
+                          //$('#cola').show().attr('class','label label-success').html(respuesta['cola']);
+                          $('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                          tabla.ajax.reload();
+                        },
+                      error: function(respuesta)
+                        {
+                          $('#mensajes').html(respuesta['especialidad_consulta']);
+                          $('#mensajes').html(respuesta['turno_consulta']);
+                          $('#mensajes').html(respuesta['fecha_consulta']);                  
+                        }
+
+                    });
+              }
+          );
+      //fecha de consultas de hoy hasta dentro de dos semanas
       function rangoFechaConsultas(id_control)
         {
           var fecha_maxima = new Date();
@@ -41,9 +67,7 @@ $(document).ready( function () {
                   $('#formulario_principal').formValidation('revalidateField', '#'+id_control);
                 });
         }
-
-      rangoFechaConsultas('fecha_consulta_paciente');
-
+      rangoFechaConsultas('fecha_consulta_paciente');      
       function verificarColaConsultas()
         {   
 
@@ -59,7 +83,6 @@ $(document).ready( function () {
                   /*$('#cola').show("slow").attr('class',respuesta['clase']).html(respuesta['cola']);*/
                   $('#cola').show().attr('class',respuesta['clase']).html(respuesta['cola']);
                   $('#mensajes').show().html(respuesta['mensaje']);
-
                 },
               error: function(respuesta)
                 {
@@ -83,6 +106,8 @@ $(document).ready( function () {
                   //alert(respuesta['cola']);
                   //$('#cola').show().attr('class','label label-success').html(respuesta['cola']);
                   $('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                  tabla.ajax.reload();
+
 
                 },
               error: function(respuesta)
@@ -93,16 +118,12 @@ $(document).ready( function () {
                 }
 
             });            
-        }        
-
-
-
-
-
+        }
 
   $('#visualiza_cola').on('click', function () {    
     var $btn = $(this).button('loading');
     verificarColaConsultas();
+
     tabla.ajax.reload();    
     $btn.button('reset');
   });

@@ -101,7 +101,7 @@
 							  		Histórico de consultas médicas del paciente
 								</div>
 								<div class="panel-body">
-							    	<table id="consultas_historico" class="table table-striped table-bordered">
+							    	<table id="consultas_historico" class="display compact">
 									    <thead>
 									        <tr>
 									            <th class="text-center">Fecha</th>
@@ -120,7 +120,12 @@
 											            	{{ $fecha->format('d/m/Y') }} </td>
 											            <td>{{ $llave->especialidad }}</td>
 											            <td>
-																{{ $llave->asistio_consulta }}
+											            	<?php
+											            		if(empty($llave->asistio_consulta))
+												            		{
+												            			echo "EN PROCESO";
+												            		}
+											            	?>																
 											            </td>
 											        </tr>
 											    @endforeach										        
@@ -148,7 +153,28 @@
 	    	</div>			
 	    </div>	    
 	    <div role="tabpanel" class="tab-pane fade" id="examenes_medicos">
-	    	Seccion de exámenes médicos
+	    	{{-- INICIO TAB PANEL --}}
+			<div class="col-xs-12">
+		    	<h4>
+		    		Carga de exámenes médicos
+		    	</h4>
+		    	<br>
+		    	<br>
+
+		    	<div class="col-xs-7">
+					<div class="panel panel-primary ">
+					  <div class="panel-heading">
+					  	Examenes medicos realizados
+					  	</div>
+					  <div class="panel-body">
+					  </div>
+					</div>
+		    	</div>
+		    	<div class="col-xs-2">
+		    		&nbsp;		    		
+		    	</div>
+			</div>
+			{{-- FIN TAB PANEL --}}
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="tratamientos_medicos">
 	    	Seccion de tratamientos medicos
