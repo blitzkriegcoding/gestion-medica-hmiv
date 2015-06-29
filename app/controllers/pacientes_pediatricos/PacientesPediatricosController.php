@@ -15,11 +15,8 @@ class PacientesPediatricosController extends \BaseController {
 												];
 			return View::make('pacientes_pediatricos.crear_paciente_pediatrico')->with($datos_nuevo_paciente);
 		}
-
-
 	public function crear_paciente_pediatrico()
 		{
-			//return dd(Input::all());
 			$respuesta = PacientePediatrico::cargar_paciente_pediatrico(Input::all());
 			
 			if($respuesta['error_mensajes'] == true)

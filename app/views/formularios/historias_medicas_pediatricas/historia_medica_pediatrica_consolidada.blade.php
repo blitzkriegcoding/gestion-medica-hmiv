@@ -53,10 +53,20 @@
 								    		Turno de la consulta:
 								    	</label>
 								    	 {{Form::select('turno_consulta',[''=>'SELECCIONE','M'=>'MAÑANA','T'=>'TARDE'],'',array('class'=>'form-control', 'id'=>'turno_consulta', 'style'=>'width: 100%')) }}
-								    	 <br>								    	 
-							    	 	<button type="button" id="carga_consulta" data-loading-text="Cargando..." class="btn btn-primary" autocomplete="off">
-										  Cargar consulta
-										</button>								    	
+								    	 <br>
+
+								    	 <div class="col-xs-12">
+								    	 	<div class="col-xs-6">
+										    	<button type="button" id="visualiza_cola" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+												  Ver cola de pacientes
+												</button>								    	 		
+								    	 	</div>
+								    	 	<div class="col-xs-6">
+										    	<button type="button" id="carga_consulta" data-loading-text="Cargando..." class="btn btn-primary" style="width:100%" autocomplete="off">
+												  Cargar consulta
+												</button>								    	 		
+								    	 	</div>								    	 	
+								    	 </div>
 								    </div>
 								  </div>
 								</div>    				
@@ -72,11 +82,15 @@
 							  	Cola de consultas médicas
 							  	</div>
 							  <div class="panel-body">
-							    <div id='cola'>							    	
-
+							    <div>
+							    	<h6 id='cola' style="display:none">
+							    		
+							    	</h6>
 							    </div>
-							    <div id='mensajes'>
-							    	
+							    <div>
+							    	<h6 id='mensajes' style="display:none">
+							    		
+							    	</h6>						    		
 							    </div>
 
 							  </div>
@@ -87,26 +101,31 @@
 							  		Histórico de consultas médicas del paciente
 								</div>
 								<div class="panel-body">
-							    	<table id="consultas_historico" class="display stripe row-border compact">
+							    	<table id="consultas_historico" class="table table-striped table-bordered">
 									    <thead>
 									        <tr>
-									            <th>Fecha</th>
-									            <th>Especialidad</th>
-									            <th>¿Asistió?</th>
+									            <th class="text-center">Fecha</th>
+									            <th class="text-center">Especialidad</th>
+									            <th class="text-center">¿Asistió?</th>
 									        </tr>
 									    </thead>
-									    <tbody>
-									        <tr>
-									            <td>Row 1 Data 1</td>
-									            <td>Row 1 Data 2</td>
-									            <td>Row 1 Data 3</td>
-									        </tr>
-									        <tr>
-									            <td>Row 2 Data 1</td>
-									            <td>Row 2 Data 2</td>
-									            <td>Row 2 Data 3</td>
-									        </tr>
-									    </tbody>
+									    @if(!empty($consultas_historico))
+										    <tbody class="text-center">
+											    @foreach($consultas_historico as $llave)
+											        <tr>
+											            <td>
+											            	<?php
+											            		$fecha = new DateTime($llave->fecha_consulta);
+											            	?>
+											            	{{ $fecha->format('d/m/Y') }} </td>
+											            <td>{{ $llave->especialidad }}</td>
+											            <td>
+																{{ $llave->asistio_consulta }}
+											            </td>
+											        </tr>
+											    @endforeach										        
+										    </tbody>
+									   	@endif
 									</table>
 								</div>
 							</div>

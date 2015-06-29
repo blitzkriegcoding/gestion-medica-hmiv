@@ -8,7 +8,10 @@ class ConsultasPacientePediatrico extends \Eloquent {
 							'sintomas',
 							'diagnostico_consulta',
 							'tratamiento_indicado',
-							'asistio_consulta'];
+							'asistio_consulta',
+							'turno'
+							];
+
 	public $table = 'consultas_paciente_pediatrico';
 	public $primaryKey = 'id_consulta_paciente';
 	public $timestamps = false;
@@ -18,9 +21,9 @@ class ConsultasPacientePediatrico extends \Eloquent {
 	public static function verificarColaConsultas($input)
 		{
 			$respuesta = 	[
-							'cola',
-							'mensaje',
-							'clase'
+							'cola' 		=>	'',
+							'mensaje'	=>	'',
+							'clase'		=>	''
 							];
 			$cola = NULL;
 			
@@ -51,9 +54,10 @@ class ConsultasPacientePediatrico extends \Eloquent {
 												->where('fecha_consulta','=',"'".$input['fecha_consulta']."'")
 												->where('id_especialidad','=',$input['especialidad_consulta'])
 												->count();
+
 			 $cola = self::where('fecha_consulta','=',"'".$input['fecha_consulta']."'")
 								->where('id_especialidad','=',$input['especialidad_consulta'])
-								->count()." Paciente(s) en cola";												
+								->count()." Paciente(s) en cola para esta especialidad y esta fecha";												
 
 			if($paciente_posee_consulta > 0)
 				{
@@ -65,7 +69,10 @@ class ConsultasPacientePediatrico extends \Eloquent {
 				}
 			if($cola < 20)
 				{
-					$respuesta['clase'] = 'label label-success';
+					$respuesta = [	'mensaje'	=> '',
+								'cola'		=> $cola,
+								'clase' 	=> 'label label-success'
+								];
 				}
 			if($cola >= 20 && $cola <= 29)
 				{
@@ -78,23 +85,50 @@ class ConsultasPacientePediatrico extends \Eloquent {
 					$respuesta = 	[
 										'mensaje'	=> 	'No hay mas cupos para consultas en esta especialidad este día',
 										'cola'		=>	$cola,
-										'clase'		=>	'label label-warning'
+										'clase'		=>	'label label-danger'
 									];
-					return $respuesta;	
+					
+				}		
+			
+
+			return ($respuesta);
+		}
+
+
+		
+	public static function programarConsulta($input)
+		{
+			 $cola = self::where('fecha_consulta','=',"'".$input['fecha_consulta']."'")
+								->where('id_especialidad','=',$input['especialidad_consulta'])
+								->count()." Paciente(s) en cola";				
+
+			$paciente_posee_consulta = self::join('historia_paciente_pediatrico','consultas_paciente_pediatrico.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
+												->where('historia_paciente_pediatrico.id_paciente','=',Session::get('id_paciente_pediatrico'))
+												->where('fecha_consulta','=',"'".$input['fecha_consulta']."'")
+												->where('id_especialidad','=',$input['especialidad_consulta'])
+												->count();
+
+			if($paciente_posee_consulta > 0)
+				{
+					 $respuesta = [	'mensaje'	=> 	'El paciente ya tiene consulta para fecha y especialidad seleccionada',
+					 				'cola'		=>	$cola,
+					 				'clase'		=>	'label label-danger'
+					 				];
+					 return $respuesta;
 				}
 
+												
 
-
-			$mensaje = self::programarConsulta($input);
-			
-			$respuesta = 	[
-								'mensaje'	=> 	$mensaje,
-								'cola'		=>	$cola
-							];
-			return Response::json($respuesta);
-		}
-	private static function programarConsulta($input)
-		{
+			if($cola == 30)
+				{					
+					#$respuesta['clase'] = 'label label-danger';
+					$respuesta = 	[
+										'mensaje'	=> 	'No hay mas cupos para consultas en esta especialidad este día',
+										'cola'		=>	$cola,
+										'clase'		=>	'label label-danger'
+									];
+					return $respuesta;					
+				}
 			$id_historia_medica = HistoriaMedicaPediatrica::where('id_paciente','=',Session::get('id_paciente_pediatrico'))->pluck('id_historia_medica');
 			$nueva_cita_medica = 	[
 										'fecha_consulta'		=>	$input['fecha_consulta'],
@@ -103,14 +137,38 @@ class ConsultasPacientePediatrico extends \Eloquent {
 										'turno'					=>	$input['turno_consulta']
 									];
 			self::create($nueva_cita_medica);
+			$respuesta = 	[
+								'mensaje'	=> 	'Consulta médica programada con éxito',
+								'cola'		=>	$cola,
+								'clase'		=>	'label label-success'
+							];			
 
 			return 'Consulta médica programada con éxito';
 		}
 
+	public static function listarConsultasHistoricoInicial()
+		{
+			$consultas_historico = DB::table('consultas_paciente_pediatrico')
+											->select('fecha_consulta', 'especialidad', 'asistio_consulta')
+											->join('especialidades_medicas','consultas_paciente_pediatrico.id_especialidad','=','especialidades_medicas.id_especialidad')
+											->join('historia_paciente_pediatrico','consultas_paciente_pediatrico.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
+											->where('historia_paciente_pediatrico.id_paciente','=',Session::get('id_paciente_pediatrico'))->get();
+			return $consultas_historico;
+		}
+	public static function listarConsultasHistoricoJSON()
+		{
+			$consultas_historico = DB::table('consultas_paciente_pediatrico')
+											->select('fecha_consulta', 'especialidad', 'asistio_consulta')
+											->join('especialidades_medicas','consultas_paciente_pediatrico.id_especialidad','=','especialidades_medicas.id_especialidad')
+											->join('historia_paciente_pediatrico','consultas_paciente_pediatrico.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
+											->where('historia_paciente_pediatrico.id_paciente','=',Session::get('id_paciente_pediatrico'))->get();
+			return Response::json($consultas_historico);
+		}		
 	public function HistoriaMedicaPediatrica()
 		{
 			return $this->belongsTo('HistoriaMedicaPediatrica','id_historia_medica','id_historia_medica');
 		}
+
 
 
 

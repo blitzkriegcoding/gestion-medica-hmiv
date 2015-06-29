@@ -3,20 +3,26 @@
 class HistoriaMedicaFederadaController extends \BaseController 
 	{
 		public function nueva_historia_medica_federada($id_paciente_pediatrico)
-			{
-				
+			{				
 				Session::put('id_paciente_pediatrico',$id_paciente_pediatrico);
-				return View::make('historias_medicas_pediatricas.crear_historia_medica_federada');
+				$consultas_historico = ConsultasPacientePediatrico::listarConsultasHistoricoInicial();				
+				return View::make('historias_medicas_pediatricas.crear_historia_medica_federada')->with(['consultas_historico' => $consultas_historico]);
 			}
-		public static function verificar_cola_consultas()
-			{
-				
+		public function verificar_cola_consultas()
+			{				
 				$respuesta = ConsultasPacientePediatrico::verificarColaConsultas(Input::all());
 				return $respuesta;
 			}
-		public function cargar_nueva_consulta_medica()
+		public function cargar_consulta_nueva()
 			{
+				$respuesta = ConsultasPacientePediatrico::programarConsulta(Input::all());
+				return $respuesta;
 
+			}
+		public function recargar_historico_consultas()
+			{
+				$tabla = ConsultasPacientePediatrico::listarConsultasHistoricoJSON();
+				return $tabla;
 			}
 		public function anular_nueva_consulta_medica()
 			{
