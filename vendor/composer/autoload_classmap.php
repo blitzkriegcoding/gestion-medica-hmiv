@@ -63,6 +63,7 @@ return array(
     'TratamientosController' => $baseDir . '/app/controllers/controladores_diversos/TratamientosController.php',
     'TratamientosSostenidos' => $baseDir . '/app/models/historias_medicas_pediatricas/TratamientosSostenidos.php',
     'User' => $baseDir . '/app/models/User.php',
+    'VacunasPaciente' => $baseDir . '/app/models/historias_medicas_pediatricas/VacunasPaciente.php',
     'Whoops\\Module' => $vendorDir . '/filp/whoops/src/deprecated/Zend/Module.php',
     'Whoops\\Provider\\Zend\\ExceptionStrategy' => $vendorDir . '/filp/whoops/src/deprecated/Zend/ExceptionStrategy.php',
     'Whoops\\Provider\\Zend\\RouteNotFoundStrategy' => $vendorDir . '/filp/whoops/src/deprecated/Zend/RouteNotFoundStrategy.php',

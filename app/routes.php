@@ -35,20 +35,26 @@ Route::group(['prefix' => 'pacientes_pediatricos'] ,function()
 		Route::get('obtener_patologia/{patologia}',			['uses'=>'PatologiasController@mostrarPatologia'])->where('patologia','[a-zA-Z\s]+');
 		Route::get('obtener_intolerancia/{intolerancia}',	['uses'=>'IntoleranciasController@mostrarIntolerancia'])->where('intolerancia','[a-zA-Z\s]+');
 	});
-
+/**************************RUTAS HISTORIAS PEDIATRICAS********************************/
 Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 	{
 		/*TODOS LOS GET*/
 		Route::get('creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',		['uses'	=>	'HistoriaMedicaPediatricaController@nueva_historia_medica_pediatrica']);		
 		Route::get('creacion_historia_medica_federada/{id_paciente_pediatrico}',		['uses' =>	'HistoriaMedicaFederadaController@nueva_historia_medica_federada']);
 		Route::get('recargar_historico_consultas',										['uses'	=> 'HistoriaMedicaFederadaController@recargar_historico_consultas'] );
-		
+		Route::get('obtener_historico_vacunas',											['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_vacunas' ]);
+		/*TODOS LOS POST*/
 		Route::post('cola_consultas',													['uses' => 	'HistoriaMedicaFederadaController@verificar_cola_consultas']);
 		Route::post('cargar_consulta_nueva',											['uses'	=>	'HistoriaMedicaFederadaController@cargar_consulta_nueva']);
 		Route::post('anular_consulta_medica',											['uses'	=>	'HistoriaMedicaFederadaController@anular_consulta_medica']);
-		
-	});
+		Route::post('borrar_vacuna_aplicada',											['uses'	=>	'HistoriaMedicaFederadaController@borrar_vacuna_aplicada']);
+		//cargar_vacuna_nueva
+		Route::post('cargar_vacuna_nueva',												['uses'	=>	'HistoriaMedicaFederadaController@cargar_vacuna_nueva']);
+		/*RUTAS PARA CONSULTA VIA AJAX*/
+		Route::get('obtener_vacuna/{vacuna}',											['uses'	=> 'HistoriaMedicaFederadaController@obtener_vacuna'] );
 
+
+	});
 
 /*********************RUTAS MEDICOS*********************/
 

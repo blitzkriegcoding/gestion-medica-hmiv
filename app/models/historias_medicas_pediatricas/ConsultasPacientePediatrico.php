@@ -35,7 +35,7 @@ class ConsultasPacientePediatrico extends \Eloquent {
 			$errores_consulta = [
 									'integer'		=>	'Debe seleccionar algún valor valido de la lista',
 									'exists'		=>	'Debe seleccionar alguna especialidad de la lista',
-									'required'		=>	'Los valores de Fecha de la consulta, Especialidad y Turno',
+									'required'		=>	'El valor es obligatorio',
 									'date_format'	=>	'Valor de fecha invalido',
 									'in'			=>	'La consulta debe ser en la mañana o en la tarde'
 								];
@@ -44,7 +44,10 @@ class ConsultasPacientePediatrico extends \Eloquent {
 			if($validador_consulta->fails())
 				{					
 					$respuesta = 	[
-										'mensaje' => $validador_consulta->messages()
+										'mensaje' 	=> 	$validador_consulta->messages(),
+										'bandera'	=>	1,
+										'clase'		=>	'text text-danger'
+
 									];
 					return Response::json($respuesta);
 				}
@@ -63,20 +66,29 @@ class ConsultasPacientePediatrico extends \Eloquent {
 				{
 					 $respuesta = [	'mensaje'	=> 	'El paciente ya tiene consulta para fecha y especialidad seleccionada',
 					 				'cola'		=>	$cola,
-					 				'clase'		=>	'label label-info'
+					 				'clase'		=>	'alert alert-info',
+					 				'bandera'	=>	2	
 					 				];
 					 return $respuesta;
 				}
 			if($cola < 20)
 				{
-					$respuesta = [	'mensaje'	=> '',
-								'cola'		=> $cola,
-								'clase' 	=> 'label label-success'
+					$respuesta = [	
+									'mensaje'	=> 'Aun cuenta con suficientes cupos para la consulta',
+									'cola'		=> $cola,
+									'clase' 	=> 'alert alert-success',
+									'bandera'	=>	3	
 								];
 				}
 			if($cola >= 20 && $cola <= 29)
 				{
-					$respuesta['clase'] = 'label label-warning';	
+					$respuesta['clase'] = 'alert alert-warning';
+								$respuesta = [	
+									'mensaje'	=> 'Ya quedan pocos cupos para esta consulta',
+									'cola'		=> $cola,
+									'clase' 	=> 'alert alert-warning',
+									'bandera'	=>	3	
+								];
 				}
 			if($cola == 30)
 				{
@@ -85,7 +97,8 @@ class ConsultasPacientePediatrico extends \Eloquent {
 					$respuesta = 	[
 										'mensaje'	=> 	'No hay mas cupos para consultas en esta especialidad este día',
 										'cola'		=>	$cola,
-										'clase'		=>	'label label-danger'
+										'clase'		=>	'alert alert-danger',
+										'bandera'	=>	1	
 									];
 					
 				}		
@@ -112,7 +125,9 @@ class ConsultasPacientePediatrico extends \Eloquent {
 				{
 					 $respuesta = [	'mensaje'	=> 	'El paciente ya tiene consulta para fecha y especialidad seleccionada',
 					 				'cola'		=>	$cola,
-					 				'clase'		=>	'label label-danger'
+					 				'clase'		=>	'alert alert-info',
+					 				'bandera'	=>	2
+
 					 				];
 					 return $respuesta;
 				}
@@ -125,7 +140,8 @@ class ConsultasPacientePediatrico extends \Eloquent {
 					$respuesta = 	[
 										'mensaje'	=> 	'No hay mas cupos para consultas en esta especialidad este día',
 										'cola'		=>	$cola,
-										'clase'		=>	'label label-danger'
+										'clase'		=>	'alert alert-danger',
+										'bandera'	=>	2
 									];
 					return $respuesta;					
 				}
@@ -138,10 +154,14 @@ class ConsultasPacientePediatrico extends \Eloquent {
 										'asistio_consulta'		=>	''
 									];
 			self::create($nueva_cita_medica);
+			 $cola = self::where('fecha_consulta','=',"'".$input['fecha_consulta']."'")
+								->where('id_especialidad','=',$input['especialidad_consulta'])
+								->count()." Paciente(s) en cola";				
 			$respuesta = 	[
 								'mensaje'	=> 	'Consulta médica programada con éxito',
 								'cola'		=>	$cola,
-								'clase'		=>	'label label-success'
+								'clase'		=>	'alert alert-success',
+								'bandera'	=>	2
 							];			
 
 			return $respuesta;
@@ -208,11 +228,11 @@ class ConsultasPacientePediatrico extends \Eloquent {
 
 		}
 
-
 	public function HistoriaMedicaPediatrica()
 		{
 			return $this->belongsTo('HistoriaMedicaPediatrica','id_historia_medica','id_historia_medica');
 		}
+
 
 
 
