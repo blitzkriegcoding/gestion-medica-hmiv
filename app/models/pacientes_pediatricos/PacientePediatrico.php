@@ -264,7 +264,60 @@ class PacientePediatrico extends \Eloquent {
 		}
 
 
+	public static function validarDatosPaciente($input)
+		{
+	 		$reglas_paciente_pediatrico = 
+											[
+												'tipo_documento_paciente'				=> 	'required|in:V,E,P,X',										
+												'primer_nombre_paciente'				=> 	'required|max:30|regex:/([a-zA-ZñÑ\s])/',
+												'segundo_nombre_paciente'				=> 	'max:30|regex:/([a-zA-ZñÑ\s])/',
+												'primer_apellido_paciente'				=> 	'max:40|required|regex:/([a-zA-ZñÑ\s])/',
+												'segundo_apellido_paciente'				=> 	'max:40|regex:/([a-zA-ZñÑ\s])/',
+												'fecha_nacimiento_paciente_campo'		=> 	'date_format:d/m/Y|required',
+												'pais_origen_paciente'					=> 	'required|integer|exists:paises,id_pais',
+												'sexo_paciente'							=> 	'required|in:F,M',
+												'lugar_nacimiento_paciente'				=> 	'required|max:30|regex:/([a-zA-ZñÑ\s])/',
+											];
+			$mensajes_error_paciente = 	[
+											'required'		=>	'Campo obligatorio',
+											'in'			=>	'Debe seleccionar entre los valores mostrados',
+											'date_format'	=>	'Fecha en formato inválido',
+											'regex'			=>	'No concuerda el formato del campo',
+											'integer'		=>	'El campo debe ser un número entero',
+											'exists'		=>	'Debe seleccionar entre los valores de la lista',
+										];
+			$validador_datos_paciente = Validator::make($input,$reglas_paciente_pediatrico,$mensajes_error_paciente);
 
+			switch($input['tipo_documento_paciente'])
+				{			
+					case 'V':
+						$validador_bloques->sometimes('documento_paciente','required|integer|max:32000000',function($input)
+							{	
+								#return $input['documento_paciente'] > 32000000;
+								return ($input['tipo_documento_paciente'] == 'V') && ($input['documento_paciente'] > 32000000);
+							});
+					break;
+					case 'E':
+						$validador_bloques->sometimes('documento_paciente','required|integer|min:80000000',function($input)
+							{	
+								
+								#return $input['documento_paciente'] < 80000000;
+								return ($input['tipo_documento_paciente'] == "E") && ($input['documento_paciente'] < 80000000);						
+							});
+					break;
+					case "P":
+						$validador_bloques->sometimes('documento_paciente','required|regex:/([0-9a-zA-Z])/',function($input)
+							{
+								return $input['tipo_documento_paciente'] == "P";
+							});
+					break;
+				}
+				
+			
+
+
+
+		}
 
 	public static function cargar_paciente_pediatrico($input)				
 		{			
@@ -320,88 +373,12 @@ class PacientePediatrico extends \Eloquent {
 										'pais_origen_paciente'					=> 	'required|integer|exists:paises,id_pais',
 										'sexo_paciente'							=> 	'required|in:F,M',
 										'lugar_nacimiento_paciente'				=> 	'required|max:30|regex:/([a-zA-ZñÑ\s])/',
-										/*BLOQUE 2*/
-										'tipo_documento_representante'			=>	'required|in:V,E,P',										
-										'sexo_representante' 					=>	'required|in:M,F',
-										'representante_legal'					=>	'required|in:1,2',
-										'primer_nombre_representante'			=>	'required|max:30|regex:/([a-zA-ZñÑ\s])/',
-										'segundo_nombre_representante'			=>	'max:30|regex:/([a-zA-ZñÑ\s])/',
-										'primer_apellido_representante'			=>	'required|max:30|regex:/([a-zA-ZñÑ\s])/',
-										'segundo_apellido_representante'		=>	'max:30|regex:/([a-zA-ZñÑ\s])/',
-										'fecha_nacimiento_representante'		=>	'date_format:d/m/Y|required',
-										'pais_origen_representante'				=>	'required|integer|exists:paises,id_pais',
-										'parentesco_representante'				=>	'required|integer|exists:parentesco,id_parentesco',										
-										'estado_civil_representante'			=>	'required|integer|exists:estado_civil,id_estado_civil',										
-										'direccion_est_mun_par_representante'	=>	'required|integer|exists:parroquia,id_parroquia',
-										'avenida_calle_representante'			=>	'required|max:40|regex:/([a-zA-ZñÑ\s])/',
-										'casa_edificio_representante'			=>	'required|max:40|regex:/([a-zA-ZñÑ\s])/',
-										'telefono_1'							=>	'required|max:11|regex:/([0-9])/',
-										'telefono_2'							=>	'max:11|regex:/([0-9])/',
-										'correo_representante'					=>	'email',
-										'ocupacion_oficio_representante'		=>	'required|exists:ocupacion_oficio,id_ocupacion_oficio',										
-										'grado_instruccion_representante'		=>	'required|exists:nivel_estudio,id_nivel_estudio',										
-										/*BLOQUE 3*/
-										'tipo_ingreso_paciente'					=>	'required|integer',
-										'medico_tratante'						=>	'required|exists:medicos,id_medico',
-										'fecha_ingreso_paciente'				=>	'date_format:d/m/Y|required',
-										'ubicacion_hospital_paciente'			=>	'required',
-										'resumen_ingreso_paciente'				=>	'required',
-										'enfermedad_actual_paciente'			=>	'required',
-										'diagnostico_admision_paciente'			=>	'required'
+
 									];
 
 			$validador_bloques = Validator::make($input,$reglas_bloques);
 
-			switch($input['tipo_documento_paciente'])
-				{			
-					case 'V':
-						$validador_bloques->sometimes('documento_paciente','required|integer|max:32000000',function($input)
-							{	
-								#return $input['documento_paciente'] > 32000000;
-								return ($input['tipo_documento_paciente'] == 'V') && ($input['documento_paciente'] > 32000000);
-							});
-					break;
-					case 'E':
-						$validador_bloques->sometimes('documento_paciente','required|integer|min:80000000',function($input)
-							{	
-								
-								#return $input['documento_paciente'] < 80000000;
-								return ($input['tipo_documento_paciente'] == "E") && ($input['documento_paciente'] < 80000000);						
-							});
-					break;
-					case "P":
-						$validador_bloques->sometimes('documento_paciente','required|regex:/([0-9a-zA-Z])/',function($input)
-							{
-								return $input['tipo_documento_paciente'] == "P";
-							});
-					break;
-				}
-			
 
-			switch($input['tipo_documento_representante'])
-				{			
-					case 'V':
-						$validador_bloques->sometimes('documento_paciente','required|integer|max:32000000',function($input)
-							{	
-								#return $input['documento_paciente'] > 32000000;
-								return ($input['tipo_documento_representante'] == 'V') && ($input['documento_representante'] > 32000000);
-							});
-					break;
-					case 'E':
-						$validador_bloques->sometimes('documento_representante','required|integer|min:80000000',function($input)
-							{	
-								
-								#return $input['documento_paciente'] < 80000000;
-								return ($input['tipo_documento_representante'] == "E") && ($input['documento_representante'] < 80000000);						
-							});
-					break;
-					case "P":
-						$validador_bloques->sometimes('documento_paciente','required|regex:/([0-9a-zA-Z])/',function($input)
-							{
-								return $input['tipo_documento_representante'] == "P";
-							});
-					break;
-				}
 
 			
 			if($validador_bloques->fails())
@@ -489,7 +466,7 @@ class PacientePediatrico extends \Eloquent {
 						}
 					else
 						{
-							$representante = new Representantes();
+/*							$representante = new Representantes();
 
 							$representante->tipo_documento 		= $input['tipo_documento_representante'];
 							$representante->documento 			= $input['documento_representante'];
@@ -510,26 +487,28 @@ class PacientePediatrico extends \Eloquent {
 							$representante->id_ocupacion_oficio = $input['ocupacion_oficio_representante'];
 							$representante->id_estado_civil 	= $input['estado_civil_representante'];
 							
-							$representante->save();
-							$parentesco_rep->id_representante 	= $representante->id_representante;
+							$representante->save();*/
 
-							$respuesta = [
+							#$parentesco_rep->id_representante 	= $representante->id_representante;
+
+/*							$respuesta = [
 											'bandera'			=>	' glyphicon glyphicon-ok ',
 											'mensaje'			=>	'Paciente y Representante creados con éxito',
 											'estilo'			=>	'alert alert-danger',
 											'error_mensajes'	=>	false,
-										];
+										];*/
 
 						}
 
 					/*	GUARDAR DATOS DE PARENTESCO ENTRE PACIENTE Y REPRESENTANTE	*/
 
-					$parentesco_rep->id_parentesco 				= $input['parentesco_representante'];
-					$parentesco_rep->representante_real			= $input['representante_legal'];
+					/*$parentesco_rep->id_parentesco 				= $input['parentesco_representante'];
+					$parentesco_rep->representante_real			= $input['representante_legal'];*/
 					
-					$parentesco_rep->save();
+					// $parentesco_rep->save();
 
 					/*	GUARDAR DETALLES DE ADMISION DEL PACIENTE	*/					
+					/* CODIGO REFACTORIZADO EL 30/06/2015 23:30 HRS
 					$detalles_ingreso->fecha_ingreso 			= $input['fecha_ingreso_paciente'];					
 					$detalles_ingreso->id_tipo_ingreso 			= $input['tipo_ingreso_paciente'];
 					$detalles_ingreso->resumen_ingreso 			= $input['resumen_ingreso_paciente'];
@@ -537,9 +516,7 @@ class PacientePediatrico extends \Eloquent {
 					$detalles_ingreso->id_medico 				= $input['medico_tratante'];
 					$detalles_ingreso->enfermedad_actual 		= $input['enfermedad_actual_paciente'];
 					$detalles_ingreso->diagnostico_ingreso 		= $input['diagnostico_admision_paciente'];
-					$detalles_ingreso->save();
-					
-
+					$detalles_ingreso->save();*/
 				}
 			return $respuesta;
 		}

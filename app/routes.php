@@ -10,7 +10,12 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
+/**************************RUTAS INICIO SESION********************************/
+Route::get('login',function() 
+		{
+			return View::make('InicioSesion');
+		}
+	);
 
 /**************************RUTAS PACIENTES PEDIATRICOS********************************/
 
