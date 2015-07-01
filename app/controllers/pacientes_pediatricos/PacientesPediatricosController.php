@@ -17,7 +17,7 @@ class PacientesPediatricosController extends \BaseController {
 		}
 	public function crear_paciente_pediatrico()
 		{
-			$respuesta = PacientePediatrico::cargar_paciente_pediatrico(Input::all());
+			$respuesta = PacientePediatrico::guardarDatosPacientePediatrico(Input::all());
 			
 			if($respuesta['error_mensajes'] == true)
 				{				

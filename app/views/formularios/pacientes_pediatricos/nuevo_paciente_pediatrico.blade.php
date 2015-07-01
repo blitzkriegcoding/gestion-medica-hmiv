@@ -1,8 +1,4 @@
-<div class="container">
-  <h3>
-    Creación de pacientes pediátricos de nuevo ingreso al HMIV
-  </h3>
-</div>
+
 @if (Session::get('mensaje'))
   <!-- Si hay un mensaje, entonces lo imprimimos y le damos estilo con bootstrap -->
   <div class="container-fluid" style="width: 430px; margin: 0 auto;">
@@ -12,11 +8,17 @@
       </div>
       <div class="col-md-10 column">
         {{ Session::get('mensaje')}}
+
       </div>
     </div>
   </div>
 <br><br>
 @endif
+<div class="container">
+  <h3>
+    Creación de pacientes pediátricos de nuevo ingreso al HMIV
+  </h3>
+</div>
 <div class="panel-body col-xs- col-sm- col-md- col-lg- alineacion_paneles" >
     <div class="wizard" data-initialize="wizard" id="wizard_ingreso" href="#">
       <ul class="steps">
@@ -149,7 +151,7 @@
                       {{Form::label('representante_legal','Representante legal: ')}} 
                     </div>
                     <div class="col-md-3 pad-controles ">
-                      {{Form::select('representante_legal',array(''=>'SELECCIONE','1'=>' SI, ES REPRESENTANTE','0'=>'NO, ES ACOMPAÑANTE'),'',array('class'=>'form-control','style'=>'width: 100%')) }}
+                      {{Form::select('representante_legal',array(''=>'SELECCIONE','1'=>' SI, ES REPRESENTANTE','2'=>'NO, ES ACOMPAÑANTE'),'',array('class'=>'form-control','style'=>'width: 100%')) }}
                     </div>                    
 
                   </div>

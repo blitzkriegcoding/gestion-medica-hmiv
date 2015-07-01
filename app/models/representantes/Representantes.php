@@ -27,7 +27,7 @@ class Representantes extends \Eloquent
 		public $timestamps = false;
 		protected $primaryKey = 'id_representante';
 
-		private static function validarDatosRepresentante($input)	
+		public static function validarDatosRepresentante($input)	
 			{
 				$reglas_validacion_representante = 	[
 														'tipo_documento_representante'			=>	'required|in:V,E,P',										
@@ -62,14 +62,14 @@ class Representantes extends \Eloquent
 				switch($input['tipo_documento_representante'])
 					{			
 						case 'V':
-							$validador_bloques->sometimes('documento_paciente','required|integer|max:32000000',function($input)
+							$validador_datos_representante->sometimes('documento_paciente','required|integer|max:32000000',function($input)
 								{	
 									#return $input['documento_paciente'] > 32000000;
 									return ($input['tipo_documento_representante'] == 'V') && ($input['documento_representante'] > 32000000);
 								});
 						break;
 						case 'E':
-							$validador_bloques->sometimes('documento_representante','required|integer|min:80000000',function($input)
+							$validador_datos_representante->sometimes('documento_representante','required|integer|min:80000000',function($input)
 								{	
 									
 									#return $input['documento_paciente'] < 80000000;
@@ -77,7 +77,7 @@ class Representantes extends \Eloquent
 								});
 						break;
 						case "P":
-							$validador_bloques->sometimes('documento_paciente','required|regex:/([0-9a-zA-Z])/',function($input)
+							$validador_datos_representante->sometimes('documento_paciente','required|regex:/([0-9a-zA-Z])/',function($input)
 								{
 									return $input['tipo_documento_representante'] == "P";
 								});
@@ -106,22 +106,19 @@ class Representantes extends \Eloquent
 			}
 		public static function guardarDatosRepresentante($input)
 			{
-				$respuesta = self::validarDatosRepresentante($input);
-				if($respuesta['error_mensajes'] == true)
-					{
-						return $respuesta;
-					}
 
 				$representante_existe = self::where('tipo_documento'	,'=',	$input['tipo_documento_representante'])
 												->where('documento'		,'=',	$input['documento_representante'])
 												->pluck('id_representante');
+				
 				if(!empty($representante_existe))
 					{
 						return [
-									'bandera'			=>	' glyphicon glyphicon-exclamation-sign ',
-									'mensaje'			=>	'Representante ya existe en la base de datos',
-									'estilo'			=>	' alert alert-warning ',
-									'error_mensajes'	=>	false,
+									'bandera'				=>	' glyphicon glyphicon-exclamation-sign ',
+									'mensaje'				=>	'Representante ya existe en la base de datos',
+									'estilo'				=>	' alert alert-warning ',
+									'error_mensajes'		=>	false,
+									'representante_existe'	=>	true
 								];
 					}
 
@@ -146,16 +143,14 @@ class Representantes extends \Eloquent
 							'id_estado_civil' 		=> $input['estado_civil_representante'],		
 						];
 
-				self::create($nuevo_representante);
-
-						return [
-									'bandera'			=>	' glyphicon glyphicon-ok-sign ',
-									'mensaje'			=>	'Representante creado con exito',
-									'estilo'			=>	' alert alert-success ',
-									'error_mensajes'	=>	false,
-								];
-
-
+				$id_representante_nuevo = self::create($nuevo_representante);
+				return [
+							'bandera'					=>	' glyphicon glyphicon-ok-sign ',
+							'mensaje'					=>	'Representante creado con exito',
+							'estilo'					=>	' alert alert-success ',
+							'error_mensajes'			=>	false,
+							'representante_existe'		=>	true,
+							'id_representante_nuevo'	=>	$id_representante_nuevo->id_representante
+						];
 			}
-
 	}

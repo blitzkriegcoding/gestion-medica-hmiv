@@ -13,6 +13,7 @@
       <div class="col-md-10 column">
         <?php echo Session::get('mensaje'); ?>
 
+
       </div>
     </div>
   </div>
@@ -164,7 +165,7 @@
                       <?php echo Form::label('representante_legal','Representante legal: '); ?> 
                     </div>
                     <div class="col-md-3 pad-controles ">
-                      <?php echo Form::select('representante_legal',array(''=>'SELECCIONE','1'=>' SI, ES REPRESENTANTE','0'=>'NO, ES ACOMPAÑANTE'),'',array('class'=>'form-control','style'=>'width: 100%')); ?>
+                      <?php echo Form::select('representante_legal',array(''=>'SELECCIONE','1'=>' SI, ES REPRESENTANTE','2'=>'NO, ES ACOMPAÑANTE'),'',array('class'=>'form-control','style'=>'width: 100%')); ?>
 
                     </div>                    
 
