@@ -1,0 +1,8 @@
+<?php $__env->startSection('formularios'); ?>
+	<?php echo $__env->make('formularios.busquedas.busqueda_pacientes_representantes', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>	
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('controles_adicionales'); ?>
+	<?php /* <?php echo $__env->make('includes.controles_adicionales_nuevo_paciente', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> */ ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

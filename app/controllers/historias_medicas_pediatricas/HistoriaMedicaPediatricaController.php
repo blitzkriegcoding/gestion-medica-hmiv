@@ -17,15 +17,15 @@ class HistoriaMedicaPediatricaController extends \BaseController {
 				MEDICAS Y REPRESENTANTES LEGALES
 			*/
 
-			if(!is_null($representante_historia) || !empty($representante_historia))
+			if(!empty($representante_historia))
 				{
-					return "TIENE HISTORIA MEDICA";
+					return Redirect::to('historias_medicas_pediatricas/creacion_historia_medica_federada/'.Session::get('id_paciente_pediatrico'));
 				}
 			/*
 				SEGUNDO CASO: 
 
 			*/
-			if(is_null($representante_historia) || empty($representante_historia))
+			if(empty($representante_historia))
 				{
 					$representante_legal_actual = ParentescoRepresentantes::where('id_paciente','=',$id_paciente_pediatrico)
 													->where('representante_real','=','1')
@@ -60,12 +60,7 @@ class HistoriaMedicaPediatricaController extends \BaseController {
 											];							
 							return View::make('historias_medicas_pediatricas.crear_historia_medica_pediatrica')->with($datos_vista)->nest('datos_representante','formularios.historias_medicas_pediatricas.vistas_parciales.aviso_datos_representante_pediatrico');
 						}
-
 				}
-
-
-			
-			
 		}
 
 
@@ -76,11 +71,11 @@ class HistoriaMedicaPediatricaController extends \BaseController {
 			if($respuesta['error_mensajes'] == true)
 				{	
 					
-					return Redirect::to('pacientes_pediatricos/creacion_historia_medica_pediatrica/'.Session::get('id_paciente_pediatrico'))->withErrors($respuesta['mensaje'])->withInput();
+					return Redirect::to('historias_medicas_pediatricas/creacion_historia_medica_pediatrica/'.Session::get('id_paciente_pediatrico'))->withErrors($respuesta['mensaje'])->withInput();
 				}
 			else
 				{
-					return Redirect::to('pacientes_pediatricos/creacion_historia_medica_pediatrica/'.Session::get('id_paciente_pediatrico'))->with(['mensaje'=>$respuesta['mensaje'],'estilo'=>$respuesta['estilo'],'codigo_historia_medica'=>$respuesta['codigo_historia_medica'],'bandera'=>$respuesta['bandera']]);
+					return Redirect::to('historias_medicas_pediatricas/creacion_historia_medica_pediatrica/'.Session::get('id_paciente_pediatrico'))->with(['mensaje'=>$respuesta['mensaje'],'estilo'=>$respuesta['estilo'],'codigo_historia_medica'=>$respuesta['codigo_historia_medica'],'bandera'=>$respuesta['bandera']]);
 
 				}				
 		}

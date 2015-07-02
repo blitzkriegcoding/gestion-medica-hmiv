@@ -99,24 +99,22 @@ class Medicos extends \Eloquent {
 				{
 					return $contacto_medico_nuevo;
 				}
-			else
-				{
 
-					 $id_contacto = DatosMedicoContacto::create([
-				  													'id_medico'				=>	$id_medico['id_medico'],
-				  													'tipo_documento'		=>	$input['tipo_documento_contacto'],
-				  													'documento'				=>	$input['documento_contacto'],
-				  													'direccion_completa'	=>	strtoupper($input['direccion_contacto']),
-				  													'telefono1'				=>	$input['telefono1_contacto'],
-				  													'telefono2'				=>	$input['telefono2_contacto'],
-				  													'id_relacion_medico'	=>	$input['relacion_medico_contacto'],
-				  													'primer_nombre'			=>	strtoupper($input['primer_nombre_contacto']),
-				  													'segundo_nombre'		=>	strtoupper($input['segundo_nombre_contacto']),
-				  													'primer_apellido'		=>	strtoupper($input['primer_apellido_contacto']),
-				  													'segundo_apellido'		=>	strtoupper($input['segundo_apellido_contacto']),
-					  											]);
+			 $id_contacto = DatosMedicoContacto::create([
+		  													'id_medico'				=>	$id_medico['id_medico'],
+		  													'tipo_documento'		=>	$input['tipo_documento_contacto'],
+		  													'documento'				=>	$input['documento_contacto'],
+		  													'direccion_completa'	=>	strtoupper($input['direccion_contacto']),
+		  													'telefono1'				=>	$input['telefono1_contacto'],
+		  													'telefono2'				=>	$input['telefono2_contacto'],
+		  													'id_relacion_medico'	=>	$input['relacion_medico_contacto'],
+		  													'primer_nombre'			=>	strtoupper($input['primer_nombre_contacto']),
+		  													'segundo_nombre'		=>	strtoupper($input['segundo_nombre_contacto']),
+		  													'primer_apellido'		=>	strtoupper($input['primer_apellido_contacto']),
+		  													'segundo_apellido'		=>	strtoupper($input['segundo_apellido_contacto']),
+			  											]);
 
-				}
+			
 
 			/*GUARDAR LAS ESPECIALIDADES MEDICAS QUE POSEE EN LA BASE DE DATOS*/
 

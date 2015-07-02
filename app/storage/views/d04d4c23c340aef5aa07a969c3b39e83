@@ -1,8 +1,4 @@
-<div class="container">
-  <h3>
-    Creación de pacientes pediátricos de nuevo ingreso al HMIV
-  </h3>
-</div>
+
 <?php if(Session::get('mensaje')): ?>
   <!-- Si hay un mensaje, entonces lo imprimimos y le damos estilo con bootstrap -->
   <div class="container-fluid" style="width: 430px; margin: 0 auto;">
@@ -19,6 +15,11 @@
   </div>
 <br><br>
 <?php endif; ?>
+<div class="container">
+  <h3>
+    Creación de pacientes pediátricos de nuevo ingreso al HMIV
+  </h3>
+</div>
 <div class="panel-body col-xs- col-sm- col-md- col-lg- alineacion_paneles" >
     <div class="wizard" data-initialize="wizard" id="wizard_ingreso" href="#">
       <ul class="steps">

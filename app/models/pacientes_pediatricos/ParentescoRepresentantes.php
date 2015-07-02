@@ -1,5 +1,4 @@
 <?php
-
 class ParentescoRepresentantes extends \Eloquent {
 	protected $fillable = ['id_parentesco','id_paciente','id_representante','representante_real'];
 	protected $table = 'parentesco_representantes';
@@ -57,9 +56,6 @@ class ParentescoRepresentantes extends \Eloquent {
 								'parentesco_existe'	=>	true
 							];
 				}
-
-
-
 			$nuevo_parentesco = [
 									'id_parentesco'			=>	$input['parentesco_representante'],
 									'representante_real'	=>	$parentesco_real,

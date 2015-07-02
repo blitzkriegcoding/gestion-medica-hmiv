@@ -10,6 +10,7 @@ return array(
     'AlergiasController' => $baseDir . '/app/controllers/controladores_diversos/AlergiasController.php',
     'AlergiasPacientePediatrico' => $baseDir . '/app/models/historias_medicas_pediatricas/AlergiasPacientePediatrico.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
+    'BusquedasController' => $baseDir . '/app/controllers/busquedas/BusquedasController.php',
     'CondicionExamenFisico' => $baseDir . '/app/models/pacientes_pediatricos/CondicionExamenFisico.php',
     'CondicionExamenFuncional' => $baseDir . '/app/models/pacientes_pediatricos/CondicionExamenFuncional.php',
     'CondicionInterrogatorio' => $baseDir . '/app/models/pacientes_pediatricos/CondicionInterrogatorio.php',
