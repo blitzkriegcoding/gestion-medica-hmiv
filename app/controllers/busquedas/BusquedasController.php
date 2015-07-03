@@ -6,5 +6,12 @@ class BusquedasController extends \BaseController
 			{
 				return View::make('busquedas.crear_busqueda_pacientes_representantes');
 			}
+		public function generar_busqueda()
+			{
+				$respuesta = PacientePediatrico::generarBusquedaPaciente(Input::all());
+
+				return $respuesta;
+				#return Response::json($json);
+			}
 
 	}

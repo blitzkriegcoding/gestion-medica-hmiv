@@ -75,7 +75,10 @@ Route::group(['prefix' => 'medicos'], function()
 
 /*********************RUTAS DE BUSQUEDA*********************/
 Route::group(['prefix' => 'busquedas'], function(){
-	Route::get('busqueda_nueva', ['uses' => 'BusquedasController@crear_nueva_busqueda']);
+	Route::get('busqueda_nueva', 	['uses' => 'BusquedasController@crear_nueva_busqueda']);
+
+	/*TODOS LOS POST*/
+	Route::post('generar_busqueda',	['uses' => 'BusquedasController@generar_busqueda']);
 
 });
 /*********************FIN RUTAS MEDICOS*********************/

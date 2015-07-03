@@ -46,8 +46,8 @@
 				    	</label>
 				    	<table >
 				    		<tr >
-				    			<td width="30%" style="padding: 2px">{{Form::select('tipo_documento_paciente',array(''=>'--','V'=>'V-','E'=>'E-','P'=>'P-'),'',array('class'=>'form-control','style'=>'width: 100%')) }}</td>
-				    			<td width="70%" style="padding: 2px">{{Form::text('documento_paciente',NULL ,array('class'=>'form-control ','placeholder'=>'Escriba cédula','style'=>'width: 100%'))}}</td>
+				    			<td width="30%" style="padding: 2px">{{Form::select('tipo_documento_paciente',array(''=>'--','V'=>'V-','E'=>'E-','P'=>'P-'),'',array('class'=>'form-control','style'=>'width: 100%','id'=>'tipo_documento_paciente')) }}</td>
+				    			<td width="70%" style="padding: 2px">{{Form::text('documento_paciente',NULL ,array('class'=>'form-control ','placeholder'=>'Escriba cédula','style'=>'width: 100%','id'=>'documento_paciente' ))}}</td>
 				    		</tr>
 				    	</table>
 				    </div>
@@ -56,12 +56,10 @@
 				    		Por nacionalidad y cédula del representante:
 				    	</label>
 				    	<table  >
-				    		<tr width="100%">
-				    			<td width="30%" style="padding: 2px">
-				    				{{Form::select('tipo_documento_representante',array(''=>'--','V'=>'V-','E'=>'E-','P'=>'P-'),'',array('class'=>'form-control','style'=>'width: 100%')) }}
+				    		<tr>
+				    			<td width="30%" style="padding: 2px">{{Form::select('tipo_documento_representante',array(''=>'--','V'=>'V-','E'=>'E-','P'=>'P-'),'',array('class'=>'form-control','style'=>'width: 100%','id'=>'tipo_documento_representante')) }}
 				    			</td>
-				    			<td width="70%" style="padding: 2px">
-				    				{{Form::text('documento_representante',NULL ,array('class'=>'form-control ','placeholder'=>'Escriba cédula', 'style'=>'width: 100%'))}}
+				    			<td width="70%" style="padding: 2px">{{Form::text('documento_representante',NULL ,array('class'=>'form-control ','placeholder'=>'Escriba cédula', 'style'=>'width: 100%','id'=>'documento_representante')) }}
 				    			</td>
 				    		</tr>
 				    	</table>
@@ -73,21 +71,21 @@
 				    	<label for="nombres_paciente">
 				    		Por nombres del representante:                      		
 				    	</label>
-				    	{{Form::text('nombres_paciente',NULL ,array('class'=>'form-control ','style'=>'width: 80%','id'=>'nombres_paciente'))}}
+				    	{{Form::text('nombres_representante',NULL ,array('class'=>'form-control ','style'=>'width: 80%','id'=>'nombres_paciente', 'id'=>'nombres_representante')) }}
 
 				    </div>
 				    <div class="col-xs-4">
 				    	<label for="apellidos_paciente">
 				    		Por apellidos del representante:				    		
 				    	</label>				    
-				    	{{Form::text('apellidos_paciente',NULL ,array('class'=>'form-control ','style'=>'width: 80%','id'=>'apellidos_paciente'))}}
+				    	{{Form::text('apellidos_representante',NULL ,array('class'=>'form-control ','style'=>'width: 80%','id'=>'apellidos_paciente', 'id'=>'apellidos_representante')) }}
 				    	
 				    </div>
 				</div>
 				<br>				
 				<div class="row">
 					<div style=" width: 20%;margin: 0 auto" >
-						<button type="button" id="myButton" data-loading-text="Cargando..." class="btn btn-success" autocomplete="off" style="width:100%">
+						<button type="button" id="buscar_info" data-loading-text="Cargando..." class="btn btn-success" autocomplete="off" style="width:100%">
 						  Buscar información!
 						</button>														
 					</div>
@@ -95,8 +93,29 @@
 		  </div>
 		</div>
 	</div>
-	<br>
-	<div id="tabla_resultados" style="display: none">
-		
+	<br><br>
+	<div id="capa_resultados" style="display: none" class="col-xs-12">
+		<div class="panel panel-info">
+		  <div class="panel-heading"><strong>Resultado de la búsqueda</strong></div>
+		  <div class="panel-body">
+			<table id="tabla_resultados" class="display compact stripe hover cell-border row-border" style="width: 100%">
+			    <thead >
+			        <tr >
+			            <th class="text-center">N°</th>
+			            <th class="text-center">Nombres y Apellidos</th>
+			            <th class="text-center">Cédula</th>
+			            <th class="text-center">Fecha de nacimiento</th>
+			            <th class="text-center">Código de Historia</th>
+			            <th class="text-center">Representante</th>
+			            <th class="text-center">Opciones</th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			    </tbody>
+			</table>		    
+		  </div>
+		</div>
+
+				
 	</div>
 </div>

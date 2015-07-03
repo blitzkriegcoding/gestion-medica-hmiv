@@ -485,5 +485,115 @@ class PacientePediatrico extends \Eloquent {
 			
 		}
 
+	public static function generarBusquedaPaciente($input)
+		{
+			$argumentos = 	[
+								'pacientes_pediatricos.fecha_nacimiento' 				=> 'busqueda_fecha_nacimiento_campo',
+								'pacientes_pediatricos.primer_nombre' 					=> 'nombres_paciente',
+								'pacientes_pediatricos.segundo_nombre' 					=> 'nombres_paciente',
+								'pacientes_pediatricos.primer_apellido' 				=> 'apellidos_paciente',
+								'pacientes_pediatricos.segundo_apellido' 				=> 'apellidos_paciente',								
+								'historia_paciente_pediatrico.codigo_historia_medica'	=> 'codigo_historia_medica',								
+								'pacientes_pediatricos.tipo_documento' 					=> 'tipo_documento_paciente',
+								'pacientes_pediatricos.documento' 						=> 'documento_paciente',
+								'representantes.tipo_documento' 						=> 'tipo_documento_representante',
+								'representantes.documento' 								=> 'documento_representante',
+								'representantes.primer_nombre' 							=> 'nombres_representante',
+								'representantes.segundo_nombre' 						=> 'nombres_representante',
+								'representantes.primer_apellido' 						=> 'apellidos_representante',
+								'representantes.segundo_apellido' 						=> 'apellidos_representante'
+							];
+			$parametros = [];
+			$datos_paciente_json = [];
+			$nro_registro = 0;
+			$corte_or = 0;
+			$doc_completo_pac = "";
+			$doc_completo_rep = "";
+
+			foreach($argumentos as $llave => $valor):
+				
+				if($input[$valor]!="")
+					{
+						$parametros[$llave] = $input[$valor];						
+					}
+
+			endforeach;
+			$consulta_parametros = " ";
+			foreach($parametros as $llave => $valor):				
+				if($corte_or < count($parametros)-1)
+					{
+						if($llave =='pacientes_pediatricos.fecha_nacimiento')
+							{
+								$consulta_parametros .= $llave."="."'".($valor)."' or ";
+							}
+						else
+							{
+								$consulta_parametros .= $llave." like "."'%".strtoupper($valor)."%' or ";	
+							}
+
+						
+					}
+				else
+					{
+						if($llave =='pacientes_pediatricos.fecha_nacimiento')
+							{
+								$consulta_parametros .= $llave."="."'".($valor)."'";
+							}
+						else
+							{
+								$consulta_parametros .= $llave." like "."'%".strtoupper($valor)."%'";								
+							}
+					}
+			$corte_or++;
+			endforeach;
+
+			$datos_paciente = self::leftJoin('historia_paciente_pediatrico','pacientes_pediatricos.id_paciente','=','historia_paciente_pediatrico.id_paciente')
+									->leftJoin('parentesco_representantes','pacientes_pediatricos.id_paciente','=','parentesco_representantes.id_paciente')
+										->join('representantes','parentesco_representantes.id_representante','=','representantes.id_representante')
+											->whereRaw($consulta_parametros)
+												->select('pacientes_pediatricos.fecha_nacimiento as fn_pac', 'pacientes_pediatricos.primer_nombre as p_nombre_paciente', 'pacientes_pediatricos.segundo_nombre as s_nombre_paciente',
+															'pacientes_pediatricos.primer_apellido as p_apellido_paciente', 'pacientes_pediatricos.segundo_apellido as s_apellido_paciente', 'historia_paciente_pediatrico.codigo_historia_medica as cod_his_med',
+															'pacientes_pediatricos.tipo_documento as nac_pac', 'pacientes_pediatricos.documento as ced_pac', 'representantes.tipo_documento as nac_rep', 'representantes.documento as ced_rep',
+															'representantes.primer_nombre as p_nombre_rep', 'representantes.segundo_nombre as s_nombre_rep', 'representantes.primer_apellido as p_apellido_rep', 'representantes.segundo_apellido as s_apellido_rep')
+													->get();
+			#dd($consulta_parametros);
+
+			
+			foreach($datos_paciente as $d):
+				$nro_registro++;
+				if($d->ced_pac == "" || $d->nac_pac == "X" || $d->nac_pac == "")
+					{
+						$doc_completo_pac = "NO APLICA";
+					}
+				else
+					{
+						$doc_completo_pac = $d->nac_pac."-".$d->ced_pac;	
+					}
+
+				$datos_paciente_json[] = 	[
+												'registro' 	=> 	$nro_registro,
+												'nom_ape'  	=> 	($d->p_nombre_paciente." ".$d->s_nombre_paciente." ".$d->p_apellido_paciente."".$d->s_apellido_paciente),
+												'documento'	=> 	$doc_completo_pac,
+												'fecha_nac'	=>	$d->fn_pac,
+												'cod_histo'	=>	$d->cod_his_med,
+												'represent'	=>	($d->p_nombre_rep." ".$d->s_nombre_rep." ".$d->p_apellido_rep."".$d->s_apellido_rep),
+												'opciones'	=>	'OPCIONES'
+
+											];
+			endforeach;
+			/*
+                                            { "data" : "registro"   },
+                                            { "data" : "nom_ape"    },
+                                            { "data" : "documento"  },
+                                            { "data" : "fecha_nac"  },
+                                            { "data" : "cod_histo"  },
+                                            { "data" : "represent"  },
+                                            { "data" : "opciones"   },
+
+
+			*/
+			return Response::json($datos_paciente_json);
+
+		}
 
 }

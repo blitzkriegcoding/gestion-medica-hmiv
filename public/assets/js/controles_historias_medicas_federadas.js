@@ -29,6 +29,7 @@ $(document).ready( function () {
                           "type"    : "GET",
                           "url"     : "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_historico_vacunas",
                           "dataSrc" : ""
+                          
                       },
               'columns' : [
                             { "data" : "fecha_vacunacion" },
