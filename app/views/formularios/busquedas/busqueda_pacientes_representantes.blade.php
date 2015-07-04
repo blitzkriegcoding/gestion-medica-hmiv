@@ -2,6 +2,8 @@
 	Módulo de búsqueda de Pacientes, Historias Médicas y Representantes
 </h3>
 <br>
+
+<br>
 <div class="container" >
 	<div class="col-xs-12" >
 		<div class="panel panel-primary" >
@@ -107,15 +109,14 @@
 			            <th class="text-center">Fecha de nacimiento</th>
 			            <th class="text-center">Código de Historia</th>
 			            <th class="text-center">Representante</th>
-			            <th class="text-center">Opciones</th>
+			            <th class="text-center">Detalle</th>
 			        </tr>
 			    </thead>
-			    <tbody>
+
+			    <tbody class="text-center">
 			    </tbody>
 			</table>		    
 		  </div>
-		</div>
-
-				
+		</div>	
 	</div>
 </div>

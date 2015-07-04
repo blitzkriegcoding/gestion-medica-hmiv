@@ -1,25 +1,41 @@
+@if(Session::get('historia_medica_existe') == true):
+	<div class="alert alert-info alert-dismissible" role="alert">
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	  <strong>Disculpe, usted fue direccionado hasta aquí...</strong>&nbsp;Ya el paciente tiene un código de historia médica creado.
+	</div>
+@endif
 <div class="container-fluid">
 	<h3>
 		Creación de historia médica pediátrica federada
 	</h3>
-</div><br>
+</div>
+<div class="container">
+<br>
+<div class="panel panel-primary">
+  <div class="panel-body">
+    Basic panel example
+  </div>
+</div>
+<br>	
+</div>
 <div class="container" >
-	<div >
-	  <!-- Nav tabs -->
-	  
+<div class="panel panel-primary">
+  <div class="panel-body">
+    <div >
+	  <!-- Nav tabs -->	  
 	  {{-- <ul class="nav nav-tabs" role="tablist"> --}}
-	  <ul class="nav nav-pills" role="tablist">
-	    <li role="presentation" class="active text-center" ><a href="#consultas_medicas" aria-controls="consultas_medicas" role="tab" data-toggle="pill" >Consultas<br>Médicas</a></li>
-	    <li role="presentation" class="text-center"><a href="#examenes_medicos" aria-controls="examenes_medicos" role="tab" data-toggle="pill" style="text-center">Exámenes<br>Médicos</a></li>
-	    <li role="presentation" class="text-center"><a href="#tratamientos_medicos" aria-controls="tratamientos_medicos" role="tab" data-toggle="pill" style="text-center">Tratamientos<br>Médicos</a></li>
-	    <li role="presentation" class="text-center" style="height:100%"><a href="#patologias_conocidas" aria-controls="patologias_conocidas" role="tab" data-toggle="pill">Patologías<br>detectadas</a></li>
-	    <li role="presentation" class="text-center"><a href="#alergias_conocidas" aria-controls="alergias_conocidas" role="tab" data-toggle="pill">Alérgias e<br>Intolernacias</a></li>
-	    <li role="presentation" class="text-center"><a href="#vacunas_aplicadas" aria-controls="vacunas_aplicadas" role="tab" data-toggle="pill">Vacunas<br>recibidas</a></li>
-	    <li role="presentation" class="text-center"><a href="#intervenciones_quirurgicas" aria-controls="intervenciones_quirurgicas" role="tab" data-toggle="pill">Intervenciones<br>quirúrgicas</a></li>
-	    <li role="presentation" class="text-center"><a href="#ingresos_hospitalizacion" aria-controls="ingresos_hospitalizacion" role="tab" data-toggle="pill">Ingreso por<br>Hospitalizacion</a></li>
-	    <li role="presentation" class="text-center"><a href="#altas_medicas" aria-controls="altas_medicas" role="tab" data-toggle="pill">Altas<br>medicas</a></li>
-	    <li role="presentation" class="text-center"><a href="#ordenes_medicas" aria-controls="ordenes_medicas" role="tab" data-toggle="pill">Ordenes<br>medicas</a></li>
-	    <li role="presentation" class="text-center"><a href="#ordenes_enfermeria" aria-controls="ordenes_enfermeria" role="tab" data-toggle="pill">Ordenes por<br>enfermería</a></li>
+	  <ul class="nav nav-pills" role="tablist" style="font-size:13px">
+	    <li role="presentation" class="active text-center" ><a href="#consultas_medicas" aria-controls="consultas_medicas" role="tab" data-toggle="pill"><span class="badge">1</span><br>Consultas<br>Médicas</a></li>
+	    <li role="presentation" class="text-center"><a href="#examenes_medicos" aria-controls="examenes_medicos" role="tab" data-toggle="pill" style="text-center"><span class="badge">2</span><br>Exámenes<br>Médicos</a></li>
+	    <li role="presentation" class="text-center"><a href="#tratamientos_medicos" aria-controls="tratamientos_medicos" role="tab" data-toggle="pill" style="text-center"><span class="badge">3</span><br>Tratamientos<br>Médicos</a></li>
+	    <li role="presentation" class="text-center" style="height:100%"><a href="#patologias_conocidas" aria-controls="patologias_conocidas" role="tab" data-toggle="pill"><span class="badge">4</span><br>Patologías<br>detectadas</a></li>
+	    <li role="presentation" class="text-center"><a href="#alergias_conocidas" aria-controls="alergias_conocidas" role="tab" data-toggle="pill"><span class="badge">5</span><br>Alérgias e<br>Intolernacias</a></li>
+	    <li role="presentation" class="text-center"><a href="#vacunas_aplicadas" aria-controls="vacunas_aplicadas" role="tab" data-toggle="pill"><span class="badge">6</span><br>Vacunas<br>recibidas</a></li>
+	    <li role="presentation" class="text-center"><a href="#intervenciones_quirurgicas" aria-controls="intervenciones_quirurgicas" role="tab" data-toggle="pill"><span class="badge">7</span><br>Intervenciones<br>quirúrgicas</a></li>
+	    <li role="presentation" class="text-center"><a href="#ingresos_hospitalizacion" aria-controls="ingresos_hospitalizacion" role="tab" data-toggle="pill"><span class="badge">8</span><br>Ingreso por<br>Hospitalizacion</a></li>
+	    <li role="presentation" class="text-center"><a href="#altas_medicas" aria-controls="altas_medicas" role="tab" data-toggle="pill"><span class="badge">9</span><br>Altas<br>medicas</a></li>
+	    <li role="presentation" class="text-center"><a href="#ordenes_medicas" aria-controls="ordenes_medicas" role="tab" data-toggle="pill"><span class="badge">10</span><br>Ordenes<br>medicas</a></li>
+	    <li role="presentation" class="text-center"><a href="#ordenes_enfermeria" aria-controls="ordenes_enfermeria" role="tab" data-toggle="pill"><span class="badge">11</span><br>Ordenes por<br>enfermería</a></li>
 	  </ul>
 	  <!-- Tab panes -->
 	  <div class="tab-content" >
@@ -60,8 +76,6 @@
 								    	 {{Form::select('turno_consulta',[''=>'SELECCIONE','M'=>'MAÑANA','T'=>'TARDE'],'',array('class'=>'form-control', 'id'=>'turno_consulta', 'style'=>'width: 100%')) }}								    	 
 								    	 <div style="display:none" id="turno_consulta_error" role="alert"></div>
 								    	 <br><br>
-								    	 
-
 								    	 <div class="col-xs-12">
 								    	 	<div class="col-xs-6">
 										    	<button type="button" id="visualiza_cola" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
@@ -77,8 +91,7 @@
 								    	 <br><br>
 								    </div>
 								  </div>
-								</div>    				
-							
+								</div>							
 		    			</div>
 
 		    			<div class="col-xs-6">
@@ -213,7 +226,13 @@
 			{{-- FIN TAB PANEL --}}
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="tratamientos_medicos">
-	    	Seccion de tratamientos medicos
+	    	<div class="col-xs-12">
+		    	<h4>
+		    		Seccion de tratamientos medicos
+		    	</h4>    		
+	    		
+	    	</div>
+	    	
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="patologias_conocidas">
 	    	Seccion de patologias conocidas
@@ -358,4 +377,8 @@
 	    </div>	    
 	  </div>
 	</div>
+  </div>
+</div>
+
+
 </div>

@@ -57,7 +57,7 @@ public static function obtenerHistoricoVacunas()
 			foreach($respuesta as $d):
 
 				$nueva_fecha = new DateTime($d->fecha_vacunacion);
-				$boton_quitar = "<button class='btn btn-danger' id='".$d->id_vacuna_paciente."'>Borrar</button";											
+				$boton_quitar = "<button class='btn btn-danger' id='".$d->id_vacuna_paciente."'>Borrar</button>";											
 				$vacunas_json[] = [ 'fecha_vacunacion'	=>	$nueva_fecha->format('d/m/Y'),
 									'tipo_vacuna'		=>	$d->tipo_vacuna,
 									'edad'				=>	$d->edad,

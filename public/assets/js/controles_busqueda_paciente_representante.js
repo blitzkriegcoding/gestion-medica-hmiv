@@ -35,7 +35,7 @@ $(document).ready( function ()
                         {
                               'searching':  true,
                               "language": {
-                                            "info": "Mostrando _PAGE_ of _PAGES_",
+                                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
                                             "paginate": {
                                                           "first":      "Primera",
                                                           "last":       "Última",
@@ -46,6 +46,8 @@ $(document).ready( function ()
                                               "loadingRecords": "Cargando registros...",
                                               "lengthMenu":     "Mostrar _MENU_ registros",
                                               "emptyTable":     "Sin registros de la solicitud realizada",
+                                              "search":         "Buscar: ",
+
 
 
 
@@ -74,19 +76,7 @@ $(document).ready( function ()
                                                                 'apellidos_representante'         : $("#apellidos_representante").val(),                                                              
 
                                                             });
-                                                          }
-                                                      /*{ 'busqueda_fecha_nacimiento_campo' : $("#busqueda_fecha_nacimiento_campo").val(), 
-                                                          'nombres_paciente'                : $("#nombres_paciente").val(), 
-                                                          'apellidos_paciente'              : $("#apellidos_paciente").val(), 
-                                                          'codigo_historia_medica'          : $("#codigo_historia_medica").val(), 
-                                                          'tipo_documento_paciente'         : $("#tipo_documento_paciente").val(), 
-                                                          'documento_paciente'              : $("#documento_paciente").val(),
-                                                          'tipo_documento_representante'    : $("#tipo_documento_representante").val(),
-                                                          'documento_representante'         : $("#documento_representante").val(),
-                                                          'nombres_representante'           : $("#nombres_representante").val(),
-                                                          'apellidos_representante'         : $("#apellidos_representante").val(),
-                                                      }*/
-
+                                                          },
                                       },
                               'columns' : [
                                             { "data" : "registro"   },

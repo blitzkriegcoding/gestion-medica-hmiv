@@ -19,7 +19,7 @@ class HistoriaMedicaPediatricaController extends \BaseController {
 
 			if(!empty($representante_historia))
 				{
-					return Redirect::to('historias_medicas_pediatricas/creacion_historia_medica_federada/'.Session::get('id_paciente_pediatrico'));
+					return Redirect::to('historias_medicas_pediatricas/creacion_historia_medica_federada/'.Session::get('id_paciente_pediatrico'))->with(['historia_medica_existe' => true]);
 				}
 			/*
 				SEGUNDO CASO: 
