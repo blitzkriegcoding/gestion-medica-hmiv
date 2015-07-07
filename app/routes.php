@@ -21,6 +21,11 @@ Route::get('/iniciar_sesion',function()
 			return View::make('InicioSesion');
 		}
 	);
+Route::get('principal', function() 
+	{
+		return View::make('bienvenida.bienvenida');
+	}
+);
 
 /**************************RUTAS PACIENTES PEDIATRICOS********************************/
 
@@ -109,40 +114,7 @@ Route::pattern('id_paciente_pediatrico','[0-9]+');
 /*********RUTA ESPECIAL PARA ENTRUST**************/
 Route::get('crear_perfil', function()
 	{
-	    $admin = new Role();
-	    $admin->name = 'Administrador';
-	    $admin->save();
-	  
-	    $user = new Role();
-	    $user->name = 'Usuario Generico';
-	    $user->save();
-	  
-	    $read = new Permission();
-	    $read->name = 'can_read';
-	    $read->display_name = 'Puede Leer';
-	    $read->save();
-	  
-	    $edit = new Permission();
-	    $edit->name = 'can_edit';
-	    $edit->display_name = 'Puede Listar';
-	    $edit->save();
-	  
-	    $user->attachPermission($read);
-	    $admin->attachPermission($read);
-	    $admin->attachPermission($edit);
-	 
-	    $adminRole = DB::table('roles')->where('name', '=', 'Admin')->pluck('id');
-	    $userRole = DB::table('roles')->where('name', '=', 'User')->pluck('id');
-	    // print_r($userRole);
-	    // die();
-	  
-	    $user1 = User::where('username','=','imron02')->first();
-	    $user1->roles()->attach($adminRole);
-	    $user2 = User::where('username','=','asih')->first();
-	    $user2->roles()->attach($userRole);
-	    $user3 = User::where('username','=','sarah')->first();
-	    $user3->roles()->attach($userRole);
-	    return 'Woohoo!';
+
 	}
 );
 

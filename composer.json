@@ -9,8 +9,7 @@
 		"fzaninotto/faker": "1.5.*@dev",
 		"twitter/bootstrap": "3.3.*@dev",
 		"anahkiasen/former": "~3.5",
-		"barryvdh/laravel-debugbar": "~1.8",
-		"zizaco/confide": "~4.0@dev",
+		"barryvdh/laravel-debugbar": "~1.8",		
 		"zizaco/entrust": "1.2.*@dev"
 	},
 	"autoload": {

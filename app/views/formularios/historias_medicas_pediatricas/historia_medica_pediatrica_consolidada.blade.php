@@ -212,14 +212,11 @@
 	            			<label for="archivos">
 	            				Archivos:
 	            			</label>
-
 	            				{{-- {{Form::textarea('descripcion_examen','',array('class'=>'form-control ', 'id'=>'descripcion_examen', 'size'=>'30x4', 'style'=>'resize:none'))}} --}}
 					  	</div>
 					  </div>
 					</div>	    		
 		    	</div>
-
-
 			</div>
 			{{-- FIN TAB PANEL --}}
 	    </div>
@@ -227,13 +224,106 @@
 	    	<div class="col-xs-12">
 		    	<h4>
 		    		Seccion de tratamientos medicos
-		    	</h4>    		
-	    		
+		    	</h4>	    		
 	    	</div>
-	    	
 	    </div>
-	    <div role="tabpanel" class="tab-pane fade" id="patologias_conocidas">
-	    	Seccion de patologias conocidas
+	    <div role="tabpanel" class="tab-pane fade" id="patologias_conocidas">	    	
+	    	<div class="col-xs-12">
+		    	<h4>
+		    		Seccion de patologias conocidas
+		    	</h4>
+		    	<br>
+				<div class="col-xs-12">				
+		    	<div class="col-xs-5">
+					<div class="panel panel-primary ">
+					  <div class="panel-heading">
+					  	<strong>Selección de patologías del paciente</strong>
+					  </div>
+					  <div class="panel-body">
+					  	<div class="form-group">
+	            			<label for="patologia_detectada">
+	            				Patología detectada:
+	            			</label>
+	            				{{Form::select('patologia_detectada',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'vacuna_aplicada','style'=>'width: 100%')) }}
+	            				<div style="display:none" id="patologia_detectada" role="alert">
+	            					
+	            				</div>
+	            			<br>
+					    	 <br>
+					    	 <div class="col-xs-12">
+							    	<button type="button" id="guardar_patologia" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+									  Guardar
+									</button>
+					    	 </div>
+					    	 <br>
+					  	</div>
+					  </div>
+					</div>
+		    	</div>
+		    	<div class="col-xs-7">
+					<div class="panel panel-primary ">
+					  <div class="panel-heading">
+					  	<strong>Patologías definidas en la apertura de la historia</strong>
+					  </div>
+					  <div class="panel-body">
+				    	<table id="vacunas_historico" class="display compact">
+						    <thead>
+						        <tr>
+						            <th class="text-center">Fecha vacunación</th>
+						            <th class="text-center">Tipo vacuna</th>
+						            <th class="text-center">Edad</th>
+						            <th class="text-center">Refuerzo</th>
+						            <th class="text-center">¿Borrar?</th>
+						        </tr>
+						    </thead>
+						    @if(!empty($vacunas_historico))
+							    <tbody class="text-center">
+								    @foreach($vacunas_historico as $llave)
+								        <tr>
+								            <td>
+								            	<?php
+								            		$fecha = new DateTime($llave->fecha_vacunacion);
+								            		echo $fecha->format('d/m/Y');
+								            	?>								            	
+								            </td>
+								            <td>{{ $llave->tipo_vacuna }}</td>
+								            <td>
+								            	{{ $llave->edad }}																	
+								            </td>
+								            <td>
+								            	<?php
+								            		switch($llave->refuerzo)
+									            		{
+									            			case 'S':
+									            				echo 'SI';
+									            			break;
+
+									            			case 'N':
+									            				echo 'NO';
+									            			break;
+									            		}
+								            	?>
+								            </td>
+								            <td>
+								            	&nbsp;
+								            </td>
+
+								        </tr>
+								    @endforeach										        
+							    </tbody>
+						   	@endif
+						</table>					  	
+					  </div>
+					</div>
+					<br>
+					<div role="alert" id='mensaje_vacuna' style="display:none" >						
+					</div>
+		    	</div>
+
+	    	</div>		    	
+
+
+	    	</div>	    	
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="alergias_conocidas">
 	    	{{-- INICIO PANEL --}}	    	
@@ -357,8 +447,13 @@
 	    	</div>
 	    	{{-- FIN PANEL --}}
 	    </div>
-	    <div role="tabpanel" class="tab-pane fade" id="intervenciones_quirurgicas">
-	    	Seccion de Intervenciones quirúrgicas
+	    <div role="tabpanel" class="tab-pane fade" id="intervenciones_quirurgicas">	    	
+	    	<div class="col-xs-12">
+		    	<h4>
+		    		Seccion de Intervenciones quirúrgicas
+		    	</h4>
+		    	<br>	    		
+	    	</div>		    	
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="ingresos_hospitalizacion">
 	    	Seccion de ingresos por hospitalizacion
