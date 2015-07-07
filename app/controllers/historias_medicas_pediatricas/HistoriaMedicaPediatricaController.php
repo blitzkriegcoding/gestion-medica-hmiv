@@ -82,10 +82,9 @@ class HistoriaMedicaPediatricaController extends \BaseController {
 
 
 
-	public function historia_medica_pediatrica_consolidada($id_paciente_pediatrico)
+	public function datos_paciente_historia_medica()
 		{
-			$codigo_historia_medica = HistoriaMedicaPediatrica::where('id_paciente', '=', $id_paciente_pediatrico)
-										->pluck('codigo_historia_medica');
+
 		}
 
 

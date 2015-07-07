@@ -11,7 +11,12 @@
 |
 */
 /**************************RUTAS INICIO SESION********************************/
-Route::get('login',function() 
+Route::get('/',function() 
+		{
+			return View::make('InicioSesion');
+		}
+	);
+Route::get('/iniciar_sesion',function() 
 		{
 			return View::make('InicioSesion');
 		}
@@ -101,3 +106,56 @@ Route::pattern('id_paciente_pediatrico','[0-9]+');
 /*FIN PATRONES DE SEGURIDAD BASADOS EN EXPRESIONES REGULARES*/
 
 	 
+/*********RUTA ESPECIAL PARA ENTRUST**************/
+Route::get('crear_perfil', function()
+	{
+	    $admin = new Role();
+	    $admin->name = 'Administrador';
+	    $admin->save();
+	  
+	    $user = new Role();
+	    $user->name = 'Usuario Generico';
+	    $user->save();
+	  
+	    $read = new Permission();
+	    $read->name = 'can_read';
+	    $read->display_name = 'Puede Leer';
+	    $read->save();
+	  
+	    $edit = new Permission();
+	    $edit->name = 'can_edit';
+	    $edit->display_name = 'Puede Listar';
+	    $edit->save();
+	  
+	    $user->attachPermission($read);
+	    $admin->attachPermission($read);
+	    $admin->attachPermission($edit);
+	 
+	    $adminRole = DB::table('roles')->where('name', '=', 'Admin')->pluck('id');
+	    $userRole = DB::table('roles')->where('name', '=', 'User')->pluck('id');
+	    // print_r($userRole);
+	    // die();
+	  
+	    $user1 = User::where('username','=','imron02')->first();
+	    $user1->roles()->attach($adminRole);
+	    $user2 = User::where('username','=','asih')->first();
+	    $user2->roles()->attach($userRole);
+	    $user3 = User::where('username','=','sarah')->first();
+	    $user3->roles()->attach($userRole);
+	    return 'Woohoo!';
+	}
+);
+
+/*************************************************///
+
+// Confide routes
+Route::get('users/create', 'UsersController@create');
+Route::post('users', 'UsersController@store');
+Route::get('users/login', 'UsersController@login');
+Route::post('users/login', 'UsersController@doLogin');
+Route::get('users/confirm/{code}', 'UsersController@confirm');
+Route::get('users/forgot_password', 'UsersController@forgotPassword');
+Route::post('users/forgot_password', 'UsersController@doForgotPassword');
+Route::get('users/reset_password/{token}', 'UsersController@resetPassword');
+Route::post('users/reset_password', 'UsersController@doResetPassword');
+Route::get('users/logout', 'UsersController@logout');

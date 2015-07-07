@@ -410,7 +410,6 @@ class PacientePediatrico extends \Eloquent {
 												'documento'			=>	$input['documento_paciente']
 												];
 				}
-
 			switch($input['sexo_paciente'])
 				{
 					case 'M':
@@ -421,10 +420,6 @@ class PacientePediatrico extends \Eloquent {
 						$foto_paciente = ['fotografia' => asset('img/icono_chama.jpg')];						
 					break;
 				}
-			#dd($documentos_paciente)	;
-
-
-
 			if($respuesta['paciente_existe'] == false)
 				{
 					$paciente_nuevo	= [

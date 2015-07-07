@@ -4,8 +4,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Sistema de Gestión Médica, Hospital Materno Infantil de El Valle</title>
-	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css')}} ">
+	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css')}}">
 	<link rel="stylesheet" href="{{ asset('assets/css/login.css')}} ">
+    <link rel="icon" href="{{ asset('img/nino_jesus_icono.jpg')}}">
 </head>
 <body>
 <div class="container">

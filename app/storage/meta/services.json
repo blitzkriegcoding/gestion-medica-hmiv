@@ -27,7 +27,9 @@
         "Illuminate\\View\\ViewServiceProvider",
         "Illuminate\\Workbench\\WorkbenchServiceProvider",
         "Way\\Generators\\GeneratorsServiceProvider",
-        "Former\\FormerServiceProvider"
+        "Former\\FormerServiceProvider",
+        "Zizaco\\Confide\\ServiceProvider",
+        "Zizaco\\Entrust\\EntrustServiceProvider"
     ],
     "eager": [
         "Illuminate\\Cookie\\CookieServiceProvider",
@@ -37,7 +39,9 @@
         "Illuminate\\Session\\SessionServiceProvider",
         "Illuminate\\View\\ViewServiceProvider",
         "Illuminate\\Workbench\\WorkbenchServiceProvider",
-        "Way\\Generators\\GeneratorsServiceProvider"
+        "Way\\Generators\\GeneratorsServiceProvider",
+        "Zizaco\\Confide\\ServiceProvider",
+        "Zizaco\\Entrust\\EntrustServiceProvider"
     ],
     "deferred": {
         "artisan": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",

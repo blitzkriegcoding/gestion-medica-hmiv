@@ -2,7 +2,6 @@
 	Módulo de búsqueda de Pacientes, Historias Médicas y Representantes
 </h3>
 <br>
-
 <br>
 <div class="container" >
 	<div class="col-xs-12" >

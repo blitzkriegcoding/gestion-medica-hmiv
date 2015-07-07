@@ -13,7 +13,8 @@
 <br>
 <div class="panel panel-primary">
   <div class="panel-body">
-    Basic panel example
+    <strong>Paciente: </strong><?php echo $datos_paciente_historia[0]->p_nombre." ".$datos_paciente_historia[0]->s_nombre." ".$datos_paciente_historia[0]->p_apellido." ".$datos_paciente_historia[0]->s_apellido; ?><br><strong>Código historia médica: </strong><?php echo $datos_paciente_historia[0]->cod_his; ?>
+
   </div>
 </div>
 <br>	
@@ -162,10 +163,8 @@
 			<div class="col-xs-12">
 		    	<h4>
 		    		Carga de exámenes médicos
-		    	</h4>
+		    	</h4>	    	
 		    	<br>
-		    	<br>
-
 		    	<div class="col-xs-6">
 					<div class="panel panel-primary ">
 					  <div class="panel-heading">

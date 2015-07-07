@@ -1,0 +1,22 @@
+//
+<?php if(! $restful): ?>
+
+// Confide routes
+Route::get('<?php echo $url; ?>/create', '<?php echo $controllerName; ?>@create');
+Route::post('<?php echo $url; ?>', '<?php echo $controllerName; ?>@store');
+Route::get('<?php echo $url; ?>/login', '<?php echo $controllerName; ?>@login');
+Route::post('<?php echo $url; ?>/login', '<?php echo $controllerName; ?>@doLogin');
+Route::get('<?php echo $url; ?>/confirm/{code}', '<?php echo $controllerName; ?>@confirm');
+Route::get('<?php echo $url; ?>/forgot_password', '<?php echo $controllerName; ?>@forgotPassword');
+Route::post('<?php echo $url; ?>/forgot_password', '<?php echo $controllerName; ?>@doForgotPassword');
+Route::get('<?php echo $url; ?>/reset_password/{token}', '<?php echo $controllerName; ?>@resetPassword');
+Route::post('<?php echo $url; ?>/reset_password', '<?php echo $controllerName; ?>@doResetPassword');
+Route::get('<?php echo $url; ?>/logout', '<?php echo $controllerName; ?>@logout');
+<?php else: ?>
+
+// Confide RESTful route
+Route::get('<?php echo $url; ?>/confirm/{code}', '<?php echo $controllerName; ?>@getConfirm');
+Route::get('<?php echo $url; ?>/reset_password/{token}', '<?php echo $controllerName; ?>@getReset');
+Route::post('<?php echo $url; ?>/reset_password', '<?php echo $controllerName; ?>@postReset');
+Route::controller( '<?php echo $url; ?>', '<?php echo $controllerName; ?>');
+<?php endif; ?>
