@@ -47,51 +47,50 @@
 	    	<br>
 				<div class="col-xs-12">
 	    			<div class="row">
-
 		    			<div class="col-xs-6">		    				
-								<div class="panel panel-primary">
-								  <div class="panel-heading">								  	
-								  		Programar consulta médica
-								 </div>
-								  <div class="panel-body">
-								    <div class="form-group">
-								    	<label for="fecha_consulta">
-								    		Fecha de la consulta:
-								    	</label>
-								    	 <div class="input-group date" id='fecha_consulta_paciente'>
-	                          				{{Form::text('fecha_consulta',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_consulta',  'readonly'=>'' ))}}<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-	                        			</div>
-	                        			<div style="display:none" id="fecha_consulta_error" role="alert"></div>
+							<div class="panel panel-primary">
+							  <div class="panel-heading">								  	
+							  		Programar consulta médica
+							 </div>
+							  <div class="panel-body">
+							    <div class="form-group">
+							    	<label for="fecha_consulta">
+							    		Fecha de la consulta:
+							    	</label>
+							    	 <div class="input-group date" id='fecha_consulta_paciente'>
+                          				{{Form::text('fecha_consulta',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_consulta',  'readonly'=>'' ))}}<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        			</div>
+                        			<div style="display:none" id="fecha_consulta_error" role="alert"></div>
 
-								    	<br>
-								    	<label for="especialidad_consulta">
-								    		Especialidad de la consulta:
-								    	</label>
-											{{Form::select('especialidad_consulta',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'especialidad_consulta','style'=>'width: 100%')) }}
-											<div style="display:none" id="especialidad_consulta_error" role="alert"></div>
-								    	<br><br>
-								    	<label for="turno_consulta">
-								    		Turno de la consulta:
-								    	</label>
-								    	 {{Form::select('turno_consulta',[''=>'SELECCIONE','M'=>'MAÑANA','T'=>'TARDE'],'',array('class'=>'form-control', 'id'=>'turno_consulta', 'style'=>'width: 100%')) }}								    	 
-								    	 <div style="display:none" id="turno_consulta_error" role="alert"></div>
-								    	 <br><br>
-								    	 <div class="col-xs-12">
-								    	 	<div class="col-xs-6">
-										    	<button type="button" id="visualiza_cola" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
-												  Ver cola de pacientes
-												</button>								    	 		
-								    	 	</div>
-								    	 	<div class="col-xs-6">
-										    	<button type="button" id="carga_consulta" data-loading-text="Cargando..." class="btn btn-primary" style="width:100%" autocomplete="off">
-												  Cargar consulta
-												</button>								    	 		
-								    	 	</div>								    	 	
-								    	 </div>
-								    	 <br><br>
-								    </div>
-								  </div>
-								</div>							
+							    	<br>
+							    	<label for="especialidad_consulta">
+							    		Especialidad de la consulta:
+							    	</label>
+										{{Form::select('especialidad_consulta',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'especialidad_consulta','style'=>'width: 100%')) }}
+										<div style="display:none" id="especialidad_consulta_error" role="alert"></div>
+							    	<br><br>
+							    	<label for="turno_consulta">
+							    		Turno de la consulta:
+							    	</label>
+							    	 {{Form::select('turno_consulta',[''=>'SELECCIONE','M'=>'MAÑANA','T'=>'TARDE'],'',array('class'=>'form-control', 'id'=>'turno_consulta', 'style'=>'width: 100%')) }}								    	 
+							    	 <div style="display:none" id="turno_consulta_error" role="alert"></div>
+							    	 <br><br>
+							    	 <div class="col-xs-12">
+							    	 	<div class="col-xs-6">
+									    	<button type="button" id="visualiza_cola" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+											  Ver cola de pacientes
+											</button>								    	 		
+							    	 	</div>
+							    	 	<div class="col-xs-6">
+									    	<button type="button" id="carga_consulta" data-loading-text="Cargando..." class="btn btn-primary" style="width:100%" autocomplete="off">
+											  Cargar consulta
+											</button>								    	 		
+							    	 	</div>								    	 	
+							    	 </div>
+							    	 <br><br>
+							    </div>
+							  </div>
+							</div>							
 		    			</div>
 
 		    			<div class="col-xs-6">
@@ -166,7 +165,7 @@
 		    	<div class="col-xs-6">
 					<div class="panel panel-primary ">
 					  <div class="panel-heading">
-					  	Examenes medicos realizados
+					  	<strong>Exámenes médicos realizados </strong>
 					  	</div>
 					  <div class="panel-body">
 					  	<div class="form-group">
@@ -192,7 +191,7 @@
 		    	<div class="col-xs-6">
 		    		<div class="panel panel-primary ">
 					  <div class="panel-heading">
-					  	Archivos adjuntos
+					  	<strong>Archivos adjuntos </strong>
 					  </div>
 					  <div class="panel-body">
 					  	<div class="form-group">
@@ -234,7 +233,7 @@
 		    	</h4>
 		    	<br>
 				<div class="col-xs-12">				
-		    	<div class="col-xs-5">
+		    	<div class="col-xs-6">
 					<div class="panel panel-primary ">
 					  <div class="panel-heading">
 					  	<strong>Selección de patologías del paciente</strong>
@@ -244,7 +243,7 @@
 	            			<label for="patologia_detectada">
 	            				Patología detectada:
 	            			</label>
-	            				{{Form::select('patologia_detectada',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'vacuna_aplicada','style'=>'width: 100%')) }}
+	            				{{Form::select('patologia_detectada',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'patologia_detectada','style'=>'width: 100%')) }}
 	            				<div style="display:none" id="patologia_detectada" role="alert">
 	            					
 	            				</div>
@@ -260,19 +259,16 @@
 					  </div>
 					</div>
 		    	</div>
-		    	<div class="col-xs-7">
+		    	<div class="col-xs-6">
 					<div class="panel panel-primary ">
 					  <div class="panel-heading">
 					  	<strong>Patologías definidas en la apertura de la historia</strong>
 					  </div>
 					  <div class="panel-body">
-				    	<table id="vacunas_historico" class="display compact">
+				    	<table id="patologias_historico" class="display compact">
 						    <thead>
 						        <tr>
-						            <th class="text-center">Fecha vacunación</th>
-						            <th class="text-center">Tipo vacuna</th>
-						            <th class="text-center">Edad</th>
-						            <th class="text-center">Refuerzo</th>
+						            <th class="text-center">Patología conocida</th>						            
 						            <th class="text-center">¿Borrar?</th>
 						        </tr>
 						    </thead>
@@ -281,33 +277,14 @@
 								    @foreach($vacunas_historico as $llave)
 								        <tr>
 								            <td>
-								            	<?php
-								            		$fecha = new DateTime($llave->fecha_vacunacion);
-								            		echo $fecha->format('d/m/Y');
-								            	?>								            	
+								            	&nbsp;
 								            </td>
-								            <td>{{ $llave->tipo_vacuna }}</td>
+								            <td>
+								            	{{ $llave->tipo_vacuna }}
+								            </td>
 								            <td>
 								            	{{ $llave->edad }}																	
 								            </td>
-								            <td>
-								            	<?php
-								            		switch($llave->refuerzo)
-									            		{
-									            			case 'S':
-									            				echo 'SI';
-									            			break;
-
-									            			case 'N':
-									            				echo 'NO';
-									            			break;
-									            		}
-								            	?>
-								            </td>
-								            <td>
-								            	&nbsp;
-								            </td>
-
 								        </tr>
 								    @endforeach										        
 							    </tbody>
@@ -350,7 +327,7 @@
 					  </div>
 					  <div class="panel-body">
 					  	<div class="form-group">
-							<label for="fecha_examen">
+							<label for="fecha_aplicacion_vacuna">
 						  		Fecha de aplicación de la vacuna:
 						  	</label>
 					    	<div class="input-group date" id='fecha_aplicacion_vacuna' style="width:100%">
