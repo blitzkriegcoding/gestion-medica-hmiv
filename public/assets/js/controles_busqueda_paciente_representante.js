@@ -99,6 +99,35 @@ $(document).ready( function ()
             $btn.button('reset')
           });
 
+      // $('#tabla_resultados').delegate("button","click", function(event)
+      //         {
+      //               var obj = this;                    
+      //               // $.ajax({
+      //               //   url: "http://localhost/hmiv/public/historias_medicas_pediatricas/anular_consulta_medica",
+      //               //   type: "POST",
+      //               //   data: { 'id_consulta_paciente': obj.id },
+      //               //   contentType: 'application/x-www-form-urlencoded',
+      //               //   dataType: 'json',
+      //               //   success: function(respuesta) 
+      //               //     {                 
+      //               //       //alert(respuesta['cola']);
+      //               //       //$('#cola').show().attr('class','label label-success').html(respuesta['cola']);
+      //               //       $('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
+      //               //       tabla.ajax.reload();
+      //               //     },
+      //               //   error: function(respuesta)
+      //               //     {
+      //               //       $('#mensajes').html(respuesta['especialidad_consulta']);
+      //               //       $('#mensajes').html(respuesta['turno_consulta']);
+      //               //       $('#mensajes').html(respuesta['fecha_consulta']);                  
+      //               //     }                   
+
+      //               //});
+      //               //obj.href = 'historias_medicas_pediatricas/historia_medica_paciente/'+obj.id;
+      //               //alert(obj.href);
+      //         }
+      //     );
+
 
 
 

@@ -108,10 +108,9 @@
 			            <th class="text-center">Fecha de nacimiento</th>
 			            <th class="text-center">Código de Historia</th>
 			            <th class="text-center">Representante</th>
-			            <th class="text-center">Detalle</th>
+			            <th class="text-center">Detalle</th> 
 			        </tr>
 			    </thead>
-
 			    <tbody class="text-center">
 			    </tbody>
 			</table>		    

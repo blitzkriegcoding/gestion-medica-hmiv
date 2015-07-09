@@ -8,6 +8,8 @@ class HistoriaMedicaFederadaController extends \BaseController
 				$consultas_historico 		= ConsultasPacientePediatrico::listarConsultasHistoricoInicial();				
 				$vacunas_historico			= VacunasPaciente::obtenerHistoricoVacunas();
 				$datos_paciente_historia	= HistoriaMedicaPediatrica::datosPacienteHistoria();
+				
+				
 				return View::make('historias_medicas_pediatricas.crear_historia_medica_federada')->with(['consultas_historico' => $consultas_historico,'vacunas_historico' => $vacunas_historico,'datos_paciente_historia' => $datos_paciente_historia]);
 			}
 		public function verificar_cola_consultas()

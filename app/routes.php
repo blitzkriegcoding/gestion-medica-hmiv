@@ -63,6 +63,8 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::post('borrar_vacuna_aplicada',											['uses'	=>	'HistoriaMedicaFederadaController@borrar_vacuna_aplicada']);
 		Route::post('crear_historia_medica_pediatrica',									['uses'	=>	'HistoriaMedicaPediatricaController@crear_historia_medica_pediatrica' ] );
 		Route::post('cargar_vacuna_nueva',												['uses'	=>	'HistoriaMedicaFederadaController@cargar_vacuna_nueva']);
+
+		Route::get('historia_medica_paciente/{id_paciente_pediatrico}',					['uses' => 'HistoriaMedicaPediatricaController@historia_medica_paciente']);
 		
 		/*RUTAS PARA CONSULTA VIA AJAX*/
 		Route::get('obtener_vacuna/{vacuna}',											['uses'	=> 'HistoriaMedicaFederadaController@obtener_vacuna'] );
@@ -121,13 +123,13 @@ Route::get('crear_perfil', function()
 /*************************************************///
 
 // Confide routes
-Route::get('users/create', 'UsersController@create');
-Route::post('users', 'UsersController@store');
-Route::get('users/login', 'UsersController@login');
-Route::post('users/login', 'UsersController@doLogin');
-Route::get('users/confirm/{code}', 'UsersController@confirm');
-Route::get('users/forgot_password', 'UsersController@forgotPassword');
-Route::post('users/forgot_password', 'UsersController@doForgotPassword');
-Route::get('users/reset_password/{token}', 'UsersController@resetPassword');
-Route::post('users/reset_password', 'UsersController@doResetPassword');
-Route::get('users/logout', 'UsersController@logout');
+// Route::get('users/create', 'UsersController@create');
+// Route::post('users', 'UsersController@store');
+// Route::get('users/login', 'UsersController@login');
+// Route::post('users/login', 'UsersController@doLogin');
+// Route::get('users/confirm/{code}', 'UsersController@confirm');
+// Route::get('users/forgot_password', 'UsersController@forgotPassword');
+// Route::post('users/forgot_password', 'UsersController@doForgotPassword');
+// Route::get('users/reset_password/{token}', 'UsersController@resetPassword');
+// Route::post('users/reset_password', 'UsersController@doResetPassword');
+// Route::get('users/logout', 'UsersController@logout');

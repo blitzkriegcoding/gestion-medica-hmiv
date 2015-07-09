@@ -86,6 +86,19 @@ class HistoriaMedicaPediatricaController extends \BaseController {
 		{
 
 		}
+	public function historia_medica_paciente($id_paciente_pediatrico)
+		{
+			$posee_historia = HistoriaMedicaPediatrica::verificarExistenciaHistoriaMedica($id_paciente_pediatrico);
+			if($posee_historia == true)
+				{
+					return Redirect::to('historias_medicas_pediatricas/creacion_historia_medica_federada/'.$id_paciente_pediatrico);
+				}
+			else
+				{
+					return Redirect::to('historias_medicas_pediatricas/creacion_historia_medica_pediatrica/'.$id_paciente_pediatrico);	
+				}
+
+		}
 
 
 }

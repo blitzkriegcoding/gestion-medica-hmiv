@@ -547,7 +547,7 @@ class PacientePediatrico extends \Eloquent {
 									->leftJoin('parentesco_representantes','pacientes_pediatricos.id_paciente','=','parentesco_representantes.id_paciente')
 										->join('representantes','parentesco_representantes.id_representante','=','representantes.id_representante')
 											->whereRaw($consulta_parametros)
-												->select(
+												->select(	'pacientes_pediatricos.id_paciente',
 															'pacientes_pediatricos.fecha_nacimiento as fn_pac', 'pacientes_pediatricos.primer_nombre as p_nombre_paciente', 'pacientes_pediatricos.segundo_nombre as s_nombre_paciente',
 															'pacientes_pediatricos.primer_apellido as p_apellido_paciente', 'pacientes_pediatricos.segundo_apellido as s_apellido_paciente', 'historia_paciente_pediatrico.codigo_historia_medica as cod_his_med',
 															'pacientes_pediatricos.tipo_documento as nac_pac', 'pacientes_pediatricos.documento as ced_pac', 'representantes.tipo_documento as nac_rep', 'representantes.documento as ced_rep',
@@ -574,7 +574,7 @@ class PacientePediatrico extends \Eloquent {
 												'fecha_nac'	=>	/*$d->fn_pac*/$fecha_nacimiento->format('d/m/Y'),
 												'cod_histo'	=>	$d->cod_his_med,
 												'represent'	=>	($d->p_nombre_rep." ".$d->s_nombre_rep." ".$d->p_apellido_rep."".$d->s_apellido_rep),
-												'opciones'	=>	"<button class='btn btn-success' id='".$d->id_historia_medica."'>Ver detalles</button>"
+												'opciones'	=>	"<a href='".asset('/historias_medicas_pediatricas/historia_medica_paciente/'.$d->id_paciente)."' class='btn btn-success' id='".$d->id_historia_medica."'>Ver detalles</a>"
 
 											];
 			endforeach;

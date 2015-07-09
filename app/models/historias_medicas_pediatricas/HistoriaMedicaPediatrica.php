@@ -414,6 +414,19 @@ public static function datosPacienteHistoria()
 		return (($datos_paciente_historia));
 
 	}
+public static function verificarExistenciaHistoriaMedica($id_paciente_pediatrico)	
+	{
+		$historia_existe = self::where('id_paciente','=',$id_paciente_pediatrico)->pluck('id_paciente');
+
+		if(!empty($historia_existe))	
+			{
+				return true;				
+			}
+		else
+			{
+				return false;
+			}	
+	}
 
 
 }

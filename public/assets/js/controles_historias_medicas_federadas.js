@@ -40,7 +40,7 @@ $(document).ready( function () {
                           ],
         }); 
 
-      $('#consultas_historico').delegate("button","click", function(event)
+      $('#tabla_resultados').delegate("button","click", function(event)
               {
                     var obj = this;                    
                     $.ajax({
@@ -64,6 +64,7 @@ $(document).ready( function () {
                         }
 
                     });
+                    
               }
           );
       $('#vacunas_historico').delegate("button","click", function(event)
