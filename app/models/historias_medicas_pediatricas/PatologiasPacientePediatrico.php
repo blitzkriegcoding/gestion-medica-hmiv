@@ -5,4 +5,49 @@ class PatologiasPacientePediatrico extends \Eloquent {
 	public $primaryKey 	= 'id_patologia_historia';
 	public $timestamps 	= false;
 	public $table 		= 'patologias_historia_pediatrica';
+
+
+	public static function obtenerPatologiasPaciente()
+		{
+			$cantidad = 0;
+			$pat_json = [];
+			$pat_pac = self::join('patologias','patologias.id_patologia','=','patologias_historia_pediatrica.id_patologia')
+									->join('historia_paciente_pediatrico', 'historia_paciente_pediatrico.id_historia_medica','=','patologias_historia_pediatrica.id_historia_medica')
+										->where('historia_paciente_pediatrico.id_paciente','=',Session::get('id_paciente_pediatrico'))
+											->select('patologias.patologia as pat')
+												->get();
+					
+			foreach($pat_pac as $d):
+				$cantidad ++;
+				$pat_json[] = 	[
+									'num_pac' 	=>	$cantidad, 
+									'patologia'	=>	$d->pat
+								];
+			endforeach;
+			#dd($pat_json);
+			#return Response::json($pat_json);
+			return ($pat_json);
+		}
+	public static function obtenerPatologiasPacienteJSON()
+		{
+			$cantidad = 0;
+			$pat_json = [];
+			$pat_pac = self::join('patologias','patologias.id_patologia','=','patologias_historia_pediatrica.id_patologia')
+									->join('historia_paciente_pediatrico', 'historia_paciente_pediatrico.id_historia_medica','=','patologias_historia_pediatrica.id_historia_medica')
+										->where('historia_paciente_pediatrico.id_paciente','=',Session::get('id_paciente_pediatrico'))
+											->select('patologias.patologia as pat')
+												->get();
+					
+			foreach($pat_pac as $d):
+				$cantidad ++;
+				$pat_json[] = 	[
+									'num_pac' 	=>	$cantidad, 
+									'patologia'	=>	$d->pat,
+									'borrar'	=>	'pruebas'
+								];
+			endforeach;
+			#dd($pat_json);
+			return Response::json($pat_json);
+			#return ($pat_json);
+		}		
 }
