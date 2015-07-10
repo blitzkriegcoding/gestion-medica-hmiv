@@ -15,7 +15,6 @@ class PatologiasPacientePediatrico extends \Eloquent {
 										->where('historia_paciente_pediatrico.id_paciente','=',Session::get('id_paciente_pediatrico'))
 											->select('patologias.patologia as pat')
 												->get();
-
 					
 			foreach($patologias_paciente as $patologia):
 				$cantidad ++;
