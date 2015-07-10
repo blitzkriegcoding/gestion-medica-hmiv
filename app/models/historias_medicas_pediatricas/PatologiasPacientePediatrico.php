@@ -49,5 +49,42 @@ class PatologiasPacientePediatrico extends \Eloquent {
 			#dd($pat_json);
 			return Response::json($pat_json);
 			#return ($pat_json);
-		}		
+		}	
+
+public static function cargarPatologiaNueva($input)
+	{
+		$reglas_validacion_patologia = 	[
+											'patologia_detectada' => 'required|exists:patologias,id_patologia'
+										];
+		$mensajes_error_patologia = [
+										'required'	=>	'Patologia detectada es obligatoria',
+										'exists'	=>	'Debe seleccionar un valor de la lista'
+									];
+
+		$validador_patologias_paciente = Validator::make($input,$reglas_validacion_patologia,$mensajes_error_patologia);
+
+		if($validador_patologias_paciente->fails())
+			{		
+					return [
+								'error_mensajes'	=> 	true,
+								'mensaje'			=> 	$validador_patologias_paciente->messages(),
+								'clase'				=>	'text text-danger',
+								'bandera'			=>	1
+							];			
+			}
+
+		$codigo_historia_medica = HistoriaMedicaPediatrica::where('id_paciente','=', Session::get('id_paciente_pediatrico'))->pluck('id_historia_medica');
+
+		PatologiasPacientePediatrico::create(
+												[	'id_patologia' 			=>	$input['patologia_detectada'],
+													'id_historia_medica'	=>	$codigo_historia_medica
+												]);
+					return [
+								'error_mensajes'	=> 	false,
+								'mensaje'			=> 	'Patología registrada con éxito',					
+								'clase'				=>	'alert alert-success',
+								'bandera'			=>	2
+							];	
+
+	}			
 }

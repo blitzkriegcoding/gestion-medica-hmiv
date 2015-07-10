@@ -242,16 +242,15 @@
 	            				Patología detectada:
 	            			</label>
 	            				{{Form::select('patologia_detectada',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'patologia_detectada','style'=>'width: 100%')) }}
-	            				<div style="display:none" id="patologia_detectada" role="alert">
-	            					
+	            				<div style="display:none" id="patologia_detectada_error" role="alert">	            					
 	            				</div>
-	            			<br>
-					    	 <br>
-					    	 <div class="col-xs-12">
+							<br>
+							<br>
+							<div class="col-xs-12">
 							    	<button type="button" id="guardar_patologia" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
 									  Guardar
 									</button>
-					    	 </div>
+							</div>
 					    	 <br>
 					  	</div>
 					  </div>
@@ -266,29 +265,6 @@
 				    	<table id="patologias_historico" class="display compact">
 						    <thead>
 						        <tr>
-<<<<<<< HEAD
-						            <th class="text-center">Patología conocida</th>						            
-						            <th class="text-center">¿Borrar?</th>
-						        </tr>
-						    </thead>
-						    @if(!empty($vacunas_historico))
-							    <tbody class="text-center">
-								    @foreach($vacunas_historico as $llave)
-								        <tr>
-								            <td>
-								            	&nbsp;
-								            </td>
-								            <td>
-								            	{{ $llave->tipo_vacuna }}
-								            </td>
-								            <td>
-								            	{{ $llave->edad }}																	
-								            </td>
-								        </tr>
-								    @endforeach										        
-							    </tbody>
-						   	@endif
-=======
 						        	<th class="text-center">N°</th>
 						            <th class="text-center">Patología conocida</th>
 						            <th class="text-center">¿Borrar?</th>
@@ -296,12 +272,12 @@
 						    </thead>						    
 							<tbody class="text-center">							
 							</tbody>						   	
->>>>>>> 3063e72cb48f82c810890e313005680c6c0d9f32
+
 						</table>					  	
 					  </div>
 					</div>
 					<br>
-					<div role="alert" id='mensaje_vacuna' style="display:none" >						
+					<div role="alert" id='mensaje_patologia' style="display:none" >						
 					</div>
 		    	</div>
 

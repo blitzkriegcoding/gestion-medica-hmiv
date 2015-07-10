@@ -408,9 +408,9 @@ public static function datosPacienteHistoria()
 	{
 		$datos_paciente_historia = HistoriaMedicaPediatrica::where('pacientes_pediatricos.id_paciente', '=', Session::get('id_paciente_pediatrico'))
 									->join('pacientes_pediatricos','historia_paciente_pediatrico.id_paciente','=','pacientes_pediatricos.id_paciente')
-									->select('primer_nombre as p_nombre','segundo_nombre as s_nombre','primer_apellido as p_apellido',
+										->select('primer_nombre as p_nombre','segundo_nombre as s_nombre','primer_apellido as p_apellido',
 												'segundo_apellido as s_apellido','codigo_historia_medica as cod_his')
-										->get();
+											->get();
 		return (($datos_paciente_historia));
 
 	}
@@ -427,6 +427,7 @@ public static function verificarExistenciaHistoriaMedica($id_paciente_pediatrico
 				return false;
 			}	
 	}
+
 
 
 }

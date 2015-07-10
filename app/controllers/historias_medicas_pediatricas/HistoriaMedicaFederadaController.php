@@ -8,11 +8,11 @@ class HistoriaMedicaFederadaController extends \BaseController
 				$consultas_historico 		= ConsultasPacientePediatrico::listarConsultasHistoricoInicial();				
 				$vacunas_historico			= VacunasPaciente::obtenerHistoricoVacunas();
 				$datos_paciente_historia	= HistoriaMedicaPediatrica::datosPacienteHistoria();
-<<<<<<< HEAD
+
 				
 				
 				return View::make('historias_medicas_pediatricas.crear_historia_medica_federada')->with(['consultas_historico' => $consultas_historico,'vacunas_historico' => $vacunas_historico,'datos_paciente_historia' => $datos_paciente_historia]);
-=======
+
 				#$patologias_paciente		= PatologiasPacientePediatrico::obtenerPatologiasPaciente();
 				
 				return View::make('historias_medicas_pediatricas.crear_historia_medica_federada')->with(
@@ -22,7 +22,7 @@ class HistoriaMedicaFederadaController extends \BaseController
 					'datos_paciente_historia' 	=> $datos_paciente_historia,
 					/*'patologias_paciente'		=> $patologias_paciente*/
 					]);
->>>>>>> 3063e72cb48f82c810890e313005680c6c0d9f32
+
 			}
 		public function verificar_cola_consultas()
 			{				
@@ -64,8 +64,14 @@ class HistoriaMedicaFederadaController extends \BaseController
 			{
 				return PatologiasPacientePediatrico::obtenerPatologiasPacienteJSON();
 			}
+		public function cargar_patologia_nueva()
+			{
+				return PatologiasPacientePediatrico::cargarPatologiaNueva(Input::all());
 
-/*		public function anular_nuevo_examen_medico()
+			}
+
+	/*		
+		public function anular_nuevo_examen_medico()
 			{
 				
 			}
@@ -80,6 +86,7 @@ class HistoriaMedicaFederadaController extends \BaseController
 		public function quitar_nueva_alergia()
 			{
 
-			}*/
+			}
+	*/
 		
 	}

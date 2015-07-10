@@ -7,7 +7,9 @@ class Patologias extends \Eloquent {
 
 	public static function mostrarPatologia($patologia)
 		{
-			return Response::json(Patologias::where('patologia','LIKE',strtoupper($patologia).'%')->get());
+			return Response::json(Patologias::where('patologia','LIKE',strtoupper($patologia).'%')
+								->select('id_patologia','patologia')
+									->get());
 		}
 
 }

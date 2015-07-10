@@ -40,9 +40,9 @@ $(document).ready( function () {
                           ],
         }); 
 
-<<<<<<< HEAD
-      $('#tabla_resultados').delegate("button","click", function(event)
-=======
+
+      //$('#tabla_resultados').delegate("button","click", function(event)
+
     var tabla_patologias = $('#patologias_historico').DataTable(
         {
               'searching':  false,
@@ -63,7 +63,7 @@ $(document).ready( function () {
         });     
 
       $('#consultas_historico').delegate("button","click", function(event)
->>>>>>> 3063e72cb48f82c810890e313005680c6c0d9f32
+
               {
                     var obj = this;                    
                     $.ajax({
@@ -269,6 +269,8 @@ $(document).ready( function () {
 
             });            
         }
+
+       
       function cargarVacuna()
         {   
             $('#fecha_vacuna_error').hide();
@@ -320,6 +322,42 @@ $(document).ready( function () {
 
             });            
         }
+      function cargarPatologia()
+        {   
+            $.ajax({
+              url: "http://localhost/hmiv/public/historias_medicas_pediatricas/cargar_patologia_nueva",
+              type: "POST",
+              data: { 'patologia_detectada': $('#patologia_detectada').val() },
+              contentType: 'application/x-www-form-urlencoded',
+              dataType: 'json',
+              success: function(respuesta) 
+                {                 
+                  switch(respuesta['bandera'])
+                    {
+                      case 1:
+                        var mensaje = "";
+
+                        $.each(respuesta['mensaje'], function (a,b)
+                              {
+                                $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
+                              }                             
+                          );
+                        
+                      break;
+
+                      case 2:                        
+                        $('#mensaje_patologia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                      break;
+                    }
+                  tabla_patologias.ajax.reload();
+                },
+              error: function(respuesta)
+                {
+                 
+                }
+
+            });            
+        }         
 
 
 
@@ -344,6 +382,11 @@ $(document).ready( function () {
     $btn.button('reset');
   });
 
+  $('#guardar_patologia').on('click', function () {    
+    var $btn = $(this).button('loading');
+    cargarPatologia();
+    $btn.button('reset');
+  });
 
    $("#especialidad_consulta").select2({
         language: "es",        
@@ -404,6 +447,44 @@ $(document).ready( function () {
                   resultados.push({
                       'id': item.id_tipo_vacuna,
                       'text': item.vacuna
+                  });
+              });
+                  
+            return {        
+              //results: data
+              results: resultados
+            };
+          },
+          cache: true
+        },
+        
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 1,  
+        //templateResult: formatRepo, // omitted for brevity, see the source of this page
+        //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+      });
+
+   $("#patologia_detectada").select2({
+        language: "es",        
+        ajax: {    
+          url: function(params) 
+            {  
+              return "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_patologia/"+params.term;
+            },
+          dataType: 'json',
+          delay: 50,
+          data: function (params) {
+          },
+          processResults: function (data, page) {
+            // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data
+            //alert(data);
+            var resultados = [];
+            $.each(data, function (index, item) {
+                  resultados.push({
+                      'id': item.id_patologia,
+                      'text': item.patologia
                   });
               });
                   
