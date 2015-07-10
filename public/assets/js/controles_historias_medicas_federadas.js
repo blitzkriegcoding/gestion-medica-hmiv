@@ -40,6 +40,25 @@ $(document).ready( function () {
                           ],
         }); 
 
+    var tabla_patologias = $('#patologias_historico').DataTable(
+        {
+              'searching':  false,
+              'ordering':   true,
+              "pageLength": 4,
+              "lengthChange": false,
+              "ajax": 
+                      {
+                          "type"    : "GET",
+                          "url"     : "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_patologias_paciente",
+                          "dataSrc" : ""                          
+                      },
+              'columns' : [
+                            { "data" : "num_pac"    },
+                            { "data" : "patologia"  },
+                            { "data" : "borrar"  },
+                          ],
+        });     
+
       $('#consultas_historico').delegate("button","click", function(event)
               {
                     var obj = this;                    

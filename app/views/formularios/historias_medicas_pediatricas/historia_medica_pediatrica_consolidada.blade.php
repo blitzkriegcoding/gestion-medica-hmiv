@@ -1,3 +1,4 @@
+
 @if(Session::get('historia_medica_existe') == true):
 	<div class="alert alert-info alert-dismissible" role="alert">
 	  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -195,9 +196,6 @@
 					  </div>
 					  <div class="panel-body">
 					  	<div class="form-group">
-
-
-
 			              <div class="alert alert-info col-xs-12 column">
 			                <div class="col-xs-2 column">
 			                  <span class="glyphicon glyphicon-exclamation-sign" style='font-size: 35px;' aria-hidden="true"></span>  
@@ -268,27 +266,13 @@
 				    	<table id="patologias_historico" class="display compact">
 						    <thead>
 						        <tr>
-						            <th class="text-center">Patología conocida</th>						            
+						        	<th class="text-center">N°</th>
+						            <th class="text-center">Patología conocida</th>
 						            <th class="text-center">¿Borrar?</th>
 						        </tr>
-						    </thead>
-						    @if(!empty($vacunas_historico))
-							    <tbody class="text-center">
-								    @foreach($vacunas_historico as $llave)
-								        <tr>
-								            <td>
-								            	&nbsp;
-								            </td>
-								            <td>
-								            	{{ $llave->tipo_vacuna }}
-								            </td>
-								            <td>
-								            	{{ $llave->edad }}																	
-								            </td>
-								        </tr>
-								    @endforeach										        
-							    </tbody>
-						   	@endif
+						    </thead>						    
+							<tbody class="text-center">							
+							</tbody>						   	
 						</table>					  	
 					  </div>
 					</div>

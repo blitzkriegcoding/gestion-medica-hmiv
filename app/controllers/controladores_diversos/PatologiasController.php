@@ -7,8 +7,5 @@ class PatologiasController extends \BaseController
 				return Patologias::mostrarPatologia($patologia);
 			}
 
-		public function PatologiasPaciente()
-			{
-				return PatologiasPaciente::obtenerPatologiasPaciente();
-			}
+
 	}

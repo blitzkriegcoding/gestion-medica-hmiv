@@ -8,9 +8,15 @@ class HistoriaMedicaFederadaController extends \BaseController
 				$consultas_historico 		= ConsultasPacientePediatrico::listarConsultasHistoricoInicial();				
 				$vacunas_historico			= VacunasPaciente::obtenerHistoricoVacunas();
 				$datos_paciente_historia	= HistoriaMedicaPediatrica::datosPacienteHistoria();
+				#$patologias_paciente		= PatologiasPacientePediatrico::obtenerPatologiasPaciente();
 				
-				
-				return View::make('historias_medicas_pediatricas.crear_historia_medica_federada')->with(['consultas_historico' => $consultas_historico,'vacunas_historico' => $vacunas_historico,'datos_paciente_historia' => $datos_paciente_historia]);
+				return View::make('historias_medicas_pediatricas.crear_historia_medica_federada')->with(
+					[
+					'consultas_historico' 		=> $consultas_historico,
+					'vacunas_historico' 		=> $vacunas_historico,
+					'datos_paciente_historia' 	=> $datos_paciente_historia,
+					/*'patologias_paciente'		=> $patologias_paciente*/
+					]);
 			}
 		public function verificar_cola_consultas()
 			{				
@@ -47,6 +53,10 @@ class HistoriaMedicaFederadaController extends \BaseController
 		public function borrar_vacuna_aplicada()	
 			{
 				return VacunasPaciente::borrarVacunaAplicada(Input::all());
+			}
+		public function obtener_patologias_paciente()
+			{
+				return PatologiasPacientePediatrico::obtenerPatologiasPacienteJSON();
 			}
 
 /*		public function anular_nuevo_examen_medico()
