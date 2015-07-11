@@ -90,6 +90,7 @@ $(document).ready( function () {
                     
               }
           );
+
       $('#vacunas_historico').delegate("button","click", function(event)
               {
                     var obj = this;                    
@@ -122,17 +123,53 @@ $(document).ready( function () {
                         },
                       error: function(respuesta)
                         {
-                          // var mensaje = "";
-                          // $.each(respuesta['mensajes'], function(a,b)
-                          //   {
-                          //     mensaje += a+"\t"+b;
-                          //   });
-                          // alert(mensaje);
+
                         }
 
                     });
               }
           );
+//PARA EL BORRADO DE PATOLOGIAS DEL PACIENTE
+      $('#patologias_historico').delegate("button","click", function(event)
+              {
+                    var obj = this;                    
+                    $.ajax({
+                      url: "http://localhost/hmiv/public/historias_medicas_pediatricas/borrar_patologia_guardada",
+                      type: "POST",
+                      data: { 'id_patologia_historia': obj.id },
+                      contentType: 'application/x-www-form-urlencoded',
+                      dataType: 'json',
+                      success: function(respuesta) 
+                        {                 
+                          //alert(respuesta['cola']);
+                          //$('#cola').show().attr('class','label label-success').html(respuesta['cola']);
+                          //$('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                          switch(respuesta['bandera'])
+                            {
+                              case 1:
+                                var mensaje = "";
+                                $.each(respuesta['mensaje'], function (a,b)
+                                      {
+                                        $('#mensaje_patologia').show().attr('class',respuesta['clase']).html(b);
+                                      }                             
+                                  );                                
+                              break;
+                              case 2:                                
+                                $('#mensaje_patologia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                              break;
+                            }                          
+                          tabla_patologias.ajax.reload();
+                        },
+                      error: function(respuesta)
+                        {
+
+                        }
+
+                    });
+              }
+          );
+
+
       //fecha de consultas de hoy hasta dentro de dos semanas
       function rangoFechaConsultas(id_control,num_dias)
         {

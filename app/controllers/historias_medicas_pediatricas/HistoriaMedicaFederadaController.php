@@ -70,6 +70,11 @@ class HistoriaMedicaFederadaController extends \BaseController
 
 			}
 
+		public function borrar_patologia_guardada()
+			{
+				return PatologiasPacientePediatrico::borrarPatologiaGuardada(Input::all());
+			}
+
 	/*		
 		public function anular_nuevo_examen_medico()
 			{

@@ -271,8 +271,7 @@
 						        </tr>
 						    </thead>						    
 							<tbody class="text-center">							
-							</tbody>						   	
-
+							</tbody>
 						</table>					  	
 					  </div>
 					</div>
@@ -280,7 +279,6 @@
 					<div role="alert" id='mensaje_patologia' style="display:none" >						
 					</div>
 		    	</div>
-
 	    	</div>		    	
 
 

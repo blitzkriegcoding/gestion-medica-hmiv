@@ -64,6 +64,7 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::post('borrar_vacuna_aplicada',											['uses'	=>	'HistoriaMedicaFederadaController@borrar_vacuna_aplicada']);
 		Route::post('crear_historia_medica_pediatrica',									['uses'	=>	'HistoriaMedicaPediatricaController@crear_historia_medica_pediatrica' ] );
 		Route::post('cargar_vacuna_nueva',												['uses'	=>	'HistoriaMedicaFederadaController@cargar_vacuna_nueva']);
+		Route::post('borrar_patologia_guardada',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_patologia_guardada']);
 		
 		Route::post('cargar_patologia_nueva',											['uses'	=>	'HistoriaMedicaFederadaController@cargar_patologia_nueva']);
 		Route::get('historia_medica_paciente/{id_paciente_pediatrico}',					['uses' =>	'HistoriaMedicaPediatricaController@historia_medica_paciente']);
