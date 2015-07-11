@@ -10,6 +10,5 @@ class Intolerancias extends \Eloquent {
 			return Response::json(Intolerancias::where('intolerancia','LIKE',strtoupper($intolerancia).'%')->get());
 		}
 
-	#public function 	
 
 }

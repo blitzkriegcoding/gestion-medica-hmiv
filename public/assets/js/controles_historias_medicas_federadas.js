@@ -62,6 +62,46 @@ $(document).ready( function () {
                           ],
         });     
 
+
+    var tabla_alergias = $('#alergias_historico').DataTable(
+        {
+              'searching':  false,
+              'ordering':   true,
+              "pageLength": 4,
+              "lengthChange": false,
+              "ajax": 
+                      {
+                          "type"    : "GET",
+                          "url"     : "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_alergias_paciente",
+                          "dataSrc" : ""                          
+                      },
+              'columns' : [
+                            { "data" : "num_ale"  },
+                            { "data" : "alergia"  },
+                            { "data" : "borrar"   },
+                          ],
+        });
+
+    var tabla_intolerancias = $('#intolerancias_historico').DataTable(
+        {
+              'searching':  false,
+              'ordering':   true,
+              "pageLength": 4,
+              "lengthChange": false,
+              "ajax": 
+                      {
+                          "type"    : "GET",
+                          "url"     : "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_intolerancias_paciente",
+                          "dataSrc" : ""                          
+                      },
+              'columns' : [
+                            { "data" : "num_int"  },
+                            { "data" : "intolerancia"  },
+                            { "data" : "borrar"   },
+                          ],
+        });
+
+
       $('#consultas_historico').delegate("button","click", function(event)
 
               {
@@ -522,6 +562,83 @@ $(document).ready( function () {
                   resultados.push({
                       'id': item.id_patologia,
                       'text': item.patologia
+                  });
+              });
+                  
+            return {        
+              //results: data
+              results: resultados
+            };
+          },
+          cache: true
+        },
+        
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 1,  
+        //templateResult: formatRepo, // omitted for brevity, see the source of this page
+        //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+      });
+
+   $("#alergia_detectada").select2({
+        language: "es",        
+        ajax: {    
+          url: function(params) 
+            {  
+              return "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_alergias/"+params.term;
+            },
+          dataType: 'json',
+          delay: 50,
+          data: function (params) {
+          },
+          processResults: function (data, page) {
+            // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data
+            //alert(data);
+            var resultados = [];
+            $.each(data, function (index, item) {
+                  resultados.push({
+                      'id': item.id_alergia,
+                      'text': item.alergia
+                  });
+              });
+                  
+            return {        
+              //results: data
+              results: resultados
+            };
+          },
+          cache: true
+        },
+        
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 1,  
+        //templateResult: formatRepo, // omitted for brevity, see the source of this page
+        //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+      });
+
+
+   $("#intolerancia_detectada").select2({
+        language: "es",        
+        ajax: {    
+          url: function(params) 
+            {  
+              return "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_intolerancias/"+params.term;
+            },
+          dataType: 'json',
+          delay: 50,
+          data: function (params) {
+          },
+          processResults: function (data, page) {
+            // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data
+            //alert(data);
+            var resultados = [];
+            $.each(data, function (index, item) {
+                  resultados.push({
+                      'id': item.id_intolerancia,
+                      'text': item.intolerancia
                   });
               });
                   

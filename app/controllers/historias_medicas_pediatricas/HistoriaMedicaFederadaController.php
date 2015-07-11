@@ -74,6 +74,25 @@ class HistoriaMedicaFederadaController extends \BaseController
 			{
 				return PatologiasPacientePediatrico::borrarPatologiaGuardada(Input::all());
 			}
+		public function obtener_alergias_paciente()	
+			{
+				return AlergiasPacientePediatrico::obtenerAlergiasPacienteJSON(Input::all());
+			}
+		public function obtener_intolerancias_paciente()	
+			{
+				return IntoleranciasPacientePediatrico::obtenerIntoleranciasPacienteJSON(Input::all());
+			}
+
+		public function obtener_intolerancias($intolerancia)	
+			{
+				return Intolerancias::mostrarIntolerancia($intolerancia);
+			}
+			//obtener_alergias	
+		public function obtener_alergias($alergia)	
+			{
+				return Alergias::mostrarAlergia($alergia);
+			}			
+
 
 	/*		
 		public function anular_nuevo_examen_medico()

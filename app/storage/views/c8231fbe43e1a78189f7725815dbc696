@@ -5,11 +5,15 @@
 	  <strong>Disculpe, usted fue direccionado hasta aquí...</strong>&nbsp;Ya el paciente tiene un código de historia médica creado.
 	</div>
 <?php endif; ?>
-<div class="container-fluid">
+<div class="container">
+<div class="col-xs-12">
 	<h3>
 		Creación de historia médica pediátrica federada
 	</h3>
 </div>
+	
+</div>
+
 <div class="container">
 <br>
 <div class="panel panel-primary">
@@ -276,8 +280,7 @@
 						        </tr>
 						    </thead>						    
 							<tbody class="text-center">							
-							</tbody>						   	
-
+							</tbody>
 						</table>					  	
 					  </div>
 					</div>
@@ -285,7 +288,6 @@
 					<div role="alert" id='mensaje_patologia' style="display:none" >						
 					</div>
 		    	</div>
-
 	    	</div>		    	
 
 
@@ -297,7 +299,86 @@
 		    	<h4>
 		    		Carga de alérgias
 		    	</h4>
-		    	<br>
+				<div class="col-xs-12">				
+			    	<div class="col-xs-6">
+						<div class="panel panel-primary ">
+						  <div class="panel-heading">
+						  	<strong>Selección de alérgias/intolerancias del paciente</strong>
+						  </div>
+						  <div class="panel-body">
+						  	<div class="form-group">
+		            			<label for="alergia_detectada">
+		            				Alérgia detectada:
+		            			</label>
+		            				<?php echo Form::select('alergia_detectada',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'alergia_detectada','style'=>'width: 100%')); ?>
+
+		            				<div style="display:none" id="alergia_detectada_error" role="alert">	            					
+		            				</div>																
+						  	</div>
+						  	<div class="form-group">
+		            			<label for="alergia_detectada">
+		            				Intolerancia detectada:
+		            			</label>
+		            				<?php echo Form::select('intolerancia_detectada',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'intolerancia_detectada','style'=>'width: 100%')); ?>
+
+		            				<div style="display:none" id="intolerancia_detectada_error" role="alert">	            					
+		            				</div>
+								<br>
+								<br>
+									<div class="col-xs-12">
+									    	<button type="button" id="guardar_alergia" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+											  Guardar
+											</button>
+									</div>
+								<br>
+						  	</div>						  	
+						  </div>
+						</div>
+			    	</div>
+			    	<div class="col-xs-6">
+						<div class="panel panel-primary">
+						  <div class="panel-heading">
+						  	<strong>Alérgias definidas en la apertura de la historia</strong>
+						  </div>
+						  <div class="panel-body">
+					    	<table id="alergias_historico" class="display compact">
+							    <thead>
+							        <tr>
+							        	<th class="text-center">N°</th>
+							            <th class="text-center">Alergia</th>
+							            <th class="text-center">¿Borrar?</th>
+							        </tr>
+							    </thead>
+								<tbody class="text-center">							
+								</tbody>
+							</table>
+						  </div>
+						</div>						
+						<div role="alert" id='mensaje_patologia' style="display:none">
+						</div>
+						<br>
+						<div class="panel panel-primary">
+						  <div class="panel-heading">
+						  	<strong>Intolerancias definidas en la apertura de la historia</strong>
+						  </div>
+						  <div class="panel-body">
+					    	<table id="intolerancias_historico" class="display compact">
+							    <thead>
+							        <tr>
+							        	<th class="text-center">N°</th>
+							            <th class="text-center">Intolerancia</th>
+							            <th class="text-center">¿Borrar?</th>
+							        </tr>
+							    </thead>
+								<tbody class="text-center">							
+								</tbody>
+							</table>
+						  </div>
+						</div>							
+
+			    	</div>
+	    	</div>			    	
+		    	
 	    		
 	    	</div>
 	    	<?php /* FIN PANEL */ ?>
