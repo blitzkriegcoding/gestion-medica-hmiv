@@ -434,8 +434,89 @@ $(document).ready( function () {
                 }
 
             });            
-        }         
+        }    
 
+      function cargarAlergia()
+        {   
+            $.ajax({
+              //url: "http://localhost/hmiv/public/historias_medicas_pediatricas/cargar_alergia_nueva",
+              url: "../../historias_medicas_pediatricas/cargar_alergia_nueva",
+              type: "POST",
+              data: { 'alergia_detectada': $('#alergia_detectada').val() },
+              contentType: 'application/x-www-form-urlencoded',
+              dataType: 'json',
+              success: function(respuesta) 
+                {                 
+                  switch(respuesta['bandera'])
+                    {
+                      case 1:
+                        var mensaje = "";
+
+                        $.each(respuesta['mensaje'], function (a,b)
+                              {
+                                $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
+                              }                             
+                          );
+                        
+                      break;
+
+                      case 2:                        
+                        $('#mensaje_alergia_intolerancia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                      break;
+
+
+
+                    }
+                  tabla_alergias.ajax.reload();
+                },
+              error: function(respuesta)
+                {
+                 
+                }
+
+            });            
+        }             
+
+      function cargarIntolerancia()
+        {   
+            $.ajax({
+              //url: "http://localhost/hmiv/public/historias_medicas_pediatricas/cargar_alergia_nueva",
+              url: "../../historias_medicas_pediatricas/cargar_intolerancia_nueva",
+              type: "POST",
+              data: { 'intolerancia_detectada': $('#intolerancia_detectada').val() },
+              contentType: 'application/x-www-form-urlencoded',
+              dataType: 'json',
+              success: function(respuesta) 
+                {                 
+                  switch(respuesta['bandera'])
+                    {
+                      case 1:
+                        var mensaje = "";
+                        $('#'+a+"_error").hide()
+
+                        $.each(respuesta['mensaje'], function (a,b)
+                              {
+                                $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
+                              }                             
+                          );                        
+                      break;
+
+                      case 2:                        
+                        $('#mensaje_alergia_intolerancia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                      break;
+
+                      
+
+                    }
+                  tabla_intolerancias.ajax.reload();
+                },
+              error: function(respuesta)
+                {
+                 
+                }
+
+            });            
+        }   
 
 
 
@@ -464,6 +545,22 @@ $(document).ready( function () {
     cargarPatologia();
     $btn.button('reset');
   });
+
+  $('#guardar_alergia').on('click', function () {    
+    var $btn = $(this).button('loading');
+    cargarAlergia();
+    $btn.button('reset');
+  });
+
+  //cargarIntolerancia
+
+    $('#guardar_intolerancia').on('click', function () {    
+    var $btn = $(this).button('loading');
+    cargarIntolerancia();
+    $btn.button('reset');
+  });
+
+
 
    $("#especialidad_consulta").select2({
         language: "es",        
@@ -584,7 +681,8 @@ $(document).ready( function () {
         ajax: {    
           url: function(params) 
             {  
-              return "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_alergias/"+params.term;
+              //return "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_alergias/"+params.term;
+              return "../../historias_medicas_pediatricas/obtener_alergias/"+params.term;
             },
           dataType: 'json',
           delay: 50,
@@ -623,7 +721,7 @@ $(document).ready( function () {
         ajax: {    
           url: function(params) 
             {  
-              return "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_intolerancias/"+params.term;
+              return "../../historias_medicas_pediatricas/obtener_intolerancias/"+params.term;
             },
           dataType: 'json',
           delay: 50,

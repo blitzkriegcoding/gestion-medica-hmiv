@@ -91,26 +91,18 @@ class HistoriaMedicaFederadaController extends \BaseController
 		public function obtener_alergias($alergia)	
 			{
 				return Alergias::mostrarAlergia($alergia);
-			}			
-
-
-	/*		
-		public function anular_nuevo_examen_medico()
-			{
-				
 			}
-		public function cargar_nuevo_tratamiento_medico()
-			{
 
-			}
-		public function cargar_nueva_alergia()
+		public function cargar_alergia_nueva()
 			{
-
+				return AlergiasPacientePediatrico::guardarAlergiaPaciente(Input::all());
 			}
-		public function quitar_nueva_alergia()
+		public function cargar_intolerancia_nueva()
 			{
-
+				return IntoleranciasPacientePediatrico::guardarIntoleranciaPaciente(Input::all());
 			}
-	*/
+
+
+
 		
 	}

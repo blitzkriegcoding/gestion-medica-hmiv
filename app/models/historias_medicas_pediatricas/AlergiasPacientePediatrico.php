@@ -37,6 +37,55 @@ class AlergiasPacientePediatrico extends \Eloquent {
 			endforeach;
 			#dd($datos_intolerancia);
 			return $alergias_json;
-		}		
+		}	
+	public static function guardarAlergiaPaciente($input)
+		{
+			$reglas_alergias = 	[
+									'alergia_detectada'	=> 'required|exists:alergias,id_alergia'
+								];
+			$mensajes_error_alergias	=	[
+												'required'	=>	'Debe seleccionar alergia antes de guardar',
+												'exists'	=>	'Debe selecionar alergia valida'
+											];
+
+			$validador_alergias_paciente = Validator::make($input, $reglas_alergias, $mensajes_error_alergias);
+
+			if($validador_alergias_paciente->fails())
+				{
+					return 	[
+								'mensaje'	=>	$validador_alergias_paciente->messages(),
+								'clase'		=>	'text-danger',
+								'bandera'	=>	1
+							];
+				}
+
+			$alergia_existente = self::where('id_alergia','=',$input['alergia_detectada'])->pluck('id_alergia')
+									->join('historia_paciente_pediatrico','alergias_historia_pediatrica.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
+										->where('id_paciente','=',Session::get('id_paciente_pediatrico'));
+
+			if(!empty($alergia_existente))
+				{
+					return 	[
+								'mensaje'	=>	'La alergia seleccionada ya se encuentra asociada a la historia',
+								'clase'		=>	'alert alert-danger',
+								'bandera'	=>	2
+							];
+				}
+
+			self::create(
+							[
+							'id_historia_medica'	=> HistoriaMedicaPediatrica::where('id_paciente','=',Session::get('id_paciente_pediatrico'))->pluck('id_historia_medica'), 
+							'id_alergia'			=> $input['alergia_detectada']
+							]
+						);
+
+			return 	[
+						'mensaje'	=>	'Alergia registrada con exito',
+						'clase'		=>	'alert alert-success',
+						'bandera'	=>	2
+					];
+
+		}
+
 
 }

@@ -305,29 +305,43 @@
 		            			<label for="alergia_detectada">
 		            				Alérgia detectada:
 		            			</label>
-		            				{{Form::select('alergia_detectada',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'alergia_detectada','style'=>'width: 100%')) }}
-		            				<div style="display:none" id="alergia_detectada_error" role="alert">	            					
-		            				</div>																
+	            				{{Form::select('alergia_detectada',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'alergia_detectada','style'=>'width: 100%')) }}
+	            				<div style="display:none" id="alergia_detectada_error" role="alert">	            					
+	            				</div>																
 						  	</div>
+								
+							<div class="col-xs-12">
+						    	<button type="button" id="guardar_alergia" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+								  Guardar
+								</button>
+							</div>
+								<br><br><br>
+
 						  	<div class="form-group">
-		            			<label for="alergia_detectada">
+		            			<label for="intolerancia_detectada">
 		            				Intolerancia detectada:
 		            			</label>
 		            				{{Form::select('intolerancia_detectada',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'intolerancia_detectada','style'=>'width: 100%')) }}
 		            				<div style="display:none" id="intolerancia_detectada_error" role="alert">	            					
 		            				</div>
-								<br>
-								<br>
+								<br><br>
 									<div class="col-xs-12">
-									    	<button type="button" id="guardar_alergia" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+									    	<button type="button" id="guardar_intolerancia" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
 											  Guardar
 											</button>
 									</div>
 								<br>
+									
 						  	</div>						  	
 						  </div>
 						</div>
+						<br>
+						<div role="alert" id='mensaje_alergia_intolerancia' style="display:none">
+						</div>							
 			    	</div>
+
+
+
 			    	<div class="col-xs-6">
 						<div class="panel panel-primary">
 						  <div class="panel-heading">
@@ -347,8 +361,7 @@
 							</table>
 						  </div>
 						</div>						
-						<div role="alert" id='mensaje_patologia' style="display:none">
-						</div>
+
 						<br>
 						<div class="panel panel-primary">
 						  <div class="panel-heading">

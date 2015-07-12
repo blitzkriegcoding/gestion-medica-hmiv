@@ -53,12 +53,12 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		/*TODOS LOS GET*/
 		Route::get('creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',		['uses'	=>	'HistoriaMedicaPediatricaController@nueva_historia_medica_pediatrica']);		
 		Route::get('creacion_historia_medica_federada/{id_paciente_pediatrico}',		['uses' =>	'HistoriaMedicaFederadaController@nueva_historia_medica_federada']);
-		Route::get('recargar_historico_consultas',										['uses'	=> 'HistoriaMedicaFederadaController@recargar_historico_consultas'] );
+		Route::get('recargar_historico_consultas',										['uses'	=>  'HistoriaMedicaFederadaController@recargar_historico_consultas'] );
 		Route::get('obtener_historico_vacunas',											['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_vacunas' ]);
 		Route::get('obtener_patologias_paciente',										['uses' =>	'HistoriaMedicaFederadaController@obtener_patologias_paciente' ]);
 		Route::get('obtener_alergias_paciente',											['uses' =>	'HistoriaMedicaFederadaController@obtener_alergias_paciente' ]);
 		Route::get('obtener_intolerancias_paciente',									['uses' =>	'HistoriaMedicaFederadaController@obtener_intolerancias_paciente']);
-		
+		Route::get('historia_medica_paciente/{id_paciente_pediatrico}',					['uses' =>	'HistoriaMedicaPediatricaController@historia_medica_paciente']);
 		
 		/*TODOS LOS POST*/
 		Route::post('cola_consultas',													['uses' => 	'HistoriaMedicaFederadaController@verificar_cola_consultas']);
@@ -68,9 +68,11 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::post('crear_historia_medica_pediatrica',									['uses'	=>	'HistoriaMedicaPediatricaController@crear_historia_medica_pediatrica' ] );
 		Route::post('cargar_vacuna_nueva',												['uses'	=>	'HistoriaMedicaFederadaController@cargar_vacuna_nueva']);
 		Route::post('borrar_patologia_guardada',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_patologia_guardada']);
-		
 		Route::post('cargar_patologia_nueva',											['uses'	=>	'HistoriaMedicaFederadaController@cargar_patologia_nueva']);
-		Route::get('historia_medica_paciente/{id_paciente_pediatrico}',					['uses' =>	'HistoriaMedicaPediatricaController@historia_medica_paciente']);
+		Route::post('cargar_alergia_nueva',												['uses'	=>	'HistoriaMedicaFederadaController@cargar_alergia_nueva']);
+		Route::post('cargar_intolerancia_nueva',										['uses'	=>	'HistoriaMedicaFederadaController@cargar_intolerancia_nueva']);
+		
+
 		
 		/*RUTAS PARA CONSULTA VIA AJAX*/
 		Route::get('obtener_vacuna/{vacuna}',											['uses'	=>	'HistoriaMedicaFederadaController@obtener_vacuna'] );
