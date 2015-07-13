@@ -55,7 +55,7 @@
 		    			<div class="col-xs-6">		    				
 							<div class="panel panel-primary">
 							  <div class="panel-heading">								  	
-							  		Programar consulta médica
+							  		<strong>Programar consulta médica</strong>
 							 </div>
 							  <div class="panel-body">
 							    <div class="form-group">
@@ -103,7 +103,7 @@
 						{{--FIN COLAS Y MENSAJES --}}
 							<div class="panel panel-primary">
 								<div class="panel-heading">
-							  		Histórico de consultas médicas del paciente
+							  		<strong>Histórico de consultas médicas del paciente</strong>
 								</div>
 								<div class="panel-body">
 							    	<table id="consultas_historico" class="display compact">
@@ -283,8 +283,7 @@
 					<div role="alert" id='mensaje_patologia' style="display:none" >						
 					</div>
 		    	</div>
-	    	</div>		    	
-
+	    	</div>
 
 	    	</div>	    	
 	    </div>
@@ -293,7 +292,7 @@
 	    	<div class="col-xs-12">
 		    	<h4>
 		    		Carga de alérgias
-		    	</h4>
+		    	</h4><br>
 				<div class="col-xs-12">				
 			    	<div class="col-xs-6">
 						<div class="panel panel-primary ">
@@ -399,7 +398,7 @@
 		    	<div class="col-xs-5">
 					<div class="panel panel-primary ">
 					  <div class="panel-heading">
-					  	Aplicación de vacunas
+					  	<strong>Aplicación de vacunas</strong>
 					  </div>
 					  <div class="panel-body">
 					  	<div class="form-group">
@@ -440,7 +439,7 @@
 		    	<div class="col-xs-7">
 					<div class="panel panel-primary ">
 					  <div class="panel-heading">
-					  	Historico de vacunas
+					  	<strong>Historico de vacunas</strong>
 					  </div>
 					  <div class="panel-body">
 				    	<table id="vacunas_historico" class="display compact">

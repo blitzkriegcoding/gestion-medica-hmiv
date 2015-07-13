@@ -27,7 +27,7 @@ class IntoleranciasPacientePediatrico extends \Eloquent {
 				$intolerancias_json[] = 	[ 
 											'num_int' 		=>	$contador_intolerancia,
 											'intolerancia'	=>	$d->intolerancia,	
-											'borrar'		=>	"<button class='btn btn-danger' id='".$d->id_intolernacia_paciente."'>Borrar</button"
+											'borrar'		=>	"<button class='btn btn-danger' id='".$d->id_intolerancia."'>Borrar</button"
 
 										];
 			endforeach;			
@@ -84,6 +84,48 @@ class IntoleranciasPacientePediatrico extends \Eloquent {
 						'bandera'	=>	2
 					];
 
-		}		
+		}
+
+	public static function borrarIntoleranciaPaciente($input)
+		{
+			$reglas_borrado_intolerancias	= 	[
+													'intolerancia_detectada'	=>	'required|exists:intolerancias_paciente_pediatrico,id_intolernacia_paciente'
+												];
+			$mensaje_borrado_intolerancia 	=	[	
+													'required'	=>	'Debe tener un elemento asignado',
+													'exists'	=>	'No existe intolerancia asignada'
+												];
+
+			$validador_borrado = Validator::make($input, $reglas_borrado_intolerancias, $mensaje_borrado_intolerancia);
+
+			if($validador_borrado->fails())
+				{
+					return 	[
+								'mensaje'	=>	$validador_borrado->messages(),
+								'clase'		=>	'alert alert-danger',
+								'bandera'	=>	3
+							];
+				}
+
+			$intolerancia_existente = self::where('id_intolernacia_paciente','=',$input['intolerancia_detectada'])
+										->join('historia_paciente_pediatrico','intolerancias_paciente_pediatrico.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
+											->where('id_paciente','=',Session::get('id_paciente_pediatrico'))
+												->pluck('id_intolernacia_paciente');			
+
+			if(empty($intolerancia_existente))
+				{
+					return 	[
+								'mensaje'	=>	'La intolerancia a borrar no existe',
+								'clase'		=>	'alert alert-danger',
+								'bandera'	=>	2
+							];
+				}
+			self::destroy($input['intolerancia_detectada']);
+			return 	[
+						'mensaje'	=>	'Intolerancia borrada con exito',
+						'clase'		=>	'alert alert-success',
+						'bandera'	=>	2
+					];
+		}
 
 }

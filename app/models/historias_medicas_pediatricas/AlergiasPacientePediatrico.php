@@ -59,9 +59,10 @@ class AlergiasPacientePediatrico extends \Eloquent {
 							];
 				}
 
-			$alergia_existente = self::where('id_alergia','=',$input['alergia_detectada'])->pluck('id_alergia')
-									->join('historia_paciente_pediatrico','alergias_historia_pediatrica.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
-										->where('id_paciente','=',Session::get('id_paciente_pediatrico'));
+			$alergia_existente = self::where('id_alergia','=',$input['alergia_detectada'])
+										->join('historia_paciente_pediatrico','alergias_historia_pediatrica.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
+											->where('id_paciente','=',Session::get('id_paciente_pediatrico'))
+												->pluck('id_alergia');
 
 			if(!empty($alergia_existente))
 				{
@@ -84,6 +85,51 @@ class AlergiasPacientePediatrico extends \Eloquent {
 						'clase'		=>	'alert alert-success',
 						'bandera'	=>	2
 					];
+
+		}
+
+	public static function borrarAlergiaPaciente($input)
+		{
+			$reglas_borrado_alergias	= 	[
+												'alergia_detectada'	=>	'required|exists:alergias_historia_pediatrica,id_alergia_historia'
+											];
+			$mensaje_borrado_alergias 	=	[	
+												'required'	=>	'Debe tener un elemento asignado',
+												'exists'	=>	'No existe alergia asignada'
+											];
+
+			$validador_borrado = Validator::make($input, $reglas_borrado_alergias, $mensaje_borrado_alergias);
+
+			if($validador_borrado->fails())
+				{
+					return 	[
+								'mensaje'	=>	$validador_borrado->messages(),
+								'clase'		=>	'alert alert-danger',
+								'bandera'	=>	3
+							];
+
+				}
+			$alergia_existente = self::where('id_alergia_historia','=',$input['alergia_detectada'])
+										->join('historia_paciente_pediatrico','alergias_historia_pediatrica.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
+											->where('id_paciente','=',Session::get('id_paciente_pediatrico'))
+												->pluck('id_alergia_historia');
+			
+
+			if(empty($alergia_existente))
+				{
+					return 	[
+								'mensaje'	=>	'La alergia a borrar no existe',
+								'clase'		=>	'alert alert-danger',
+								'bandera'	=>	2
+							];
+				}
+			self::destroy($input['alergia_detectada']);
+			return 	[
+						'mensaje'	=>	'Alergia borrada con exito',
+						'clase'		=>	'alert alert-success',
+						'bandera'	=>	2
+					];
+
 
 		}
 

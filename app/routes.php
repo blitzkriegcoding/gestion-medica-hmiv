@@ -71,6 +71,8 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::post('cargar_patologia_nueva',											['uses'	=>	'HistoriaMedicaFederadaController@cargar_patologia_nueva']);
 		Route::post('cargar_alergia_nueva',												['uses'	=>	'HistoriaMedicaFederadaController@cargar_alergia_nueva']);
 		Route::post('cargar_intolerancia_nueva',										['uses'	=>	'HistoriaMedicaFederadaController@cargar_intolerancia_nueva']);
+		Route::post('borrar_alergia_guardada',											['uses'	=>	'HistoriaMedicaFederadaController@borrar_alergia_guardada']);
+		Route::post('borrar_intolerancia_guardada',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_intolerancia_guardada']);
 		
 
 		

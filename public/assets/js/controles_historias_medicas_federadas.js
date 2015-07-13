@@ -210,6 +210,87 @@ $(document).ready( function () {
           );
 
 
+//Para el borrado de alergias del paciente
+      $('#alergias_historico').delegate("button","click", function(event)
+              {
+                    var obj = this;                    
+                    $.ajax({
+                      url: "http://localhost/hmiv/public/historias_medicas_pediatricas/borrar_alergia_guardada",
+                      type: "POST",
+                      data: { 'alergia_detectada': obj.id },
+                      contentType: 'application/x-www-form-urlencoded',
+                      dataType: 'json',
+                      success: function(respuesta) 
+                        {                 
+                          //alert(respuesta['cola']);
+                          //$('#cola').show().attr('class','label label-success').html(respuesta['cola']);
+                          //$('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                          switch(respuesta['bandera'])
+                            {
+                              case 1:
+                                var mensaje = "";
+                                $.each(respuesta['mensaje'], function (a,b)
+                                      {
+                                        $('#mensaje_patologia').show().attr('class',respuesta['clase']).html(b);
+                                      }                             
+                                  );                                
+                              break;
+                              case 2:                                
+                                $('#mensaje_patologia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                              break;
+                            }                          
+                          tabla_alergias.ajax.reload();
+                        },
+                      error: function(respuesta)
+                        {
+
+                        }
+
+                    });
+              }
+          );
+//Para el borrado de intolerancias del paciente
+      $('#intolerancias_historico').delegate("button","click", function(event)
+              {
+                    var obj = this;                    
+                    $.ajax({
+                      url: "http://localhost/hmiv/public/historias_medicas_pediatricas/borrar_intolerancia_guardada",
+                      type: "POST",
+                      data: { 'intolerancia_detectada': obj.id },
+                      contentType: 'application/x-www-form-urlencoded',
+                      dataType: 'json',
+                      success: function(respuesta) 
+                        {                 
+                          //alert(respuesta['cola']);
+                          //$('#cola').show().attr('class','label label-success').html(respuesta['cola']);
+                          //$('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                          switch(respuesta['bandera'])
+                            {
+                              case 1:
+                                var mensaje = "";
+                                $.each(respuesta['mensaje'], function (a,b)
+                                      {
+                                        $('#mensaje_patologia').show().attr('class',respuesta['clase']).html(b);
+                                      }                             
+                                  );                                
+                              break;
+                              case 2:                                
+                                $('#mensaje_patologia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                              break;
+                            }        
+
+                                              
+                          tabla_intolerancias.ajax.reload();
+                        },
+                      error: function(respuesta)
+                        {
+
+                        }
+
+                    });
+              }
+          );
+
       //fecha de consultas de hoy hasta dentro de dos semanas
       function rangoFechaConsultas(id_control,num_dias)
         {
@@ -454,6 +535,7 @@ $(document).ready( function () {
 
                         $.each(respuesta['mensaje'], function (a,b)
                               {
+
                                 $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
                               }                             
                           );
@@ -463,9 +545,6 @@ $(document).ready( function () {
                       case 2:                        
                         $('#mensaje_alergia_intolerancia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
                       break;
-
-
-
                     }
                   tabla_alergias.ajax.reload();
                 },
@@ -491,11 +570,11 @@ $(document).ready( function () {
                   switch(respuesta['bandera'])
                     {
                       case 1:
-                        var mensaje = "";
-                        $('#'+a+"_error").hide()
+                        var mensaje = "";                       
 
                         $.each(respuesta['mensaje'], function (a,b)
                               {
+                                //$('#'+a+"_error").show().attr('class').remove();
                                 $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
                               }                             
                           );                        

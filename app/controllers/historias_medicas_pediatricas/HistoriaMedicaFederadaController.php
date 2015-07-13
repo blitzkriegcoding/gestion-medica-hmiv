@@ -102,6 +102,16 @@ class HistoriaMedicaFederadaController extends \BaseController
 				return IntoleranciasPacientePediatrico::guardarIntoleranciaPaciente(Input::all());
 			}
 
+		public function borrar_alergia_guardada()
+			{
+				return AlergiasPacientePediatrico::borrarAlergiaPaciente(Input::all());
+			}
+
+		public function borrar_intolerancia_guardada()
+			{
+				return IntoleranciasPacientePediatrico::borrarIntoleranciaPaciente(Input::all());	
+			}
+
 
 
 		
