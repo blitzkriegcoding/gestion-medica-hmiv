@@ -111,6 +111,14 @@ class HistoriaMedicaFederadaController extends \BaseController
 			{
 				return IntoleranciasPacientePediatrico::borrarIntoleranciaPaciente(Input::all());	
 			}
+		public function obtener_hospitalizacion_paciente()
+			{
+				return Hospitalizacion::obtenerHistoricoHospitalizacionJSON();
+			}
+		public function cargar_hospitalizacion_nueva()
+			{
+				return Hospitalizacion::cargarHospitalizacionNueva(Input::all());
+			}
 
 
 

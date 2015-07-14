@@ -59,6 +59,8 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::get('obtener_alergias_paciente',											['uses' =>	'HistoriaMedicaFederadaController@obtener_alergias_paciente' ]);
 		Route::get('obtener_intolerancias_paciente',									['uses' =>	'HistoriaMedicaFederadaController@obtener_intolerancias_paciente']);
 		Route::get('historia_medica_paciente/{id_paciente_pediatrico}',					['uses' =>	'HistoriaMedicaPediatricaController@historia_medica_paciente']);
+		Route::get('obtener_hospitalizacion_paciente',									['uses' =>	'HistoriaMedicaFederadaController@obtener_hospitalizacion_paciente']);
+
 		
 		/*TODOS LOS POST*/
 		Route::post('cola_consultas',													['uses' => 	'HistoriaMedicaFederadaController@verificar_cola_consultas']);
@@ -73,6 +75,7 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::post('cargar_intolerancia_nueva',										['uses'	=>	'HistoriaMedicaFederadaController@cargar_intolerancia_nueva']);
 		Route::post('borrar_alergia_guardada',											['uses'	=>	'HistoriaMedicaFederadaController@borrar_alergia_guardada']);
 		Route::post('borrar_intolerancia_guardada',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_intolerancia_guardada']);
+		Route::post('cargar_hospitalizacion_nueva',										['uses'	=>	'HistoriaMedicaFederadaController@cargar_hospitalizacion_nueva']);
 		
 
 		

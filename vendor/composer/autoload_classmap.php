@@ -34,6 +34,7 @@ return array(
     'HistoriaMedicaPediatrica' => $baseDir . '/app/models/historias_medicas_pediatricas/HistoriaMedicaPediatrica.php',
     'HistoriaMedicaPediatricaController' => $baseDir . '/app/controllers/historias_medicas_pediatricas/HistoriaMedicaPediatricaController.php',
     'HomeController' => $baseDir . '/app/controllers/HomeController.php',
+    'Hospitalizacion' => $baseDir . '/app/models/historias_medicas_pediatricas/Hospitalizacion.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
     'IngresoPacientePediatrico' => $baseDir . '/app/models/pacientes_pediatricos/IngresoPacientePediatrico.php',
     'Intolerancias' => $baseDir . '/app/models/modelos_complementarios/Intolerancias.php',

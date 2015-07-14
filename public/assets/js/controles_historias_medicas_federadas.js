@@ -101,6 +101,28 @@ $(document).ready( function () {
                           ],
         });
 
+    var tabla_hospitalizacion = $('#historico_hospitalizacion').DataTable(
+        {
+              'searching':  false,
+              'ordering':   true,
+              "pageLength": 4,
+              "lengthChange": false,
+              "ajax": 
+                      {
+                          "type"    : "GET",
+                          "url"     : "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_hospitalizacion_paciente",
+                          "dataSrc" : ""                          
+                      },
+              'columns' : [
+                            { "data" : "num_hos"      },
+                            { "data" : "fecha"        },
+                            { "data" : "sala"         },
+                            { "data" : "codigo_cama"  },
+                            { "data" : "piso"         },
+                            { "data" : "pruebas"      },
+                          ],
+        });    
+
 
       $('#consultas_historico').delegate("button","click", function(event)
 
@@ -316,7 +338,8 @@ $(document).ready( function () {
         }
       rangoFechaConsultas('fecha_consulta_paciente',15);
       rangoFechaConsultas('fecha_aplicacion_vacuna',0);
-
+      rangoFechaConsultas('fecha_examen_paciente',0);
+      rangoFechaConsultas('fecha_hospitalizacion_paciente',0);
 
 
       function verificarColaConsultas()
@@ -597,6 +620,50 @@ $(document).ready( function () {
             });            
         }   
 
+      function cargarHospitalizacion()
+        {   
+            $.ajax({
+              //url: "http://localhost/hmiv/public/historias_medicas_pediatricas/cargar_alergia_nueva",
+              url: "../../historias_medicas_pediatricas/cargar_hospitalizacion_nueva",
+              type: "POST",
+              data: { 
+                        'fecha_hospitalizacion'           : $('#fecha_hospitalizacion').val(),
+                        'piso_hospitalizacion'            : $('#piso_hospitalizacion').val(),
+                        'sala_hospitalizacion'            : $('#sala_hospitalizacion').val(),
+                        'codigo_cama_hospitalizacion'     : $('#codigo_cama_hospitalizacion').val(),
+                        'observaciones_hospitalizacion'   : $('#observaciones_hospitalizacion').val(),
+                    },
+              contentType: 'application/x-www-form-urlencoded',
+              dataType: 'json',
+              success: function(respuesta) 
+                {                 
+                  switch(respuesta['bandera'])
+                    {
+                      case 1:
+                        var mensaje = "";
+                        $.each(respuesta['mensaje'], function (a,b)
+                              {
+                                $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
+                              }                             
+                          );                        
+                      break;
+
+                      case 2:                        
+                        $('#mensaje_alergia_intolerancia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                      break;
+
+                      
+
+                    }
+                  tabla_hospitalizacion.ajax.reload();
+                },
+              error: function(respuesta)
+                {
+                 
+                }
+
+            });            
+        }   
 
 
   $('#visualiza_cola').on('click', function () {    
@@ -638,6 +705,12 @@ $(document).ready( function () {
     cargarIntolerancia();
     $btn.button('reset');
   });
+
+    $('#carga_hospitalizacion').on('click', function () {    
+    var $btn = $(this).button('loading');
+    cargarHospitalizacion();
+    $btn.button('reset');
+  });    
 
 
 

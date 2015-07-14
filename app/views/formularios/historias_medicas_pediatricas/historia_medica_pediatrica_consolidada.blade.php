@@ -508,7 +508,84 @@
 	    	</div>		    	
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="ingresos_hospitalizacion">
-	    	Seccion de ingresos por hospitalizacion
+	    	<div class="col-xs-12">
+	    		<h4>Sección de ingresos por hospitalización</h4>
+	    		<br>
+		    	<div class="col-xs-5">
+					<div class="panel panel-primary ">
+					  <div class="panel-heading">
+					  	<strong>Datos de ingreso por hospitalización</strong>
+					  	</div>
+					  <div class="panel-body">
+					  	<div class="form-group">
+							<label for="fecha_hospitalizacion">
+						  		Fecha de hospitalización:
+						  	</label>
+					    	<div class="input-group date" id='fecha_hospitalizacion_paciente' style="width:75%">
+	              				{{Form::text('fecha_hospitalizacion',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_hospitalizacion',  'readonly'=>'' )) }} <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	            			</div>
+	            			<div style="display:none" id="fecha_hospitalizacion_error" role="alert"></div>
+	            			<br>
+	            			<label for="piso">
+	            				Piso:
+	            			</label>
+	            				{{Form::select('piso_hospitalizacion',array(''=>'SELECCIONE','1' => 'PISO 1','2' => 'PISO 2', '3' => 'PISO 3', '4' => 'PISO 4'  ),'',array('class'=>'form-control','id'=>'piso_hospitalizacion','style'=>'width: 75%')) }}
+	            				<div style="display:none" id="piso_hospitalizacion_error" role="alert"></div>
+	            			<br>
+	            			<label for="sala">
+	            				Sala:
+	            			</label>
+	            				{{Form::text('sala_hospitalizacion',NULL ,array('class'=>'form-control','style'=>'width: 75%', 'id'=>'sala_hospitalizacion'))}}
+								<div style="display:none" id="sala_hospitalizacion_error" role="alert"></div>
+							<br>	            			
+	            			<label for="codigo_cama">
+	            				Código cama:
+	            			</label>	            				
+	            				{{Form::text('codigo_cama_hospitalizacion',NULL ,array('class'=>'form-control','style'=>'width: 75%', 'id'=>'codigo_cama_hospitalizacion'))}}
+	            				<div style="display:none" id="codigo_cama_hospitalizacion_error" role="alert"></div>
+							<br>
+	            			<label for="observaciones_hospitalizacion">
+	            				Observaciones de hospitalización
+	            			</label>
+	            				{{Form::textarea('observaciones_hospitalizacion','',array('class'=>'form-control ', 'id'=>'observaciones_hospitalizacion', 'size'=>'20x6', 'style'=>'resize:none'))}}
+	            				<div style="display:none" id="observaciones_hospitalizacion_error" role="alert"></div>
+					    	<br>
+					    	<div class="col-xs-12">
+							   	<button type="button" id="carga_hospitalizacion" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+										Guardar hospitalización
+								</button>
+					    	</div>
+					  	</div>
+					  </div>
+					</div>
+		    	</div>
+		    	<div class="col-xs-7">
+					<div class="panel panel-primary ">
+					  <div class="panel-heading">
+					  	<strong>Historico de hospitalización</strong>
+					  </div>
+					  <div class="panel-body">
+				    	<table id="historico_hospitalizacion" class="display compact">
+						    <thead>
+						        <tr>
+						            <th class="text-center">N°</th>
+						            <th class="text-center">Fecha<br>hospitalización</th>
+						            <th class="text-center">Piso</th>
+						            <th class="text-center">Sala</th>
+						            <th class="text-center">Cama</th>
+						            <th class="text-center">Detalles</th>
+						        </tr>
+						    </thead>						    
+							<tbody class="text-center">									        
+							</tbody>
+						</table>					  	
+					  </div>
+					</div>
+					<br>
+					<div role="alert" id='mensaje_hospitalizacion' style="display:none" >						
+					</div>
+		    	</div>
+	    	</div>
 	    </div>	
 	    <div role="tabpanel" class="tab-pane fade" id="altas_medicas">
 	    	Seccion de Altas medicas
@@ -524,6 +601,48 @@
 	</div>
   </div>
 </div>
-
-
 </div>
+{{-- VENTANA MODAL PARA CERRAR LAS CONSULTAS MEDICAS --}}
+
+<div class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Cierre de consulta medica</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-4">.col-md-4</div>
+            <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+            <div class="col-md-2 col-md-offset-4">.col-md-2 .col-md-offset-4</div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-9">
+              Level 1: .col-sm-9
+              <div class="row">
+                <div class="col-xs-8 col-sm-6">
+                  Level 2: .col-xs-8 .col-sm-6
+                </div>
+                <div class="col-xs-4 col-sm-6">
+                  Level 2: .col-xs-4 .col-sm-6
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar ventana</button>
+        <button type="button" class="btn btn-primary">Cerrar consulta</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
