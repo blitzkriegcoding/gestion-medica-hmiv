@@ -76,7 +76,8 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::post('borrar_alergia_guardada',											['uses'	=>	'HistoriaMedicaFederadaController@borrar_alergia_guardada']);
 		Route::post('borrar_intolerancia_guardada',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_intolerancia_guardada']);
 		Route::post('cargar_hospitalizacion_nueva',										['uses'	=>	'HistoriaMedicaFederadaController@cargar_hospitalizacion_nueva']);
-		
+		Route::post('borrar_hospitalizacion_guardada',									['uses'	=>	'HistoriaMedicaFederadaController@borrar_hospitalizacion_guardada']);
+		//borrar_hospitalizacion_guardada
 
 		
 		/*RUTAS PARA CONSULTA VIA AJAX*/

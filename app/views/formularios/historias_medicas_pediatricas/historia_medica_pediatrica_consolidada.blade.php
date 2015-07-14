@@ -52,7 +52,7 @@
 	    	<br>
 				<div class="col-xs-12">
 	    			<div class="row">
-		    			<div class="col-xs-6">		    				
+		    			<div class="col-xs-5">		    				
 							<div class="panel panel-primary">
 							  <div class="panel-heading">								  	
 							  		<strong>Programar consulta médica</strong>
@@ -83,7 +83,7 @@
 							    	 <div class="col-xs-12">
 							    	 	<div class="col-xs-6">
 									    	<button type="button" id="visualiza_cola" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
-											  Ver cola de pacientes
+											  Ver cola
 											</button>								    	 		
 							    	 	</div>
 							    	 	<div class="col-xs-6">
@@ -98,7 +98,7 @@
 							</div>							
 		    			</div>
 
-		    			<div class="col-xs-6">
+		    			<div class="col-xs-7">
 		    			{{-- COLAS Y MENSAJES --}}	
 						{{--FIN COLAS Y MENSAJES --}}
 							<div class="panel panel-primary">
@@ -114,28 +114,8 @@
 									            <th class="text-center">¿Asistió?</th>
 									        </tr>
 									    </thead>
-									    @if(!empty($consultas_historico))
-										    <tbody class="text-center">
-											    @foreach($consultas_historico as $llave)
-											        <tr>
-											            <td>
-											            	<?php
-											            		$fecha = new DateTime($llave->fecha_consulta);
-											            	?>
-											            	{{ $fecha->format('d/m/Y') }} </td>
-											            <td>{{ $llave->especialidad }}</td>
-											            <td>
-											            	<?php
-											            		if(empty($llave->asistio_consulta))
-												            		{
-												            			echo "EN PROCESO";
-												            		}
-											            	?>																
-											            </td>
-											        </tr>
-											    @endforeach										        
-										    </tbody>
-									   	@endif
+									    <tbody class="text-center">									        
+										</tbody>									   	
 									</table>
 								</div>
 							</div>
@@ -167,7 +147,7 @@
 		    		Carga de exámenes médicos
 		    	</h4>	    	
 		    	<br>
-		    	<div class="col-xs-6">
+		    	<div class="col-xs-5">
 					<div class="panel panel-primary ">
 					  <div class="panel-heading">
 					  	<strong>Exámenes médicos realizados </strong>
@@ -179,11 +159,12 @@
 						  	</label>
 					    	<div class="input-group date" id='fecha_examen_paciente' style="width:75%">
 	              				{{Form::text('fecha_examen',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_examen',  'readonly'=>'' ))}}<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-	            			</div>
+	            			</div><br>
 	            			<label for="medico_ordenante">
 	            				Médico ordenante:
 	            			</label>
-	            				{{Form::select('medico_ordenante',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'medico_ordenante','style'=>'width: 75%')) }}
+	            				{{Form::select('medico_ordenante',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'medico_ordenante','style'=>'width: 100%')) }}
+	            			<br>
 	            			<label for="descripcion_examen">
 	            				Detalles del exámen:
 	            			</label>
@@ -193,7 +174,7 @@
 					  </div>
 					</div>
 		    	</div>
-		    	<div class="col-xs-6">
+		    	<div class="col-xs-7">
 		    		<div class="panel panel-primary ">
 					  <div class="panel-heading">
 					  	<strong>Archivos adjuntos </strong>
@@ -315,7 +296,6 @@
 								</button>
 							</div>
 								<br><br><br>
-
 						  	<div class="form-group">
 		            			<label for="intolerancia_detectada">
 		            				Intolerancia detectada:
@@ -338,9 +318,6 @@
 						<div role="alert" id='mensaje_alergia_intolerancia' style="display:none">
 						</div>							
 			    	</div>
-
-
-
 			    	<div class="col-xs-6">
 						<div class="panel panel-primary">
 						  <div class="panel-heading">
@@ -511,7 +488,7 @@
 	    	<div class="col-xs-12">
 	    		<h4>Sección de ingresos por hospitalización</h4>
 	    		<br>
-		    	<div class="col-xs-5">
+		    	<div class="col-xs-4">
 					<div class="panel panel-primary ">
 					  <div class="panel-heading">
 					  	<strong>Datos de ingreso por hospitalización</strong>
@@ -559,7 +536,7 @@
 					  </div>
 					</div>
 		    	</div>
-		    	<div class="col-xs-7">
+		    	<div class="col-xs-8">
 					<div class="panel panel-primary ">
 					  <div class="panel-heading">
 					  	<strong>Historico de hospitalización</strong>
@@ -568,11 +545,13 @@
 				    	<table id="historico_hospitalizacion" class="display compact">
 						    <thead>
 						        <tr>
-						            <th class="text-center">N°</th>
-						            <th class="text-center">Fecha<br>hospitalización</th>
+						            <th class="text-center" style="width:5%">N°</th>
+						            <th class="text-center">Fecha</th>
 						            <th class="text-center">Piso</th>
 						            <th class="text-center">Sala</th>
 						            <th class="text-center">Cama</th>
+						            <th class="text-center">¿Alta?</th>
+						            <th class="text-center">¿Borrar?</th>						            
 						            <th class="text-center">Detalles</th>
 						        </tr>
 						    </thead>						    
@@ -582,13 +561,17 @@
 					  </div>
 					</div>
 					<br>
-					<div role="alert" id='mensaje_hospitalizacion' style="display:none" >						
-					</div>
+
+				<div class="alert alert-info alert-dismissible text-center" role="alert" id='mensaje_hospitalizacion' style="display:none">
+				  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>				  
+				</div>					
 		    	</div>
 	    	</div>
 	    </div>	
 	    <div role="tabpanel" class="tab-pane fade" id="altas_medicas">
-	    	Seccion de Altas medicas
+	    	<div class="col-xs-12">
+	    		<h4>Seccion de Altas medicas</h4>
+	    	</div> 
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="ordenes_medicas">
 	    	Seccion de Altas medicas

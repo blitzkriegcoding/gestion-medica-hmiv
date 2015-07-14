@@ -8,7 +8,7 @@ $(document).ready( function () {
               "ajax": 
                       {
                           "type"    : "GET",
-                          "url"     : "http://localhost/hmiv/public/historias_medicas_pediatricas/recargar_historico_consultas",
+                          "url"     : "../../historias_medicas_pediatricas/recargar_historico_consultas",
                           "dataSrc" : ""
                       },
               'columns' : [
@@ -27,7 +27,7 @@ $(document).ready( function () {
               "ajax": 
                       {
                           "type"    : "GET",
-                          "url"     : "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_historico_vacunas",
+                          "url"     : "../../historias_medicas_pediatricas/obtener_historico_vacunas",
                           "dataSrc" : ""
                           
                       },
@@ -38,10 +38,7 @@ $(document).ready( function () {
                             { "data" : "refuerzo"         },
                             { "data" : "boton_quitar"     },
                           ],
-        }); 
-
-
-      //$('#tabla_resultados').delegate("button","click", function(event)
+        });
 
     var tabla_patologias = $('#patologias_historico').DataTable(
         {
@@ -52,7 +49,7 @@ $(document).ready( function () {
               "ajax": 
                       {
                           "type"    : "GET",
-                          "url"     : "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_patologias_paciente",
+                          "url"     : "../../historias_medicas_pediatricas/obtener_patologias_paciente",
                           "dataSrc" : ""                          
                       },
               'columns' : [
@@ -60,8 +57,7 @@ $(document).ready( function () {
                             { "data" : "patologia"  },
                             { "data" : "borrar"  },
                           ],
-        });     
-
+        });
 
     var tabla_alergias = $('#alergias_historico').DataTable(
         {
@@ -72,7 +68,7 @@ $(document).ready( function () {
               "ajax": 
                       {
                           "type"    : "GET",
-                          "url"     : "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_alergias_paciente",
+                          "url"     : "../../historias_medicas_pediatricas/obtener_alergias_paciente",
                           "dataSrc" : ""                          
                       },
               'columns' : [
@@ -91,7 +87,7 @@ $(document).ready( function () {
               "ajax": 
                       {
                           "type"    : "GET",
-                          "url"     : "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_intolerancias_paciente",
+                          "url"     : "../../historias_medicas_pediatricas/obtener_intolerancias_paciente",
                           "dataSrc" : ""                          
                       },
               'columns' : [
@@ -110,7 +106,7 @@ $(document).ready( function () {
               "ajax": 
                       {
                           "type"    : "GET",
-                          "url"     : "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_hospitalizacion_paciente",
+                          "url"     : "../../historias_medicas_pediatricas/obtener_hospitalizacion_paciente",
                           "dataSrc" : ""                          
                       },
               'columns' : [
@@ -119,7 +115,9 @@ $(document).ready( function () {
                             { "data" : "sala"         },
                             { "data" : "codigo_cama"  },
                             { "data" : "piso"         },
-                            { "data" : "pruebas"      },
+                            { "data" : "alta"         },
+                            { "data" : "borrar"       },                            
+                            { "data" : "detalles"     },
                           ],
         });    
 
@@ -129,15 +127,13 @@ $(document).ready( function () {
               {
                     var obj = this;                    
                     $.ajax({
-                      url: "http://localhost/hmiv/public/historias_medicas_pediatricas/anular_consulta_medica",
+                      url: "../../historias_medicas_pediatricas/anular_consulta_medica",
                       type: "POST",
                       data: { 'id_consulta_paciente': obj.id },
                       contentType: 'application/x-www-form-urlencoded',
                       dataType: 'json',
                       success: function(respuesta) 
-                        {                 
-                          //alert(respuesta['cola']);
-                          //$('#cola').show().attr('class','label label-success').html(respuesta['cola']);
+                        { 
                           $('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
                           tabla.ajax.reload();
                         },
@@ -157,16 +153,13 @@ $(document).ready( function () {
               {
                     var obj = this;                    
                     $.ajax({
-                      url: "http://localhost/hmiv/public/historias_medicas_pediatricas/borrar_vacuna_aplicada",
+                      url: "../../historias_medicas_pediatricas/borrar_vacuna_aplicada",
                       type: "POST",
                       data: { 'id_vacuna': obj.id },
                       contentType: 'application/x-www-form-urlencoded',
                       dataType: 'json',
                       success: function(respuesta) 
-                        {                 
-                          //alert(respuesta['cola']);
-                          //$('#cola').show().attr('class','label label-success').html(respuesta['cola']);
-                          //$('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                        { 
                           switch(respuesta['bandera'])
                             {
                               case 1:
@@ -196,7 +189,7 @@ $(document).ready( function () {
               {
                     var obj = this;                    
                     $.ajax({
-                      url: "http://localhost/hmiv/public/historias_medicas_pediatricas/borrar_patologia_guardada",
+                      url: "../../historias_medicas_pediatricas/borrar_patologia_guardada",
                       type: "POST",
                       data: { 'id_patologia_historia': obj.id },
                       contentType: 'application/x-www-form-urlencoded',
@@ -237,7 +230,7 @@ $(document).ready( function () {
               {
                     var obj = this;                    
                     $.ajax({
-                      url: "http://localhost/hmiv/public/historias_medicas_pediatricas/borrar_alergia_guardada",
+                      url: "../../historias_medicas_pediatricas/borrar_alergia_guardada",
                       type: "POST",
                       data: { 'alergia_detectada': obj.id },
                       contentType: 'application/x-www-form-urlencoded',
@@ -253,12 +246,12 @@ $(document).ready( function () {
                                 var mensaje = "";
                                 $.each(respuesta['mensaje'], function (a,b)
                                       {
-                                        $('#mensaje_patologia').show().attr('class',respuesta['clase']).html(b);
+                                        $('#mensaje_alergia_intolerancia').show().attr('class',respuesta['clase']).html(b);
                                       }                             
                                   );                                
                               break;
                               case 2:                                
-                                $('#mensaje_patologia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                                $('#mensaje_alergia_intolerancia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
                               break;
                             }                          
                           tabla_alergias.ajax.reload();
@@ -276,7 +269,7 @@ $(document).ready( function () {
               {
                     var obj = this;                    
                     $.ajax({
-                      url: "http://localhost/hmiv/public/historias_medicas_pediatricas/borrar_intolerancia_guardada",
+                      url: "../../historias_medicas_pediatricas/borrar_intolerancia_guardada",
                       type: "POST",
                       data: { 'intolerancia_detectada': obj.id },
                       contentType: 'application/x-www-form-urlencoded',
@@ -292,17 +285,56 @@ $(document).ready( function () {
                                 var mensaje = "";
                                 $.each(respuesta['mensaje'], function (a,b)
                                       {
-                                        $('#mensaje_patologia').show().attr('class',respuesta['clase']).html(b);
+                                        $('#mensaje_alergia_intolerancia').show().attr('class',respuesta['clase']).html(b);
                                       }                             
                                   );                                
                               break;
                               case 2:                                
-                                $('#mensaje_patologia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                                $('#mensaje_alergia_intolerancia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
                               break;
                             }        
 
                                               
                           tabla_intolerancias.ajax.reload();
+                        },
+                      error: function(respuesta)
+                        {
+
+                        }
+
+                    });
+              }
+          );
+
+//Para el borrado de hospitalizacion del paciente
+      $('#historico_hospitalizacion').delegate("button.btn-danger","click", function(event)
+              {
+                    var obj = this;                    
+                    $.ajax({
+                      url: "../../historias_medicas_pediatricas/borrar_hospitalizacion_guardada",
+                      type: "POST",
+                      data: { 'id_hospitalizacion': obj.id },
+                      contentType: 'application/x-www-form-urlencoded',
+                      dataType: 'json',
+                      success: function(respuesta) 
+                        {                 
+                          switch(respuesta['bandera'])
+                            {
+                              case 1:
+                                var mensaje = "";
+                                $.each(respuesta['mensaje'], function (a,b)
+                                      {
+                                        $('#mensaje_hospitalizacion').show().attr('class',respuesta['clase']).html(b);
+                                      }                             
+                                  );                                
+                              break;
+                              case 2:                                
+                                $('#mensaje_hospitalizacion').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                              break;
+                            }        
+
+                                              
+                          tabla_hospitalizacion.ajax.reload();
                         },
                       error: function(respuesta)
                         {
@@ -349,7 +381,7 @@ $(document).ready( function () {
             $('#turno_consulta_error').hide();
 
             $.ajax({
-              url: "http://localhost/hmiv/public/historias_medicas_pediatricas/cola_consultas",
+              url: "../../historias_medicas_pediatricas/cola_consultas",
               type: "POST",
               data: { 'fecha_consulta': $('#fecha_consulta').val(), 'especialidad_consulta': $('#especialidad_consulta').val(), 'turno_consulta': $('#turno_consulta').val() },
               contentType: 'application/x-www-form-urlencoded',
@@ -399,7 +431,7 @@ $(document).ready( function () {
       function cargarConsulta()
         {   
             $.ajax({
-              url: "http://localhost/hmiv/public/historias_medicas_pediatricas/cargar_consulta_nueva",
+              url: "../../historias_medicas_pediatricas/cargar_consulta_nueva",
               type: "POST",
               data: { 'fecha_consulta': $('#fecha_consulta').val(), 'especialidad_consulta': $('#especialidad_consulta').val(), 'turno_consulta': $('#turno_consulta').val() },
               contentType: 'application/x-www-form-urlencoded',
@@ -460,7 +492,7 @@ $(document).ready( function () {
 
 
             $.ajax({
-              url: "http://localhost/hmiv/public/historias_medicas_pediatricas/cargar_vacuna_nueva",
+              url: "../../historias_medicas_pediatricas/cargar_vacuna_nueva",
               type: "POST",
               data: { 'fecha_vacuna': $('#fecha_vacuna').val(), 'vacuna_aplicada': $('#vacuna_aplicada').val(), 'refuerzo_vacuna': $('#refuerzo_vacuna').val() },
               contentType: 'application/x-www-form-urlencoded',
@@ -506,7 +538,7 @@ $(document).ready( function () {
       function cargarPatologia()
         {   
             $.ajax({
-              url: "http://localhost/hmiv/public/historias_medicas_pediatricas/cargar_patologia_nueva",
+              url: "../../historias_medicas_pediatricas/cargar_patologia_nueva",
               type: "POST",
               data: { 'patologia_detectada': $('#patologia_detectada').val() },
               contentType: 'application/x-www-form-urlencoded',
@@ -543,7 +575,7 @@ $(document).ready( function () {
       function cargarAlergia()
         {   
             $.ajax({
-              //url: "http://localhost/hmiv/public/historias_medicas_pediatricas/cargar_alergia_nueva",
+              //url: "../../historias_medicas_pediatricas/cargar_alergia_nueva",
               url: "../../historias_medicas_pediatricas/cargar_alergia_nueva",
               type: "POST",
               data: { 'alergia_detectada': $('#alergia_detectada').val() },
@@ -582,7 +614,7 @@ $(document).ready( function () {
       function cargarIntolerancia()
         {   
             $.ajax({
-              //url: "http://localhost/hmiv/public/historias_medicas_pediatricas/cargar_alergia_nueva",
+              //url: "../../historias_medicas_pediatricas/cargar_alergia_nueva",
               url: "../../historias_medicas_pediatricas/cargar_intolerancia_nueva",
               type: "POST",
               data: { 'intolerancia_detectada': $('#intolerancia_detectada').val() },
@@ -594,10 +626,8 @@ $(document).ready( function () {
                     {
                       case 1:
                         var mensaje = "";                       
-
                         $.each(respuesta['mensaje'], function (a,b)
-                              {
-                                //$('#'+a+"_error").show().attr('class').remove();
+                              {                                
                                 $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
                               }                             
                           );                        
@@ -622,8 +652,7 @@ $(document).ready( function () {
 
       function cargarHospitalizacion()
         {   
-            $.ajax({
-              //url: "http://localhost/hmiv/public/historias_medicas_pediatricas/cargar_alergia_nueva",
+            $.ajax({              
               url: "../../historias_medicas_pediatricas/cargar_hospitalizacion_nueva",
               type: "POST",
               data: { 
@@ -649,11 +678,8 @@ $(document).ready( function () {
                       break;
 
                       case 2:                        
-                        $('#mensaje_alergia_intolerancia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                        $('#mensaje_hospitalizacion').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
                       break;
-
-                      
-
                     }
                   tabla_hospitalizacion.ajax.reload();
                 },
@@ -718,7 +744,7 @@ $(document).ready( function () {
         language: "es",        
         ajax: {    
           url: function(params) {  
-              return "http://localhost/hmiv/public/medicos/obtener_especialidades_medicas/"+params.term; 
+              return "../../medicos/obtener_especialidades_medicas/"+params.term; 
               //return "hmiv/public/medicos/obtener_especialidades_medicas/"+params.term; 
             },
           dataType: 'json',
@@ -756,7 +782,7 @@ $(document).ready( function () {
         language: "es",        
         ajax: {    
           url: function(params) {  
-              return "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_vacuna/"+params.term; 
+              return "../../historias_medicas_pediatricas/obtener_vacuna/"+params.term; 
               //return "hmiv/public/medicos/obtener_especialidades_medicas/"+params.term; 
             },
           dataType: 'json',
@@ -795,7 +821,7 @@ $(document).ready( function () {
         ajax: {    
           url: function(params) 
             {  
-              return "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_patologia/"+params.term;
+              return "../../historias_medicas_pediatricas/obtener_patologia/"+params.term;
             },
           dataType: 'json',
           delay: 50,
@@ -833,7 +859,7 @@ $(document).ready( function () {
         ajax: {    
           url: function(params) 
             {  
-              //return "http://localhost/hmiv/public/historias_medicas_pediatricas/obtener_alergias/"+params.term;
+              //return "../../historias_medicas_pediatricas/obtener_alergias/"+params.term;
               return "../../historias_medicas_pediatricas/obtener_alergias/"+params.term;
             },
           dataType: 'json',

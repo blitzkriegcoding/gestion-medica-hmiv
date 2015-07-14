@@ -7,14 +7,10 @@ class HistoriaMedicaFederadaController extends \BaseController
 				Session::put('id_paciente_pediatrico',$id_paciente_pediatrico);
 				$consultas_historico 		= ConsultasPacientePediatrico::listarConsultasHistoricoInicial();				
 				$vacunas_historico			= VacunasPaciente::obtenerHistoricoVacunas();
-				$datos_paciente_historia	= HistoriaMedicaPediatrica::datosPacienteHistoria();
-
-				
+				$datos_paciente_historia	= HistoriaMedicaPediatrica::datosPacienteHistoria();				
 				
 				return View::make('historias_medicas_pediatricas.crear_historia_medica_federada')->with(['consultas_historico' => $consultas_historico,'vacunas_historico' => $vacunas_historico,'datos_paciente_historia' => $datos_paciente_historia]);
-
-				#$patologias_paciente		= PatologiasPacientePediatrico::obtenerPatologiasPaciente();
-				
+				#$patologias_paciente		= PatologiasPacientePediatrico::obtenerPatologiasPaciente();				
 				return View::make('historias_medicas_pediatricas.crear_historia_medica_federada')->with(
 					[
 					'consultas_historico' 		=> $consultas_historico,
@@ -22,7 +18,6 @@ class HistoriaMedicaFederadaController extends \BaseController
 					'datos_paciente_historia' 	=> $datos_paciente_historia,
 					/*'patologias_paciente'		=> $patologias_paciente*/
 					]);
-
 			}
 		public function verificar_cola_consultas()
 			{				
@@ -118,6 +113,10 @@ class HistoriaMedicaFederadaController extends \BaseController
 		public function cargar_hospitalizacion_nueva()
 			{
 				return Hospitalizacion::cargarHospitalizacionNueva(Input::all());
+			}
+		public function borrar_hospitalizacion_guardada()
+			{
+				return Hospitalizacion::borrarHospitalizacionGuardada(Input::all());
 			}
 
 
