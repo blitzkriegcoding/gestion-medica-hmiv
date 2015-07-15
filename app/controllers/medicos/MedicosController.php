@@ -28,5 +28,9 @@ class MedicosController extends \BaseController
 
 				}			
 		}
+	public function obtener_medico($medico)
+		{
+			return Medicos::obtenerMedicoJSON($medico);
+		}
 
 }

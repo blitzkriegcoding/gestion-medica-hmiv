@@ -778,6 +778,46 @@ $(document).ready( function () {
         //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
       });
 
+   $("#medico_ordenante").select2({
+        language: "es",        
+        ajax: {    
+          url: function(params) {  
+              return "../../medicos/obtener_medico/"+params.term; 
+              //return "hmiv/public/medicos/obtener_especialidades_medicas/"+params.term; 
+            },
+          dataType: 'json',
+          delay: 50,
+          data: function (params) {
+          },
+          processResults: function (data, page) {
+            // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data
+            //alert(data);
+            var resultados = [];
+            $.each(data, function (index, item) {
+                  resultados.push({
+                      'id': item.id_medico,
+                      'text': item.medico
+                  });
+              });
+                  
+            return {        
+              //results: data
+              results: resultados
+            };
+          },
+          cache: true
+        },
+        
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 1,  
+        //templateResult: formatRepo, // omitted for brevity, see the source of this page
+        //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+      });
+
+
+
    $("#vacuna_aplicada").select2({
         language: "es",        
         ajax: {    

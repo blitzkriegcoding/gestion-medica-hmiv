@@ -359,4 +359,23 @@ class Medicos extends \Eloquent {
 
 				}
 		}
+	public static function obtenerMedicoJSON($medico)
+		{
+			$medicos = self::where('primer_nombre','like',strtoupper($medico)."%")
+											->orWhere('segundo_nombre','like',strtoupper($medico)."%")
+												->orWhere('primer_apellido','like',strtoupper($medico)."%")
+													->orWhere('segundo_apellido','like',strtoupper($medico)."%")
+														->select('id_medico',"primer_nombre", "segundo_nombre", "primer_apellido", "segundo_apellido")
+															->get();
+			$medicos_json = [];
+			foreach($medicos as $d)
+				{
+					$medicos_json[] = 	[
+											'id_medico'	=> 	$d->id_medico,
+											'medico'	=>	($d->primer_nombre." ".$d->segundo_nombre." ".$d->primer_apellido." ".$d->segundo_apellido)
+										];
+				}
+			return 	Response::json($medicos_json);
+
+		}
 }

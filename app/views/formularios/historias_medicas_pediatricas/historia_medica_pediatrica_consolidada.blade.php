@@ -159,17 +159,25 @@
 						  	</label>
 					    	<div class="input-group date" id='fecha_examen_paciente' style="width:75%">
 	              				{{Form::text('fecha_examen',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_examen',  'readonly'=>'' ))}}<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	              				<div style="display:none" id="fecha_examen_error" role="alert"></div>
 	            			</div><br>
 	            			<label for="medico_ordenante">
 	            				Médico ordenante:
 	            			</label>
 	            				{{Form::select('medico_ordenante',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'medico_ordenante','style'=>'width: 100%')) }}
-	            			<br>
+	            				<div style="display:none" id="medico_ordenante_error" role="alert"></div>
+	            			<br><br>
+	            			<label for="nombre_examen">
+	            				Nombre del exámen:
+	            			</label>	            				
+	            				{{Form::text('nombre_examen',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'nombre_examen'))}}
+	            				<div style="display:none" id="nombre_examen_error" role="alert"></div>
+							<br>
 	            			<label for="descripcion_examen">
 	            				Detalles del exámen:
 	            			</label>
 	            				{{Form::textarea('descripcion_examen','',array('class'=>'form-control ', 'id'=>'descripcion_examen', 'size'=>'30x4', 'style'=>'resize:none'))}}
-
+								<div style="display:none" id="descripcion_examen_error" role="alert"></div>
 					  	</div>
 					  </div>
 					</div>
