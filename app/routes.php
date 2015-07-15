@@ -60,6 +60,8 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::get('obtener_intolerancias_paciente',									['uses' =>	'HistoriaMedicaFederadaController@obtener_intolerancias_paciente']);
 		Route::get('historia_medica_paciente/{id_paciente_pediatrico}',					['uses' =>	'HistoriaMedicaPediatricaController@historia_medica_paciente']);
 		Route::get('obtener_hospitalizacion_paciente',									['uses' =>	'HistoriaMedicaFederadaController@obtener_hospitalizacion_paciente']);
+		Route::get('obtener_historico_examenes',										['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_examenes']);
+
 
 		
 		/*TODOS LOS POST*/

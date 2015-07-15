@@ -26,6 +26,7 @@ return array(
     'ExamenFisicoPediatrico' => $baseDir . '/app/models/examenes_pediatricos_diversos/ExamenFisicoPediatrico.php',
     'ExamenFuncionalPediatrico' => $baseDir . '/app/models/examenes_pediatricos_diversos/ExamenFuncionalPediatrico.php',
     'ExamenInterrogatorioPediatrico' => $baseDir . '/app/models/examenes_pediatricos_diversos/ExamenInterrogatorioPediatrico.php',
+    'ExamenesPediatricos' => $baseDir . '/app/models/examenes_hospital/ExamenesPediatricos.php',
     'ExamenesPediatricosController' => $baseDir . '/app/controllers/examenes_pediatricos_diversos/ExamenesPediatricosController.php',
     'GrupoExamenFisico' => $baseDir . '/app/models/pacientes_pediatricos/GrupoExamenFisico.php',
     'GrupoExamenFuncional' => $baseDir . '/app/models/pacientes_pediatricos/GrupoExamenFuncional.php',

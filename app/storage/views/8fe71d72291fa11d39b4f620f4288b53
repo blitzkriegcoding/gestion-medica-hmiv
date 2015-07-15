@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<?php echo asset('assets/datatables/media/css/jquery.dataTables.css'); ?> ">
     <link href="<?php echo asset('assets/formvalidation/dist/css/formValidation.css'); ?>" rel="stylesheet">
     
-    <link rel="stylesheet" href="<?php echo asset('assets/select2/dist/css/select2.min.css'); ?>">    
+    <link rel="stylesheet" href="<?php echo asset('assets/select2/dist/css/select2.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo asset('../vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css'); ?>">
   </head>
   

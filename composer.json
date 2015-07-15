@@ -10,7 +10,8 @@
 		"twitter/bootstrap": "3.3.*@dev",
 		"anahkiasen/former": "~3.5",
 		"barryvdh/laravel-debugbar": "~1.8",		
-		"zizaco/entrust": "1.2.*@dev"
+		"zizaco/entrust": "1.2.*@dev",
+		"kartik-v/bootstrap-fileinput": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

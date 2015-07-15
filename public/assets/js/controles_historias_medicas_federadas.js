@@ -18,6 +18,27 @@ $(document).ready( function () {
                           ],
         });
 
+     var tabla_examenes = $('#examenes_historico').DataTable(
+        {
+              'searching':  false,
+              'ordering':   true,
+              "pageLength": 3,
+              "lengthChange": false,
+              "ajax": 
+                      {
+                          "type"    : "GET",
+                          "url"     : "../../historias_medicas_pediatricas/obtener_historico_examenes",
+                          "dataSrc" : ""
+                      },
+              'columns' : [
+                            { "data" : "num_exa"        },
+                            { "data" : "fecha_examen"   },
+                            { "data" : "nombre_examen"  },
+                            { "data" : "detalles"       },
+                            { "data" : "borrar"         },
+                          ],
+        });     
+
     var tabla_vacunas = $('#vacunas_historico').DataTable(
         {
               'searching':  false,
@@ -112,9 +133,9 @@ $(document).ready( function () {
               'columns' : [
                             { "data" : "num_hos"      },
                             { "data" : "fecha"        },
-                            { "data" : "sala"         },
-                            { "data" : "codigo_cama"  },
                             { "data" : "piso"         },
+                            { "data" : "sala"         },
+                            { "data" : "codigo_cama"  },                            
                             { "data" : "alta"         },
                             { "data" : "borrar"       },                            
                             { "data" : "detalles"     },

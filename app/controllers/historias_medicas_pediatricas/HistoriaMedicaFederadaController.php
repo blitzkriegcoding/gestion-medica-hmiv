@@ -119,7 +119,10 @@ class HistoriaMedicaFederadaController extends \BaseController
 				return Hospitalizacion::borrarHospitalizacionGuardada(Input::all());
 			}
 
-
-
+		public function obtener_historico_examenes()
+			{
+				return ExamenesPediatricos::obtenerHistoricoExamenes();
+			}
 		
+
 	}

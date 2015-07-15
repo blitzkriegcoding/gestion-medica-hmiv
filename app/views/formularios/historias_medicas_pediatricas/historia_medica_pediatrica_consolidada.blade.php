@@ -151,7 +151,7 @@
 					<div class="panel panel-primary ">
 					  <div class="panel-heading">
 					  	<strong>Exámenes médicos realizados </strong>
-					  	</div>
+					  </div>
 					  <div class="panel-body">
 					  	<div class="form-group">
 							<label for="fecha_examen">
@@ -183,6 +183,28 @@
 					</div>
 		    	</div>
 		    	<div class="col-xs-7">
+					<div class="panel panel-primary ">
+					  <div class="panel-heading">
+					  	<strong>Histórico de exámenes realizados</strong>
+					  </div>
+					  <div class="panel-body">
+				    	<table id="examenes_historico" class="display compact">
+						    <thead>
+						        <tr>
+						        	<th class="text-center">N°</th>
+						            <th class="text-center">Fecha</th>
+						            <th class="text-center">Nombre éxamen</th>
+						            <th class="text-center">Detalles</th>
+						            <th class="text-center">¿Borrar?</th>
+						        </tr>
+						    </thead>						    
+							<tbody class="text-center">							
+							</tbody>
+						</table>					  	
+					  </div>
+					</div>
+
+
 		    		<div class="panel panel-primary ">
 					  <div class="panel-heading">
 					  	<strong>Archivos adjuntos </strong>

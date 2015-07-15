@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('assets/datatables/media/css/jquery.dataTables.css')  }} ">
     <link href="{{ asset('assets/formvalidation/dist/css/formValidation.css') }}" rel="stylesheet">
     
-    <link rel="stylesheet" href="{{ asset('assets/select2/dist/css/select2.min.css')}}">    
+    <link rel="stylesheet" href="{{ asset('assets/select2/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('../vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css')}}">
   </head>
   
