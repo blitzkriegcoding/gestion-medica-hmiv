@@ -1,4 +1,5 @@
 $(document).ready( function () {
+    $("#imagenes_examenes").fileinput({'showUpload':false, 'previewFileType':'any'});
      var tabla = $('#consultas_historico').DataTable(
         {
               'searching':  false,

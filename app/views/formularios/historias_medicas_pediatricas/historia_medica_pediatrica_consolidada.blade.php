@@ -224,7 +224,7 @@
 	            			<label for="archivos">
 	            				Archivos:
 	            			</label>
-	            				{{-- {{Form::textarea('descripcion_examen','',array('class'=>'form-control ', 'id'=>'descripcion_examen', 'size'=>'30x4', 'style'=>'resize:none'))}} --}}
+	            				<input id="imagenes_examenes" name="examenes[]" multiple=true type="file" class="file" data-preview-file-type="text">
 					  	</div>
 					  </div>
 					</div>	    		

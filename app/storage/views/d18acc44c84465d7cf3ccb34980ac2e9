@@ -1,0 +1,2 @@
+<script src="<?php echo asset('../vendor/kartik-v/bootstrap-fileinput/js/fileinput.min.js'); ?>" type="text/javascript"></script>
+<script src="<?php echo asset('../vendor/kartik-v/bootstrap-fileinput/js/fileinput_locale_es.js'); ?>" type="text/javascript"></script>
