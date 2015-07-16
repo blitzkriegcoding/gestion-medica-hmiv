@@ -123,6 +123,10 @@ class HistoriaMedicaFederadaController extends \BaseController
 			{
 				return ExamenesPediatricos::obtenerHistoricoExamenes();
 			}
+		public function guardar_examenes_medicos()
+			{
+				return ExamenesPediatricos::guardarExamenesMedicos(Input::all());
+			}
 		
 
 	}

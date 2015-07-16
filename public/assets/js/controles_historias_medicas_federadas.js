@@ -1,5 +1,28 @@
 $(document).ready( function () {
-    $("#imagenes_examenes").fileinput({'showUpload':false, 'previewFileType':'any'});
+    $("#imagenes_examenes").
+      fileinput(
+                  { 
+                    
+                    language:               'es',
+                    maxFileSize:            4096,
+                    showUpload:             true, 
+                    showPreview:            false,
+                    showCaption:            true,
+                    allowedFileExtensions:  ["jpg", "png", "bmp"],
+                    minFileCount:           1,
+                    maxFileCount:           10,
+                    uploadUrl:              '../../historias_medicas_pediatricas/guardar_examenes_medicos',
+                    uploadExtraData: function() 
+                            {
+                              return  {
+                                        'fecha_examen':       $('#fecha_examen').val(),
+                                        'medico_ordenante':   $('#medico_ordenante').val(),
+                                        'nombre_examen':      $('#nombre_examen').val(),
+                                        'descripcion_examen': $('#descripcion_examen').val()
+                                      };
+                            }
+                  }
+                );
      var tabla = $('#consultas_historico').DataTable(
         {
               'searching':  false,

@@ -79,6 +79,9 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::post('borrar_intolerancia_guardada',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_intolerancia_guardada']);
 		Route::post('cargar_hospitalizacion_nueva',										['uses'	=>	'HistoriaMedicaFederadaController@cargar_hospitalizacion_nueva']);
 		Route::post('borrar_hospitalizacion_guardada',									['uses'	=>	'HistoriaMedicaFederadaController@borrar_hospitalizacion_guardada']);
+		Route::post('guardar_examenes_medicos',											['uses'	=>	'HistoriaMedicaFederadaController@guardar_examenes_medicos']);
+		
+		//../../historias_medicas_pediatricas/recargar_historico_consultas
 		//borrar_hospitalizacion_guardada
 
 		

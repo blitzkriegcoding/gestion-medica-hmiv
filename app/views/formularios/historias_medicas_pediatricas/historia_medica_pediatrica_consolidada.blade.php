@@ -217,14 +217,14 @@
 			                </div>
 			                <div class="col-xs-10 column">
 			                    Apartado para cargar archivos de exámenes<br>
-			                      <strong>Instrucciones: </strong>Seleccione uno o más archivos de imagenes (jpg y/o png) o archivos pdf si posee de los examenes realizados.
+			                      <strong>Instrucciones: </strong>Seleccione uno o más archivos de imagenes (jpg, bmp, png) si posee de los examenes realizados.
 			                </div>
 			              </div>
 			              <br>							
 	            			<label for="archivos">
 	            				Archivos:
 	            			</label>
-	            				<input id="imagenes_examenes" name="examenes[]" multiple=true type="file" class="file" data-preview-file-type="text">
+	            				<input id="imagenes_examenes" name="examenes[]" type="file">
 					  	</div>
 					  </div>
 					</div>	    		

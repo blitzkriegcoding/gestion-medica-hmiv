@@ -34,5 +34,42 @@ class ExamenesPediatricos extends \Eloquent
 				return Response::json($examenes_json);
 			}
 
+		public static function guardarExamenesMedicos($input)
+			{
+
+				$reglas_datos_examenes = 	[
+												'fecha_examen'			=>	'required|date_format:d/m/Y',
+												'medico_ordenante'		=>	'required|exists:medicos,id_medico',
+												'nombre_examen'			=>	'required|regex:/[a-zA-Z0-9ñÑ\.\s\,-]+/',
+												'descripcion_examen'	=>	'required|regex:/[a-zA-Z0-9ñÑ\.\s\,-]+/',
+												/*'examenes'				=>	'required|image'*/
+											];
+
+				#return [$input['fecha_examen'], $input['medico_ordenante'], $input['nombre_examen'], $input['descripcion_examen']];
+				$mensajes_error = 	[
+										'required' 		=>	'Este campo es requerido',
+										'date_format'	=>	'Fecha inválida',										
+										'exists'		=>	'Debe seleccionar un valor correcto',
+										'regex'			=>	'Solo se aceptan letras, numeros, espacios en blanco, comas y puntos',
+										'image'			=>	'Solo se aceptan imagenes jpg, png, bmp'
+
+									];				
+
+				$validador_datos_examenes = Validator::make($input, $reglas_datos_examenes, $mensajes_error);
+				
+				if($validador_datos_examenes->fails())
+					{
+						return 	[
+									'mensaje'	=>	$validador_datos_examenes->messages(),
+									'clase'		=>	'alert alert-danger fade in',
+									'bandera'	=>	1
+								];
+					}
+				
+
+
+
+			}
+
 
 	}
