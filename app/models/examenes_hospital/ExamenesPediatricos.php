@@ -41,8 +41,7 @@ class ExamenesPediatricos extends \Eloquent
 												'fecha_examen'			=>	'required|date_format:d/m/Y',
 												'medico_ordenante'		=>	'required|exists:medicos,id_medico',
 												'nombre_examen'			=>	'required|regex:/[a-zA-Z0-9ñÑ\.\s\,-]+/',
-												'descripcion_examen'	=>	'required|regex:/[a-zA-Z0-9ñÑ\.\s\,-]+/',
-												/*'examenes'				=>	'required|image'*/
+												'descripcion_examen'	=>	'required|regex:/[a-zA-Z0-9ñÑ\.\s\,-]+/'												
 											];
 
 				#return [$input['fecha_examen'], $input['medico_ordenante'], $input['nombre_examen'], $input['descripcion_examen']];
@@ -53,7 +52,19 @@ class ExamenesPediatricos extends \Eloquent
 										'regex'			=>	'Solo se aceptan letras, numeros, espacios en blanco, comas y puntos',
 										'image'			=>	'Solo se aceptan imagenes jpg, png, bmp'
 
-									];				
+									];	
+				$imagenes = [];
+				$arreglo_imagenes 		= ['examenes'	=> 	[] ];
+				$reglas_imagenes		= ['examenes'	=>	[] ];
+				$validacion_imagenes	= [];
+				
+				foreach($input['examenes'] as $llave => $valor):					
+					$arreglo_imagenes['examenes'][$llave]	=	"examenes.".$llave;
+					$reglas_imagenes['examenes'][$llave]	=	["required", "image", "max:2097152"];
+				endforeach;
+
+				$validacion_imagenes = array_combine($arreglo_imagenes['examenes'] , $reglas_imagenes['examenes']);
+				$reglas_datos_examenes = array_merge($reglas_datos_examenes,$validacion_imagenes);
 
 				$validador_datos_examenes = Validator::make($input, $reglas_datos_examenes, $mensajes_error);
 				
@@ -65,6 +76,8 @@ class ExamenesPediatricos extends \Eloquent
 									'bandera'	=>	1
 								];
 					}
+
+
 				
 
 

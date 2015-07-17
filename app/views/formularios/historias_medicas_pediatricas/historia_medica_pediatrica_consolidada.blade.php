@@ -224,7 +224,7 @@
 	            			<label for="archivos">
 	            				Archivos:
 	            			</label>
-	            				<input id="imagenes_examenes" name="examenes[]" type="file">
+	            				<input id="imagenes_examenes" name="examenes[]" type="file" multiple>
 					  	</div>
 					  </div>
 					</div>	    		

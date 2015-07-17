@@ -1,6 +1,6 @@
 $(document).ready( function () {
-    $("#imagenes_examenes").
-      fileinput(
+    $("#imagenes_examenes")
+      .fileinput(
                   { 
                     
                     language:               'es',
@@ -22,7 +22,12 @@ $(document).ready( function () {
                                       };
                             }
                   }
-                );
+                )
+      .on('fileuploaderror', function(event, data, previewId, index) {
+            var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+            console.log('File upload error');
+        });
      var tabla = $('#consultas_historico').DataTable(
         {
               'searching':  false,
