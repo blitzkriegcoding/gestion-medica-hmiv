@@ -3,8 +3,8 @@ $(document).ready( function () {
       .fileinput(
                   { 
                     
-                    language:               'es',
-                    maxFileSize:            4096,
+                    language:               'es',                    
+                    maxFileSize:            2048,
                     showUpload:             true, 
                     showPreview:            false,
                     showCaption:            true,
@@ -12,6 +12,7 @@ $(document).ready( function () {
                     minFileCount:           1,
                     maxFileCount:           10,
                     uploadUrl:              '../../historias_medicas_pediatricas/guardar_examenes_medicos',
+                    uploadAsync:            true,
                     uploadExtraData: function() 
                             {
                               return  {
@@ -20,14 +21,25 @@ $(document).ready( function () {
                                         'nombre_examen':      $('#nombre_examen').val(),
                                         'descripcion_examen': $('#descripcion_examen').val()
                                       };
-                            }
+                            },
+
                   }
                 )
-      .on('fileuploaderror', function(event, data, previewId, index) {
-            var form = data.form, files = data.files, extra = data.extra,
-                response = data.response, reader = data.reader;
-            console.log('File upload error');
-        });
+          .on('filebatchuploadsuccess', function(event, data, previewId, index) 
+            {               
+                var response = data.response;
+                $('#mensaje_examenes_medicos').show('slow').attr('class',response.clase).html(response.success);
+               
+            })
+          .on('filebatchuploaderror', function(event, data, previewId, index) {
+                var response = data.response;
+                $.each(response.error, function (a,b)
+                      {                       
+                        $('#'+a+"_error").show().attr('class',response.clase).html(b);
+                      }
+                  );                
+            });
+
      var tabla = $('#consultas_historico').DataTable(
         {
               'searching':  false,

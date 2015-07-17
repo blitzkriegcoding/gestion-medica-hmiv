@@ -178,6 +178,12 @@
 	            			</label>
 	            				{{Form::textarea('descripcion_examen','',array('class'=>'form-control ', 'id'=>'descripcion_examen', 'size'=>'30x4', 'style'=>'resize:none'))}}
 								<div style="display:none" id="descripcion_examen_error" role="alert"></div>
+
+								
+					  	</div>
+
+					  	<div class="col-xs-12" style="display:none" id="mensaje_examenes_medicos">
+					  		
 					  	</div>
 					  </div>
 					</div>
@@ -203,8 +209,6 @@
 						</table>					  	
 					  </div>
 					</div>
-
-
 		    		<div class="panel panel-primary ">
 					  <div class="panel-heading">
 					  	<strong>Archivos adjuntos </strong>

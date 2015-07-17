@@ -87,7 +87,7 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		
 		/*RUTAS PARA CONSULTA VIA AJAX*/
 		Route::get('obtener_vacuna/{vacuna}',											['uses'	=>	'HistoriaMedicaFederadaController@obtener_vacuna'] );
-		Route::get('obtener_patologia/{patologia}',										['uses'	=>	'HistoriaMedicaFederadaController@mostrarPatologia'])->where('patologia','[a-zA-Z\s]+');
+		Route::get('obtener_patologia/{patologia}',										['uses'	=>	'PatologiasController@mostrar_patologia']);
 		Route::get('obtener_alergias/{alergia}',										['uses'	=>	'HistoriaMedicaFederadaController@obtener_alergias'])->where('alergias','[a-zA-Z\s]+');
 		Route::get('obtener_intolerancias/{intolerancia}',								['uses'	=>	'HistoriaMedicaFederadaController@obtener_intolerancias'])->where('intolerancia','[a-zA-Z\s]+');
 		

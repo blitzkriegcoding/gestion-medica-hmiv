@@ -2,7 +2,7 @@
 
 class ExamenesPediatricos extends \Eloquent 
 	{
-		protected $fillable = [];
+		protected $fillable = ['id_historia_medica','descripcion', 'fecha_examen','id_medico','nombre_examen'];
 		public $table = 'examenes_pediatricos';
 		public $timestamps = false;
 
@@ -57,11 +57,16 @@ class ExamenesPediatricos extends \Eloquent
 				$arreglo_imagenes 		= ['examenes'	=> 	[] ];
 				$reglas_imagenes		= ['examenes'	=>	[] ];
 				$validacion_imagenes	= [];
+				$imagen 				= NULL;
+				$extension 				= NULL;
+				$directorio				= public_path().'imagenes_examenes/';
+
 				
 				foreach($input['examenes'] as $llave => $valor):					
 					$arreglo_imagenes['examenes'][$llave]	=	"examenes.".$llave;
 					$reglas_imagenes['examenes'][$llave]	=	["required", "image", "max:2097152"];
 				endforeach;
+
 
 				$validacion_imagenes = array_combine($arreglo_imagenes['examenes'] , $reglas_imagenes['examenes']);
 				$reglas_datos_examenes = array_merge($reglas_datos_examenes,$validacion_imagenes);
@@ -70,14 +75,38 @@ class ExamenesPediatricos extends \Eloquent
 				
 				if($validador_datos_examenes->fails())
 					{
-						return 	[
-									'mensaje'	=>	$validador_datos_examenes->messages(),
-									'clase'		=>	'alert alert-danger fade in',
-									'bandera'	=>	1
-								];
+						return 	Response::json([												
+												'clase'		=>	'text-danger fade in',												
+												'error'		=>	$validador_datos_examenes->messages()		
+												]);
 					}
 
 
+				// $examen = self::create([	
+				// 						'id_historia_medica'	=>	HistoriaMedicaPediatrica::where('id_paciente','='Session::get('id_paciente_pediatrico')->pluck('id_historia_medica') ),
+				// 						'descripcion'			=>	$input['descripcion_examen'], 
+				// 						'fecha_examen'			=>	$input['fecha_examen'],
+				// 						'id_medico'				=>	$input['medico_ordenante'],
+				// 						'nombre_examen'			=>	$input['nombre_examen']
+				// 						]);
+
+
+#  ['id_historia_medica','descripcion', 'fecha_examen','id_medico','nombre_examen']
+
+				foreach($input['examenes'] as $llave => $valor):					
+					$imagen 		= 	Input::file("examenes.".$llave);
+					$extension		= 	Input::file("examenes.".$llave)->getClientOriginalExtension(); //File::extension($imagen['name']);
+					$nombre_archivo	=	sha1(time().time()).".{$extension}";
+					#$upload_success = 	Input::upload($imagen, $directorio, $nombre_archivo);
+				endforeach;
+
+				return 	Response::json([
+						'success'	=>	'Exámenes cargados exitosamente',
+						'clase'		=>	'alert alert-success fade in',						
+
+						]);
+
+				
 				
 
 
