@@ -5,10 +5,16 @@ class ExamenesPediatricos extends \Eloquent
 		protected $fillable = ['id_historia_medica','descripcion', 'fecha_examen','id_medico','nombre_examen'];
 		public $table = 'examenes_pediatricos';
 		public $timestamps = false;
+		public $primaryKey = 'id_examen';
 
 		public function HistoriaMedicaPediatrica()
 			{
 				return $this->belongsTo('HistoriaMedicaPediatrica','id_historia_medica','id_historia_medica');
+			}
+
+		public function DocumentosExamenesPediatricos()
+			{
+				return $this->hasMany('DocumentosExamenesPediatricos','id_examen','id_examen');
 			}
 
 		public static function obtenerHistoricoExamenes()
@@ -22,10 +28,10 @@ class ExamenesPediatricos extends \Eloquent
 
 				foreach($historico_examenes as $d):
 					$contador_examenes++;
-					$nueva_fecha = new Date($d->fecha_examen);
+					$nueva_fecha = new DateTime($d->fecha_examen);
 					$examenes_json[] = 	[
 											'num_exa'		=>	$contador_examenes,
-											'fecha_examen'	=>	$nueva_fecha->date_format('d/m/Y'),
+											'fecha_examen'	=>	$nueva_fecha->format('d/m/Y'),
 											'nombre_examen'	=>	$d->nombre_examen,
 											'detalles'		=>	'pruebas',
 											'borrar'		=>	'pruebas'
@@ -59,7 +65,7 @@ class ExamenesPediatricos extends \Eloquent
 				$validacion_imagenes	= [];
 				$imagen 				= NULL;
 				$extension 				= NULL;
-				$directorio				= public_path().'imagenes_examenes/';
+				$directorio				= public_path().'/imagenes_examenes/';
 
 				
 				foreach($input['examenes'] as $llave => $valor):					
@@ -82,27 +88,32 @@ class ExamenesPediatricos extends \Eloquent
 					}
 
 
-				// $examen = self::create([	
-				// 						'id_historia_medica'	=>	HistoriaMedicaPediatrica::where('id_paciente','='Session::get('id_paciente_pediatrico')->pluck('id_historia_medica') ),
-				// 						'descripcion'			=>	$input['descripcion_examen'], 
-				// 						'fecha_examen'			=>	$input['fecha_examen'],
-				// 						'id_medico'				=>	$input['medico_ordenante'],
-				// 						'nombre_examen'			=>	$input['nombre_examen']
-				// 						]);
+				$examen = self::create([	
+										'id_historia_medica'	=>	HistoriaMedicaPediatrica::where('id_paciente','=',Session::get('id_paciente_pediatrico'))->pluck('id_historia_medica'),
+										'descripcion'			=>	strtoupper($input['descripcion_examen']), 
+										'fecha_examen'			=>	$input['fecha_examen'],
+										'id_medico'				=>	$input['medico_ordenante'],
+										'nombre_examen'			=>	strtoupper($input['nombre_examen'])
+										]);
 
 
-#  ['id_historia_medica','descripcion', 'fecha_examen','id_medico','nombre_examen']
-
+				
+				
 				foreach($input['examenes'] as $llave => $valor):					
 					$imagen 		= 	Input::file("examenes.".$llave);
 					$extension		= 	Input::file("examenes.".$llave)->getClientOriginalExtension(); //File::extension($imagen['name']);
-					$nombre_archivo	=	sha1(time().time()).".{$extension}";
-					#$upload_success = 	Input::upload($imagen, $directorio, $nombre_archivo);
+					$nombre_archivo	=	sha1(time().time().mt_rand()).".{$extension}";
+					$upload_success =	Input::file("examenes.".$llave)->move($directorio, $nombre_archivo);
+					DocumentosExamenesPediatricos::create(	[	
+																'id_examen'			=>	$examen->id_examen,
+																'ruta_documento'	=>	'/public/imagenes_examenes/'.$nombre_archivo
+															]);
 				endforeach;
-
+				#dd($directorio);
 				return 	Response::json([
 						'success'	=>	'Exámenes cargados exitosamente',
-						'clase'		=>	'alert alert-success fade in',						
+						'clase'		=>	'alert alert-success fade in',
+						
 
 						]);
 

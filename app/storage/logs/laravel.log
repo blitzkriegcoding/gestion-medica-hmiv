@@ -1843,3 +1843,175 @@ Stack trace:
 #22 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
 #23 C:\xampp\htdocs\hmiv\public\index.php(49): Illuminate\Foundation\Application->run()
 #24 {main} [] []
+[2015-07-18 02:26:03] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to undefined method Illuminate\Http\Request::upload()' in C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php:214
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-18 04:14:41] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'Session' (T_STRING)' in C:\xampp\htdocs\hmiv\app\models\examenes_hospital\ExamenesPediatricos.php:91
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-18 04:16:01] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Call to a member function pluck() on string' in C:\xampp\htdocs\hmiv\app\models\examenes_hospital\ExamenesPediatricos.php:91
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-18 04:17:17] production.ERROR: exception 'PDOException' with message 'SQLSTATE[42703]: Undefined column: 7 ERROR:  no existe la columna «id»
+LINE 1: ... "nombre_examen") values ($1, $2, $3, $4, $5) returning "id"
+                                                                   ^' in C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php:301
+Stack trace:
+#0 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(301): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(617): Illuminate\Database\Connection->Illuminate\Database\{closure}(Object(Illuminate\Database\PostgresConnection), 'insert into "ex...', Array)
+#2 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(581): Illuminate\Database\Connection->runQueryCallback('insert into "ex...', Array, Object(Closure))
+#3 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(304): Illuminate\Database\Connection->run('insert into "ex...', Array, Object(Closure))
+#4 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(279): Illuminate\Database\Connection->select('insert into "ex...', Array, false)
+#5 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\PostgresProcessor.php(18): Illuminate\Database\Connection->selectFromWriteConnection('insert into "ex...', Array)
+#6 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1910): Illuminate\Database\Query\Processors\PostgresProcessor->processInsertGetId(Object(Illuminate\Database\Query\Builder), 'insert into "ex...', Array, 'id')
+#7 [internal function]: Illuminate\Database\Query\Builder->insertGetId(Array, 'id')
+#8 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(972): call_user_func_array(Array, Array)
+#9 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1580): Illuminate\Database\Eloquent\Builder->__call('insertGetId', Array)
+#10 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1580): Illuminate\Database\Eloquent\Builder->insertGetId(Array, 'id')
+#11 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1550): Illuminate\Database\Eloquent\Model->insertAndSetId(Object(Illuminate\Database\Eloquent\Builder), Array)
+#12 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1456): Illuminate\Database\Eloquent\Model->performInsert(Object(Illuminate\Database\Eloquent\Builder), Array)
+#13 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(526): Illuminate\Database\Eloquent\Model->save()
+#14 C:\xampp\htdocs\hmiv\app\models\examenes_hospital\ExamenesPediatricos.php(96): Illuminate\Database\Eloquent\Model::create(Array)
+#15 C:\xampp\htdocs\hmiv\app\controllers\historias_medicas_pediatricas\HistoriaMedicaFederadaController.php(128): ExamenesPediatricos::guardarExamenesMedicos(Array)
+#16 [internal function]: HistoriaMedicaFederadaController->guardar_examenes_medicos()
+#17 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#18 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('guardar_examene...', Array)
+#19 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(HistoriaMedicaFederadaController), Object(Illuminate\Routing\Route), 'guardar_examene...')
+#20 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(967): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'HistoriaMedicaF...', 'guardar_examene...')
+#21 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#22 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Route.php(109): call_user_func_array(Object(Closure), Array)
+#23 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1033): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#24 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1001): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#25 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(775): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#26 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(745): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#27 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Session\Middleware.php(72): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#28 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Cookie\Queue.php(47): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#29 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Cookie\Guard.php(51): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#30 C:\xampp\htdocs\hmiv\vendor\stack\builder\src\Stack\StackedHttpKernel.php(23): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#31 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#32 C:\xampp\htdocs\hmiv\public\index.php(49): Illuminate\Foundation\Application->run()
+#33 {main}
+
+Next exception 'Illuminate\Database\QueryException' with message 'SQLSTATE[42703]: Undefined column: 7 ERROR:  no existe la columna «id»
+LINE 1: ... "nombre_examen") values ($1, $2, $3, $4, $5) returning "id"
+                                                                   ^ (SQL: insert into "examenes_pediatricos" ("id_historia_medica", "descripcion", "fecha_examen", "id_medico", "nombre_examen") values (54, aaaa, 16/07/2015, 2, aaa) returning "id")' in C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php:625
+Stack trace:
+#0 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(581): Illuminate\Database\Connection->runQueryCallback('insert into "ex...', Array, Object(Closure))
+#1 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(304): Illuminate\Database\Connection->run('insert into "ex...', Array, Object(Closure))
+#2 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(279): Illuminate\Database\Connection->select('insert into "ex...', Array, false)
+#3 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\PostgresProcessor.php(18): Illuminate\Database\Connection->selectFromWriteConnection('insert into "ex...', Array)
+#4 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1910): Illuminate\Database\Query\Processors\PostgresProcessor->processInsertGetId(Object(Illuminate\Database\Query\Builder), 'insert into "ex...', Array, 'id')
+#5 [internal function]: Illuminate\Database\Query\Builder->insertGetId(Array, 'id')
+#6 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(972): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1580): Illuminate\Database\Eloquent\Builder->__call('insertGetId', Array)
+#8 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1580): Illuminate\Database\Eloquent\Builder->insertGetId(Array, 'id')
+#9 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1550): Illuminate\Database\Eloquent\Model->insertAndSetId(Object(Illuminate\Database\Eloquent\Builder), Array)
+#10 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1456): Illuminate\Database\Eloquent\Model->performInsert(Object(Illuminate\Database\Eloquent\Builder), Array)
+#11 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(526): Illuminate\Database\Eloquent\Model->save()
+#12 C:\xampp\htdocs\hmiv\app\models\examenes_hospital\ExamenesPediatricos.php(96): Illuminate\Database\Eloquent\Model::create(Array)
+#13 C:\xampp\htdocs\hmiv\app\controllers\historias_medicas_pediatricas\HistoriaMedicaFederadaController.php(128): ExamenesPediatricos::guardarExamenesMedicos(Array)
+#14 [internal function]: HistoriaMedicaFederadaController->guardar_examenes_medicos()
+#15 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#16 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('guardar_examene...', Array)
+#17 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(HistoriaMedicaFederadaController), Object(Illuminate\Routing\Route), 'guardar_examene...')
+#18 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(967): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'HistoriaMedicaF...', 'guardar_examene...')
+#19 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#20 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Route.php(109): call_user_func_array(Object(Closure), Array)
+#21 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1033): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#22 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1001): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#23 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(775): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#24 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(745): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#25 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Session\Middleware.php(72): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#26 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Cookie\Queue.php(47): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#27 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Cookie\Guard.php(51): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#28 C:\xampp\htdocs\hmiv\vendor\stack\builder\src\Stack\StackedHttpKernel.php(23): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#29 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#30 C:\xampp\htdocs\hmiv\public\index.php(49): Illuminate\Foundation\Application->run()
+#31 {main} [] []
+[2015-07-18 04:18:56] production.ERROR: exception 'PDOException' with message 'SQLSTATE[23502]: Not null violation: 7 ERROR:  el valor null para la columna «documento_examen» viola la restricción not null
+DETAIL:  La fila que falla contiene (1, 54, aaaaa, null, 2015-07-09, 2, aaa).' in C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php:301
+Stack trace:
+#0 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(301): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(617): Illuminate\Database\Connection->Illuminate\Database\{closure}(Object(Illuminate\Database\PostgresConnection), 'insert into "ex...', Array)
+#2 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(581): Illuminate\Database\Connection->runQueryCallback('insert into "ex...', Array, Object(Closure))
+#3 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(304): Illuminate\Database\Connection->run('insert into "ex...', Array, Object(Closure))
+#4 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(279): Illuminate\Database\Connection->select('insert into "ex...', Array, false)
+#5 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\PostgresProcessor.php(18): Illuminate\Database\Connection->selectFromWriteConnection('insert into "ex...', Array)
+#6 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1910): Illuminate\Database\Query\Processors\PostgresProcessor->processInsertGetId(Object(Illuminate\Database\Query\Builder), 'insert into "ex...', Array, 'id_examen')
+#7 [internal function]: Illuminate\Database\Query\Builder->insertGetId(Array, 'id_examen')
+#8 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(972): call_user_func_array(Array, Array)
+#9 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1580): Illuminate\Database\Eloquent\Builder->__call('insertGetId', Array)
+#10 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1580): Illuminate\Database\Eloquent\Builder->insertGetId(Array, 'id_examen')
+#11 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1550): Illuminate\Database\Eloquent\Model->insertAndSetId(Object(Illuminate\Database\Eloquent\Builder), Array)
+#12 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1456): Illuminate\Database\Eloquent\Model->performInsert(Object(Illuminate\Database\Eloquent\Builder), Array)
+#13 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(526): Illuminate\Database\Eloquent\Model->save()
+#14 C:\xampp\htdocs\hmiv\app\models\examenes_hospital\ExamenesPediatricos.php(97): Illuminate\Database\Eloquent\Model::create(Array)
+#15 C:\xampp\htdocs\hmiv\app\controllers\historias_medicas_pediatricas\HistoriaMedicaFederadaController.php(128): ExamenesPediatricos::guardarExamenesMedicos(Array)
+#16 [internal function]: HistoriaMedicaFederadaController->guardar_examenes_medicos()
+#17 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#18 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('guardar_examene...', Array)
+#19 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(HistoriaMedicaFederadaController), Object(Illuminate\Routing\Route), 'guardar_examene...')
+#20 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(967): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'HistoriaMedicaF...', 'guardar_examene...')
+#21 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#22 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Route.php(109): call_user_func_array(Object(Closure), Array)
+#23 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1033): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#24 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1001): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#25 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(775): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#26 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(745): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#27 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Session\Middleware.php(72): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#28 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Cookie\Queue.php(47): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#29 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Cookie\Guard.php(51): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#30 C:\xampp\htdocs\hmiv\vendor\stack\builder\src\Stack\StackedHttpKernel.php(23): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#31 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#32 C:\xampp\htdocs\hmiv\public\index.php(49): Illuminate\Foundation\Application->run()
+#33 {main}
+
+Next exception 'Illuminate\Database\QueryException' with message 'SQLSTATE[23502]: Not null violation: 7 ERROR:  el valor null para la columna «documento_examen» viola la restricción not null
+DETAIL:  La fila que falla contiene (1, 54, aaaaa, null, 2015-07-09, 2, aaa). (SQL: insert into "examenes_pediatricos" ("id_historia_medica", "descripcion", "fecha_examen", "id_medico", "nombre_examen") values (54, aaaaa, 09/07/2015, 2, aaa) returning "id_examen")' in C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php:625
+Stack trace:
+#0 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(581): Illuminate\Database\Connection->runQueryCallback('insert into "ex...', Array, Object(Closure))
+#1 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(304): Illuminate\Database\Connection->run('insert into "ex...', Array, Object(Closure))
+#2 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Connection.php(279): Illuminate\Database\Connection->select('insert into "ex...', Array, false)
+#3 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Query\Processors\PostgresProcessor.php(18): Illuminate\Database\Connection->selectFromWriteConnection('insert into "ex...', Array)
+#4 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(1910): Illuminate\Database\Query\Processors\PostgresProcessor->processInsertGetId(Object(Illuminate\Database\Query\Builder), 'insert into "ex...', Array, 'id_examen')
+#5 [internal function]: Illuminate\Database\Query\Builder->insertGetId(Array, 'id_examen')
+#6 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(972): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1580): Illuminate\Database\Eloquent\Builder->__call('insertGetId', Array)
+#8 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1580): Illuminate\Database\Eloquent\Builder->insertGetId(Array, 'id_examen')
+#9 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1550): Illuminate\Database\Eloquent\Model->insertAndSetId(Object(Illuminate\Database\Eloquent\Builder), Array)
+#10 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(1456): Illuminate\Database\Eloquent\Model->performInsert(Object(Illuminate\Database\Eloquent\Builder), Array)
+#11 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(526): Illuminate\Database\Eloquent\Model->save()
+#12 C:\xampp\htdocs\hmiv\app\models\examenes_hospital\ExamenesPediatricos.php(97): Illuminate\Database\Eloquent\Model::create(Array)
+#13 C:\xampp\htdocs\hmiv\app\controllers\historias_medicas_pediatricas\HistoriaMedicaFederadaController.php(128): ExamenesPediatricos::guardarExamenesMedicos(Array)
+#14 [internal function]: HistoriaMedicaFederadaController->guardar_examenes_medicos()
+#15 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#16 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('guardar_examene...', Array)
+#17 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(HistoriaMedicaFederadaController), Object(Illuminate\Routing\Route), 'guardar_examene...')
+#18 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(967): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'HistoriaMedicaF...', 'guardar_examene...')
+#19 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}()
+#20 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Route.php(109): call_user_func_array(Object(Closure), Array)
+#21 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1033): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#22 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1001): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#23 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(775): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#24 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(745): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#25 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Session\Middleware.php(72): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#26 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Cookie\Queue.php(47): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#27 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Cookie\Guard.php(51): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#28 C:\xampp\htdocs\hmiv\vendor\stack\builder\src\Stack\StackedHttpKernel.php(23): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#29 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#30 C:\xampp\htdocs\hmiv\public\index.php(49): Illuminate\Foundation\Application->run()
+#31 {main} [] []
+[2015-07-18 04:21:25] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'DocumentosExamenesPediatricos' not found' in C:\xampp\htdocs\hmiv\app\models\examenes_hospital\ExamenesPediatricos.php:107
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-18 04:29:47] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Date' not found' in C:\xampp\htdocs\hmiv\app\models\examenes_hospital\ExamenesPediatricos.php:31
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-18 04:30:00] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Date' not found' in C:\xampp\htdocs\hmiv\app\models\examenes_hospital\ExamenesPediatricos.php:31
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []

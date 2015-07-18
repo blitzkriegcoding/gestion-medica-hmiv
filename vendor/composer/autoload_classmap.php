@@ -17,6 +17,7 @@ return array(
     'ConsultasPacientePediatrico' => $baseDir . '/app/models/historias_medicas_pediatricas/ConsultasPacientePediatrico.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'DatosMedicoContacto' => $baseDir . '/app/models/medicos/DatosMedicoContacto.php',
+    'DocumentosExamenesPediatricos' => $baseDir . '/app/models/examenes_hospital/DocumentosExamenesPediatricos.php',
     'EntrustSetupTables' => $baseDir . '/app/database/migrations/2015_07_04_200111_entrust_setup_tables.php',
     'EspecialidadesMedicas' => $baseDir . '/app/models/modelos_complementarios/EspecialidadesMedicas.php',
     'EspecialidadesMedicasController' => $baseDir . '/app/controllers/medicos/EspecialidadesMedicasController.php',
