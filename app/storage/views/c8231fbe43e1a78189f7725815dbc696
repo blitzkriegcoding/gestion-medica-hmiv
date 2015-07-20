@@ -258,8 +258,10 @@
 						  	</label>
 					    	<div class="input-group date" id='fecha_tratamiento_medico' style="width:75%">
 	              				<?php echo Form::text('fecha_tratamiento',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_tratamiento',  'readonly'=>'' )); ?><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-	              				<div style="display:none" id="fecha_tratamiento_error" role="alert"></div>
-	            			</div><br>
+	              				
+	            			</div>
+	            			<div style="display:none" id="fecha_tratamiento_error" role="alert"></div>
+	            			<br>
 	            			<label for="medico_ordenante_tratamiento">
 	            				Médico ordenante:
 	            			</label>
@@ -278,12 +280,9 @@
 							    	<button type="button" id="guardar_tratamiento" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
 									  Guardar
 									</button>
-							</div><br>						
+							</div><br>
+					  	</div>
 
-					  	</div>
-					  	<div class="col-xs-12" style="display:none" id="mensaje_tratamientos_medicos">
-					  		
-					  	</div>
 					  </div>
 					</div>
 		    	</div>
@@ -306,6 +305,9 @@
 							</tbody>
 						</table>					  	
 					  </div>
+					</div>
+					<br>
+					<div class="col-xs-12" style="display:none" id="mensaje_tratamientos_medicos">					  		
 					</div>
 					<br>
 					<div class="panel panel-primary ">
@@ -703,9 +705,73 @@
 	    	</div>
 	    </div>	
 	    <div role="tabpanel" class="tab-pane fade" id="altas_medicas">
-	    	<div class="col-xs-12">
+	    	<div class="col-xs-12" style="margin: 0px auto; width: 100%">
 	    		<h4>Seccion de Altas medicas</h4>
-	    	</div> 
+		    	<div class="col-xs-8" >
+					<div class="panel panel-primary ">
+					  <div class="panel-heading">
+					  	<strong>Datos de alta médica por hospitalización</strong>
+					  	</div>
+					  <div class="panel-body">
+					  	<div class="form-group">
+							<label for="fecha_hospitalizacion">
+						  		Datos de hospitalización:
+						  	</label>
+					    	<div class="input-group date" id='fecha_hospitalizacion_paciente' style="width:75%">
+	              				<?php echo Form::text('fecha_hospitalizacion',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_hospitalizacion',  'readonly'=>'' )); ?> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	            			</div>
+	            			<div style="display:none" id="fecha_hospitalizacion_error" role="alert"></div>
+	            			<br>
+	            			<label for="fecha_alta_medica">
+	            				Fecha de alta médica:
+	            			</label>
+					    	<div class="input-group date" id='fecha_alta_medica' style="width:75%">
+	              				<?php echo Form::text('fecha_alta_medica_campo',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_alta_medica_campo',  'readonly'=>'' )); ?> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	            			</div>
+	            				<div style="display:none" id="fecha_alta_medica_error" role="alert"></div>
+	            			<br>
+	            			<label for="tipo_alta_medica">
+	            				Tipo de alta médica:
+	            			</label>
+								<?php echo Form::select('tipo_alta_medica',array(''=>'SELECCIONE','1' => 'PISO 1','2' => 'PISO 2', '3' => 'PISO 3', '4' => 'PISO 4'  ),'',array('class'=>'form-control','id'=>'tipo_alta_medica','style'=>'width: 75%')); ?>
+
+								<div style="display:none" id="tipo_alta_medica_error" role="alert"></div>
+							<br>	            			
+	            			<label for="medico_alta">
+	            				Médico otorgante de alta:
+	            			</label>	            				
+	            				<?php echo Form::select('medico_alta',array(''=>'SELECCIONE','1' => 'PISO 1','2' => 'PISO 2', '3' => 'PISO 3', '4' => 'PISO 4'  ),'',array('class'=>'form-control','id'=>'medico_alta','style'=>'width: 75%')); ?>
+
+	            				<div style="display:none" id="medico_alta_error" role="alert"></div>
+							<br>
+	            			<label for="resumen_egreso">
+	            				Resumen de egreso:
+	            			</label>
+	            				<?php echo Form::textarea('resumen_egreso','',array('class'=>'form-control ', 'id'=>'resumen_egreso', 'size'=>'40x10', 'style'=>'resize:none')); ?>
+
+	            				<div style="display:none" id="resumen_egreso_error" role="alert"></div>
+					    	<br>
+	            			<label for="egreso_forzado">
+	            				¿Egreso forzado?:
+	            			</label>	            				
+	            				<?php echo Form::select('egreso_forzado',array(''=>'SELECCIONE','S' => 'SI','N' => 'NO'),'',array('class'=>'form-control','id'=>'egreso_forzado','style'=>'width: 75%')); ?>
+
+	            				<div style="display:none" id="egreso_forzado_error" role="alert"></div>
+							<br>					    	
+					    	<div class="col-xs-12">
+							   	<button type="button" id="carga_egreso" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+										Guardar egreso
+								</button>
+					    	</div>
+					  	</div>
+					  </div>
+					</div>
+		    	</div>					
+
+
+
+
+	    	</div>	    	 
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="ordenes_medicas">
 	    	Seccion de Altas medicas

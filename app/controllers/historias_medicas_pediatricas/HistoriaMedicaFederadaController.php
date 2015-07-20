@@ -82,7 +82,7 @@ class HistoriaMedicaFederadaController extends \BaseController
 			{
 				return Intolerancias::mostrarIntolerancia($intolerancia);
 			}
-			//obtener_alergias	
+			
 		public function obtener_alergias($alergia)	
 			{
 				return Alergias::mostrarAlergia($alergia);
@@ -131,6 +131,14 @@ class HistoriaMedicaFederadaController extends \BaseController
 		public function obtener_historico_tratamientos()
 			{
 				return Tratamientos::obtenerHistoricoTratamientosJSON();
+			}
+		public function cargar_tratamiento_nuevo()
+			{
+				return Tratamientos::cargarTratamientoNuevo(Input::all());
+			}
+		public function borrar_tratamiento_guardado()	
+			{
+				return Tratamientos::borrarTratamientoGuardado(Input::all());
 			}
 		
 

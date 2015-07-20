@@ -369,6 +369,43 @@ $(document).ready( function () {
                     });
               }
           );
+
+      $('#tratamientos_historico').delegate("button.btn-danger","click", function(event)
+              {
+                    var obj = this;                    
+                    $.ajax({
+                      url: "../../historias_medicas_pediatricas/borrar_tratamiento_guardado",
+                      type: "POST",
+                      data: { 'id_tratamiento': obj.id },
+                      contentType: 'application/x-www-form-urlencoded',
+                      dataType: 'json',
+                      success: function(respuesta) 
+                        {                 
+                          switch(respuesta['bandera'])
+                            {
+                              case 1:
+                                var mensaje = "";
+                                $.each(respuesta['mensaje'], function (a,b)
+                                      {
+                                        $('#mensaje_tratamientos_medicos').show().attr('class',respuesta['clase']).html(b);
+                                      }                             
+                                  );                                
+                              break;
+                              case 2:                                
+                                $('#mensaje_tratamientos_medicos').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                              break;
+                            }                 
+                          tabla_tratamientos.ajax.reload();
+                        },
+                      error: function(respuesta)
+                        {
+
+                        }
+
+                    });
+              }
+          );
+
 //PARA EL BORRADO DE PATOLOGIAS DEL PACIENTE
       $('#patologias_historico').delegate("button","click", function(event)
               {
@@ -477,14 +514,11 @@ $(document).ready( function () {
                               case 2:                                
                                 $('#mensaje_alergia_intolerancia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
                               break;
-                            }        
-
-                                              
+                            }                 
                           tabla_intolerancias.ajax.reload();
                         },
                       error: function(respuesta)
                         {
-
                         }
 
                     });
@@ -529,6 +563,8 @@ $(document).ready( function () {
                     });
               }
           );
+
+
 
       //fecha de consultas de hoy hasta dentro de dos semanas
       function rangoFechaConsultas(id_control,num_dias)
@@ -721,6 +757,52 @@ $(document).ready( function () {
 
             });            
         }
+
+ function cargarTratamiento()
+        {   
+            $('#fecha_tratamiento_error').hide();
+            $('#medico_ordenante_tratamiento_error').hide();
+            $('#descripcion_tratamiento_error').hide();
+
+
+            $.ajax({
+              url: "../../historias_medicas_pediatricas/cargar_tratamiento_nuevo",
+              type: "POST",
+              data: { 'fecha_tratamiento': $('#fecha_tratamiento').val(), 'medico_ordenante_tratamiento': $('#medico_ordenante_tratamiento').val(), 'descripcion_tratamiento': $('#descripcion_tratamiento').val() },
+              contentType: 'application/x-www-form-urlencoded',
+              dataType: 'json',
+              success: function(respuesta) 
+                {
+                  switch(respuesta['bandera'])
+                    {
+                      case 1:
+                        var mensaje = "";
+                        $.each(respuesta['mensaje'], function (a,b)
+                              {
+                                $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
+                              }
+                          );
+                      break;
+                      case 2:
+                        $('#mensaje_tratamientos_medicos').show('slow').attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                      break;
+
+                    }
+                  
+                  tabla_tratamientos.ajax.reload();
+
+
+                },
+              error: function(respuesta)
+                {
+                  $('#mensajes').html(respuesta['especialidad_consulta']);
+                  $('#mensajes').html(respuesta['turno_consulta']);
+                  $('#mensajes').html(respuesta['fecha_consulta']);                  
+                }
+
+            });            
+        }
+
       function cargarPatologia()
         {   
             $.ajax({
@@ -895,6 +977,14 @@ $(document).ready( function () {
   $('#cargar_vacuna').on('click', function () {    
     var $btn = $(this).button('loading');
     cargarVacuna();
+    $btn.button('reset');
+  });
+
+//cargarTratamiento
+
+  $('#guardar_tratamiento').on('click', function () {    
+    var $btn = $(this).button('loading');
+    cargarTratamiento();
     $btn.button('reset');
   });
 

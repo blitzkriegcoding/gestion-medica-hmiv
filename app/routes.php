@@ -79,7 +79,10 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::post('cargar_hospitalizacion_nueva',										['uses'	=>	'HistoriaMedicaFederadaController@cargar_hospitalizacion_nueva']);
 		Route::post('borrar_hospitalizacion_guardada',									['uses'	=>	'HistoriaMedicaFederadaController@borrar_hospitalizacion_guardada']);
 		Route::post('guardar_examenes_medicos',											['uses'	=>	'HistoriaMedicaFederadaController@guardar_examenes_medicos']);
+		Route::post('cargar_tratamiento_nuevo',											['uses'	=>	'HistoriaMedicaFederadaController@cargar_tratamiento_nuevo']);
+		Route::post('borrar_tratamiento_guardado',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_tratamiento_guardado']);
 		
+		//cargar_tratamiento_nuevo
 		//../../historias_medicas_pediatricas/recargar_historico_consultas
 		//borrar_hospitalizacion_guardada
 
