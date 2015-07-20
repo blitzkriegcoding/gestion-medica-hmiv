@@ -2015,3 +2015,19 @@ Stack trace:
 Stack trace:
 #0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
 #1 {main} [] []
+[2015-07-20 01:22:42] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Tratamientos' not found' in C:\xampp\htdocs\hmiv\app\controllers\historias_medicas_pediatricas\HistoriaMedicaFederadaController.php:133
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-20 01:23:19] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Tratamientos' not found' in C:\xampp\htdocs\hmiv\app\controllers\historias_medicas_pediatricas\HistoriaMedicaFederadaController.php:133
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-20 01:23:28] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Tratamientos' not found' in C:\xampp\htdocs\hmiv\app\controllers\historias_medicas_pediatricas\HistoriaMedicaFederadaController.php:133
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-20 01:23:46] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected ';', expecting ']'' in C:\xampp\htdocs\hmiv\app\models\modelos_complementarios\Tratamientos.php:24
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []

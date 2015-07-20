@@ -33,8 +33,8 @@ class ExamenesPediatricos extends \Eloquent
 											'num_exa'		=>	$contador_examenes,
 											'fecha_examen'	=>	$nueva_fecha->format('d/m/Y'),
 											'nombre_examen'	=>	$d->nombre_examen,
-											'detalles'		=>	'pruebas',
-											'borrar'		=>	'pruebas'
+											'detalles'		=>	"<button class='btn btn-warning' id='".$d->id_examen."'>Ver</button",
+											'borrar'		=>	"<button class='btn btn-danger' id='".$d->id_examen."'>Borrar</button",
 										];
 				endforeach;
 				return Response::json($examenes_json);
@@ -70,7 +70,7 @@ class ExamenesPediatricos extends \Eloquent
 				
 				foreach($input['examenes'] as $llave => $valor):					
 					$arreglo_imagenes['examenes'][$llave]	=	"examenes.".$llave;
-					$reglas_imagenes['examenes'][$llave]	=	["required", "image", "max:2097152"];
+					$reglas_imagenes['examenes'][$llave]	=	["image", "max:2097152"];
 				endforeach;
 
 
@@ -112,17 +112,20 @@ class ExamenesPediatricos extends \Eloquent
 				#dd($directorio);
 				return 	Response::json([
 						'success'	=>	'Exámenes cargados exitosamente',
-						'clase'		=>	'alert alert-success fade in',
-						
+						'clase'		=>	'alert alert-success fade in',					
 
 						]);
-
-				
-				
-
-
+			}
+		private static function guardarImagenesExamenes($input,$id_examen)
+			{
 
 			}
+
+		public static function borrarExamenesMedicos($input)
+			{
+				
+			}
+
 
 
 	}

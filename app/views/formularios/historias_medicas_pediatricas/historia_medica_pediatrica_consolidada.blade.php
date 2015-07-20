@@ -240,7 +240,91 @@
 	    	<div class="col-xs-12">
 		    	<h4>
 		    		Seccion de tratamientos medicos
-		    	</h4>	    		
+		    	</h4>
+		    	<div class="col-xs-6">
+					<div class="panel panel-primary ">
+					  <div class="panel-heading">
+					  	<strong>Tratamientos médicos ordenados </strong>
+					  </div>
+					  <div class="panel-body">
+					  	<div class="form-group">
+							<label for="fecha_tratamiento">
+						  		Fecha de prescripción:
+						  	</label>
+					    	<div class="input-group date" id='fecha_tratamiento_medico' style="width:75%">
+	              				{{Form::text('fecha_tratamiento',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_tratamiento',  'readonly'=>'' ))}}<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	              				<div style="display:none" id="fecha_tratamiento_error" role="alert"></div>
+	            			</div><br>
+	            			<label for="medico_ordenante_tratamiento">
+	            				Médico ordenante:
+	            			</label>
+	            				{{Form::select('medico_ordenante_tratamiento',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'medico_ordenante_tratamiento','style'=>'width: 100%')) }}
+	            				<div style="display:none" id="medico_ordenante_tratamiento_error" role="alert"></div>
+	            			<br>
+	            			<label for="descripcion_tratamiento">
+	            				Descripción del tratamiento:
+	            			</label>
+	            				{{Form::textarea('descripcion_tratamiento','',array('class'=>'form-control ', 'id'=>'descripcion_tratamiento', 'size'=>'30x4', 'style'=>'resize:none'))}}
+								<div style="display:none" id="descripcion_tratamiento_error" role="alert"></div>
+							<br>
+							<div class="col-xs-12">
+							    	<button type="button" id="guardar_tratamiento" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+									  Guardar
+									</button>
+							</div><br>						
+
+					  	</div>
+					  	<div class="col-xs-12" style="display:none" id="mensaje_tratamientos_medicos">
+					  		
+					  	</div>
+					  </div>
+					</div>
+		    	</div>
+		    	<div class="col-xs-6">
+					<div class="panel panel-primary ">
+					  <div class="panel-heading">
+					  	<strong>Histórico de tratamientos</strong>
+					  </div>
+					  <div class="panel-body">
+				    	<table id="tratamientos_historico" class="display compact">
+						    <thead>
+						        <tr>
+						        	<th class="text-center">N°</th>
+						        	<th class="text-center">Fecha prescripción</th>						            
+						            <th class="text-center">Detalles</th>
+						            <th class="text-center">¿Borrar?</th>
+						        </tr>
+						    </thead>						    
+							<tbody class="text-center">							
+							</tbody>
+						</table>					  	
+					  </div>
+					</div>
+					<br>
+					<div class="panel panel-primary ">
+					  <div class="panel-heading">
+					  	<strong>Tratamientos sostenidos en la apertura de la historia médica</strong>
+					  </div>
+					  <div class="panel-body">
+				    	<table id="tratamientos_apertura_historia" class="display compact">
+						    <thead>
+						        <tr>
+						        	<th class="text-center">N°</th>
+						        	<th class="text-center">Fecha prescripción</th>
+						            <th class="text-center">Tratamiento prescrito</th>
+						            <th class="text-center">Detalles</th>
+						            <th class="text-center">¿Borrar?</th>
+						        </tr>
+						    </thead>						    
+							<tbody class="text-center">							
+							</tbody>
+						</table>					  	
+					  </div>
+					</div>					
+					<br>
+					<div role="alert" id='mensaje_tratamiento' style="display:none" >						
+					</div>
+		    	</div>		    	
 	    	</div>
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="patologias_conocidas">	    	

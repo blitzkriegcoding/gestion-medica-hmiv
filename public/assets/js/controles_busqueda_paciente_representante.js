@@ -47,10 +47,6 @@ $(document).ready( function ()
                                               "lengthMenu":     "Mostrar _MENU_ registros",
                                               "emptyTable":     "Sin registros de la solicitud realizada",
                                               "search":         "Buscar: ",
-
-
-
-
                                           },
                                         
                               'ordering':   true,

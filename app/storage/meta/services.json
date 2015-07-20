@@ -28,7 +28,8 @@
         "Illuminate\\Workbench\\WorkbenchServiceProvider",
         "Way\\Generators\\GeneratorsServiceProvider",
         "Former\\FormerServiceProvider",
-        "Zizaco\\Entrust\\EntrustServiceProvider"
+        "Zizaco\\Entrust\\EntrustServiceProvider",
+        "Barryvdh\\DomPDF\\ServiceProvider"
     ],
     "eager": [
         "Illuminate\\Cookie\\CookieServiceProvider",
@@ -114,7 +115,8 @@
         "translation.loader": "Illuminate\\Translation\\TranslationServiceProvider",
         "validator": "Illuminate\\Validation\\ValidationServiceProvider",
         "validation.presence": "Illuminate\\Validation\\ValidationServiceProvider",
-        "former": "Former\\FormerServiceProvider"
+        "former": "Former\\FormerServiceProvider",
+        "dompdf": "Barryvdh\\DomPDF\\ServiceProvider"
     },
     "when": {
         "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider": [],
@@ -136,6 +138,7 @@
         "Illuminate\\Database\\SeedServiceProvider": [],
         "Illuminate\\Translation\\TranslationServiceProvider": [],
         "Illuminate\\Validation\\ValidationServiceProvider": [],
-        "Former\\FormerServiceProvider": []
+        "Former\\FormerServiceProvider": [],
+        "Barryvdh\\DomPDF\\ServiceProvider": []
     }
 }

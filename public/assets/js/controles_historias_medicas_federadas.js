@@ -2,7 +2,6 @@ $(document).ready( function () {
     $("#imagenes_examenes")
       .fileinput(
                   { 
-                    
                     language:               'es',                    
                     maxFileSize:            2048,
                     showUpload:             true, 
@@ -22,7 +21,6 @@ $(document).ready( function () {
                                         'descripcion_examen': $('#descripcion_examen').val()
                                       };
                             },
-
                   }
                 )
           .on('filebatchuploadsuccess', function(event, data, previewId, index) 
@@ -52,6 +50,21 @@ $(document).ready( function () {
                           "url"     : "../../historias_medicas_pediatricas/recargar_historico_consultas",
                           "dataSrc" : ""
                       },
+              "language": {
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "infoEmpty":      "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "paginate": {
+                                          "first":      "Primera",
+                                          "last":       "Última",
+                                          "next":       "Siguiente",
+                                          "previous":   "Anterior"
+                                },
+                              "processing":     "Procesando...",
+                              "loadingRecords": "Cargando registros...",
+                              "lengthMenu":     "Mostrar _MENU_ registros",
+                              "emptyTable":     "Sin datos cargados aun",
+                              "search":         "Buscar: ",
+                          },                        
               'columns' : [
                             { "data" : "fecha_consulta"   },
                             { "data" : "especialidad"     },
@@ -78,6 +91,41 @@ $(document).ready( function () {
                             { "data" : "detalles"       },
                             { "data" : "borrar"         },
                           ],
+        });
+
+     var tabla_tratamientos = $('#tratamientos_historico').DataTable(
+        {
+              'searching':  false,
+              'ordering':   true,
+              "pageLength": 3,
+              "lengthChange": false,
+              "ajax": 
+                      {
+                          "type"    : "GET",
+                          "url"     : "../../historias_medicas_pediatricas/obtener_historico_tratamientos",
+                          "dataSrc" : ""
+                      },
+              "language": {
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "infoEmpty":      "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "paginate": {
+                                          "first":      "Primera",
+                                          "last":       "Última",
+                                          "next":       "Siguiente",
+                                          "previous":   "Anterior"
+                                },
+                              "processing":     "Procesando...",
+                              "loadingRecords": "Cargando registros...",
+                              "lengthMenu":     "Mostrar _MENU_ registros",
+                              "emptyTable":     "Sin datos cargados aun",
+                              "search":         "Buscar: ",
+                          },                      
+              'columns' : [
+                            { "data" : "num_tra"  },
+                            { "data" : "fec_tra"  },                            
+                            { "data" : "detalles" },
+                            { "data" : "borrar"   },
+                          ],
         });     
 
     var tabla_vacunas = $('#vacunas_historico').DataTable(
@@ -93,6 +141,21 @@ $(document).ready( function () {
                           "dataSrc" : ""
                           
                       },
+              "language": {
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "infoEmpty":      "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "paginate": {
+                                          "first":      "Primera",
+                                          "last":       "Última",
+                                          "next":       "Siguiente",
+                                          "previous":   "Anterior"
+                                },
+                              "processing":     "Procesando...",
+                              "loadingRecords": "Cargando registros...",
+                              "lengthMenu":     "Mostrar _MENU_ registros",
+                              "emptyTable":     "Sin datos cargados aun",
+                              "search":         "Buscar: ",
+                          },                        
               'columns' : [
                             { "data" : "fecha_vacunacion" },
                             { "data" : "tipo_vacuna"      },
@@ -114,6 +177,21 @@ $(document).ready( function () {
                           "url"     : "../../historias_medicas_pediatricas/obtener_patologias_paciente",
                           "dataSrc" : ""                          
                       },
+              "language": {
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "infoEmpty":      "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "paginate": {
+                                          "first":      "Primera",
+                                          "last":       "Última",
+                                          "next":       "Siguiente",
+                                          "previous":   "Anterior"
+                                },
+                              "processing":     "Procesando...",
+                              "loadingRecords": "Cargando registros...",
+                              "lengthMenu":     "Mostrar _MENU_ registros",
+                              "emptyTable":     "Sin datos cargados aun",
+                              "search":         "Buscar: ",
+                          },                        
               'columns' : [
                             { "data" : "num_pac"    },
                             { "data" : "patologia"  },
@@ -133,6 +211,21 @@ $(document).ready( function () {
                           "url"     : "../../historias_medicas_pediatricas/obtener_alergias_paciente",
                           "dataSrc" : ""                          
                       },
+              "language": {
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "infoEmpty":      "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "paginate": {
+                                          "first":      "Primera",
+                                          "last":       "Última",
+                                          "next":       "Siguiente",
+                                          "previous":   "Anterior"
+                                },
+                              "processing":     "Procesando...",
+                              "loadingRecords": "Cargando registros...",
+                              "lengthMenu":     "Mostrar _MENU_ registros",
+                              "emptyTable":     "Sin datos cargados aun",
+                              "search":         "Buscar: ",
+                          },                        
               'columns' : [
                             { "data" : "num_ale"  },
                             { "data" : "alergia"  },
@@ -152,6 +245,21 @@ $(document).ready( function () {
                           "url"     : "../../historias_medicas_pediatricas/obtener_intolerancias_paciente",
                           "dataSrc" : ""                          
                       },
+              "language": {
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "infoEmpty":      "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "paginate": {
+                                          "first":      "Primera",
+                                          "last":       "Última",
+                                          "next":       "Siguiente",
+                                          "previous":   "Anterior"
+                                },
+                              "processing":     "Procesando...",
+                              "loadingRecords": "Cargando registros...",
+                              "lengthMenu":     "Mostrar _MENU_ registros",
+                              "emptyTable":     "Sin datos cargados aun",
+                              "search":         "Buscar: ",
+                          },                        
               'columns' : [
                             { "data" : "num_int"  },
                             { "data" : "intolerancia"  },
@@ -171,6 +279,21 @@ $(document).ready( function () {
                           "url"     : "../../historias_medicas_pediatricas/obtener_hospitalizacion_paciente",
                           "dataSrc" : ""                          
                       },
+              "language": {
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "infoEmpty":      "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "paginate": {
+                                          "first":      "Primera",
+                                          "last":       "Última",
+                                          "next":       "Siguiente",
+                                          "previous":   "Anterior"
+                                },
+                              "processing":     "Procesando...",
+                              "loadingRecords": "Cargando registros...",
+                              "lengthMenu":     "Mostrar _MENU_ registros",
+                              "emptyTable":     "Sin datos cargados aun",
+                              "search":         "Buscar: ",
+                          },                        
               'columns' : [
                             { "data" : "num_hos"      },
                             { "data" : "fecha"        },
@@ -434,6 +557,7 @@ $(document).ready( function () {
       rangoFechaConsultas('fecha_aplicacion_vacuna',0);
       rangoFechaConsultas('fecha_examen_paciente',0);
       rangoFechaConsultas('fecha_hospitalizacion_paciente',0);
+      rangoFechaConsultas('fecha_tratamiento_medico',0);
 
 
       function verificarColaConsultas()
@@ -841,6 +965,44 @@ $(document).ready( function () {
       });
 
    $("#medico_ordenante").select2({
+        language: "es",        
+        ajax: {    
+          url: function(params) {  
+              return "../../medicos/obtener_medico/"+params.term; 
+              //return "hmiv/public/medicos/obtener_especialidades_medicas/"+params.term; 
+            },
+          dataType: 'json',
+          delay: 50,
+          data: function (params) {
+          },
+          processResults: function (data, page) {
+            // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data
+            //alert(data);
+            var resultados = [];
+            $.each(data, function (index, item) {
+                  resultados.push({
+                      'id': item.id_medico,
+                      'text': item.medico
+                  });
+              });
+                  
+            return {        
+              //results: data
+              results: resultados
+            };
+          },
+          cache: true
+        },
+        
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 1,  
+        //templateResult: formatRepo, // omitted for brevity, see the source of this page
+        //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+      });
+
+   $("#medico_ordenante_tratamiento").select2({
         language: "es",        
         ajax: {    
           url: function(params) {  
