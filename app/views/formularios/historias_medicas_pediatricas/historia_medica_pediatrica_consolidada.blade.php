@@ -112,6 +112,7 @@
 									            <th class="text-center">Fecha</th>
 									            <th class="text-center">Especialidad</th>
 									            <th class="text-center">¿Asistió?</th>
+									            <th class="text-center">¿Cerrar?</th>
 									        </tr>
 									    </thead>
 									    <tbody class="text-center">									        
@@ -670,9 +671,9 @@
 						            <th class="text-center">Piso</th>
 						            <th class="text-center">Sala</th>
 						            <th class="text-center">Cama</th>
-						            <th class="text-center">¿Alta?</th>
-						            <th class="text-center">¿Borrar?</th>						            
+						            <th class="text-center">¿Alta?</th>						            
 						            <th class="text-center">Detalles</th>
+						            <th class="text-center">¿Borrar?</th>
 						        </tr>
 						    </thead>						    
 							<tbody class="text-center">									        
@@ -809,3 +810,68 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<div class="modal fade bs-example-modal-lg" id="ventana_modal_consultas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <!-- Botón para cerrar la ventana -->
+		<button type="button" class="close" data-dismiss="modal">
+			<span aria-hidden="true">×</span>
+			<span class="sr-only">Cerrar</span>
+		</button>
+        <!-- Título de la ventana -->
+		<h2 class="title">Alta de pacientes pediátricos</h2>
+      </div>	  
+      <div class="modal-body">
+	  	<div class="form-group">
+			<label for="fecha_alta_medica">
+				Fecha de alta médica:
+			</label>
+	    	<div class="input-group date" id='fecha_alta_medica' style="width:75%">
+  				{{Form::text('fecha_alta_medica_campo',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_alta_medica_campo',  'readonly'=>'' )) }} <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+			</div>
+				<div style="display:none" id="fecha_alta_medica_error" role="alert"></div>
+			<br>
+			<label for="tipo_alta_medica">
+				Tipo de alta médica:
+			</label>
+				{{Form::select('tipo_alta_medica',array(''=>'SELECCIONE','1' => 'PISO 1','2' => 'PISO 2', '3' => 'PISO 3', '4' => 'PISO 4'  ),'',array('class'=>'form-control','id'=>'tipo_alta_medica','style'=>'width: 75%')) }}
+				<div style="display:none" id="tipo_alta_medica_error" role="alert"></div>
+			<br>	            			
+			<label for="medico_alta">
+				Médico otorgante de alta:
+			</label>	            				
+				{{Form::select('medico_alta',array(''=>'SELECCIONE','1' => 'PISO 1','2' => 'PISO 2', '3' => 'PISO 3', '4' => 'PISO 4'  ),'',array('class'=>'form-control','id'=>'medico_alta','style'=>'width: 75%')) }}
+				<div style="display:none" id="medico_alta_error" role="alert"></div>
+			<br>
+			<label for="resumen_egreso">
+				Resumen de egreso:
+			</label>
+				{{Form::textarea('resumen_egreso','',array('class'=>'form-control ', 'id'=>'resumen_egreso', 'size'=>'40x6', 'style'=>'resize:none'))}}
+				<div style="display:none" id="resumen_egreso_error" role="alert"></div>
+	    	<br>
+			<label for="egreso_forzado">
+				¿Egreso forzado?:
+			</label>	            				
+				{{Form::select('egreso_forzado',array(''=>'SELECCIONE','S' => 'SI','N' => 'NO'),'',array('class'=>'form-control','id'=>'egreso_forzado','style'=>'width: 75%')) }}
+				<div style="display:none" id="egreso_forzado_error" role="alert"></div>
+			<br>					    	
+	    	<div class="col-xs-12">
+	    		<div class="col-xs-4"></div>
+	    		<div class="col-xs-4">
+	    			<button type="button" id="carga_egreso" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+						Guardar egreso
+				</button>
+	    		</div>
+	    		<div class="col-xs-4"></div>
+			   	
+	    	</div>
+	    	<br><br>
+	  	</div>
+        
+
+      </div>
+    </div>
+  </div>
+</div>

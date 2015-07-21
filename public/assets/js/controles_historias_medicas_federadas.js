@@ -1,4 +1,6 @@
 $(document).ready( function () {
+    $ventana_modal_consultas_medicas = $('#ventana_modal_consultas');
+    
     $("#imagenes_examenes")
       .fileinput(
                   { 
@@ -69,6 +71,7 @@ $(document).ready( function () {
                             { "data" : "fecha_consulta"   },
                             { "data" : "especialidad"     },
                             { "data" : "asistio_consulta" },
+                            { "data" : "cerrar_consulta" },
                           ],
         });
 
@@ -299,15 +302,15 @@ $(document).ready( function () {
                             { "data" : "fecha"        },
                             { "data" : "piso"         },
                             { "data" : "sala"         },
-                            { "data" : "codigo_cama"  },                            
+                            { "data" : "codigo_cama"  },
                             { "data" : "alta"         },
-                            { "data" : "borrar"       },                            
                             { "data" : "detalles"     },
+                            { "data" : "borrar"       },
                           ],
         });    
 
 
-      $('#consultas_historico').delegate("button","click", function(event)
+      $('#consultas_historico').delegate("button.btn-danger","click", function(event)
 
               {
                     var obj = this;                    
@@ -331,6 +334,35 @@ $(document).ready( function () {
 
                     });
                     
+              }
+          );
+
+      $('#consultas_historico').delegate("button.btn-success","click", function(event)
+
+              {
+/*                
+                    var obj = this;                    
+                    $.ajax({
+                      url: "../../historias_medicas_pediatricas/anular_consulta_medica",
+                      type: "POST",
+                      data: { 'id_consulta_paciente': obj.id },
+                      contentType: 'application/x-www-form-urlencoded',
+                      dataType: 'json',
+                      success: function(respuesta) 
+                        { 
+                          $('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                          tabla.ajax.reload();
+                        },
+                      error: function(respuesta)
+                        {
+                          $('#mensajes').html(respuesta['especialidad_consulta']);
+                          $('#mensajes').html(respuesta['turno_consulta']);
+                          $('#mensajes').html(respuesta['fecha_consulta']);                  
+                        }
+
+                    });
+                    */
+                    $ventana_modal_consultas_medicas.modal('show');
               }
           );
 

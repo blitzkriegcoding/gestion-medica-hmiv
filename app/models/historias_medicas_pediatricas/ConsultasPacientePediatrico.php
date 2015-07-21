@@ -181,6 +181,7 @@ class ConsultasPacientePediatrico extends \Eloquent {
 			$nuevo_json = [];
 			$nueva_fecha = NULL;
 			$respuesta_asistio = NULL;
+			$cierre	= NULL;
 			$consultas_historico = DB::table('consultas_paciente_pediatrico')
 											->select('fecha_consulta', 'especialidad', 'asistio_consulta','id_consulta_paciente')
 											->join('especialidades_medicas','consultas_paciente_pediatrico.id_especialidad','=','especialidades_medicas.id_especialidad')
@@ -191,18 +192,26 @@ class ConsultasPacientePediatrico extends \Eloquent {
 				switch($d->asistio_consulta)
 					{
 						case 'S':
-							$respuesta_asistio = 'SI';
+							$respuesta_asistio	= 'SI';
+							$cierre 			= '<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>';
 						break;
 
 						case 'N':
-							$respuesta_asistio = 'NO';
+							$respuesta_asistio	= 'NO';
+							$cierre 			= '<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>';
 						break;
 
 						case null:
-							$respuesta_asistio = "<button class='btn btn-danger' id='".$d->id_consulta_paciente."'>Anular</button";
+							$respuesta_asistio 	= "<button class='btn btn-danger' id='".$d->id_consulta_paciente."'>Anular</button";
+							$cierre 			= "<button class='btn btn-success' id='".$d->id_consulta_paciente."'>Cerrar</button";
 						break;
 					}
-				$nuevo_json[]	=	['fecha_consulta' => $nueva_fecha->format('d/m/Y'), 'especialidad' => $d->especialidad, 'asistio_consulta' => $respuesta_asistio ];				
+				$nuevo_json[]	=	[
+										'fecha_consulta'	=> $nueva_fecha->format('d/m/Y'), 
+										'especialidad'		=> $d->especialidad,
+										'asistio_consulta'	=> $respuesta_asistio,
+										'cerrar_consulta'	=> $cierre,
+									];				
 			endforeach;
 
 			return Response::json($nuevo_json);

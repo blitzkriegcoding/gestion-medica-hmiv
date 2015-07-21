@@ -2177,3 +2177,7 @@ Stack trace:
 #29 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
 #30 C:\xampp\htdocs\hmiv\public\index.php(49): Illuminate\Foundation\Application->run()
 #31 {main} [] []
+[2015-07-21 01:19:25] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'break' (T_BREAK)' in C:\xampp\htdocs\hmiv\app\models\historias_medicas_pediatricas\ConsultasPacientePediatrico.php:207
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []

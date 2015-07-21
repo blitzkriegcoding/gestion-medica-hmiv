@@ -53,9 +53,9 @@ class Hospitalizacion extends \Eloquent
 											'sala'			=>	$d->sala,
 											'codigo_cama'	=>	$d->codigo_cama,
 											'piso'			=>	$d->piso,
-											'alta'			=>	$alta,
-											'borrar'		=>	"<button class='btn btn-danger' id='".$d->id_hospitalizacion."'>Borrar</button>",											
-											'detalles'		=>	"<button class='btn btn-warning' id='".$d->id_hospitalizacion."'>Ver</button>"
+											'alta'			=>	"<button class='btn btn-success' id='".$d->id_hospitalizacion."'>Otorgar</button>",
+											'borrar'		=>	"<button class='btn btn-danger' id='".$d->id_hospitalizacion."'>Borrar</button>",
+											'detalles'		=>	"<button class='btn btn-info' id='".$d->id_hospitalizacion."'>Ver</button>"
 										];
 				endforeach;
 				return Response::json($historico_json);
