@@ -140,6 +140,10 @@ class HistoriaMedicaFederadaController extends \BaseController
 			{
 				return Tratamientos::borrarTratamientoGuardado(Input::all());
 			}
+		public function cerrar_consulta_medica()
+			{
+				return ConsultasPacientePediatrico::cerrarConsultaMedica(Input::all());
+			}
 		
 
 	}

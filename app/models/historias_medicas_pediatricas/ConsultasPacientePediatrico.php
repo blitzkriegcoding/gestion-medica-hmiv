@@ -242,6 +242,123 @@ class ConsultasPacientePediatrico extends \Eloquent {
 			return $this->belongsTo('HistoriaMedicaPediatrica','id_historia_medica','id_historia_medica');
 		}
 
+	public static function cerrarConsultaMedica($input)
+		{
+			
+
+/*
+                      'id_consulta_paciente'      : identificador_consulta,
+                      'medico_receptor_consulta'  : $('#medico_receptor_consulta').val(),
+                      'sintomas_consulta'         : $('#sintomas_consulta').val(),          
+                      'diagnostico_consulta'      : $('#diagnostico_consulta').val(),       
+                      'paciente_asistio'          : $('#paciente_asistio').val(),    
+
+*/
+
+			$reglas_asistencia 	= 	[
+										'paciente_asistio'	=>	'required|in:S,N'
+									];
+
+			$mensaje_asistencia	=	[
+										'required'	=>	'Este campo es obligatorio',
+										'in'		=>	'Debe seleccionar entre las opciones disponibles'
+									];
+
+
+			$validador_asistencia = Validator::make($input, $reglas_asistencia, $mensaje_asistencia);
+
+			if($validador_asistencia->fails())
+				{
+					return 	[
+								'mensaje'	=> 	$validador_asistencia->messages(),
+								'clase'		=>	'text text-danger',
+								'bandera'	=>	1
+							];
+				}
+
+
+		
+
+			$respuesta = NULL;
+			$consulta_paciente = self::where('id_paciente','=',Session::get('id_paciente_pediatrico'))
+									->join('historia_paciente_pediatrico','consultas_paciente_pediatrico.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
+										->where('id_consulta_paciente', '=', $input['id_consulta_paciente'])
+											->pluck('id_consulta_paciente');
+			
+			
+
+			if(empty($consulta_paciente))
+				{
+					$respuesta = 	[
+										'mensaje'	=> 	'Consulta inexistente',
+										'clase'		=>	'alert alert-danger',
+										'bandera'	=>	2
+									];
+					return $respuesta;
+				}
+			if($input['paciente_asistio'] == 'N') 
+				{
+					// self::update(
+					// 				[
+					// 					'asistio_consulta'		=>	$input['paciente_asistio'],
+					// 				]
+					// 			)
+					// 		->where('id_consulta_paciente','=', $input['id_consulta_paciente']);
+
+					DB::table('consultas_paciente_pediatrico')
+							->where('id_consulta_paciente','=', $input['id_consulta_paciente'])
+								->update(['asistio_consulta'	=>	$input['paciente_asistio']]);
+
+					return 	[
+								'mensaje'	=> 	'Consulta cerrada con exito',
+								'clase'		=>	'alert alert-success',
+								'bandera'	=>	2
+							];							
+				}
+
+			$reglas_cierre 		= 	[
+										'medico_receptor_consulta'	=>	'required|exists:medicos,id_medico' ,
+										'sintomas_consulta'			=>	'required' ,
+										'diagnostico_consulta'		=>	'required' ,
+									];
+
+			$mensajes_cierre	=	[
+										'required'	=>	'Este campo es obligatorio',
+										'exists'	=>	'Debe seleccionar un medico válido de la lista'
+									];
+
+			$validador_cierre = Validator::make($input, $reglas_cierre, $mensajes_cierre);
+
+
+			if($validador_cierre->fails())
+				{
+					return 	[
+								'mensaje'	=> 	$validador_cierre->messages(),
+								'clase'		=>	'text text-danger',
+								'bandera'	=>	1
+							];
+				}	
+
+
+/*			
+			self::update(
+							[
+								'id_medico'				=>	$input['id_medico_receptor'],
+								'sintomas'				=>	$input['sintomas_paciente'],
+								'diagnostico_consulta'	=>	$input['diagnostico_paciente'],
+								'asistio_consulta'		=>	$input['paciente_asistio'],
+							]
+						)
+					->where('id_consulta_paciente','=', $input['id_consulta_paciente']);
+*/
+					
+			return 	[
+						'mensaje'	=> 	'Consulta cerrada con exito',
+						'clase'		=>	'alert alert-success',
+						'bandera'	=>	2
+					];					
+		}
+
 
 
 

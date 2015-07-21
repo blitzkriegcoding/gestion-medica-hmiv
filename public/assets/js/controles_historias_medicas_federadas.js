@@ -1,5 +1,9 @@
 $(document).ready( function () {
     $ventana_modal_consultas_medicas = $('#ventana_modal_consultas');
+    $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+
+    var identificador_consulta  = 0;
+    var identificador_alta      = 0;
     
     $("#imagenes_examenes")
       .fileinput(
@@ -39,6 +43,11 @@ $(document).ready( function () {
                       }
                   );                
             });
+      function resetValores($form)          
+        {
+          $form.find('input:text, input:password, input:file, select, textarea').val('');
+          $form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');          
+        }
 
      var tabla = $('#consultas_historico').DataTable(
         {
@@ -340,8 +349,11 @@ $(document).ready( function () {
       $('#consultas_historico').delegate("button.btn-success","click", function(event)
 
               {
-/*                
-                    var obj = this;                    
+
+                    var obj = this; 
+                    identificador_consulta = obj.id;
+                    $ventana_modal_consultas_medicas.modal('show');
+                    /*                   
                     $.ajax({
                       url: "../../historias_medicas_pediatricas/anular_consulta_medica",
                       type: "POST",
@@ -362,7 +374,7 @@ $(document).ready( function () {
 
                     });
                     */
-                    $ventana_modal_consultas_medicas.modal('show');
+                    
               }
           );
 
@@ -736,6 +748,62 @@ $(document).ready( function () {
 
             });            
         }
+      function cerrarConsultaModal() 
+        {
+            
+            $('#medico_receptor_consulta_error').hide();
+            $('#sintomas_consulta_error').hide();          
+            $('#diagnostico_consulta_error').hide();       
+            $('#paciente_asistio_error').hide();            
+
+            $.ajax({
+              url: "../../historias_medicas_pediatricas/cerrar_consulta_medica",
+              type: "POST",
+              data: { 
+                      'id_consulta_paciente'      : identificador_consulta,
+                      'medico_receptor_consulta'  : $('#medico_receptor_consulta').val(),
+                      'sintomas_consulta'         : $('#sintomas_consulta').val(),          
+                      'diagnostico_consulta'      : $('#diagnostico_consulta').val(),       
+                      'paciente_asistio'          : $('#paciente_asistio').val(),           
+                    },
+              contentType: 'application/x-www-form-urlencoded',
+              dataType: 'json',
+              success: function(respuesta) 
+                { 
+                  
+                  switch(respuesta['bandera'])
+                    {
+
+                      case 1:
+                        var mensaje = "";
+
+                        $.each(respuesta['mensaje'], function (a,b)
+                              {
+                                $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
+                              }
+                          );
+                      break;
+
+                      case 2:
+                        $('#mensaje_cierre_consulta').show('slow').attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                        identificador_consulta = 0;
+                        resetValores($('#contenedor'));
+                      break;
+
+
+                    }
+
+
+                  tabla.ajax.reload();
+                },
+              error: function(respuesta)
+                {
+                
+                }
+
+            });
+            
+        }
 
        
       function cargarVacuna()
@@ -1001,10 +1069,18 @@ $(document).ready( function () {
   });
 
     $('#carga_consulta').on('click', function () {    
-    var $btn = $(this).button('loading');
-    cargarConsulta();    
-    $btn.button('reset');
-  });
+      var $btn = $(this).button('loading');
+      cargarConsulta();    
+      $btn.button('reset');
+    });
+
+//cerrarConsultaModal
+
+    $('#carga_cierre').on('click', function () {    
+      var $btn = $(this).button('loading');
+      cerrarConsultaModal();    
+      $btn.button('reset');
+    });
 
   $('#cargar_vacuna').on('click', function () {    
     var $btn = $(this).button('loading');
@@ -1085,6 +1161,46 @@ $(document).ready( function () {
         //templateResult: formatRepo, // omitted for brevity, see the source of this page
         //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
       });
+
+   $("#medico_receptor_consulta").select2({
+        language: "es",        
+        ajax: {    
+          url: function(params) {  
+              return "../../medicos/obtener_medico/"+params.term; 
+              //return "hmiv/public/medicos/obtener_especialidades_medicas/"+params.term; 
+            },
+          dataType: 'json',
+          delay: 50,
+          data: function (params) {
+          },
+          processResults: function (data, page) {
+            // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data
+            //alert(data);
+            var resultados = [];
+            $.each(data, function (index, item) {
+                  resultados.push({
+                      'id': item.id_medico,
+                      'text': item.medico
+                  });
+              });
+                  
+            return {        
+              //results: data
+              results: resultados
+            };
+          },
+          cache: true
+        },
+        
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 1,  
+        //templateResult: formatRepo, // omitted for brevity, see the source of this page
+        //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+      });
+
+
 
    $("#medico_ordenante").select2({
         language: "es",        
