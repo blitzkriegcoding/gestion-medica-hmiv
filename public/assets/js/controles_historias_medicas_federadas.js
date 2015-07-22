@@ -352,7 +352,12 @@ $(document).ready( function () {
 
                     var obj = this; 
                     identificador_consulta = obj.id;
-                    $ventana_modal_consultas_medicas.modal('show');
+                    $ventana_modal_consultas_medicas.modal('show')
+                        .on('hide.bs.modal', function (e) 
+                            {
+                                $('#mensaje_cierre_consulta').html('');
+                                $('#mensaje_cierre_consulta').hide();
+                            });
                     /*                   
                     $.ajax({
                       url: "../../historias_medicas_pediatricas/anular_consulta_medica",
