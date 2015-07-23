@@ -298,13 +298,6 @@ class ConsultasPacientePediatrico extends \Eloquent {
 				}
 			if($input['paciente_asistio'] == 'N') 
 				{
-					// self::update(
-					// 				[
-					// 					'asistio_consulta'		=>	$input['paciente_asistio'],
-					// 				]
-					// 			)
-					// 		->where('id_consulta_paciente','=', $input['id_consulta_paciente']);
-
 					DB::table('consultas_paciente_pediatrico')
 							->where('id_consulta_paciente','=', $input['id_consulta_paciente'])
 								->update(['asistio_consulta'	=>	$input['paciente_asistio']]);
@@ -337,26 +330,29 @@ class ConsultasPacientePediatrico extends \Eloquent {
 								'clase'		=>	'text text-danger',
 								'bandera'	=>	1
 							];
-				}	
+				}
+
+			if($input['paciente_asistio'] == 'S') 
+				{
+					DB::table('consultas_paciente_pediatrico')
+							->where('id_consulta_paciente','=', $input['id_consulta_paciente'])
+								->update(
+											[
+												'id_medico'				=>	$input['medico_receptor_consulta'],
+												'sintomas'				=>	$input['sintomas_consulta'],
+												'diagnostico_consulta'	=>	$input['diagnostico_consulta'],
+												'asistio_consulta'		=>	$input['paciente_asistio'],
+											]
+										);
+					return 	[
+								'mensaje'	=> 	'Consulta cerrada con exito',
+								'clase'		=>	'alert alert-success',
+								'bandera'	=>	2
+							];							
+				}				
 
 
-/*			
-			self::update(
-							[
-								'id_medico'				=>	$input['id_medico_receptor'],
-								'sintomas'				=>	$input['sintomas_paciente'],
-								'diagnostico_consulta'	=>	$input['diagnostico_paciente'],
-								'asistio_consulta'		=>	$input['paciente_asistio'],
-							]
-						)
-					->where('id_consulta_paciente','=', $input['id_consulta_paciente']);
-*/
-					
-			return 	[
-						'mensaje'	=> 	'Consulta cerrada con exito',
-						'clase'		=>	'alert alert-success',
-						'bandera'	=>	2
-					];					
+				
 		}
 
 
