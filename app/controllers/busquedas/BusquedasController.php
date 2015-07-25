@@ -8,10 +8,11 @@ class BusquedasController extends \BaseController
 			}
 		public function generar_busqueda()
 			{
+				
 				$respuesta = PacientePediatrico::generarBusquedaPaciente(Input::all());
 
 				return $respuesta;
-				#return Response::json($json);
+
 			}
 
 	}

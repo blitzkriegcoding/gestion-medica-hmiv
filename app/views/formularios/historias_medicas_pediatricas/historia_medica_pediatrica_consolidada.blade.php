@@ -38,9 +38,8 @@
 	    <li role="presentation" class="text-center"><a href="#vacunas_aplicadas" aria-controls="vacunas_aplicadas" role="tab" data-toggle="pill"><span class="badge">6</span><br>Vacunas<br>recibidas</a></li>
 	    <li role="presentation" class="text-center"><a href="#intervenciones_quirurgicas" aria-controls="intervenciones_quirurgicas" role="tab" data-toggle="pill"><span class="badge">7</span><br>Intervenciones<br>quirúrgicas</a></li>
 	    <li role="presentation" class="text-center"><a href="#ingresos_hospitalizacion" aria-controls="ingresos_hospitalizacion" role="tab" data-toggle="pill"><span class="badge">8</span><br>Ingreso por<br>Hospitalizacion</a></li>
-	    <li role="presentation" class="text-center"><a href="#altas_medicas" aria-controls="altas_medicas" role="tab" data-toggle="pill"><span class="badge">9</span><br>Altas<br>medicas</a></li>
-	    <li role="presentation" class="text-center"><a href="#ordenes_medicas" aria-controls="ordenes_medicas" role="tab" data-toggle="pill"><span class="badge">10</span><br>Ordenes<br>medicas</a></li>
-	    <li role="presentation" class="text-center"><a href="#ordenes_enfermeria" aria-controls="ordenes_enfermeria" role="tab" data-toggle="pill"><span class="badge">11</span><br>Ordenes por<br>enfermería</a></li>
+	    <li role="presentation" class="text-center"><a href="#ordenes_medicas" aria-controls="ordenes_medicas" role="tab" data-toggle="pill"><span class="badge">9</span><br>Ordenes<br>medicas</a></li>
+	    <li role="presentation" class="text-center"><a href="#ordenes_enfermeria" aria-controls="ordenes_enfermeria" role="tab" data-toggle="pill"><span class="badge">10</span><br>Ordenes por<br>enfermería</a></li>
 	  </ul>
 	  <!-- Tab panes -->
 	  <div class="tab-content" >
@@ -688,77 +687,12 @@
 				</div>					
 		    	</div>
 	    	</div>
-	    </div>	
-	    <div role="tabpanel" class="tab-pane fade" id="altas_medicas">
-	    	<div class="col-xs-12" style="margin: 0px auto; width: 100%">
-	    		<h4>Seccion de Altas medicas</h4>
-		    	<div class="col-xs-8" >
-					<div class="panel panel-primary ">
-					  <div class="panel-heading">
-					  	<strong>Datos de alta médica por hospitalización</strong>
-					  	</div>
-					  <div class="panel-body">
-					  	<div class="form-group">
-							<label for="fecha_hospitalizacion">
-						  		Datos de hospitalización:
-						  	</label>
-					    	<div class="input-group date" id='fecha_hospitalizacion_paciente' style="width:75%">
-	              				{{Form::text('fecha_hospitalizacion',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_hospitalizacion',  'readonly'=>'' )) }} <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-	            			</div>
-	            			<div style="display:none" id="fecha_hospitalizacion_error" role="alert"></div>
-	            			<br>
-	            			<label for="fecha_alta_medica">
-	            				Fecha de alta médica:
-	            			</label>
-					    	<div class="input-group date" id='fecha_alta_medica' style="width:75%">
-	              				{{Form::text('fecha_alta_medica_campo',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_alta_medica_campo',  'readonly'=>'' )) }} <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-	            			</div>
-	            				<div style="display:none" id="fecha_alta_medica_error" role="alert"></div>
-	            			<br>
-	            			<label for="tipo_alta_medica">
-	            				Tipo de alta médica:
-	            			</label>
-								{{Form::select('tipo_alta_medica',array(''=>'SELECCIONE','1' => 'PISO 1','2' => 'PISO 2', '3' => 'PISO 3', '4' => 'PISO 4'  ),'',array('class'=>'form-control','id'=>'tipo_alta_medica','style'=>'width: 75%')) }}
-								<div style="display:none" id="tipo_alta_medica_error" role="alert"></div>
-							<br>	            			
-	            			<label for="medico_alta">
-	            				Médico otorgante de alta:
-	            			</label>	            				
-	            				{{Form::select('medico_alta',array(''=>'SELECCIONE','1' => 'PISO 1','2' => 'PISO 2', '3' => 'PISO 3', '4' => 'PISO 4'  ),'',array('class'=>'form-control','id'=>'medico_alta','style'=>'width: 75%')) }}
-	            				<div style="display:none" id="medico_alta_error" role="alert"></div>
-							<br>
-	            			<label for="resumen_egreso">
-	            				Resumen de egreso:
-	            			</label>
-	            				{{Form::textarea('resumen_egreso','',array('class'=>'form-control ', 'id'=>'resumen_egreso', 'size'=>'40x10', 'style'=>'resize:none'))}}
-	            				<div style="display:none" id="resumen_egreso_error" role="alert"></div>
-					    	<br>
-	            			<label for="egreso_forzado">
-	            				¿Egreso forzado?:
-	            			</label>	            				
-	            				{{Form::select('egreso_forzado',array(''=>'SELECCIONE','S' => 'SI','N' => 'NO'),'',array('class'=>'form-control','id'=>'egreso_forzado','style'=>'width: 75%')) }}
-	            				<div style="display:none" id="egreso_forzado_error" role="alert"></div>
-							<br>					    	
-					    	<div class="col-xs-12">
-							   	<button type="button" id="carga_egreso" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
-										Guardar egreso
-								</button>
-					    	</div>
-					  	</div>
-					  </div>
-					</div>
-		    	</div>					
-
-
-
-
-	    	</div>	    	 
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="ordenes_medicas">
-	    	Seccion de Altas medicas
+	    	Ordenes Medicas
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="ordenes_enfermeria">
-	    	Seccion de Altas medicas
+	    	Ordenes por enfermeria
 
 	    </div>	    
 	  </div>
@@ -841,48 +775,51 @@
         <!-- Título de la ventana -->
 		<h2 class="title">Alta de pacientes pediátricos</h2>
       </div>	  
-      <div class="modal-body">
-	  	<div class="form-group">
+      <div class="modal-body" >
+		<div class="col-xs-12">
+	      <div class="col-xs-4"></div>
+	      <div class="col-xs-4 text-center" id="mensaje_alta_medica" style='display:none'></div>
+	      <div class="col-xs-4"></div>
+		</div>      
+	  	<div class="form-group" id="contenedor_alta">
 			<label for="fecha_alta_medica">
 				Fecha de alta médica:
 			</label>
-	    	<div class="input-group date" id='fecha_alta_medica' style="width:75%">
-  				{{Form::text('fecha_alta_medica_campo',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_alta_medica_campo',  'readonly'=>'' )) }} <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	    	<div class="input-group date" id='fecha_alta_medica' style="width:25%">
+  				{{Form::text('fecha_alta_medica_campo',NULL ,array('class'=>'form-control', 'id'=>'fecha_alta_medica_campo',  'readonly'=>'' )) }} <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			</div>
-				<div style="display:none" id="fecha_alta_medica_error" role="alert"></div>
+				<div style="display:none" id="fecha_alta_medica_campo_error" role="alert"></div>
 			<br>
 			<label for="tipo_alta_medica">
 				Tipo de alta médica:
 			</label>
-				{{Form::select('tipo_alta_medica',array(''=>'SELECCIONE','1' => 'PISO 1','2' => 'PISO 2', '3' => 'PISO 3', '4' => 'PISO 4'  ),'',array('class'=>'form-control','id'=>'tipo_alta_medica','style'=>'width: 75%')) }}
+				{{Form::select('tipo_alta_medica',$tipos_alta_medica,'',array('class'=>'form-control','id'=>'tipo_alta_medica','style'=>'width: 50%')) }}
 				<div style="display:none" id="tipo_alta_medica_error" role="alert"></div>
 			<br>	            			
 			<label for="medico_alta">
 				Médico otorgante de alta:
-			</label>	            				
-				{{Form::select('medico_alta',array(''=>'SELECCIONE','1' => 'PISO 1','2' => 'PISO 2', '3' => 'PISO 3', '4' => 'PISO 4'  ),'',array('class'=>'form-control','id'=>'medico_alta','style'=>'width: 75%')) }}
-				<div style="display:none" id="medico_alta_error" role="alert"></div>
+			</label> <br>	            				
+				{{Form::select('medico_alta',array('' => 'SELECCIONE'),'',array('class'=>'form-control','id'=>'medico_alta','style'=>'width: 50%')) }}
+				<div style="display:none" id="medico_alta_error" role="alert"></div> <br>
 			<br>
 			<label for="resumen_egreso">
 				Resumen de egreso:
 			</label>
-				{{Form::textarea('resumen_egreso','',array('class'=>'form-control ', 'id'=>'resumen_egreso', 'size'=>'40x6', 'style'=>'resize:none'))}}
+				{{Form::textarea('resumen_egreso','',array('class'=>'form-control ', 'id'=>'resumen_egreso', 'size'=>'40x3', 'style'=>'resize:none'))}}
 				<div style="display:none" id="resumen_egreso_error" role="alert"></div>
-	    	<br>
-			<label for="egreso_forzado">
-				¿Egreso forzado?:
-			</label>	            				
-				{{Form::select('egreso_forzado',array(''=>'SELECCIONE','S' => 'SI','N' => 'NO'),'',array('class'=>'form-control','id'=>'egreso_forzado','style'=>'width: 75%')) }}
-				<div style="display:none" id="egreso_forzado_error" role="alert"></div>
-			<br>					    	
+	    	<br>				    	
 	    	<div class="col-xs-12">
-	    		<div class="col-xs-4"></div>
+	    		<div class="col-xs-4">
+	    			&nbsp;
+	    		</div>
 	    		<div class="col-xs-4">
 	    			<button type="button" id="carga_egreso" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
-						Guardar egreso
-				</button>
+						Otorgar alta médica
+					</button>
 	    		</div>
-	    		<div class="col-xs-4"></div>
+	    		<div class="col-xs-4">
+	    			&nbsp;
+	    		</div>
 			   	
 	    	</div>
 	    	<br><br>

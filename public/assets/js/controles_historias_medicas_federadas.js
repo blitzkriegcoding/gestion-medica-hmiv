@@ -1,5 +1,7 @@
 $(document).ready( function () {
-    $ventana_modal_consultas_medicas = $('#ventana_modal_consultas');
+    $ventana_modal_consultas_medicas  = $('#ventana_modal_consultas');
+    $ventana_modal_altas_medicas      = $('#ventana_modal_altas_medicas');
+
     $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 
     var identificador_consulta  = 0;
@@ -347,41 +349,32 @@ $(document).ready( function () {
           );
 
       $('#consultas_historico').delegate("button.btn-success","click", function(event)
-
               {
-
                     var obj = this; 
                     identificador_consulta = obj.id;
                     $ventana_modal_consultas_medicas.modal('show')
-                        .on('hide.bs.modal', function (e) 
-                            {
-                                $('#mensaje_cierre_consulta').html('');
-                                $('#mensaje_cierre_consulta').hide();
-                            });
-                    /*                   
-                    $.ajax({
-                      url: "../../historias_medicas_pediatricas/anular_consulta_medica",
-                      type: "POST",
-                      data: { 'id_consulta_paciente': obj.id },
-                      contentType: 'application/x-www-form-urlencoded',
-                      dataType: 'json',
-                      success: function(respuesta) 
-                        { 
-                          $('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
-                          tabla.ajax.reload();
-                        },
-                      error: function(respuesta)
-                        {
-                          $('#mensajes').html(respuesta['especialidad_consulta']);
-                          $('#mensajes').html(respuesta['turno_consulta']);
-                          $('#mensajes').html(respuesta['fecha_consulta']);                  
-                        }
-
-                    });
-                    */
-                    
+                      .on('hide.bs.modal', function (e) 
+                          {
+                              $('#mensaje_cierre_consulta').html('');
+                              $('#mensaje_cierre_consulta').hide();
+                              resetValores($('#contenedor'));
+                          });
               }
           );
+
+      $('#historico_hospitalizacion').delegate("button.btn-success","click", function(event)
+              {
+                    var obj = this; 
+                    identificador_alta = obj.id;
+                    $ventana_modal_altas_medicas.modal('show')
+                      .on('hide.bs.modal', function (e) 
+                          {
+                              $('#mensaje_alta_medica').html('');
+                              $('#mensaje_alta_medica').hide();
+                              resetValores($('#contenedor_alta'));
+                          });
+              }
+          );      
 
       $('#vacunas_historico').delegate("button","click", function(event)
               {
@@ -643,6 +636,8 @@ $(document).ready( function () {
       rangoFechaConsultas('fecha_examen_paciente',0);
       rangoFechaConsultas('fecha_hospitalizacion_paciente',0);
       rangoFechaConsultas('fecha_tratamiento_medico',0);
+      rangoFechaConsultas('fecha_alta_medica',0);
+      //fecha_alta_medica
 
 
       function verificarColaConsultas()
@@ -713,36 +708,27 @@ $(document).ready( function () {
                     {
                       case 1:
                         var mensaje = "";
-
                         $.each(respuesta['mensaje'], function (a,b)
                               {
                                 $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
                               }                             
-                          );
-                        
+                          );                        
                       break;
-
                       case 2:
                         $('#cola_consulta').show().attr('class',respuesta['clase']).html(respuesta['cola']);
                         $('#mensajes_consulta').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
                       break;
-
                       case 3:
                         $('#cola_consulta').show().attr('class',respuesta['clase']).html(respuesta['cola']);
                         //$('#mensajes_consulta').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
-
-
                       break;
-
                       case 4:
                         $('#cola_consulta').show().attr('class',respuesta['clase']).html(respuesta['cola']);
                         $('#mensajes_consulta').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                    
 
                       break;
                     }
-                    tabla.ajax.reload(); 
-
-
+                  tabla.ajax.reload();
                 },
               error: function(respuesta)
                 {
@@ -754,22 +740,20 @@ $(document).ready( function () {
             });            
         }
       function cerrarConsultaModal() 
-        {
-            
+        {            
             $('#medico_receptor_consulta_error').hide();
-            $('#sintomas_consulta_error').hide();          
-            $('#diagnostico_consulta_error').hide();       
-            $('#paciente_asistio_error').hide();            
-
+            $('#sintomas_consulta_error').hide();
+            $('#diagnostico_consulta_error').hide();
+            $('#paciente_asistio_error').hide();
             $.ajax({
               url: "../../historias_medicas_pediatricas/cerrar_consulta_medica",
               type: "POST",
               data: { 
                       'id_consulta_paciente'      : identificador_consulta,
                       'medico_receptor_consulta'  : $('#medico_receptor_consulta').val(),
-                      'sintomas_consulta'         : $('#sintomas_consulta').val(),          
-                      'diagnostico_consulta'      : $('#diagnostico_consulta').val(),       
-                      'paciente_asistio'          : $('#paciente_asistio').val(),           
+                      'sintomas_consulta'         : $('#sintomas_consulta').val(),
+                      'diagnostico_consulta'      : $('#diagnostico_consulta').val(),
+                      'paciente_asistio'          : $('#paciente_asistio').val(),
                     },
               contentType: 'application/x-www-form-urlencoded',
               dataType: 'json',
@@ -794,12 +778,62 @@ $(document).ready( function () {
                         identificador_consulta = 0;
                         resetValores($('#contenedor'));
                       break;
-
-
                     }
-
-
                   tabla.ajax.reload();
+                },
+              error: function(respuesta)
+                {
+                
+                }
+
+            });
+            
+        }
+
+
+      function otorgarAltaModal() 
+        {            
+            $('#fecha_alta_medica_campo_error').hide();
+            $('#tipo_alta_medica_error').hide();
+            $('#medico_alta_error').hide();
+            $('#resumen_egreso_error').hide();
+
+
+            $.ajax({
+              url: "../../historias_medicas_pediatricas/otorgar_alta_medica",
+              type: "POST",
+              data: { 
+                      'id_hospitalizacion'        : identificador_alta,
+                      'fecha_alta_medica_campo'   : $('#fecha_alta_medica_campo').val(),
+                      'tipo_alta_medica'          : $('#tipo_alta_medica').val(),
+                      'medico_alta'               : $('#medico_alta').val(),
+                      'resumen_egreso'            : $('#resumen_egreso').val(),
+                    },
+              contentType: 'application/x-www-form-urlencoded',
+              dataType: 'json',
+              success: function(respuesta) 
+                { 
+                  
+                  switch(respuesta['bandera'])
+                    {
+
+                      case 1:
+                        var mensaje = "";
+
+                        $.each(respuesta['mensaje'], function (a,b)
+                              {
+                                $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
+                              }
+                          );
+                      break;
+
+                      case 2:
+                        $('#mensaje_alta_medica').show('slow').attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                        identificador_alta = 0;
+                        resetValores($('#contenedor_alta'));
+                      break;
+                    }
+                  tabla_hospitalizacion.ajax.reload();
                 },
               error: function(respuesta)
                 {
@@ -1010,8 +1044,6 @@ $(document).ready( function () {
                         $('#mensaje_alergia_intolerancia').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
                       break;
 
-                      
-
                     }
                   tabla_intolerancias.ajax.reload();
                 },
@@ -1126,7 +1158,13 @@ $(document).ready( function () {
     cargarHospitalizacion();
     $btn.button('reset');
   });    
+//otorgarAltaModal
 
+    $('#carga_egreso').on('click', function () {    
+    var $btn = $(this).button('loading');
+    otorgarAltaModal();
+    $btn.button('reset');
+  }); 
 
 
    $("#especialidad_consulta").select2({
@@ -1283,6 +1321,43 @@ $(document).ready( function () {
         //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
       });
 
+   $("#medico_alta").select2({
+        language: "es",        
+        ajax: {    
+          url: function(params) {  
+              return "../../medicos/obtener_medico/"+params.term; 
+              //return "hmiv/public/medicos/obtener_especialidades_medicas/"+params.term; 
+            },
+          dataType: 'json',
+          delay: 50,
+          data: function (params) {
+          },
+          processResults: function (data, page) {
+            // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data
+            //alert(data);
+            var resultados = [];
+            $.each(data, function (index, item) {
+                  resultados.push({
+                      'id': item.id_medico,
+                      'text': item.medico
+                  });
+              });
+                  
+            return {        
+              //results: data
+              results: resultados
+            };
+          },
+          cache: true
+        },
+        
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 1,  
+        //templateResult: formatRepo, // omitted for brevity, see the source of this page
+        //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+      });
 
 
    $("#vacuna_aplicada").select2({

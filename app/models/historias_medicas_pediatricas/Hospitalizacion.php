@@ -40,10 +40,14 @@ class Hospitalizacion extends \Eloquent
 					if(is_null($d->id_alta_medica))
 						{
 							$alta = "NO";
+							$boton_alta 	= "<button class='btn btn-success' id='".$d->id_hospitalizacion."'>Otorgar</button>";
+							$boton_borrar 	= "<button class='btn btn-danger' id='".$d->id_hospitalizacion."'>Borrar</button>";
 						}
 					else
 						{
 							$alta = "SI";
+							$boton_alta 	= '<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>';
+							$boton_borrar 	= '<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>';
 						}
 
 
@@ -53,8 +57,8 @@ class Hospitalizacion extends \Eloquent
 											'sala'			=>	$d->sala,
 											'codigo_cama'	=>	$d->codigo_cama,
 											'piso'			=>	$d->piso,
-											'alta'			=>	"<button class='btn btn-success' id='".$d->id_hospitalizacion."'>Otorgar</button>",
-											'borrar'		=>	"<button class='btn btn-danger' id='".$d->id_hospitalizacion."'>Borrar</button>",
+											'alta'			=>	$boton_alta,
+											'borrar'		=>	$boton_borrar,
 											'detalles'		=>	"<button class='btn btn-info' id='".$d->id_hospitalizacion."'>Ver</button>"
 										];
 				endforeach;
@@ -170,8 +174,65 @@ class Hospitalizacion extends \Eloquent
 							'mensaje'	=>	'Hospitalización borrada con éxito',
 							'clase'		=>	'alert alert-success fade in',
 							'bandera'	=>	2
-						];					
-																
+						];
+			}
+
+		public static function otorgarAltaMedica($input)
+			{
+				$reglas_alta_medica 	= 	[
+												'fecha_alta_medica_campo'	=>	'required|date_format:d/m/Y',
+												'tipo_alta_medica'			=>	'required|exists:tipos_alta_medica_pediatrica,id_alta_medica',
+												'medico_alta'				=>	'required|exists:medicos,id_medico',
+												'resumen_egreso'			=>	'required'
+											];
+
+				$mensajes_error_alta	=	[
+												'required'		=>	'Este campo es obligatorio',
+												'exists'		=>	'Seleccione un médico de la lista',
+												'date_format'	=>	'Fecha con formato inválido'
+											];
+
+				$validador_alta 		= Validator::make($input, $reglas_alta_medica, $mensajes_error_alta);
+
+				if($validador_alta->fails())
+					{
+						return 	[
+									'mensaje'	=>	$validador_alta->messages(),
+									'clase'		=>	'text text-danger',
+									'bandera'	=>	1
+								];
+					}
+
+				$hospitalizacion_existe = self::where('id_paciente','=',Session::get('id_paciente_pediatrico'))
+													->where('id_hospitalizacion','=',$input['id_hospitalizacion'])
+														->join('historia_paciente_pediatrico','hospitalizacion.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
+															->pluck('id_hospitalizacion');
+
+
+				if(empty($hospitalizacion_existe))
+					{
+						return 	[
+									'mensaje'	=>	'Hospitalización no existe',
+									'clase'		=>	'alert alert-danger fade in',
+									'bandera'	=>	2
+								];						
+					}
+ 
+				DB::table('hospitalizacion')->where('id_hospitalizacion', '=', $input['id_hospitalizacion'])
+											->update([
+														'fecha_alta'		=>	$input['fecha_alta_medica_campo'],
+														'id_alta_medica' 	=>	$input['tipo_alta_medica']
+													]);
+
+				ResumenEgresoPediatrico::guardarResumenEgreso($input);
+
+						return 	[
+									'mensaje'	=>	'Alta médica otorgada con éxito',
+									'clase'		=>	'alert alert-success fade in',
+									'bandera'	=>	2
+								];					
+
+
 
 
 
