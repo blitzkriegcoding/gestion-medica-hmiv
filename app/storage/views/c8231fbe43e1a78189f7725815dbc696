@@ -41,6 +41,7 @@
 	    <li role="presentation" class="text-center"><a href="#ingresos_hospitalizacion" aria-controls="ingresos_hospitalizacion" role="tab" data-toggle="pill"><span class="badge">8</span><br>Ingreso por<br>Hospitalizacion</a></li>
 	    <li role="presentation" class="text-center"><a href="#ordenes_medicas" aria-controls="ordenes_medicas" role="tab" data-toggle="pill"><span class="badge">9</span><br>Ordenes<br>medicas</a></li>
 	    <li role="presentation" class="text-center"><a href="#ordenes_enfermeria" aria-controls="ordenes_enfermeria" role="tab" data-toggle="pill"><span class="badge">10</span><br>Ordenes por<br>enfermería</a></li>
+	    <li role="presentation" class="text-center"><a href="#historial_talla_peso" aria-controls="historial_talla_peso" role="tab" data-toggle="pill"><span class="badge">11</span><br>Historial de<br>talla-peso</a></li>
 	  </ul>
 	  <!-- Tab panes -->
 	  <div class="tab-content" >
@@ -622,7 +623,7 @@
 							  		<strong>Datos de la intervención</strong>
 							 </div>
 							  <div class="panel-body">
-							    <div class="form-group">
+							    <div class="form-group" id="contenedor_intervencion">
 							    	<label for="fecha_intervencion_quirurgica">
 							    		Fecha de la consulta:
 							    	</label>
@@ -634,7 +635,7 @@
 							    	<label for="tipo_intervencion">
 							    		Nombre de la intervención:
 							    	</label>
-										<?php echo Form::select('tipo_intervencion',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'tipo_intervencion','style'=>'width: 100%')); ?>
+										<?php echo Form::select('tipo_intervencion',['' => 'SELECCIONE'],'',array('class'=>'form-control','id'=>'tipo_intervencion','style'=>'width: 100%')); ?>
 
 										<div style="display:none" id="tipo_intervencion_error" role="alert"></div>
 							    	<br><br>
@@ -812,6 +813,82 @@
 	    <div role="tabpanel" class="tab-pane fade" id="ordenes_enfermeria">
 	    	Ordenes por enfermeria
 
+	    </div>
+	    <div role="tabpanel" class="tab-pane fade" id="historial_talla_peso">
+	    	<div class="col-xs-12">
+	    		<h4>Historial peso y talla</h4>
+	    		<br>
+		    	<div class="col-xs-6">
+					<div class="panel panel-primary ">
+					  <div class="panel-heading">
+					  	<strong>Datos de talla y peso</strong>
+					  	</div>
+					  <div class="panel-body">
+					  	<div class="form-group">
+							<label for="fecha_hospitalizacion">
+						  		Fecha de toma:
+						  	</label>
+					    	<div class="input-group date" id='fecha_toma_talla_peso' style="width:75%">
+	              				<?php echo Form::text('fecha_toma_talla_peso',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_toma_talla_peso',  'readonly'=>'' )); ?> <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	            			</div>
+	            			<div style="display:none" id="fecha_toma_talla_peso_error" role="alert"></div>
+	            			<br>
+	            			<label for="peso">
+	            				Peso (en kilogramos):
+	            			</label>
+	            				<?php echo Form::text('peso_paciente',NULL ,array('class'=>'form-control','style'=>'width: 75%', 'id'=>'peso_paciente')); ?>
+
+	            				<div style="display:none" id="peso_paciente_error" role="alert"></div>
+	            			<br>
+	            			<label for="talla">
+	            				Talla (en centímetros):
+	            			</label>
+	            				<?php echo Form::text('talla_paciente',NULL ,array('class'=>'form-control','style'=>'width: 75%', 'id'=>'talla_paciente')); ?> 
+								<div style="display:none" id="talla_paciente_error" role="alert"></div>							
+					    	<br>
+					    	<div class="col-xs-12">
+					    		<div class="col-xs-2"></div>
+					    		<div class="col-xs-8">
+								   	<button type="button" id="carga_hospitalizacion" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+										Guardar talla y peso
+									</button>
+					    		</div>
+					    		<div class="col-xs-2">					    			
+					    		</div>
+
+					    	</div>
+					    	<br><br>
+					  	</div>
+					  </div>
+					</div>
+		    	</div>
+		    	<div class="col-xs-6">
+					<div class="panel panel-primary ">
+					  <div class="panel-heading">
+					  	<strong>Historico de Talla y Peso del Paciente</strong>
+					  </div>
+					  <div class="panel-body">
+				    	<table id="historico_talla_peso" class="display compact">
+						    <thead>
+						        <tr>
+						            <th class="text-center" style="width:5%">N°</th>
+						            <th class="text-center">Talla</th>
+						            <th class="text-center">Peso</th>						            
+						            <th class="text-center">¿Borrar?</th>
+						        </tr>
+						    </thead>						    
+							<tbody class="text-center">									        
+							</tbody>
+						</table>					  	
+					  </div>
+					</div>
+					<br>
+
+					<div class="alert alert-info alert-dismissible text-center" role="alert" id='mensaje_hospitalizacion' style="display:none">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>				  
+					</div>					
+		    	</div>
+	    	</div>
 	    </div>	    
 	  </div>
 	</div>

@@ -16,12 +16,12 @@ class TipoIntervenciones extends \Eloquent
 
 				foreach($intervenciones as $d):
 					$intervenciones_json[] = 	[
-													'
-														' 	=>	$d->id_tipo_intervencion,
+													'id_intervencion'	=>	$d->id_tipo_intervencion,
 													'intervencion'		=>	$d->tipo_intervencion,
 												];
 				endforeach;
 				return Response::json($intervenciones_json);
 			}
+		
 
 	}

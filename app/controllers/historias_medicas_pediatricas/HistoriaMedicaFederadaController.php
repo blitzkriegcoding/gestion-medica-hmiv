@@ -167,6 +167,15 @@ class HistoriaMedicaFederadaController extends \BaseController
 			{
 				return IntervencionesPediatricas::cargarIntervencion(Input::all());
 			}
+		public function borrar_intervencion_guardada()
+			{
+				return IntervencionesPediatricas::borrarIntervencionGuardada(Input::all());
+			}
+
+		public function obtener_historico_talla_peso()
+			{
+				return 
+			}
 		
 
 	}

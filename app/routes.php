@@ -63,6 +63,7 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::get('obtener_historico_examenes',										['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_examenes']);
 		Route::get('obtener_historico_tratamientos',									['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_tratamientos']);
 		Route::get('obtener_historico_intervenciones',									['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_intervenciones']);
+		Route::get('obtener_historico_talla_peso',										['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_talla_peso']);
 		
 
 		/*TODOS LOS POST*/
@@ -85,9 +86,11 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::post('borrar_tratamiento_guardado',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_tratamiento_guardado']);
 		Route::post('cerrar_consulta_medica',											['uses'	=>	'HistoriaMedicaFederadaController@cerrar_consulta_medica']);
 		Route::post('otorgar_alta_medica',												['uses'	=>	'HistoriaMedicaFederadaController@otorgar_alta_medica']);		
-		Route::post('cargar_intervencion',												['uses'	=>	'HistoriaMedicaFederadaController@cargar_intervencion']);		
+		Route::post('cargar_intervencion',												['uses'	=>	'HistoriaMedicaFederadaController@cargar_intervencion']);
+		Route::post('borrar_intervencion_guardada',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_intervencion_guardada']);
 		
-		//mensaje_alta_medica
+
+		//borrar_intervencion_guardada
 
 		
 		/*RUTAS PARA CONSULTA VIA AJAX*/
@@ -95,6 +98,7 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::get('obtener_patologia/{patologia}',										['uses'	=>	'PatologiasController@mostrar_patologia']);
 		Route::get('obtener_alergias/{alergia}',										['uses'	=>	'HistoriaMedicaFederadaController@obtener_alergias'])->where('alergias','[a-zA-Z\s]+');
 		Route::get('obtener_intolerancias/{intolerancia}',								['uses'	=>	'HistoriaMedicaFederadaController@obtener_intolerancias'])->where('intolerancia','[a-zA-Z\s]+');
+		Route::get('obtener_intervenciones/{intervencion}',								['uses'	=>	'HistoriaMedicaFederadaController@obtener_intervenciones'])->where('intervencion','[a-zA-Z\s]+');
 		
 		
 	});

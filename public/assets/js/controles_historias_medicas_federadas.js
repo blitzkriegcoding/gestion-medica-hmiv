@@ -358,6 +358,42 @@ $(document).ready( function () {
                           ],
         });    
 
+    var tabla_talla_peso = $('#historico_talla_peso').DataTable(
+        {
+              'searching':  false,
+              'ordering':   true,
+              "pageLength": 4,
+              "lengthChange": false,
+              "ajax": 
+                      {
+                          "type"    : "GET",
+                          "url"     : "../../historias_medicas_pediatricas/obtener_hospitalizacion_paciente",
+                          "dataSrc" : ""                          
+                      },
+              "language": {
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "infoEmpty":      "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "paginate": {
+                                          "first":      "Primera",
+                                          "last":       "Última",
+                                          "next":       "Siguiente",
+                                          "previous":   "Anterior"
+                                },
+                              "processing":     "Procesando...",
+                              "loadingRecords": "Cargando registros...",
+                              "lengthMenu":     "Mostrar _MENU_ registros",
+                              "emptyTable":     "Sin datos cargados aun",
+                              "search":         "Buscar: ",
+                          },                        
+              'columns' : [
+                            { "data" : "num_tal"      },
+                            { "data" : "fecha"        },
+                            { "data" : "talla"        },
+                            { "data" : "peso"         },
+                            { "data" : "borrar"       },
+                            
+                          ],
+        });  
 
       $('#consultas_historico').delegate("button.btn-danger","click", function(event)
 
@@ -605,6 +641,45 @@ $(document).ready( function () {
                     });
               }
           );
+
+
+      $('#intervenciones_historico').delegate("button.btn-danger","click", function(event)
+              {
+                    var obj = this;                    
+                    $.ajax({
+                      url: "../../historias_medicas_pediatricas/borrar_intervencion_guardada",
+                      type: "POST",
+                      data: { 'id_intervencion': obj.id },
+                      contentType: 'application/x-www-form-urlencoded',
+                      dataType: 'json',
+                      success: function(respuesta) 
+                        {                 
+                          switch(respuesta['bandera'])
+                            {
+                              case 1:
+                                var mensaje = "";
+                                $.each(respuesta['mensaje'], function (a,b)
+                                      {
+                                        $('#mensaje_intervencion').show().attr('class',respuesta['clase']).html(b);
+                                      }                             
+                                  );                                
+                              break;
+                              case 2:                                
+                                $('#mensaje_intervencion').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                              break;
+                            }                 
+                          tabla_intervenciones.ajax.reload();
+                        },
+                      error: function(respuesta)
+                        {
+
+                        }
+
+                    });
+              }
+          );
+
+
 
 //Para el borrado de hospitalizacion del paciente
       $('#historico_hospitalizacion').delegate("button.btn-danger","click", function(event)
@@ -1125,7 +1200,13 @@ $(document).ready( function () {
         } 
 
       function cargarIntervencion()
-        {   
+        {
+            $('#fecha_intervencion_quirurgica_error').hide();
+            $('#tipo_intervencion_error').hide();
+            $('#medico_intervencion_error').hide();
+            $('#status_intervencion_error').hide();
+            $('#descripcion_intervencion_error').hide();
+
             $.ajax({              
               url: "../../historias_medicas_pediatricas/cargar_intervencion",
               type: "POST",
@@ -1152,15 +1233,15 @@ $(document).ready( function () {
                       break;
 
                       case 2:                        
-                        $('#mensaje_intervencion').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                        $('#mensaje_intervencion').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                        resetValores($('#contenedor_intervencion'));
                       break;
 
                     }
-                  tabla_intolerancias.ajax.reload();
+                  tabla_intervenciones.ajax.reload();
                 },
               error: function(respuesta)
                 {
-                 
                 }
 
             });            
