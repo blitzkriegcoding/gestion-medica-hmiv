@@ -3776,3 +3776,50 @@ Stack trace:
 #18 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
 #19 C:\xampp\htdocs\hmiv\public\index.php(49): Illuminate\Foundation\Application->run()
 #20 {main} [] []
+[2015-07-26 15:46:36] production.ERROR: exception 'BadMethodCallException' with message 'Method [obtener_intervenciones] does not exist.' in C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Controller.php:268
+Stack trace:
+#0 [internal function]: Illuminate\Routing\Controller->__call('obtener_interve...', Array)
+#1 [internal function]: HistoriaMedicaFederadaController->obtener_intervenciones('a')
+#2 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#3 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('obtener_interve...', Array)
+#4 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(HistoriaMedicaFederadaController), Object(Illuminate\Routing\Route), 'obtener_interve...')
+#5 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(967): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'HistoriaMedicaF...', 'obtener_interve...')
+#6 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}('a')
+#7 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Route.php(109): call_user_func_array(Object(Closure), Array)
+#8 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1033): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#9 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1001): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#10 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(775): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#11 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(745): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#12 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Session\Middleware.php(72): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#13 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Cookie\Queue.php(47): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#14 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Cookie\Guard.php(51): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#15 C:\xampp\htdocs\hmiv\vendor\stack\builder\src\Stack\StackedHttpKernel.php(23): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#16 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#17 C:\xampp\htdocs\hmiv\public\index.php(49): Illuminate\Foundation\Application->run()
+#18 {main} [] []
+[2015-07-26 15:48:25] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'TipoIntervenciones' not found' in C:\xampp\htdocs\hmiv\app\controllers\historias_medicas_pediatricas\HistoriaMedicaFederadaController.php:160
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-26 15:48:54] production.ERROR: exception 'ErrorException' with message 'Array to string conversion' in C:\xampp\htdocs\hmiv\app\models\modelos_complementarios\TipoIntervenciones.php:13
+Stack trace:
+#0 C:\xampp\htdocs\hmiv\app\models\modelos_complementarios\TipoIntervenciones.php(13): Illuminate\Exception\Handler->handleError(8, 'Array to string...', 'C:\\xampp\\htdocs...', 13, Array)
+#1 C:\xampp\htdocs\hmiv\app\controllers\historias_medicas_pediatricas\HistoriaMedicaFederadaController.php(160): TipoIntervenciones::obtenerIntervenciones(Array)
+#2 [internal function]: HistoriaMedicaFederadaController->obtener_intervenciones('a')
+#3 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Controller.php(231): call_user_func_array(Array, Array)
+#4 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(93): Illuminate\Routing\Controller->callAction('obtener_interve...', Array)
+#5 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(62): Illuminate\Routing\ControllerDispatcher->call(Object(HistoriaMedicaFederadaController), Object(Illuminate\Routing\Route), 'obtener_interve...')
+#6 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(967): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'HistoriaMedicaF...', 'obtener_interve...')
+#7 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}('a')
+#8 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Route.php(109): call_user_func_array(Object(Closure), Array)
+#9 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1033): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#10 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Routing\Router.php(1001): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#11 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(775): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#12 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(745): Illuminate\Foundation\Application->dispatch(Object(Illuminate\Http\Request))
+#13 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Session\Middleware.php(72): Illuminate\Foundation\Application->handle(Object(Illuminate\Http\Request), 1, true)
+#14 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Cookie\Queue.php(47): Illuminate\Session\Middleware->handle(Object(Illuminate\Http\Request), 1, true)
+#15 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Cookie\Guard.php(51): Illuminate\Cookie\Queue->handle(Object(Illuminate\Http\Request), 1, true)
+#16 C:\xampp\htdocs\hmiv\vendor\stack\builder\src\Stack\StackedHttpKernel.php(23): Illuminate\Cookie\Guard->handle(Object(Illuminate\Http\Request), 1, true)
+#17 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
+#18 C:\xampp\htdocs\hmiv\public\index.php(49): Illuminate\Foundation\Application->run()
+#19 {main} [] []

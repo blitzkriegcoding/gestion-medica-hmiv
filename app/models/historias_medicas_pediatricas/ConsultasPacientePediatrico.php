@@ -349,14 +349,6 @@ class ConsultasPacientePediatrico extends \Eloquent {
 								'clase'		=>	'alert alert-success',
 								'bandera'	=>	2
 							];							
-				}				
-
-
-				
+				}
 		}
-
-
-
-
-
 }

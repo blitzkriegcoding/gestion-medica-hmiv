@@ -597,11 +597,110 @@
 	    	{{-- FIN PANEL --}}
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="intervenciones_quirurgicas">	    	
-	    	<div class="col-xs-12">
-		    	<h4>
-		    		Seccion de Intervenciones quirúrgicas
-		    	</h4>
-		    	<br>	    		
+	    	<div class="container col-xs-12">
+	    	<h4>
+	    		Carga de intervenciones quirúrgicas
+	    	</h4>
+	    	<br>
+				<div class="col-xs-12">
+	    			<div class="row">
+		    			<div class="col-xs-5">		    				
+							<div class="panel panel-primary">
+							  <div class="panel-heading">								  	
+							  		<strong>Datos de la intervención</strong>
+							 </div>
+							  <div class="panel-body">
+							    <div class="form-group">
+							    	<label for="fecha_intervencion_quirurgica">
+							    		Fecha de la consulta:
+							    	</label>
+							    	 <div class="input-group date" id='fecha_intervencion'>
+                          				{{Form::text('fecha_intervencion_quirurgica',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_intervencion_quirurgica',  'readonly'=>'' ))}}<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        			</div>
+                        			<div style="display:none" id="fecha_intervencion_error" role="alert"></div>
+							    	<br>
+							    	<label for="tipo_intervencion">
+							    		Nombre de la intervención:
+							    	</label>
+										{{Form::select('tipo_intervencion',array(''=>'SELECCIONE'),'',array('class'=>'form-control','id'=>'tipo_intervencion','style'=>'width: 100%')) }}
+										<div style="display:none" id="tipo_intervencion_error" role="alert"></div>
+							    	<br><br>
+							    	<label for="medico_intervencion">
+							    		Cirujano:
+							    	</label>
+							    	 {{Form::select('medico_intervencion',[''=>'SELECCIONE'],'',array('class'=>'form-control', 'id'=>'medico_intervencion', 'style'=>'width: 100%')) }}								    	 
+							    	 <div style="display:none" id="medico_intervencion_error" role="alert"></div>
+							    	 <br><br>
+									<label for="status_intervencion">
+							    		Status de intervención:
+							    	</label>
+							    	 {{Form::select('status_intervencion',[''=>'SELECCIONE', 'E' => 'EXITOSA', 'N' => 'NO EXITOSA'],'',array('class'=>'form-control', 'id'=>'status_intervencion', 'style'=>'width: 100%')) }}
+							    	 <div style="display:none" id="status_intervencion_error" role="alert"></div>
+							    	 <br><br>
+			            			<label for="descripcion_intervencion">
+			            				Descripción breve de la intervención
+			            			</label>
+			            				{{Form::textarea('descripcion_intervencion','',array('class'=>'form-control ', 'id'=>'descripcion_intervencion', 'size'=>'20x6', 'style'=>'resize:none'))}}
+			            				<div style="display:none" id="descripcion_intervencion_error" role="alert"></div>
+							    	<br>
+
+
+							    	 <div class="col-xs-12">
+							    	 	<div class="col-xs-2">
+							    	 		&nbsp;
+							    	 	</div>
+							    	 	<div class="col-xs-8">
+									    	<button type="button" id="visualiza_cola" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+											  Guardar intervención
+											</button>								    	 		
+							    	 	</div>							    	 	
+							    	 	<div class="col-xs-2">
+							    	 		&nbsp;
+							    	 	</div>								    	 	
+							    	 </div>
+							    	 <br><br>
+							    </div>
+							  </div>
+							</div>							
+		    			</div>
+
+		    			<div class="col-xs-7">
+		    			{{-- COLAS Y MENSAJES --}}	
+						{{--FIN COLAS Y MENSAJES --}}
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+							  		<strong>Histórico de intervenciones quirúrgicas del paciente</strong>
+								</div>
+								<div class="panel-body">
+							    	<table id="intervenciones_historico" class="display compact">
+									    <thead>
+									        <tr>
+									            <th class="text-center">Fecha</th>
+									            <th class="text-center">Especialidad</th>
+									            <th class="text-center">¿Asistió?</th>
+									            <th class="text-center">¿Cerrar?</th>
+									        </tr>
+									    </thead>
+									    <tbody class="text-center">									        
+										</tbody>									   	
+									</table>
+								</div>
+							</div>
+		    			</div>
+    			
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							&nbsp;
+						</div>
+					</div>
+					<div class="row">
+    			
+					</div>					
+						
+				</div>	    	
+
+
 	    	</div>		    	
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="ingresos_hospitalizacion">
@@ -782,11 +881,11 @@
 	      <div class="col-xs-4"></div>
 		</div>      
 	  	<div class="form-group" id="contenedor_alta">
-			<label for="fecha_alta_medica">
+			<label for="fecha_alta_medica_campo">
 				Fecha de alta médica:
 			</label>
-	    	<div class="input-group date" id='fecha_alta_medica' style="width:25%">
-  				{{Form::text('fecha_alta_medica_campo',NULL ,array('class'=>'form-control', 'id'=>'fecha_alta_medica_campo',  'readonly'=>'' )) }} <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	    	<div class="input-group date" id='calendario_alta_medica' style="width:25%;">
+  				{{Form::text('fecha_alta_medica_campo',NULL ,array('class'=>'form-control', 'id'=>'fecha_alta_medica_campo',)) }} <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			</div>
 				<div style="display:none" id="fecha_alta_medica_campo_error" role="alert"></div>
 			<br>

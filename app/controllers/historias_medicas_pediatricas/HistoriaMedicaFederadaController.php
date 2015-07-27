@@ -154,6 +154,11 @@ class HistoriaMedicaFederadaController extends \BaseController
 			{
 				return Hospitalizacion::otorgarAltaMedica(Input::all());
 			}
+
+		public function obtener_intervenciones($intervencion)
+			{
+				return TipoIntervenciones::obtenerIntervenciones($intervencion);
+			}
 		
 
 	}
