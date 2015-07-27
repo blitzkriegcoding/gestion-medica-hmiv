@@ -744,18 +744,18 @@
         "source": {
             "type": "git",
             "url": "https://github.com/twbs/bootstrap.git",
-            "reference": "66543ed112e9344d59eba343e3a45200e3ebd839"
+            "reference": "d8cae018f41fdd780e32e91bd76cd3f08b67ea70"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/66543ed112e9344d59eba343e3a45200e3ebd839",
-            "reference": "66543ed112e9344d59eba343e3a45200e3ebd839",
+            "url": "https://api.github.com/repos/twbs/bootstrap/zipball/d8cae018f41fdd780e32e91bd76cd3f08b67ea70",
+            "reference": "d8cae018f41fdd780e32e91bd76cd3f08b67ea70",
             "shasum": ""
         },
         "replace": {
             "twitter/bootstrap": "self.version"
         },
-        "time": "2015-07-13 02:53:04",
+        "time": "2015-07-18 06:18:56",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2406,15 +2406,15 @@
         "source": {
             "type": "git",
             "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-            "reference": "a83a094213898aa18c8396a6e09b7b4d7e7b5a83"
+            "reference": "e8a712d4840ba9abe7c1302808e86e55e91aab7f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/a83a094213898aa18c8396a6e09b7b4d7e7b5a83",
-            "reference": "a83a094213898aa18c8396a6e09b7b4d7e7b5a83",
+            "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/e8a712d4840ba9abe7c1302808e86e55e91aab7f",
+            "reference": "e8a712d4840ba9abe7c1302808e86e55e91aab7f",
             "shasum": ""
         },
-        "time": "2015-07-18 11:47:59",
+        "time": "2015-07-26 20:29:14",
         "type": "library",
         "installation-source": "source",
         "autoload": {

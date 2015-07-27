@@ -159,6 +159,14 @@ class HistoriaMedicaFederadaController extends \BaseController
 			{
 				return TipoIntervenciones::obtenerIntervenciones($intervencion);
 			}
+		public function obtener_historico_intervenciones()
+			{
+				return IntervencionesPediatricas::obtenerIntervencionesPaciente();
+			}
+		public function cargar_intervencion()
+			{
+				return IntervencionesPediatricas::cargarIntervencion(Input::all());
+			}
 		
 
 	}

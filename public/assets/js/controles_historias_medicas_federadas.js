@@ -283,6 +283,42 @@ $(document).ready( function () {
                           ],
         });
 
+    var tabla_intervenciones = $('#intervenciones_historico').DataTable(
+        {
+              'searching':  false,
+              'ordering':   true,
+              "pageLength": 4,
+              "lengthChange": false,
+              "ajax": 
+                      {
+                          "type"    : "GET",
+                          "url"     : "../../historias_medicas_pediatricas/obtener_historico_intervenciones",
+                          "dataSrc" : ""                          
+                      },
+              "language": {
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "infoEmpty":      "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "paginate": {
+                                          "first":      "Primera",
+                                          "last":       "Última",
+                                          "next":       "Siguiente",
+                                          "previous":   "Anterior"
+                                },
+                              "processing":     "Procesando...",
+                              "loadingRecords": "Cargando registros...",
+                              "lengthMenu":     "Mostrar _MENU_ registros",
+                              "emptyTable":     "Sin datos cargados aun",
+                              "search":         "Buscar: ",
+                          },                        
+              'columns' : [
+                            { "data" : "num_inter"            },
+                            { "data" : "fecha_intervencion"   },
+                            { "data" : "status"               },                            
+                            { "data" : "detalles"             },
+                            { "data" : "borrar"    },
+                          ],
+        });
+
     var tabla_hospitalizacion = $('#historico_hospitalizacion').DataTable(
         {
               'searching':  false,
@@ -355,7 +391,7 @@ $(document).ready( function () {
                     var obj = this; 
                     identificador_consulta = obj.id;
                     $ventana_modal_consultas_medicas.modal('show')
-                      .on('hide.bs.modal', function (e) 
+                      .on('hidden.bs.modal', function (e) 
                           {
                               $('#mensaje_cierre_consulta').html('');
                               $('#mensaje_cierre_consulta').hide();
@@ -369,12 +405,12 @@ $(document).ready( function () {
                     var obj = this; 
                     identificador_alta = obj.id;
                     $ventana_modal_altas_medicas.modal('show')
-                      .on('hide.bs.modal', function (e) 
+                      .on('hidden.bs.modal', function (e) 
                           {
                               $.fn.modal.Constructor.prototype.enforceFocus = function () { };
                               $('#mensaje_alta_medica').html('');
                               $('#mensaje_alta_medica').hide();
-                              //resetValores($('#contenedor_alta'));
+                              resetValores($('#contenedor_alta'));
                           });
               }
           );      
@@ -1086,7 +1122,49 @@ $(document).ready( function () {
                 }
 
             });            
-        }   
+        } 
+
+      function cargarIntervencion()
+        {   
+            $.ajax({              
+              url: "../../historias_medicas_pediatricas/cargar_intervencion",
+              type: "POST",
+              data: { 
+                      'fecha_intervencion_quirurgica' : $('#fecha_intervencion_quirurgica').val(),
+                      'tipo_intervencion'             : $('#tipo_intervencion').val(),
+                      'medico_intervencion'           : $('#medico_intervencion').val(),
+                      'status_intervencion'           : $('#status_intervencion').val(),
+                      'descripcion_intervencion'      : $('#descripcion_intervencion').val(),                      
+                    },
+              contentType: 'application/x-www-form-urlencoded',
+              dataType: 'json',
+              success: function(respuesta) 
+                {                 
+                  switch(respuesta['bandera'])
+                    {
+                      case 1:
+                        var mensaje = "";                       
+                        $.each(respuesta['mensaje'], function (a,b)
+                              {                                
+                                $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
+                              }                             
+                          );                        
+                      break;
+
+                      case 2:                        
+                        $('#mensaje_intervencion').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                      break;
+
+                    }
+                  tabla_intolerancias.ajax.reload();
+                },
+              error: function(respuesta)
+                {
+                 
+                }
+
+            });            
+        }           
 
       function cargarHospitalizacion()
         {   
@@ -1185,6 +1263,12 @@ $(document).ready( function () {
     cargarIntolerancia();
     $btn.button('reset');
   });
+
+    $('#cargar_intervencion').on('click', function () {    
+      var $btn = $(this).button('loading');
+      cargarIntervencion();
+      $btn.button('reset');
+    });
 
     $('#carga_hospitalizacion').on('click', function () {    
     var $btn = $(this).button('loading');

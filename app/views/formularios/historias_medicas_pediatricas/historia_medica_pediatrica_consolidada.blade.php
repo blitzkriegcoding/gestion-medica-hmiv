@@ -617,7 +617,7 @@
 							    	 <div class="input-group date" id='fecha_intervencion'>
                           				{{Form::text('fecha_intervencion_quirurgica',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_intervencion_quirurgica',  'readonly'=>'' ))}}<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                         			</div>
-                        			<div style="display:none" id="fecha_intervencion_error" role="alert"></div>
+                        			<div style="display:none" id="fecha_intervencion_quirurgica_error" role="alert"></div>
 							    	<br>
 							    	<label for="tipo_intervencion">
 							    		Nombre de la intervención:
@@ -650,7 +650,7 @@
 							    	 		&nbsp;
 							    	 	</div>
 							    	 	<div class="col-xs-8">
-									    	<button type="button" id="visualiza_cola" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+									    	<button type="button" id="cargar_intervencion" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
 											  Guardar intervención
 											</button>								    	 		
 							    	 	</div>							    	 	
@@ -663,10 +663,7 @@
 							  </div>
 							</div>							
 		    			</div>
-
 		    			<div class="col-xs-7">
-		    			{{-- COLAS Y MENSAJES --}}	
-						{{--FIN COLAS Y MENSAJES --}}
 							<div class="panel panel-primary">
 								<div class="panel-heading">
 							  		<strong>Histórico de intervenciones quirúrgicas del paciente</strong>
@@ -675,10 +672,11 @@
 							    	<table id="intervenciones_historico" class="display compact">
 									    <thead>
 									        <tr>
+									        	<th class="text-center">N°</th>
 									            <th class="text-center">Fecha</th>
-									            <th class="text-center">Especialidad</th>
-									            <th class="text-center">¿Asistió?</th>
-									            <th class="text-center">¿Cerrar?</th>
+									            <th class="text-center">Status</th>
+									            <th class="text-center">Detalles</th>
+									            <th class="text-center">¿Borrar?</th>
 									        </tr>
 									    </thead>
 									    <tbody class="text-center">									        
@@ -686,8 +684,10 @@
 									</table>
 								</div>
 							</div>
-		    			</div>
-    			
+							<br>
+							<div role="alert" id='mensaje_intervencion' style="display:none" >						
+							</div>							
+		    			</div>		    			    			
 					</div>
 					<div class="row">
 						<div class="col-xs-12">

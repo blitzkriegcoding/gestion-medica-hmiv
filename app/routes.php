@@ -62,6 +62,7 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::get('obtener_hospitalizacion_paciente',									['uses' =>	'HistoriaMedicaFederadaController@obtener_hospitalizacion_paciente']);
 		Route::get('obtener_historico_examenes',										['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_examenes']);
 		Route::get('obtener_historico_tratamientos',									['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_tratamientos']);
+		Route::get('obtener_historico_intervenciones',									['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_intervenciones']);
 		
 
 		/*TODOS LOS POST*/
@@ -84,6 +85,7 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::post('borrar_tratamiento_guardado',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_tratamiento_guardado']);
 		Route::post('cerrar_consulta_medica',											['uses'	=>	'HistoriaMedicaFederadaController@cerrar_consulta_medica']);
 		Route::post('otorgar_alta_medica',												['uses'	=>	'HistoriaMedicaFederadaController@otorgar_alta_medica']);		
+		Route::post('cargar_intervencion',												['uses'	=>	'HistoriaMedicaFederadaController@cargar_intervencion']);		
 		
 		//mensaje_alta_medica
 
