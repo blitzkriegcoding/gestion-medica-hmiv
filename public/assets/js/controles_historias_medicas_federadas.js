@@ -371,7 +371,7 @@ $(document).ready( function () {
                           {
                               $('#mensaje_alta_medica').html('');
                               $('#mensaje_alta_medica').hide();
-                              resetValores($('#contenedor_alta'));
+                              //resetValores($('#contenedor_alta'));
                           });
               }
           );      

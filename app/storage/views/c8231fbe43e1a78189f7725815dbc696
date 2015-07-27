@@ -783,7 +783,7 @@
 </div>
 
 <?php /* VENTANA MODAL PARA ALTAS MEDICAS */ ?>
-<div class="modal fade bs-example-modal-lg" id="ventana_modal_altas_medicas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id="ventana_modal_altas_medicas" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header text-center">
