@@ -4,6 +4,8 @@ $(document).ready( function () {
 
     $.fn.modal.Constructor.prototype.enforceFocus = function() {};
 
+
+
     var identificador_consulta  = 0;
     var identificador_alta      = 0;
     
@@ -369,6 +371,7 @@ $(document).ready( function () {
                     $ventana_modal_altas_medicas.modal('show')
                       .on('hide.bs.modal', function (e) 
                           {
+                              $.fn.modal.Constructor.prototype.enforceFocus = function () { };
                               $('#mensaje_alta_medica').html('');
                               $('#mensaje_alta_medica').hide();
                               resetValores($('#contenedor_alta'));
@@ -612,7 +615,7 @@ $(document).ready( function () {
       function rangoFechaConsultas(id_control,num_dias)
         {
           var fecha_maxima = new Date();
-            fecha_maxima = new Date(fecha_maxima.getFullYear(), fecha_maxima.getMonth(), fecha_maxima.getDate() + num_dias);          
+              fecha_maxima = new Date(fecha_maxima.getFullYear(), fecha_maxima.getMonth(), fecha_maxima.getDate() + num_dias);          
             $('#'+id_control)
               .datepicker
                 ({
@@ -625,19 +628,49 @@ $(document).ready( function () {
                   startView: 0,
                   daysOfWeekDisabled: [0,6]
                 })
-              .on
-                ('changeDate', function(e) {
-                  // Revalidate the date field
-                  $('#formulario_principal').formValidation('revalidateField', '#'+id_control);
-                });
+
         }
+      function rangoFechaConsultasVentanaModal(id_control,num_dias,id_ventana_modal,id_campo_texto)
+        {
+          var fecha_maxima = new Date();
+              fecha_maxima = new Date(fecha_maxima.getFullYear(), fecha_maxima.getMonth(), fecha_maxima.getDate() + num_dias);          
+            $('#'+id_control)
+              .datepicker
+                ({
+                  language: 'es',
+                  format: 'dd/mm/yyyy',
+                  autoclose: true,            
+                  endDate: new Date(fecha_maxima),
+                  todayBtn: true,
+                  todayHighlight: true,
+                  startView: 0,
+                  daysOfWeekDisabled: [0,6]
+                })
+              .on(
+                    'show', function()
+                              {
+                                  var zIndexModal = $('#'+id_ventana_modal).css('z-index');
+                                  var zIndexFecha = $('.datepicker').css('z-index');
+                                  alert(zIndexModal +"  "+zIndexFecha);
+
+                                  $('.datepicker').css('z-index',zIndexModal+1);
+                                  $('#'+id_campo_texto).css('z-index',zIndexModal+2);
+
+                              }
+                );
+
+        }
+
       rangoFechaConsultas('fecha_consulta_paciente',15);
       rangoFechaConsultas('fecha_aplicacion_vacuna',0);
       rangoFechaConsultas('fecha_examen_paciente',0);
       rangoFechaConsultas('fecha_hospitalizacion_paciente',0);
       rangoFechaConsultas('fecha_tratamiento_medico',0);
-      rangoFechaConsultas('fecha_alta_medica',0);
-      //fecha_alta_medica
+      //rangoFechaConsultas('calendario_alta_medica',15);
+      rangoFechaConsultasVentanaModal('calendario_alta_medica',0,'ventana_modal_altas_medicas');
+     
+      rangoFechaConsultas('fecha_intervencion',0);     
+      
 
 
       function verificarColaConsultas()
@@ -1513,6 +1546,83 @@ $(document).ready( function () {
         //templateResult: formatRepo, // omitted for brevity, see the source of this page
         //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
       });
+
+   $("#tipo_intervencion").select2({
+        language: "es",        
+        ajax: {    
+          url: function(params) 
+            {  
+              return "../../historias_medicas_pediatricas/obtener_intervenciones/"+params.term;
+            },
+          dataType: 'json',
+          delay: 50,
+          data: function (params) {
+          },
+          processResults: function (data, page) {
+            // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data
+            //alert(data);
+            var resultados = [];
+            $.each(data, function (index, item) {
+                  resultados.push({
+                      'id': item.id_intervencion,
+                      'text': item.intervencion
+                  });
+              });
+                  
+            return {        
+              //results: data
+              results: resultados
+            };
+          },
+          cache: true
+        },
+        
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 1,  
+        //templateResult: formatRepo, // omitted for brevity, see the source of this page
+        //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+      });
+
+    $("#medico_intervencion").select2({
+        language: "es",        
+        ajax: {    
+          url: function(params) {  
+              return "../../medicos/obtener_medico/"+params.term; 
+              //return "hmiv/public/medicos/obtener_especialidades_medicas/"+params.term; 
+            },
+          dataType: 'json',
+          delay: 50,
+          data: function (params) {
+          },
+          processResults: function (data, page) {
+            // parse the results into the format expected by Select2.
+            // since we are using custom formatting functions we do not need to
+            // alter the remote JSON data
+            //alert(data);
+            var resultados = [];
+            $.each(data, function (index, item) {
+                  resultados.push({
+                      'id': item.id_medico,
+                      'text': item.medico
+                  });
+              });
+                  
+            return {        
+              //results: data
+              results: resultados
+            };
+          },
+          cache: true
+        },
+        
+        escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+        minimumInputLength: 1,  
+        //templateResult: formatRepo, // omitted for brevity, see the source of this page
+        //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+      });
+
 
 
 /*FIN DOCUMENT READY*/
