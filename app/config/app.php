@@ -124,7 +124,8 @@ return array(
 		'Way\Generators\GeneratorsServiceProvider',
 		'Former\FormerServiceProvider',		
 		'Zizaco\Entrust\EntrustServiceProvider',
-		'Barryvdh\DomPDF\ServiceProvider',		
+		'Barryvdh\DomPDF\ServiceProvider',
+		'Aivo\Highchart\HighchartServiceProvider',
 		
 		
 
