@@ -793,23 +793,22 @@
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="ordenes_enfermeria">
 	    	Ordenes por enfermeria
-
 	    </div>
 	    <div role="tabpanel" class="tab-pane fade" id="historial_talla_peso">
 	    	<div class="col-xs-12">
 	    		<h4>Historial peso y talla</h4>
 	    		<br>
-		    	<div class="col-xs-6">
+		    	<div class="col-xs-5">
 					<div class="panel panel-primary ">
 					  <div class="panel-heading">
 					  	<strong>Datos de talla y peso</strong>
 					  	</div>
 					  <div class="panel-body">
-					  	<div class="form-group">
-							<label for="fecha_hospitalizacion">
+					  	<div class="form-group" id="contenedor_talla_peso">
+							<label for="fecha_toma_talla_peso">
 						  		Fecha de toma:
 						  	</label>
-					    	<div class="input-group date" id='fecha_toma_talla_peso' style="width:75%">
+					    	<div class="input-group date" id='fecha_toma' style="width:75%">
 	              				{{Form::text('fecha_toma_talla_peso',NULL ,array('class'=>'form-control','style'=>'width: 100%', 'id'=>'fecha_toma_talla_peso',  'readonly'=>'' )) }} <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	            			</div>
 	            			<div style="display:none" id="fecha_toma_talla_peso_error" role="alert"></div>
@@ -829,7 +828,7 @@
 					    	<div class="col-xs-12">
 					    		<div class="col-xs-2"></div>
 					    		<div class="col-xs-8">
-								   	<button type="button" id="carga_hospitalizacion" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
+								   	<button type="button" id="carga_talla_peso" data-loading-text="Cargando..." class="btn btn-success" style="width:100%" autocomplete="off">
 										Guardar talla y peso
 									</button>
 					    		</div>
@@ -841,7 +840,7 @@
 					  </div>
 					</div>
 		    	</div>
-		    	<div class="col-xs-6">
+		    	<div class="col-xs-7">
 					<div class="panel panel-primary ">
 					  <div class="panel-heading">
 					  	<strong>Historico de Talla y Peso del Paciente</strong>
@@ -850,9 +849,10 @@
 				    	<table id="historico_talla_peso" class="display compact">
 						    <thead>
 						        <tr>
-						            <th class="text-center" style="width:5%">N°</th>
-						            <th class="text-center">Talla</th>
-						            <th class="text-center">Peso</th>						            
+						            <th class="text-center" style="width:5%">N°</th>						            
+						            <th class="text-center">Fecha</th>						            
+						            <th class="text-center">Talla (cms)</th>
+						            <th class="text-center">Peso(kgs)</th>						            
 						            <th class="text-center">¿Borrar?</th>
 						        </tr>
 						    </thead>						    
@@ -863,7 +863,7 @@
 					</div>
 					<br>
 
-					<div class="alert alert-info alert-dismissible text-center" role="alert" id='mensaje_hospitalizacion' style="display:none">
+					<div class="alert alert-info alert-dismissible text-center" role="alert" id='mensaje_talla_peso' style="display:none">
 					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>				  
 					</div>					
 		    	</div>

@@ -174,8 +174,16 @@ class HistoriaMedicaFederadaController extends \BaseController
 
 		public function obtener_historico_talla_peso()
 			{
-				return 
+				return HistorialTallaPeso::obtenerHistoricoTallaPeso();
+			}
+
+		public function cargar_talla_peso()
+			{
+				return HistorialTallaPeso::guardarTallaPeso(Input::all());
 			}
 		
-
+		public function borrar_talla_peso_guardado()
+			{
+				return HistorialTallaPeso::borrarTallaPeso(Input::all());	
+			}
 	}

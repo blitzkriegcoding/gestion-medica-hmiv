@@ -88,7 +88,10 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::post('otorgar_alta_medica',												['uses'	=>	'HistoriaMedicaFederadaController@otorgar_alta_medica']);		
 		Route::post('cargar_intervencion',												['uses'	=>	'HistoriaMedicaFederadaController@cargar_intervencion']);
 		Route::post('borrar_intervencion_guardada',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_intervencion_guardada']);
+		Route::post('cargar_talla_peso',												['uses'	=>	'HistoriaMedicaFederadaController@cargar_talla_peso']);
+		Route::post('borrar_talla_peso_guardado',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_talla_peso_guardado']);
 		
+		//borrar_talla_peso_guardado
 
 		//borrar_intervencion_guardada
 

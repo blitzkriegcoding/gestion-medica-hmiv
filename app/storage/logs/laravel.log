@@ -3964,3 +3964,27 @@ Stack trace:
 #34 C:\xampp\htdocs\hmiv\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(641): Stack\StackedHttpKernel->handle(Object(Illuminate\Http\Request))
 #35 C:\xampp\htdocs\hmiv\public\index.php(49): Illuminate\Foundation\Application->run()
 #36 {main} [] []
+[2015-07-28 02:42:58] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected '}'' in C:\xampp\htdocs\hmiv\app\controllers\historias_medicas_pediatricas\HistoriaMedicaFederadaController.php:178
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-28 03:23:39] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Validador' not found' in C:\xampp\htdocs\hmiv\app\models\modelos_complementarios\HistorialTallaPeso.php:51
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-28 03:23:41] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Validador' not found' in C:\xampp\htdocs\hmiv\app\models\modelos_complementarios\HistorialTallaPeso.php:51
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-28 03:23:46] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Validador' not found' in C:\xampp\htdocs\hmiv\app\models\modelos_complementarios\HistorialTallaPeso.php:51
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-28 03:23:48] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Validador' not found' in C:\xampp\htdocs\hmiv\app\models\modelos_complementarios\HistorialTallaPeso.php:51
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []
+[2015-07-28 03:25:17] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Validador' not found' in C:\xampp\htdocs\hmiv\app\models\modelos_complementarios\HistorialTallaPeso.php:51
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []

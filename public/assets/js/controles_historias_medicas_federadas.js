@@ -367,7 +367,7 @@ $(document).ready( function () {
               "ajax": 
                       {
                           "type"    : "GET",
-                          "url"     : "../../historias_medicas_pediatricas/obtener_hospitalizacion_paciente",
+                          "url"     : "../../historias_medicas_pediatricas/obtener_historico_talla_peso",
                           "dataSrc" : ""                          
                       },
               "language": {
@@ -386,12 +386,11 @@ $(document).ready( function () {
                               "search":         "Buscar: ",
                           },                        
               'columns' : [
-                            { "data" : "num_tal"      },
-                            { "data" : "fecha"        },
-                            { "data" : "talla"        },
-                            { "data" : "peso"         },
-                            { "data" : "borrar"       },
-                            
+                              { "data" : "num_tal"      },
+                              { "data" : "fecha"        },
+                              { "data" : "talla"        },
+                              { "data" : "peso"         },
+                              { "data" : "borrar"       },                            
                           ],
         });  
 
@@ -720,6 +719,42 @@ $(document).ready( function () {
               }
           );
 
+      $('#historico_talla_peso').delegate("button.btn-danger","click", function(event)
+              {
+                    var obj = this;                    
+                    $.ajax({
+                      url: "../../historias_medicas_pediatricas/borrar_talla_peso_guardado",
+                      type: "POST",
+                      data: { 'id_talla_peso': obj.id },
+                      contentType: 'application/x-www-form-urlencoded',
+                      dataType: 'json',
+                      success: function(respuesta) 
+                        {                 
+                          switch(respuesta['bandera'])
+                            {
+                              case 1:
+                                var mensaje = "";
+                                $.each(respuesta['mensaje'], function (a,b)
+                                      {
+                                        $('#mensaje_talla_peso').show().attr('class',respuesta['clase']).html(b);
+                                      }                             
+                                  );                                
+                              break;
+                              case 2:                                
+                                $('#mensaje_talla_peso').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                                //resetValores("contenedor_talla_peso");
+                              break;
+                            }                 
+                          tabla_talla_peso.ajax.reload();
+                        },
+                      error: function(respuesta)
+                        {
+
+                        }
+
+                    });
+              }
+          );
 
 
       //fecha de consultas de hoy hasta dentro de dos semanas
@@ -762,11 +797,8 @@ $(document).ready( function () {
                               {
                                   var zIndexModal = $('#'+id_ventana_modal).css('z-index');
                                   var zIndexFecha = $('.datepicker').css('z-index');
-                                  alert(zIndexModal +"  "+zIndexFecha);
-
                                   $('.datepicker').css('z-index',zIndexModal+1);
                                   $('#'+id_campo_texto).css('z-index',zIndexModal+2);
-
                               }
                 );
 
@@ -778,9 +810,10 @@ $(document).ready( function () {
       rangoFechaConsultas('fecha_hospitalizacion_paciente',0);
       rangoFechaConsultas('fecha_tratamiento_medico',0);
       //rangoFechaConsultas('calendario_alta_medica',15);
-      rangoFechaConsultasVentanaModal('calendario_alta_medica',0,'ventana_modal_altas_medicas');
-     
-      rangoFechaConsultas('fecha_intervencion',0);     
+      rangoFechaConsultasVentanaModal('calendario_alta_medica',0,'ventana_modal_altas_medicas');     
+      rangoFechaConsultas('fecha_intervencion',0);
+      //fecha_toma_talla_peso
+      rangoFechaConsultas('fecha_toma',0);
       
 
 
@@ -902,11 +935,9 @@ $(document).ready( function () {
               contentType: 'application/x-www-form-urlencoded',
               dataType: 'json',
               success: function(respuesta) 
-                { 
-                  
+                {
                   switch(respuesta['bandera'])
                     {
-
                       case 1:
                         var mensaje = "";
 
@@ -926,8 +957,7 @@ $(document).ready( function () {
                   tabla.ajax.reload();
                 },
               error: function(respuesta)
-                {
-                
+                {                
                 }
 
             });
@@ -1069,12 +1099,8 @@ $(document).ready( function () {
                       case 2:
                         $('#mensaje_tratamientos_medicos').show('slow').attr('class',respuesta['clase']).html(respuesta['mensaje']);
                       break;
-
                     }
-                  
                   tabla_tratamientos.ajax.reload();
-
-
                 },
               error: function(respuesta)
                 {
@@ -1287,6 +1313,49 @@ $(document).ready( function () {
 
             });            
         }   
+      function cargarTallaPeso()
+        {
+            $('#fecha_toma_talla_peso_error').hide();
+            $('#peso_paciente_error').hide();
+            $('#talla_paciente_error').hide();                                  
+            $.ajax({              
+              url: "../../historias_medicas_pediatricas/cargar_talla_peso",
+              type: "POST",
+              data: { 
+                        'fecha_toma_talla_peso'           : $('#fecha_toma_talla_peso').val(),
+                        'peso_paciente'                   : $('#peso_paciente').val(),
+                        'talla_paciente'                  : $('#talla_paciente').val(),                        
+                    },
+              contentType: 'application/x-www-form-urlencoded',
+              dataType: 'json',
+              success: function(respuesta) 
+                {                 
+                  switch(respuesta['bandera'])
+                    {
+                      case 1:
+                        var mensaje = "";
+                        $.each(respuesta['mensaje'], function (a,b)
+                              {
+                                $('#'+a+"_error").show().attr('class',respuesta['clase']).html(b);
+                              }                             
+                          );                        
+                      break;
+
+                      case 2:                        
+                        $('#mensaje_talla_peso').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);                      
+                        resetValores($("#contenedor_talla_peso"));
+                      break;
+                    }
+                  tabla_talla_peso.ajax.reload();
+                },
+              error: function(respuesta)
+                {
+                }
+
+            });            
+        } 
+
+
 
 
   $('#visualiza_cola').on('click', function () {    
@@ -1364,6 +1433,11 @@ $(document).ready( function () {
     $btn.button('reset');
   }); 
 
+    $('#carga_talla_peso').on('click', function () {    
+    var $btn = $(this).button('loading');
+    cargarTallaPeso();
+    $btn.button('reset');
+  }); 
 
    $("#especialidad_consulta").select2({
         language: "es",        
@@ -1791,4 +1865,4 @@ $(document).ready( function () {
 
 
 /*FIN DOCUMENT READY*/
-});    
+});
