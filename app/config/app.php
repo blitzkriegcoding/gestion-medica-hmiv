@@ -122,10 +122,9 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
-		'Former\FormerServiceProvider',
-		#'Zizaco\Confide\ServiceProvider',
+		'Former\FormerServiceProvider',		
 		'Zizaco\Entrust\EntrustServiceProvider',
-		'Barryvdh\DomPDF\ServiceProvider',
+		'Barryvdh\DomPDF\ServiceProvider',		
 		
 		
 
@@ -196,8 +195,7 @@ return array(
 		'Validator'       	=> 'Illuminate\Support\Facades\Validator',
 		'View'            	=> 'Illuminate\Support\Facades\View',
 		'Former'			=> 'Former\Facades\Former',
-		'Debugbar' 			=> 'Barryvdh\Debugbar\Facade',
-		#'Confide'    		=> 'Zizaco\Confide\Facade',
+		'Debugbar' 			=> 'Barryvdh\Debugbar\Facade',		
 		'Entrust'    		=> 'Zizaco\Entrust\EntrustFacade',
 		'PDF' 				=> 'Barryvdh\DomPDF\Facade',
 	),

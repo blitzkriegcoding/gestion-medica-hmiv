@@ -72,16 +72,24 @@
 				    	<label for="nombres_paciente">
 				    		Por nombres del representante:                      		
 				    	</label>
-				    	{{Form::text('nombres_representante',NULL ,array('class'=>'form-control ','style'=>'width: 80%','id'=>'nombres_paciente', 'id'=>'nombres_representante')) }}
+				    	{{Form::text('nombres_representante',NULL ,array('class'=>'form-control ','style'=>'width: 80%', 'id'=>'nombres_representante')) }}
 
 				    </div>
 				    <div class="col-xs-4">
 				    	<label for="apellidos_paciente">
 				    		Por apellidos del representante:				    		
 				    	</label>				    
-				    	{{Form::text('apellidos_representante',NULL ,array('class'=>'form-control ','style'=>'width: 80%','id'=>'apellidos_paciente', 'id'=>'apellidos_representante')) }}
+				    	{{Form::text('apellidos_representante',NULL ,array('class'=>'form-control ','style'=>'width: 80%', 'id'=>'apellidos_representante')) }}
 				    	
 				    </div>
+				    <div class="col-xs-4">
+				    	<label for="precision_busqueda">
+				    		Búsqueda exacta: 
+				    	</label>
+				    	{{Form::select('busqueda_exacta',array(''=>'--','S'=>'SI','N'=>'NO'),'',array('class'=>'form-control','style'=>'width: 20%','id'=>'busqueda_exacta')) }}
+				    	
+				    </div>				    
+
 				</div>
 				<br>				
 				<div class="row">
@@ -90,7 +98,8 @@
 						  Buscar información!
 						</button>														
 					</div>
-				</div>				
+				</div>
+				<br>
 		  </div>
 		</div>
 	</div>

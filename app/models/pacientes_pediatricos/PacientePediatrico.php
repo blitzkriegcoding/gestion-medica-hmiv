@@ -504,26 +504,44 @@ class PacientePediatrico extends \Eloquent {
 			$corte_or = 0;
 			$doc_completo_pac = "";
 			$doc_completo_rep = "";
+			$exacta = "";
+			switch($input['busqueda_exacta'])
+				{
+					case "":
+						$exacta = ' or ';
+					break;
+
+					case 'S':
+						$exacta = ' and ';
+					break;
+					case 'N':
+						$exacta = ' or ';
+					break;
+
+
+
+				}
 
 			foreach($argumentos as $llave => $valor):
 				
-				if($input[$valor]!="")
+				if($input[$valor] != "")
 					{
 						$parametros[$llave] = $input[$valor];						
 					}
 
 			endforeach;
+			
 			$consulta_parametros = " ";
 			foreach($parametros as $llave => $valor):				
 				if($corte_or < count($parametros)-1)
 					{
 						if($llave =='pacientes_pediatricos.fecha_nacimiento')
 							{
-								$consulta_parametros .= $llave."="."'".($valor)."' or ";
+								$consulta_parametros .= $llave."="."'".($valor)."'".$exacta;
 							}
 						else
 							{
-								$consulta_parametros .= $llave." like "."'%".strtoupper($valor)."%' or ";	
+								$consulta_parametros .= $llave." like "."'%".strtoupper($valor)."%'".$exacta;	
 							}
 
 						

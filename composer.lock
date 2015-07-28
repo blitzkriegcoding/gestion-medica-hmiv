@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "95873da11cced46c2310a72ebda1021a",
+    "hash": "425c80358ef5a476f80e0d50239ca221",
     "packages": [
         {
             "name": "anahkiasen/former",
@@ -539,12 +539,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "e8a712d4840ba9abe7c1302808e86e55e91aab7f"
+                "reference": "ac15ba52bd3458ebcae1d72d9751533fef4f4045"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/e8a712d4840ba9abe7c1302808e86e55e91aab7f",
-                "reference": "e8a712d4840ba9abe7c1302808e86e55e91aab7f",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/ac15ba52bd3458ebcae1d72d9751533fef4f4045",
+                "reference": "ac15ba52bd3458ebcae1d72d9751533fef4f4045",
                 "shasum": ""
             },
             "type": "library",
@@ -579,7 +579,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2015-07-26 20:29:14"
+            "time": "2015-07-27 18:37:17"
         },
         {
             "name": "laravel/framework",

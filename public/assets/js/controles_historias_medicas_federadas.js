@@ -680,7 +680,7 @@ $(document).ready( function () {
 
 
 
-//Para el borrado de hospitalizacion del paciente
+      //Para el borrado de hospitalizacion del paciente
       $('#historico_hospitalizacion').delegate("button.btn-danger","click", function(event)
               {
                     var obj = this;                    

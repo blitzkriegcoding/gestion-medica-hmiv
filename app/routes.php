@@ -126,12 +126,20 @@ Route::group(['prefix' => 'medicos'], function()
 Route::group(['prefix' => 'busquedas'], function()
 	{
 		/*TODOS LOS GETS*/
-		Route::get('busqueda_nueva', 	['uses' => 'BusquedasController@crear_nueva_busqueda']);
+		Route::get('busqueda_nueva', 				['uses' => 'BusquedasController@crear_nueva_busqueda']);
+		Route::get('busqueda_historia_medica', 		['uses' => 'BusquedasController@busqueda_historia_medica']);
+		
+
+
+
 
 		/*TODOS LOS POST*/
 
 		/*RUTAS PARA CONSULTA VIA AJAX*/
-		Route::post('generar_busqueda',	['uses' => 'BusquedasController@generar_busqueda']);
+		Route::post('generar_busqueda',				['uses' => 'BusquedasController@generar_busqueda']);
+		Route::post('generar_busqueda_historia',	['uses' => 'BusquedasController@generar_busqueda_historia']);
+
+
 
 	}
 );

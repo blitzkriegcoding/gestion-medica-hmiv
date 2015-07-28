@@ -1,13 +1,6 @@
 $(document).ready( function () 
   {
-                // var tabla = $('#tabla_resultados').DataTable(
-                // {
-                //       'searching':  false,
-                //       'ordering':   true,
-                //       "pageLength": 10,
-                //       "lengthChange": false,
-                // });
-        //fecha de nacimiento del paciente limitado hasta el dia de hoy
+
         var tabla = '';
         $('#busqueda_fecha_nacimiento')
           .datepicker
@@ -25,13 +18,12 @@ $(document).ready( function ()
             var $btn = $(this).button('cargando');
             
 
-            $("#capa_resultados").show(500);
+            $("#capa_resultados").show(300);
             
-             if(tabla == '' )
-                {
-
-                    tabla = $('#tabla_resultados').DataTable(
-                      // var tabla
+            if(tabla == '')
+               {
+                  tabla = $('#tabla_resultados').DataTable(
+                  // var tabla
                         {
                               'searching':  true,
                               "language": {
@@ -42,16 +34,16 @@ $(document).ready( function ()
                                                           "next":       "Siguiente",
                                                           "previous":   "Anterior"
                                                 },
-                                              "processing":     "Procesando...",
-                                              "loadingRecords": "Cargando registros...",
-                                              "lengthMenu":     "Mostrar _MENU_ registros",
-                                              "emptyTable":     "Sin registros de la solicitud realizada",
-                                              "search":         "Buscar: ",
+                                              "processing"      :   "Procesando...",
+                                              "loadingRecords"  :   "Cargando registros...",
+                                              "lengthMenu"      :   "Mostrar _MENU_ registros",
+                                              "emptyTable"      :   "Sin registros de la solicitud realizada",
+                                              "search"          :   "Buscar: ",
                                           },
                                         
-                              'ordering':   true,
-                              "pageLength": 10,
-                              "lengthChange": true,
+                              'ordering'      : true,
+                              "pageLength"    : 10,
+                              "lengthChange"  : true,
                               ajax: 
                                       {
                                           "type"    : "POST",
@@ -69,7 +61,8 @@ $(document).ready( function ()
                                                                 'tipo_documento_representante'    : $("#tipo_documento_representante").val(),
                                                                 'documento_representante'         : $("#documento_representante").val(),
                                                                 'nombres_representante'           : $("#nombres_representante").val(),
-                                                                'apellidos_representante'         : $("#apellidos_representante").val(),                                                              
+                                                                'apellidos_representante'         : $("#apellidos_representante").val(),
+                                                                'busqueda_exacta'                 : $("#busqueda_exacta").val()
 
                                                             });
                                                           },
@@ -89,40 +82,12 @@ $(document).ready( function ()
               else 
                 {
                   tabla.ajax.reload();
-
                 }
 
             $btn.button('reset')
           });
 
-      // $('#tabla_resultados').delegate("button","click", function(event)
-      //         {
-      //               var obj = this;                    
-      //               // $.ajax({
-      //               //   url: "http://localhost/hmiv/public/historias_medicas_pediatricas/anular_consulta_medica",
-      //               //   type: "POST",
-      //               //   data: { 'id_consulta_paciente': obj.id },
-      //               //   contentType: 'application/x-www-form-urlencoded',
-      //               //   dataType: 'json',
-      //               //   success: function(respuesta) 
-      //               //     {                 
-      //               //       //alert(respuesta['cola']);
-      //               //       //$('#cola').show().attr('class','label label-success').html(respuesta['cola']);
-      //               //       $('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
-      //               //       tabla.ajax.reload();
-      //               //     },
-      //               //   error: function(respuesta)
-      //               //     {
-      //               //       $('#mensajes').html(respuesta['especialidad_consulta']);
-      //               //       $('#mensajes').html(respuesta['turno_consulta']);
-      //               //       $('#mensajes').html(respuesta['fecha_consulta']);                  
-      //               //     }                   
 
-      //               //});
-      //               //obj.href = 'historias_medicas_pediatricas/historia_medica_paciente/'+obj.id;
-      //               //alert(obj.href);
-      //         }
-      //     );
 
 
 
