@@ -14,5 +14,9 @@ class BusquedasController extends \BaseController
 				return $respuesta;
 
 			}
+		public function busqueda_historia_medica()
+			{
+				return View::make('busquedas.crear_busqueda_historia_medica_pediatrica');
+			}
 
 	}

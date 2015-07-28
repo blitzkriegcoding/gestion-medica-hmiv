@@ -1712,8 +1712,7 @@ $(document).ready( function () {
         language: "es",        
         ajax: {    
           url: function(params) 
-            {  
-              //return "../../historias_medicas_pediatricas/obtener_alergias/"+params.term;
+            {
               return "../../historias_medicas_pediatricas/obtener_alergias/"+params.term;
             },
           dataType: 'json',

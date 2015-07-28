@@ -1,0 +1,7 @@
+<?php $__env->startSection('formularios'); ?>
+	<?php echo $__env->make('formularios.busquedas.busqueda_historias_medicas_pediatricas', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>	
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('controles_adicionales'); ?>
+	<?php echo $__env->make('includes.controles_adicionales_busqueda_historia', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
