@@ -29,7 +29,7 @@
     <div >
 	  <!-- Nav tabs -->	  
 	  {{-- <ul class="nav nav-tabs" role="tablist"> --}}
-	  <ul class="nav nav-pills" role="tablist" style="font-size:13px">
+	  <ul class="nav nav-pills" role="tablist" style="font-size:12px">
 	    <li role="presentation" class="active text-center" ><a href="#consultas_medicas" aria-controls="consultas_medicas" role="tab" data-toggle="pill"><span class="badge">1</span><br>Consultas<br>Médicas</a></li>
 	    <li role="presentation" class="text-center"><a href="#examenes_medicos" aria-controls="examenes_medicos" role="tab" data-toggle="pill" style="text-center"><span class="badge">2</span><br>Exámenes<br>Médicos</a></li>
 	    <li role="presentation" class="text-center"><a href="#tratamientos_medicos" aria-controls="tratamientos_medicos" role="tab" data-toggle="pill" style="text-center"><span class="badge">3</span><br>Tratamientos<br>Médicos</a></li>

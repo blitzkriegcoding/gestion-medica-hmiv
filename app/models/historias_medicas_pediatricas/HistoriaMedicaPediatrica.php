@@ -430,7 +430,8 @@ class HistoriaMedicaPediatrica extends \Eloquent {
 
 	public static function buscarHistoriaMedica($input)
 		{
-			
+			$datos_historia = self::where('codigo_historia_medica','like', $input['codigo_historia']) 
+								->get();
 		}
 
 
