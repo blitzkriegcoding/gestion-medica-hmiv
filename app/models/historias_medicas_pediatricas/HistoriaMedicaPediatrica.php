@@ -60,13 +60,6 @@ class HistoriaMedicaPediatrica extends \Eloquent {
 									->where('representante_real','=','1')											
 									->max('codigo_historia_medica')
 									/*->toSql()*/;
-
-
-									
-
-
-			
-
 		if(!empty($representante_actual))
 			{
 				
@@ -430,8 +423,31 @@ class HistoriaMedicaPediatrica extends \Eloquent {
 
 	public static function buscarHistoriaMedica($input)
 		{
-			$datos_historia = self::where('codigo_historia_medica','like', $input['codigo_historia']) 
-								->get();
+			
+			if(empty($input['codigo_historia_medica']))
+				{
+					return Response::json(	[
+												'error'		=>	'Debe colocar un codigo de historia valido',												
+											]);
+				}
+			$contador_historia = 0;
+			$datos_historia_json = [];
+			$datos_historia = self::where('codigo_historia_medica','like', trim(strtoupper($input['codigo_historia_medica']))) 
+									->join('pacientes_pediatricos','historia_paciente_pediatrico.id_paciente','=','pacientes_pediatricos.id_paciente')
+										->select('codigo_historia_medica', 'primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido','id_historia_medica')
+											->get();
+
+			foreach($datos_historia as $d):
+				$contador_historia ++;
+				$datos_historia_json[] = 	[ 
+												'num_his'	=>	$contador_historia,
+												'cod_his'	=>	$d->codigo_historia_medica,
+												'nom_pac'	=>	($d->primer_nombre." ".$d->segundo_nombre." ".$d->primer_apellido." ".$d->segundo_apellido),
+												'pantalla'	=>	"<button class='btn btn-success' id='".$d->id_historia_medica."'>Ver</button>",
+												'pdf'		=>	"<button class='btn btn-primary' id='".$d->id_historia_medica."'>Generar</button>",
+											];
+			endforeach;
+			return Response::json($datos_historia_json);
 		}
 
 

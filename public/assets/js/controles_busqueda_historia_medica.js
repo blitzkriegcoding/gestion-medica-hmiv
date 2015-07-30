@@ -28,6 +28,7 @@ $(document).ready( function ()
                                             "lengthMenu"      :   "Mostrar _MENU_ registros",
                                             "emptyTable"      :   "Sin registros de la solicitud realizada",
                                             "search"          :   "Buscar:",
+
                                         },
                                       
                             'ordering'      : true,
@@ -36,15 +37,19 @@ $(document).ready( function ()
                             ajax: 
                                     {
                                         "type"    : "POST",
-                                        "url"     : "http://localhost/hmiv/public/busquedas/generar_busqueda_historia",
+                                        // "url"     : "http://localhost/hmiv/public/busquedas/generar_busqueda_historia",
+                                        "url"     : "../busquedas/generar_busqueda_historia",
                                         "dataSrc" : "",
                                         "data"    : function (d)
                                                         {
                                                           return $.extend({}, d, {
-                                                              'codigo_historia_medica'                 : $("#codigo_historia_medica").val()
-
+                                                              'codigo_historia_medica'  : $("#codigo_historia_medica").val()
                                                           });
                                                         },
+                                        "error" : function (respuesta)
+                                                      {   
+                                                      }
+
                                     },
                             'columns' : [
                                           { "data" : "num_his"    },
@@ -60,9 +65,73 @@ $(document).ready( function ()
               {
                 tabla.ajax.reload();
               }
-
           $btn.button('reset')
         });
+
+      $('#tabla_resultados').delegate("button.btn-success","click", function(event)
+              {
+                
+                var obj = this;                    
+                //alert(obj.id);
+                // $.ajax({
+                //   url: "../../historias_medicas_pediatricas/anular_consulta_medica",
+                //   type: "POST",
+                //   data: { 'id_consulta_paciente': obj.id },
+                //   contentType: 'application/x-www-form-urlencoded',
+                //   dataType: 'json',
+                //   success: function(respuesta) 
+                //     { 
+                //       $('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                //       tabla.ajax.reload();
+                //     },
+                //   error: function(respuesta)
+                //     {
+                //       $('#mensajes').html(respuesta['especialidad_consulta']);
+                //       $('#mensajes').html(respuesta['turno_consulta']);
+                //       $('#mensajes').html(respuesta['fecha_consulta']);                  
+                //     }
+
+                // });
+
+                  var windowSizeArray = [ "width=800,height=800,scrollbars=yes", "width=300,height=400,scrollbars=yes" ];
+                  //var url = $(this).attr("../busquedas/reporte_pantalla/"+obj.id);
+                  var windowName = "reporte_pantalla";//$(this).attr("name");
+                  var windowSize = windowSizeArray[0];
+ 
+                  window.open("../busquedas/reporte_pantalla/"+obj.id, windowName, windowSize);
+ 
+                  event.preventDefault();
+                    
+              }
+          );
+
+      $('#tabla_resultados').delegate("button.btn-primary","click", function(event)
+
+              {
+                var obj = this;    
+                //alert(obj);
+                // $.ajax({
+                //   url: "../../historias_medicas_pediatricas/anular_consulta_medica",
+                //   type: "POST",
+                //   data: { 'id_consulta_paciente': obj.id },
+                //   contentType: 'application/x-www-form-urlencoded',
+                //   dataType: 'json',
+                //   success: function(respuesta) 
+                //     { 
+                //       $('#mensajes').show().attr('class',respuesta['clase']).html(respuesta['mensaje']);
+                //       tabla.ajax.reload();
+                //     },
+                //   error: function(respuesta)
+                //     {
+                //       $('#mensajes').html(respuesta['especialidad_consulta']);
+                //       $('#mensajes').html(respuesta['turno_consulta']);
+                //       $('#mensajes').html(respuesta['fecha_consulta']);                  
+                //     }
+                // });
+                
+                    
+              }
+          );
 
   /*FIN DOCUMENT READY*/
   });

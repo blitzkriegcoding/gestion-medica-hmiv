@@ -64,7 +64,6 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::get('obtener_historico_tratamientos',									['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_tratamientos']);
 		Route::get('obtener_historico_intervenciones',									['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_intervenciones']);
 		Route::get('obtener_historico_talla_peso',										['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_talla_peso']);
-		
 
 		/*TODOS LOS POST*/
 		Route::post('cola_consultas',													['uses' => 	'HistoriaMedicaFederadaController@verificar_cola_consultas']);
@@ -91,19 +90,12 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::post('cargar_talla_peso',												['uses'	=>	'HistoriaMedicaFederadaController@cargar_talla_peso']);
 		Route::post('borrar_talla_peso_guardado',										['uses'	=>	'HistoriaMedicaFederadaController@borrar_talla_peso_guardado']);
 		
-		//borrar_talla_peso_guardado
-
-		//borrar_intervencion_guardada
-
-		
 		/*RUTAS PARA CONSULTA VIA AJAX*/
 		Route::get('obtener_vacuna/{vacuna}',											['uses'	=>	'HistoriaMedicaFederadaController@obtener_vacuna'] );
 		Route::get('obtener_patologia/{patologia}',										['uses'	=>	'PatologiasController@mostrar_patologia']);
 		Route::get('obtener_alergias/{alergia}',										['uses'	=>	'HistoriaMedicaFederadaController@obtener_alergias'])->where('alergias','[a-zA-Z\s]+');
 		Route::get('obtener_intolerancias/{intolerancia}',								['uses'	=>	'HistoriaMedicaFederadaController@obtener_intolerancias'])->where('intolerancia','[a-zA-Z\s]+');
 		Route::get('obtener_intervenciones/{intervencion}',								['uses'	=>	'HistoriaMedicaFederadaController@obtener_intervenciones'])->where('intervencion','[a-zA-Z\s]+');
-		
-		
 	});
 
 /*********************RUTAS MEDICOS*********************/
@@ -126,12 +118,9 @@ Route::group(['prefix' => 'medicos'], function()
 Route::group(['prefix' => 'busquedas'], function()
 	{
 		/*TODOS LOS GETS*/
-		Route::get('busqueda_nueva', 				['uses' => 'BusquedasController@crear_nueva_busqueda']);
-		Route::get('busqueda_historia_medica', 		['uses' => 'BusquedasController@busqueda_historia_medica']);
-		
-
-
-
+		Route::get('busqueda_nueva', 					['uses' => 'BusquedasController@crear_nueva_busqueda']);
+		Route::get('busqueda_historia_medica', 			['uses' => 'BusquedasController@busqueda_historia_medica']);
+		Route::get('reporte_pantalla/{id_historia}', 	['uses' => 'BusquedasController@reporte_pantalla'])->where('id_historia','[0-9]+');
 
 		/*TODOS LOS POST*/
 
