@@ -1,0 +1,1 @@
+reportes_estadisticas_pacientes.blade.php
