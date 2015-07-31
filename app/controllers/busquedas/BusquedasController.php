@@ -24,17 +24,11 @@ class BusquedasController extends \BaseController
 			}
 		public function reporte_pantalla($codigo_historia_medica)
 			{
-				$datos_paciente = HistoriaMedicaPediatrica::where('historia_paciente_pediatrico.id_historia_medica','=',$codigo_historia_medica)
-									->join('pacientes_pediatricos','historia_paciente_pediatrico.id_paciente','=', 'pacientes_pediatricos.id_paciente')
-										->select('codigo_historia_medica','pacientes_pediatricos.primer_nombre')
-											->get();
-				//dd($datos_paciente);
-				return View::make('busquedas.ventana_reporte_pantalla');
-				//$d = View::make('busquedas.ventana_reporte_pantalla');
+				$datos_paciente = HistoriaMedicaPediatrica::datosPrimariosHistoria($codigo_historia_medica);
+									
 
-
-
-
+				$datos_vista = $datos_paciente[0]->toArray();
+				return View::make('busquedas.ventana_reporte_pantalla')->with(['datos_primarios'=>$datos_vista]);
 			}
 
 	}

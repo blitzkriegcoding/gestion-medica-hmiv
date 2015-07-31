@@ -450,6 +450,46 @@ class HistoriaMedicaPediatrica extends \Eloquent {
 			return Response::json($datos_historia_json);
 		}
 
+	public static function datosPrimariosHistoria($codigo_historia_medica)
+		{
+			return self::where('historia_paciente_pediatrico.id_historia_medica','=',$codigo_historia_medica)
+									->join('pacientes_pediatricos','historia_paciente_pediatrico.id_paciente','=', 'pacientes_pediatricos.id_paciente')									
+									->join('parentesco_representantes','pacientes_pediatricos.id_paciente','=','parentesco_representantes.id_paciente')
+									->join('representantes','parentesco_representantes.id_representante','=','representantes.id_representante')	
+									->join('parentesco','parentesco_representantes.id_parentesco','=','parentesco.id_parentesco')
+									->join('paises','representantes.id_pais','=','paises.id_pais')
+									->join('parroquia','representantes.id_parroquia','=','parroquia.id_parroquia')
+									->join('municipio','parroquia.id_municipio','=','municipio.id_municipio')
+									->join('estado','municipio.id_estado','=','estado.id_estado')
+										->select(	'codigo_historia_medica',
+													'pacientes_pediatricos.primer_nombre as pac_n1',
+													'pacientes_pediatricos.segundo_nombre as pac_n2',
+													'pacientes_pediatricos.primer_apellido as pac_a1',
+													'pacientes_pediatricos.segundo_apellido as pac_a2',
+													'pacientes_pediatricos.tipo_documento as pac_tdoc',
+													'pacientes_pediatricos.documento as pac_doc',
+													'pacientes_pediatricos.lugar_nacimiento',
+													'pacientes_pediatricos.fecha_nacimiento',
+													'pacientes_pediatricos.sexo',
+													'paises.pais as pais_origen',
+													'representantes.primer_nombre as rep_n1',
+													'representantes.segundo_nombre as rep_n2',
+													'representantes.primer_apellido as rep_a1',
+													'representantes.segundo_apellido as rep_a2',
+													'representantes.tipo_documento as rep_tdoc',
+													'representantes.documento as rep_doc',
+													'representantes.telefono1 as rep_tel1',
+													'estado.estado',
+													'municipio.municipio',
+													'parroquia.parroquia',
+													'avenida_calle as ave_cal',
+													'casa_edificio as cas_edf',
+													'parentesco.parentesco as parentesco_rep'
+
+												)
+										->get();
+		}
+
 
 
 

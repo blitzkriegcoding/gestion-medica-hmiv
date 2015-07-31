@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <?php echo $__env->make('includes.head', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-<body >  
+  <?php echo $__env->make('includes.head_reporte', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<body class="body_reporte">  
   <!--Contenido del modulo -->
-    <div class="container-fluid" style="height:35em; margin:0px auto;">
-        <div class="content col-xs-12" id="content" style="padding-top:0px;">
+    <!-- <div class="container-fluid" style="margin:0px auto;"> -->
+        <!-- <div class="content col-xs-12" id="content" > -->
           <?php echo $__env->yieldContent('cuerpo_reporte'); ?>
-        </div>
-    </div>
+        <!-- </div> -->
+    <!-- </div> -->
     <!-- /.container -->
-    <footer class="row" align="center">        
+    <footer class="row" align="center">    
+    	<?php echo $__env->make('includes.footer_libjs', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>    
     </footer>
     	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->    
   </body>

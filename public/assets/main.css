@@ -4,6 +4,12 @@ body
 	min-height: auto;
 }
 
+.body_reporte 
+{
+  /*padding: 50px;*/
+  min-height: auto;
+}
+
 .pad-controles
   {
     padding: 5px;
