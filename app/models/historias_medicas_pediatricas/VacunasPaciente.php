@@ -30,7 +30,7 @@ class VacunasPaciente extends \Eloquent {
 			return Response::json($vacunas_json);
 		}
 
-public static function obtenerHistoricoVacunas()
+	public static function obtenerHistoricoVacunas()
 		{
 			$respuesta = self::select('fecha_vacunacion','tipo_vacuna','edad','refuerzo')
 											->join('tipo_vacunas','vacunas_paciente.id_tipo_vacuna','=','tipo_vacunas.id_tipo_vacuna')
@@ -41,6 +41,17 @@ public static function obtenerHistoricoVacunas()
 			#return Response::json($respuesta);
 			return ($respuesta);											
 		}
+
+	public static function reporteHistoricoVacunas($id_historia_medica)
+		{
+			$respuesta = self::select('fecha_vacunacion','tipo_vacuna','edad','refuerzo')
+											->join('tipo_vacunas','vacunas_paciente.id_tipo_vacuna','=','tipo_vacunas.id_tipo_vacuna')
+											->join('historia_paciente_pediatrico','vacunas_paciente.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
+											->where('historia_paciente_pediatrico.id_historia_medica','=', $id_historia_medica)
+											->orderBy('fecha_vacunacion', 'desc')
+											->get();
+			return ($respuesta);											
+		}		
 		
 	public static function obtenerHistoricoVacunasJSON()
 		{

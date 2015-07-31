@@ -38,6 +38,20 @@ class AlergiasPacientePediatrico extends \Eloquent {
 			#dd($datos_intolerancia);
 			return $alergias_json;
 		}	
+
+	public static function reporteAlergiasHistoria($id_historia_medica)
+		{
+			$datos_alergia = self::join('historia_paciente_pediatrico',
+										'alergias_historia_pediatrica.id_historia_medica',
+											'=',
+												'historia_paciente_pediatrico.id_historia_medica')
+													->join('alergias','alergias_historia_pediatrica.id_alergia','=','alergias.id_alergia')
+														->where('historia_paciente_pediatrico.id_historia_medica','=',$id_historia_medica)
+															->select('alergia','id_alergia_historia as id_alergia')
+																->get();
+			
+			return $datos_alergia;
+		}			
 	public static function guardarAlergiaPaciente($input)
 		{
 			$reglas_alergias = 	[

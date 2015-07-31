@@ -179,10 +179,12 @@ class ConsultasPacientePediatrico extends \Eloquent {
 
 	public static function historicoConsultas($id_historia_medica)
 		{
-			$consultas_historico = self::select('fecha_consulta', 'especialidad', 'asistio_consulta')
+			$consultas_historico = self::select('fecha_consulta', 'especialidad', 'asistio_consulta', 'diagnostico_consulta')
 											->join('especialidades_medicas','consultas_paciente_pediatrico.id_especialidad','=','especialidades_medicas.id_especialidad')
 											->join('historia_paciente_pediatrico','consultas_paciente_pediatrico.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
-											->where('historia_paciente_pediatrico.id_paciente','=',Session::get('id_paciente_pediatrico'))->get();
+											->where('historia_paciente_pediatrico.id_historia_medica','=', $id_historia_medica)
+											->orderBy('fecha_consulta','desc')
+											->get();
 			return $consultas_historico;
 		}		
 	public static function listarConsultasHistoricoJSON()
