@@ -128,7 +128,7 @@
 				{
 					$filas = 0;
 		?>
-					<th class="text-center">
+					<th class="text-center" style="width:10%">
 						N°
 					</th>
 					<th class="text-center">
@@ -182,7 +182,7 @@
 				{
 					$filas = 0;
 		?>
-					<th class="text-center">
+					<th class="text-center" style="width:10%">
 						N°
 					</th>
 					<th class="text-center ">
@@ -237,7 +237,7 @@
 				{
 					$filas = 0;
 		?>
-					<th class="text-center">
+					<th class="text-center" style="width:10%">
 						N°
 					</th>
 					<th class="text-center ">
@@ -249,7 +249,7 @@
 					#$nueva_fecha = new DateTime($d->fecha_vacunacion);					
 		?>
 						<tr>		
-							<td class="text-center" style="width:10%" >
+							<td class="text-center" >
 								<strong>{{ $filas }} </strong>				
 							</td>
 							<td class="text-center">
@@ -274,7 +274,7 @@
 				{
 					$filas = 0;
 		?>
-					<th class="text-center">
+					<th class="text-center" style="width:10%">
 						N°
 					</th>
 					<th class="text-center ">
@@ -317,11 +317,11 @@
 				{
 					$filas = 0;
 		?>
-					<th class="text-center">
+					<th class="text-center" style="width:10%">
 						N°
 					</th>
 					<th class="text-center ">
-						Intolerancia
+						Patología
 					</th>
 		<?php
 					foreach($datos_patologias as $d):
@@ -346,15 +346,15 @@
 <br>
 	<table class="table table-bordered table-hover table-striped">
 		<th colspan="5">
-			<h4 class="text-center">Historial de consultas médicas</h4>
+			<h4 class="text-center">Historial hospitalización</h4>
 		</th>
 		<tbody>
 		<?php 
-			if(!empty($datos_consultas))	
+			if(!empty($datos_hospitalizacion))	
 				{
 					$filas = 0;
 		?>
-					<th class="text-center">
+					<th class="text-center" style="width:10%">
 						N°
 					</th>
 					<th class="text-center">
@@ -370,27 +370,35 @@
 						Observaciones
 					</th>
 		<?php
-					foreach($datos_consultas as $d):
+					foreach($datos_hospitalizacion as $d):
 					$filas++;
-					$nueva_fecha_1 = new DateTime($d->fecha_consulta);					
-					$nueva_fecha_2 = new DateTime($d->fecha_consulta);					
+					$nueva_fecha_1 = new DateTime($d->fecha_hos);					
+					if(!empty($d->fecha_alta))
+						{
+							 $nueva_fecha_2 = new DateTime($d->fecha_alta);	
+							 $fecha_alta = $nueva_fecha_2->format('d/m/Y');				
+						}
+					else
+						{
+							$fecha_alta = "";						
+						}
 		?>
 						<tr>		
 							<td class="text-center" >
 								<strong>{{ $filas; }} </strong>				
 							</td>
 							<td class="text-center">
-								{{ $nueva_fecha->format('d/m/Y') }}
-							</td>
-							<td class="text-center">			
-								{{ $d->especialidad }}
-							</td>
-							<td class="text-center">			
-								{{ $d->asistio_consulta }}
+								{{ $nueva_fecha_1->format('d/m/Y') }}
 							</td>							
-							<td>
-								{{ $d->diagnostico_consulta }}
-							</td>			
+							<td class="text-center">
+								{{ $fecha_alta }}
+							</td>
+							<td class="text-center">			
+								{{ $d->tipo_alta_medica }}
+							</td>
+							<td class="text-center">			
+								{{ $d->observaciones }}
+							</td>									
 						</tr>
 			<?php
 					endforeach;
@@ -404,41 +412,52 @@
 		<th colspan="4">
 			<h4 class="text-center">Historial de talla y peso</h4>
 		</th>
-		<tr>		
-			<td >
-				<strong>Número de historia:</strong>				
-			</td>
-			<td>
-				V-XXXXXX-XX
-			</td>
-			<td style="padding-left: 10px">			
-				<strong>Nombres y Apellidos:</strong>			
-			</td>
-			<td>
-				XXXXXXXXXX XXXXXXXXXXXXXX XXXXXXXXXXXXXXXXXX
-			</td>			
-		</tr>		
+		<tbody>
+		<?php 
+			if(!empty($datos_talla_peso))	
+				{
+					$filas = 0;
+		?>
+					<th class="text-center" style="width:10%">
+						N°
+					</th>
+					<th class="text-center">
+						Fecha toma
+					</th>
+					<th class="text-center">
+						Talla (centímetros)
+					</th>
+					<th class="text-center">
+						Peso (kilogramos)
+					</th>
+
+		<?php
+					foreach($datos_talla_peso as $d):
+					$filas++;
+					$nueva_fecha = new DateTime($d->fecha_toma);					
+
+		?>
+						<tr>		
+							<td class="text-center" >
+								<strong>{{ $filas; }} </strong>				
+							</td>
+							<td class="text-center">
+								{{ $nueva_fecha->format('d/m/Y') }}
+							</td>							
+							<td class="text-center">
+								{{ $d->talla }}
+							</td>
+							<td class="text-center">			
+								{{ $d->peso }}
+							</td>	
+						</tr>
+			<?php
+					endforeach;
+				 }
+			?>
+		</tbody>		
 	</table>	
-	<br>
-	<table class="table table-bordered table-hover table-striped">
-		<th colspan="4">
-			<h4 class="text-center">Examenes Médicos</h4>
-		</th>
-		<tr>		
-			<td >
-				<strong>Número de historia:</strong>				
-			</td>
-			<td>
-				V-XXXXXX-XX
-			</td>
-			<td style="padding-left: 10px">			
-				<strong>Nombres y Apellidos:</strong>			
-			</td>
-			<td>
-				XXXXXXXXXX XXXXXXXXXXXXXX XXXXXXXXXXXXXXXXXX
-			</td>			
-		</tr>		
-	</table>
+
 
 	
 </div>

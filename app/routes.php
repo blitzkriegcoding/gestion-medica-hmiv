@@ -62,9 +62,13 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 		Route::get('obtener_hospitalizacion_paciente',									['uses' =>	'HistoriaMedicaFederadaController@obtener_hospitalizacion_paciente']);
 		Route::get('obtener_historico_examenes',										['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_examenes']);
 		Route::get('obtener_historico_tratamientos',									['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_tratamientos']);
+		Route::get('obtener_historico_tratamientos_sostenidos',							['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_tratamientos_sostenidos']);
+		
 		Route::get('obtener_historico_intervenciones',									['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_intervenciones']);
 		Route::get('obtener_historico_talla_peso',										['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_talla_peso']);
+		
 
+		
 		/*TODOS LOS POST*/
 		Route::post('cola_consultas',													['uses' => 	'HistoriaMedicaFederadaController@verificar_cola_consultas']);
 		Route::post('cargar_consulta_nueva',											['uses'	=>	'HistoriaMedicaFederadaController@cargar_consulta_nueva']);
@@ -121,7 +125,9 @@ Route::group(['prefix' => 'busquedas'], function()
 		Route::get('busqueda_nueva', 					['uses' => 'BusquedasController@crear_nueva_busqueda']);
 		Route::get('busqueda_historia_medica', 			['uses' => 'BusquedasController@busqueda_historia_medica']);
 		Route::get('reporte_pantalla/{id_historia}', 	['uses' => 'BusquedasController@reporte_pantalla'])->where('id_historia','[0-9]+');
+		Route::get('reporte_pdf/{id_historia}', 		['uses' => 'BusquedasController@reporte_pdf'])->where('id_historia','[0-9]+');
 
+		
 		/*TODOS LOS POST*/
 
 		/*RUTAS PARA CONSULTA VIA AJAX*/

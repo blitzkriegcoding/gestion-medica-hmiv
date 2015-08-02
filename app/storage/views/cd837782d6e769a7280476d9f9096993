@@ -49,6 +49,7 @@
 			            <th class="text-center">Paciente</th>			            
 			            <th class="text-center">Pantalla</th>
 			            <th class="text-center">PDF</th>
+			            <th class="text-center">Editar</th>
 			        </tr>
 			    </thead>
 			    <tbody class="text-center">

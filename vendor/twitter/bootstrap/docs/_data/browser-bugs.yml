@@ -1,6 +1,6 @@
 -
   browser: >
-    Internet Explorer 11
+    Internet Explorer 11 & Microsoft Edge
   summary: >
     Hovered element still remains in `:hover` state after scrolling away.
   upstream_bug: >
@@ -10,7 +10,7 @@
 
 -
   browser: >
-    Internet Explorer 11
+    Internet Explorer 11 & Microsoft Edge
   summary: >
     When hovering over a `<select>` menu item, the cursor for the element underneath the menu is displayed.
   upstream_bug: >
@@ -112,16 +112,6 @@
   browser: >
     Chrome
   summary: >
-    `display: table;` within `display: block;` forces sibling content to new line.
-  upstream_bug: >
-    Chromium#309483
-  origin: >
-    Bootstrap#9950
-
--
-  browser: >
-    Chrome
-  summary: >
     Incorrect viewport size used for media queries when printing.
   upstream_bug: >
     Chromium#273306
@@ -180,6 +170,16 @@
 
 -
   browser: >
+    Safari
+  summary: >
+    Incorrect placement of `position: fixed` element when it's a child of a `position: relative; left: X%;` element.
+  upstream_bug: >
+    WebKit#147284, Safari#21993128
+  origin: >
+    Bootstrap#16814
+
+-
+  browser: >
     Safari (OS X)
   summary: >
     Scrollbar clipped in `select[multiple]` with padding.
@@ -226,7 +226,7 @@
   summary: >
     Focus ring of image map within a modal is displayed in the wrong location.
   upstream_bug: >
-    WebKit#143527
+    WebKit#143527, Safari#21908735
   origin: >
     Bootstrap#16180
 

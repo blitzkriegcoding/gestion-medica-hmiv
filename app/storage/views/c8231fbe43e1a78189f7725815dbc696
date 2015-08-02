@@ -319,11 +319,8 @@
 				    	<table id="tratamientos_apertura_historia" class="display compact">
 						    <thead>
 						        <tr>
-						        	<th class="text-center">N°</th>
-						        	<th class="text-center">Fecha prescripción</th>
-						            <th class="text-center">Tratamiento prescrito</th>
-						            <th class="text-center">Detalles</th>
-						            <th class="text-center">¿Borrar?</th>
+						        	<th class="text-center">N°</th>						        	
+						            <th class="text-center">Tratamiento prescrito</th>						            
 						        </tr>
 						    </thead>						    
 							<tbody class="text-center">							

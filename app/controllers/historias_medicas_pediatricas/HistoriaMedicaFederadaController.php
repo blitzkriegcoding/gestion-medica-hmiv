@@ -186,4 +186,8 @@ class HistoriaMedicaFederadaController extends \BaseController
 			{
 				return HistorialTallaPeso::borrarTallaPeso(Input::all());	
 			}
+		public function obtener_historico_tratamientos_sostenidos()
+			{
+				return TratamientosSostenidos::obtenerTratamientosSostenidosJSON();
+			}
 	}

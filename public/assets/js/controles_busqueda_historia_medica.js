@@ -57,6 +57,7 @@ $(document).ready( function ()
                                           { "data" : "nom_pac"    },
                                           { "data" : "pantalla"   },
                                           { "data" : "pdf"        },                                          
+                                          { "data" : "editar"     },                                          
                                         ],
                       })
                   

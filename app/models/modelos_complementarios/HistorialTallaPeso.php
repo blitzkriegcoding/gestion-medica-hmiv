@@ -33,7 +33,14 @@ class HistorialTallaPeso extends \Eloquent
 				endforeach;
 				return Response::json($talla_peso_json);
 			}
-
+		public static function reporteHistoriaTallaPeso($id_historia_medica)
+			{
+				$talla_peso = self::where('historial_talla_peso.id_paciente', '=', Session::get('id_paciente_pediatrico'))
+									->select('talla','peso','fecha_toma')
+									->join('historia_paciente_pediatrico','historial_talla_peso.id_paciente','=','historia_paciente_pediatrico.id_paciente')										
+									->get();
+				return ($talla_peso);
+			}
 		public static function guardarTallaPeso($input)
 			{
 					$reglas_talla_peso		= 	[

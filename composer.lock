@@ -539,12 +539,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/bootstrap-fileinput.git",
-                "reference": "ac15ba52bd3458ebcae1d72d9751533fef4f4045"
+                "reference": "c762b59f6b293f1717135a0ac82a56192dbe168d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/ac15ba52bd3458ebcae1d72d9751533fef4f4045",
-                "reference": "ac15ba52bd3458ebcae1d72d9751533fef4f4045",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-fileinput/zipball/c762b59f6b293f1717135a0ac82a56192dbe168d",
+                "reference": "c762b59f6b293f1717135a0ac82a56192dbe168d",
                 "shasum": ""
             },
             "type": "library",
@@ -579,7 +579,7 @@
                 "progress",
                 "upload"
             ],
-            "time": "2015-07-27 18:37:17"
+            "time": "2015-08-01 19:48:42"
         },
         {
             "name": "laravel/framework",
@@ -1682,7 +1682,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.7.2",
+            "version": "v2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
@@ -1740,7 +1740,7 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v2.7.2",
+            "version": "v2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Filesystem.git",
@@ -2197,16 +2197,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v2.7.2",
+            "version": "v2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "fde603d9f4b2418ff0f0315b93eb039c9aa41205"
+                "reference": "e8903ebba5eb019f5886ffce739ea9e3b7519579"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/fde603d9f4b2418ff0f0315b93eb039c9aa41205",
-                "reference": "fde603d9f4b2418ff0f0315b93eb039c9aa41205",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/e8903ebba5eb019f5886ffce739ea9e3b7519579",
+                "reference": "e8903ebba5eb019f5886ffce739ea9e3b7519579",
                 "shasum": ""
             },
             "require": {
@@ -2252,7 +2252,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2015-07-01 12:07:40"
+            "time": "2015-07-28 15:18:12"
         },
         {
             "name": "twitter/bootstrap",
@@ -2260,12 +2260,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "d8cae018f41fdd780e32e91bd76cd3f08b67ea70"
+                "reference": "027b7efd792f4fab065bc6e71d8d2573cd13cadb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/d8cae018f41fdd780e32e91bd76cd3f08b67ea70",
-                "reference": "d8cae018f41fdd780e32e91bd76cd3f08b67ea70",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/027b7efd792f4fab065bc6e71d8d2573cd13cadb",
+                "reference": "027b7efd792f4fab065bc6e71d8d2573cd13cadb",
                 "shasum": ""
             },
             "replace": {
@@ -2303,7 +2303,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2015-07-18 06:18:56"
+            "time": "2015-08-01 06:42:23"
         },
         {
             "name": "way/generators",

@@ -434,7 +434,7 @@ class HistoriaMedicaPediatrica extends \Eloquent {
 			$datos_historia_json = [];
 			$datos_historia = self::where('codigo_historia_medica','like', trim(strtoupper($input['codigo_historia_medica']))) 
 									->join('pacientes_pediatricos','historia_paciente_pediatrico.id_paciente','=','pacientes_pediatricos.id_paciente')
-										->select('codigo_historia_medica', 'primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido','id_historia_medica')
+										->select('codigo_historia_medica', 'primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido','id_historia_medica', 'pacientes_pediatricos.id_paciente as paciente')
 											->get();
 
 			foreach($datos_historia as $d):
@@ -444,7 +444,10 @@ class HistoriaMedicaPediatrica extends \Eloquent {
 												'cod_his'	=>	$d->codigo_historia_medica,
 												'nom_pac'	=>	($d->primer_nombre." ".$d->segundo_nombre." ".$d->primer_apellido." ".$d->segundo_apellido),
 												'pantalla'	=>	"<button class='btn btn-success' id='".$d->id_historia_medica."'>Ver</button>",
-												'pdf'		=>	"<button class='btn btn-primary' id='".$d->id_historia_medica."'>Generar</button>",
+												// 'pdf'		=>	"<button class='btn btn-primary' id='".$d->id_historia_medica."'>Generar</button>",
+
+												'pdf'		=>	"<a class='btn btn-primary' href='../busquedas/reporte_pdf/".$d->id_historia_medica."'>Generar</a>",
+												'editar'	=>	"<a class='btn btn-primary' href='../historias_medicas_pediatricas/creacion_historia_medica_federada/".$d->paciente."'>Editar</a>",
 											];
 			endforeach;
 			return Response::json($datos_historia_json);

@@ -144,6 +144,39 @@ $(document).ready( function () {
                           ],
         });     
 
+     var tabla_tratamientos_sostenidos = $('#tratamientos_apertura_historia').DataTable(
+        {
+              'searching':  false,
+              'ordering':   true,
+              "pageLength": 3,
+              "lengthChange": false,
+              "ajax": 
+                      {
+                          "type"    : "GET",
+                          "url"     : "../../historias_medicas_pediatricas/obtener_historico_tratamientos_sostenidos",
+                          "dataSrc" : ""
+                      },
+              "language": {
+                            "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "infoEmpty":      "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            "paginate": {
+                                          "first":      "Primera",
+                                          "last":       "Última",
+                                          "next":       "Siguiente",
+                                          "previous":   "Anterior"
+                                },
+                              "processing":     "Procesando...",
+                              "loadingRecords": "Cargando registros...",
+                              "lengthMenu":     "Mostrar _MENU_ registros",
+                              "emptyTable":     "Sin datos cargados aun",
+                              "search":         "Buscar: ",
+                          },                      
+              'columns' : [
+                            { "data" : "num_tra"  },
+                            { "data" : "tratamiento"  },
+                          ],
+        });   
+
     var tabla_vacunas = $('#vacunas_historico').DataTable(
         {
               'searching':  false,
