@@ -64,6 +64,18 @@ class Hospitalizacion extends \Eloquent
 				endforeach;
 				return Response::json($historico_json);
 			}
+
+		public static function reporteHistoriaHospitalizacion($id_historia_medica)
+			{
+				$contador_historico = 0;
+				$historico_hospitalizacion = self::where('id_paciente','=',Session::get('id_paciente_pediatrico'))
+													->join('historia_paciente_pediatrico','hospitalizacion.id_historia_medica','=','historia_paciente_pediatrico.id_historia_medica')
+														->join('tipos_alta_medica_pediatrica','hospitalizacion.id_alta_medica','=','tipos_alta_medica_pediatrica.id_alta_medica')
+															->select('fecha_hospitalizacion as fec_hos','sala','codigo_cama','piso','id_hospitalizacion','fecha_alta','id_alta_medica','tipo_alta_medica','observaciones')
+																->get();
+				
+				return Response::json($historico_hospitalizacion);
+			}			
 		public static function cargarHospitalizacionNueva($input)
 			{
 				$reglas_hospitalizacion = 	[

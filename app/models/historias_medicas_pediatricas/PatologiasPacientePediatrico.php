@@ -28,6 +28,19 @@ class PatologiasPacientePediatrico extends \Eloquent {
 			#return Response::json($pat_json);
 			return ($pat_json);
 		}
+	public static function reporteHistoriaPatologia($id_historia_medica)
+		{
+			$cantidad = 0;
+			$pat_json = [];
+			$patologia = self::join('patologias','patologias.id_patologia','=','patologias_historia_pediatrica.id_patologia')
+									->join('historia_paciente_pediatrico', 'historia_paciente_pediatrico.id_historia_medica','=','patologias_historia_pediatrica.id_historia_medica')
+										->where('historia_paciente_pediatrico.id_historia_medica','=', $id_historia_medica)
+											->select('patologias.patologia as pat')
+												->get();
+					
+
+			return ($patologia);
+		}		
 	public static function obtenerPatologiasPacienteJSON()
 		{
 			$cantidad = 0;

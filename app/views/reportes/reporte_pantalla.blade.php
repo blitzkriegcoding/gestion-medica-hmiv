@@ -270,7 +270,7 @@
 		</th>
 		<tbody>
 		<?php 
-			if(!empty($datos_alergias))	
+			if(!empty($datos_intolerancias))	
 				{
 					$filas = 0;
 		?>
@@ -278,10 +278,10 @@
 						N°
 					</th>
 					<th class="text-center ">
-						Alérgia
+						Intolerancia
 					</th>
 		<?php
-					foreach($datos_alergias as $d):
+					foreach($datos_intolerancias as $d):
 					$filas++;
 					#$nueva_fecha = new DateTime($d->fecha_vacunacion);					
 		?>
@@ -290,7 +290,50 @@
 								<strong>{{ $filas }} </strong>				
 							</td>
 							<td class="text-center">
-								{{ $d->alergia }}
+								{{ $d->intolerancia }}
+							</td>
+
+						</tr>
+			<?php
+					endforeach;
+				 }
+				 else
+				 {
+			?>
+					SIN DATOS
+			<?php
+				 }
+			?>
+		</tbody>			
+	</table>
+	<br>
+	<table class="table table-bordered table-hover table-striped">
+		<th colspan="2">
+			<h4 class="text-center">Historial de Patologias</h4>
+		</th>
+		<tbody>
+		<?php 
+			if(!empty($datos_patologias))	
+				{
+					$filas = 0;
+		?>
+					<th class="text-center">
+						N°
+					</th>
+					<th class="text-center ">
+						Intolerancia
+					</th>
+		<?php
+					foreach($datos_patologias as $d):
+					$filas++;
+					#$nueva_fecha = new DateTime($d->fecha_vacunacion);					
+		?>
+						<tr>		
+							<td class="text-center" style="width:10%" >
+								<strong>{{ $filas }} </strong>				
+							</td>
+							<td class="text-center">
+								{{ $d->pat }}
 							</td>
 
 						</tr>
@@ -300,47 +343,60 @@
 			?>
 		</tbody>			
 	</table>
-
-
-	<br>
+<br>
 	<table class="table table-bordered table-hover table-striped">
-		<th colspan="4">
-			<h4 class="text-center">Historial de Patologías</h4>
+		<th colspan="5">
+			<h4 class="text-center">Historial de consultas médicas</h4>
 		</th>
-		<tr>		
-			<td >
-				<strong>Número de historia:</strong>				
-			</td>
-			<td>
-				V-XXXXXX-XX
-			</td>
-			<td style="padding-left: 10px">			
-				<strong>Nombres y Apellidos:</strong>			
-			</td>
-			<td>
-				XXXXXXXXXX XXXXXXXXXXXXXX XXXXXXXXXXXXXXXXXX
-			</td>			
-		</tr>		
-	</table>
-	<br>
-	<table class="table table-bordered table-hover table-striped">
-		<th colspan="4">
-			<h4 class="text-center">Historial de Hospitalizacion</h4>
-		</th>
-		<tr>		
-			<td >
-				<strong>Número de historia:</strong>				
-			</td>
-			<td>
-				V-XXXXXX-XX
-			</td>
-			<td style="padding-left: 10px">			
-				<strong>Nombres y Apellidos:</strong>			
-			</td>
-			<td>
-				XXXXXXXXXX XXXXXXXXXXXXXX XXXXXXXXXXXXXXXXXX
-			</td>			
-		</tr>		
+		<tbody>
+		<?php 
+			if(!empty($datos_consultas))	
+				{
+					$filas = 0;
+		?>
+					<th class="text-center">
+						N°
+					</th>
+					<th class="text-center">
+						Fecha Hospitalización
+					</th>
+					<th class="text-center">
+						Fecha Alta
+					</th>
+					<th class="text-center">
+						Tipo Alta
+					</th>
+					<th class="text-center">
+						Observaciones
+					</th>
+		<?php
+					foreach($datos_consultas as $d):
+					$filas++;
+					$nueva_fecha_1 = new DateTime($d->fecha_consulta);					
+					$nueva_fecha_2 = new DateTime($d->fecha_consulta);					
+		?>
+						<tr>		
+							<td class="text-center" >
+								<strong>{{ $filas; }} </strong>				
+							</td>
+							<td class="text-center">
+								{{ $nueva_fecha->format('d/m/Y') }}
+							</td>
+							<td class="text-center">			
+								{{ $d->especialidad }}
+							</td>
+							<td class="text-center">			
+								{{ $d->asistio_consulta }}
+							</td>							
+							<td>
+								{{ $d->diagnostico_consulta }}
+							</td>			
+						</tr>
+			<?php
+					endforeach;
+				 }
+			?>
+		</tbody>		
 	</table>
 
 	<br>

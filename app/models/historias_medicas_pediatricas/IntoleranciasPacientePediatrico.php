@@ -34,6 +34,21 @@ class IntoleranciasPacientePediatrico extends \Eloquent {
 			return $intolerancias_json;
 		}
 
+	public static function reporteHistoriaIntolerancia($id_historia_medica)
+		{
+			$datos_intolerancia = self::join('historia_paciente_pediatrico',
+										'intolerancias_paciente_pediatrico.id_historia_medica',
+											'=',
+												'historia_paciente_pediatrico.id_historia_medica')
+													->join('intolerancias','intolerancias_paciente_pediatrico.id_intolerancia','=','intolerancias.id_intolerancia')
+														->where('historia_paciente_pediatrico.id_historia_medica','=',$id_historia_medica)
+															->select('intolerancia','id_intolernacia_paciente as id_intolerancia')
+																->get();
+
+		
+			return $datos_intolerancia;
+		}		
+
 
 
 	public static function guardarIntoleranciaPaciente($input)

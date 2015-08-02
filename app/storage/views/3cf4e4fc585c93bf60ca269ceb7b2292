@@ -283,23 +283,85 @@
 	</table>
 	<br>
 	<table class="table table-bordered table-hover table-striped">
-		<th colspan="4">
-			<h4 class="text-center">Historial de Patologías</h4>
+		<th colspan="2">
+			<h4 class="text-center">Historial de Intolerancias</h4>
 		</th>
-		<tr>		
-			<td >
-				<strong>Número de historia:</strong>				
-			</td>
-			<td>
-				V-XXXXXX-XX
-			</td>
-			<td style="padding-left: 10px">			
-				<strong>Nombres y Apellidos:</strong>			
-			</td>
-			<td>
-				XXXXXXXXXX XXXXXXXXXXXXXX XXXXXXXXXXXXXXXXXX
-			</td>			
-		</tr>		
+		<tbody>
+		<?php 
+			if(!empty($datos_intolerancias))	
+				{
+					$filas = 0;
+		?>
+					<th class="text-center">
+						N°
+					</th>
+					<th class="text-center ">
+						Intolerancia
+					</th>
+		<?php
+					foreach($datos_intolerancias as $d):
+					$filas++;
+					#$nueva_fecha = new DateTime($d->fecha_vacunacion);					
+		?>
+						<tr>		
+							<td class="text-center" style="width:10%" >
+								<strong><?php echo $filas; ?> </strong>				
+							</td>
+							<td class="text-center">
+								<?php echo $d->intolerancia; ?>
+
+							</td>
+
+						</tr>
+			<?php
+					endforeach;
+				 }
+				 else
+				 {
+			?>
+					SIN DATOS
+			<?php
+				 }
+			?>
+		</tbody>			
+	</table>
+	<br>
+	<table class="table table-bordered table-hover table-striped">
+		<th colspan="2">
+			<h4 class="text-center">Historial de Patologias</h4>
+		</th>
+		<tbody>
+		<?php 
+			if(!empty($datos_patologias))	
+				{
+					$filas = 0;
+		?>
+					<th class="text-center">
+						N°
+					</th>
+					<th class="text-center ">
+						Intolerancia
+					</th>
+		<?php
+					foreach($datos_patologias as $d):
+					$filas++;
+					#$nueva_fecha = new DateTime($d->fecha_vacunacion);					
+		?>
+						<tr>		
+							<td class="text-center" style="width:10%" >
+								<strong><?php echo $filas; ?> </strong>				
+							</td>
+							<td class="text-center">
+								<?php echo $d->pat; ?>
+
+							</td>
+
+						</tr>
+			<?php
+					endforeach;
+				 }
+			?>
+		</tbody>			
 	</table>
 	<br>
 	<table class="table table-bordered table-hover table-striped">
