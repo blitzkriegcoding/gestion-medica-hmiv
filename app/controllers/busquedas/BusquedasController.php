@@ -61,22 +61,25 @@ class BusquedasController extends \BaseController
 				$datos_talla_peso			= HistorialTallaPeso::reporteHistoriaTallaPeso($codigo_historia_medica);
 
 				$datos_vista = $datos_paciente[0]->toArray();
+				$historia = [
+								'datos_primarios'		=>	$datos_vista,
+								'datos_consultas'		=>	$datos_consultas_medicas,
+								'datos_vacunacion'		=>	$datos_vacunacion,
+								'datos_alergias'		=>	$datos_alergias,
+								'datos_intolerancias'	=>	$datos_intolerancias,
+								'datos_patologias'		=>	$datos_patologias,
+								'datos_hospitalizacion'	=>	$datos_hospitalizacion,
+								'datos_talla_peso'		=>	$datos_talla_peso
+							];
 
-				$historia_pdf = PDF::loadView('busquedas.ventana_reporte_pantalla',[
-																					'datos_primarios'		=>	$datos_vista,
-																					'datos_consultas'		=>	$datos_consultas_medicas,
-																					'datos_vacunacion'		=>	$datos_vacunacion,
-																					'datos_alergias'		=>	$datos_alergias,
-																					'datos_intolerancias'	=>	$datos_intolerancias,
-																					'datos_patologias'		=>	$datos_patologias,
-																					'datos_hospitalizacion'	=>	$datos_hospitalizacion,
-																					'datos_talla_peso'		=>	$datos_talla_peso
-																				]);
 
-				return $historia_pdf->stream($datos_vista['codigo_historia_medica'].".pdf");
+
+				$historia_pdf = PDF::loadView('busquedas.ventana_reporte_pantalla', $historia)->setPaper('a4');
+
+				//return $historia_pdf->stream('HOLA.pdf');
 				#$pdf = PDF::loadHTML('<h1>Hello World!!</h1>');
 
-				#return $pdf->stream($datos_vista['codigo_historia_medica'].".pdf");
+				return $historia_pdf->download($datos_vista['codigo_historia_medica'].".pdf");
 /*
 				return View::make('busquedas.ventana_reporte_pantalla')->with(	[
 																					'datos_primarios'		=>	$datos_vista,
