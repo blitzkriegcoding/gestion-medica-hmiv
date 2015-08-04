@@ -124,7 +124,7 @@ return array(
 		'Way\Generators\GeneratorsServiceProvider',
 		'Former\FormerServiceProvider',		
 		'Zizaco\Entrust\EntrustServiceProvider',
-		'Barryvdh\DomPDF\ServiceProvider',
+		'Thujohn\Pdf\PdfServiceProvider',		
 		'Aivo\Highchart\HighchartServiceProvider',
 		
 		
@@ -198,7 +198,8 @@ return array(
 		'Former'			=> 'Former\Facades\Former',
 		'Debugbar' 			=> 'Barryvdh\Debugbar\Facade',		
 		'Entrust'    		=> 'Zizaco\Entrust\EntrustFacade',
-		'PDF' 				=> 'Barryvdh\DomPDF\Facade',
+		'PDF' 				=> 'Thujohn\Pdf\PdfFacade',
+		
 	),
 
 );

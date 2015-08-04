@@ -35,7 +35,6 @@ class BusquedasController extends \BaseController
 				$datos_talla_peso			= HistorialTallaPeso::reporteHistoriaTallaPeso($codigo_historia_medica);
 
 				$datos_vista = $datos_paciente[0]->toArray();
-
 				return View::make('busquedas.ventana_reporte_pantalla')->with(	[
 																					'datos_primarios'		=>	$datos_vista,
 																					'datos_consultas'		=>	$datos_consultas_medicas,
@@ -44,7 +43,8 @@ class BusquedasController extends \BaseController
 																					'datos_intolerancias'	=>	$datos_intolerancias,
 																					'datos_patologias'		=>	$datos_patologias,
 																					'datos_hospitalizacion'	=>	$datos_hospitalizacion,
-																					'datos_talla_peso'		=>	$datos_talla_peso
+																					'datos_talla_peso'		=>	$datos_talla_peso,
+																					'datos_edad'			=>	$datos_edad = PacientePediatrico::CalculoEdad($datos_vista['id_paciente'])
 																				]
 																			);
 			}
@@ -61,6 +61,7 @@ class BusquedasController extends \BaseController
 				$datos_talla_peso			= HistorialTallaPeso::reporteHistoriaTallaPeso($codigo_historia_medica);
 
 				$datos_vista = $datos_paciente[0]->toArray();
+				#$datos_primarios = $datos_paciente[0]->toArray();
 				$historia = [
 								'datos_primarios'		=>	$datos_vista,
 								'datos_consultas'		=>	$datos_consultas_medicas,
@@ -73,28 +74,14 @@ class BusquedasController extends \BaseController
 							];
 
 
+			    #File::put(public_path('test'.$i.'.pdf'), $content);
+				#return View::make('busquedas.ventana_reporte_pdf')->with($historia);							
+				$vista_css = View::make('busquedas.ventana_reporte_pdf')->with($historia);
+				$contenido = $vista_css->render();
+				#return $contenido;
+				return PDF::load($contenido)->show($datos_vista['codigo_historia_medica']);
 
-				$historia_pdf = PDF::loadView('busquedas.ventana_reporte_pantalla', $historia)->setPaper('a4');
-
-				//return $historia_pdf->stream('HOLA.pdf');
-				#$pdf = PDF::loadHTML('<h1>Hello World!!</h1>');
-
-				return $historia_pdf->download($datos_vista['codigo_historia_medica'].".pdf");
-/*
-				return View::make('busquedas.ventana_reporte_pantalla')->with(	[
-																					'datos_primarios'		=>	$datos_vista,
-																					'datos_consultas'		=>	$datos_consultas_medicas,
-																					'datos_vacunacion'		=>	$datos_vacunacion,
-																					'datos_alergias'		=>	$datos_alergias,
-																					'datos_intolerancias'	=>	$datos_intolerancias,
-																					'datos_patologias'		=>	$datos_patologias,
-																					'datos_hospitalizacion'	=>	$datos_hospitalizacion,
-																					'datos_talla_peso'		=>	$datos_talla_peso
-																				]
-																			);
-
-
-*/
 			}
+
 
 	}

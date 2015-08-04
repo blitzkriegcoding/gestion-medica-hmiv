@@ -47,8 +47,7 @@ class PacientePediatrico extends \Eloquent {
 
 	public static function CalculoEdad($id_paciente_pediatrico)
 		{
-			return $paciente_edad = DB::table('pacientes_pediatricos') 
-                     ->select(DB::raw
+			return $paciente_edad = self::select(DB::raw
                      	( " 
 						    REPLACE(
 						      REPLACE(

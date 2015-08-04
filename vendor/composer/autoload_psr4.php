@@ -19,6 +19,5 @@ return array(
     'HtmlObject\\' => array($vendorDir . '/anahkiasen/html-object/src'),
     'Former\\' => array($vendorDir . '/anahkiasen/former/src/Former', $vendorDir . '/anahkiasen/former/tests'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
-    'Barryvdh\\DomPDF\\' => array($vendorDir . '/barryvdh/laravel-dompdf/src'),
     'Barryvdh\\Debugbar\\' => array($vendorDir . '/barryvdh/laravel-debugbar/src'),
 );

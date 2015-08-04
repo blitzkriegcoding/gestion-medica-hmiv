@@ -11,10 +11,9 @@
 		"anahkiasen/former": "~3.5",
 		"barryvdh/laravel-debugbar": "~1.8",		
 		"zizaco/entrust": "1.2.*@dev",
-		"kartik-v/bootstrap-fileinput": "dev-master",
-		"barryvdh/laravel-dompdf": "0.4.*",
-		"mauro-moreno/laravel-highcharts": "dev-master"
-		
+		"kartik-v/bootstrap-fileinput": "dev-master",		
+		"mauro-moreno/laravel-highcharts": "dev-master",
+		"thujohn/pdf": "^1.0"		
 	},
 	"autoload": {
 		"classmap": [

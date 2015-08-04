@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <?php echo $__env->make('includes.head_reporte_pdf', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<body class="body_reporte">  
+  <!--Contenido del modulo -->
+    <!-- <div class="container-fluid" style="margin:0px auto;"> -->
+        <!-- <div class="content col-xs-12" id="content" > -->
+          <?php echo $__env->yieldContent('cuerpo_reporte'); ?>
+        <!-- </div> -->
+    <!-- </div> -->
+    <!-- /.container -->
+    <footer class="row" align="center">    
+    	<?php echo $__env->make('includes.footer_libjs', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>    
+    </footer>
+    	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->    
+  </body>
+</html>

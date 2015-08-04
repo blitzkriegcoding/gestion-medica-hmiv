@@ -446,7 +446,7 @@ class HistoriaMedicaPediatrica extends \Eloquent {
 												'pantalla'	=>	"<button class='btn btn-success' id='".$d->id_historia_medica."'>Ver</button>",
 												// 'pdf'		=>	"<button class='btn btn-primary' id='".$d->id_historia_medica."'>Generar</button>",
 
-												'pdf'		=>	"<a class='btn btn-primary' href='../busquedas/reporte_pdf/".$d->id_historia_medica."'>Generar</a>",
+												'pdf'		=>	"<a class='btn btn-primary' href='../busquedas/reporte_pdf/".$d->id_historia_medica."' target='_blank'>Generar</a>",
 												'editar'	=>	"<a class='btn btn-primary' href='../historias_medicas_pediatricas/creacion_historia_medica_federada/".$d->paciente."'>Editar</a>",
 											];
 			endforeach;
@@ -487,7 +487,8 @@ class HistoriaMedicaPediatrica extends \Eloquent {
 													'parroquia.parroquia',
 													'avenida_calle as ave_cal',
 													'casa_edificio as cas_edf',
-													'parentesco.parentesco as parentesco_rep'
+													'parentesco.parentesco as parentesco_rep',
+													'pacientes_pediatricos.id_paciente'
 
 												)
 										->get();

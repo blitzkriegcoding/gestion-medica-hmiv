@@ -29,7 +29,7 @@
         "Way\\Generators\\GeneratorsServiceProvider",
         "Former\\FormerServiceProvider",
         "Zizaco\\Entrust\\EntrustServiceProvider",
-        "Barryvdh\\DomPDF\\ServiceProvider",
+        "Thujohn\\Pdf\\PdfServiceProvider",
         "Aivo\\Highchart\\HighchartServiceProvider"
     ],
     "eager": [
@@ -42,6 +42,7 @@
         "Illuminate\\Workbench\\WorkbenchServiceProvider",
         "Way\\Generators\\GeneratorsServiceProvider",
         "Zizaco\\Entrust\\EntrustServiceProvider",
+        "Thujohn\\Pdf\\PdfServiceProvider",
         "Aivo\\Highchart\\HighchartServiceProvider"
     ],
     "deferred": {
@@ -117,8 +118,7 @@
         "translation.loader": "Illuminate\\Translation\\TranslationServiceProvider",
         "validator": "Illuminate\\Validation\\ValidationServiceProvider",
         "validation.presence": "Illuminate\\Validation\\ValidationServiceProvider",
-        "former": "Former\\FormerServiceProvider",
-        "dompdf": "Barryvdh\\DomPDF\\ServiceProvider"
+        "former": "Former\\FormerServiceProvider"
     },
     "when": {
         "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider": [],
@@ -140,7 +140,6 @@
         "Illuminate\\Database\\SeedServiceProvider": [],
         "Illuminate\\Translation\\TranslationServiceProvider": [],
         "Illuminate\\Validation\\ValidationServiceProvider": [],
-        "Former\\FormerServiceProvider": [],
-        "Barryvdh\\DomPDF\\ServiceProvider": []
+        "Former\\FormerServiceProvider": []
     }
 }

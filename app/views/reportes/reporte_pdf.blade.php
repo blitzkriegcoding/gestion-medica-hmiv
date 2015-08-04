@@ -1,26 +1,23 @@
-<?php 
-$historia = 
-
-"<img src=".{{ asset('img/cintillo_final.png')}}." alt='cintillo' class='center-block'>
-<div class='col-md-12'>	
-		<h3 class='text-center'>
+<img src="{{ asset('img/cintillo_final.png')}}" alt="cintillo" class="center-block">
+<div class="col-md-12">	
+		<h3 class="text-center">
 			<strong>HISTORIA MÉDICA PEDIÁTRICA</strong>
 		</h3>
 	
 	<br>
-	<table class='table table-bordered table-hover table-striped'>
+	<table class="table table-bordered table-hover table-striped">		
 		<tr>
-			<td colspan='4'>
-				<h4 class='text-center'>Datos primarios del paciente</h4>
+			<td colspan="4">
+				<h4 class="text-center">Datos primarios del paciente</h4>
 			</td>
 		</tr>
 		<tbody>
 		<tr>		
-			<td width='25%' >
+			<td width="25%" >
 				<strong>Número de historia:</strong>				
 			</td>
-			<td width='20%'>".
-				$datos_primarios['codigo_historia_medica'] ."
+			<td width="20%">
+				{{ $datos_primarios['codigo_historia_medica'] }}
 			</td>
 			<td style="padding-left: 10px" width="25%">			
 				<strong>Nombres y Apellidos:</strong>			
@@ -473,8 +470,5 @@ $historia =
 				 }
 			?>
 		</tbody>		
-	</table>	
-
-
-	
-</div>";
+	</table>
+</div>

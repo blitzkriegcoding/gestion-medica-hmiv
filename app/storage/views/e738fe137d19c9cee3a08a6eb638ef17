@@ -1,0 +1,7 @@
+<?php $__env->startSection('cuerpo_reporte'); ?>
+	<?php echo $__env->make('reportes.reporte_pdf', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php /*  <?php $__env->startSection('controles_adicionales'); ?>
+	<?php echo $__env->make('includes.controles_adicionales_busqueda_historia', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?> */ ?>
+<?php echo $__env->make('layouts.reportes_master_pdf', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
