@@ -44,7 +44,7 @@ class BusquedasController extends \BaseController
 																					'datos_patologias'		=>	$datos_patologias,
 																					'datos_hospitalizacion'	=>	$datos_hospitalizacion,
 																					'datos_talla_peso'		=>	$datos_talla_peso,
-																					'datos_edad'			=>	$datos_edad = PacientePediatrico::CalculoEdad($datos_vista['id_paciente'])
+																					'datos_edad_paciente'	=>	PacientePediatrico::CalculoEdad($datos_vista['id_paciente'])
 																				]
 																			);
 			}
@@ -59,9 +59,11 @@ class BusquedasController extends \BaseController
 				$datos_patologias			= PatologiasPacientePediatrico::reporteHistoriaPatologia($codigo_historia_medica);
 				$datos_hospitalizacion		= Hospitalizacion::reporteHistoriaHospitalizacion($codigo_historia_medica);
 				$datos_talla_peso			= HistorialTallaPeso::reporteHistoriaTallaPeso($codigo_historia_medica);
-
+				#$datos_edad_paciente		= PacientePediatrico::CalculoEdad();
+				
 				$datos_vista = $datos_paciente[0]->toArray();
 				#$datos_primarios = $datos_paciente[0]->toArray();
+				
 				$historia = [
 								'datos_primarios'		=>	$datos_vista,
 								'datos_consultas'		=>	$datos_consultas_medicas,
@@ -70,7 +72,8 @@ class BusquedasController extends \BaseController
 								'datos_intolerancias'	=>	$datos_intolerancias,
 								'datos_patologias'		=>	$datos_patologias,
 								'datos_hospitalizacion'	=>	$datos_hospitalizacion,
-								'datos_talla_peso'		=>	$datos_talla_peso
+								'datos_talla_peso'		=>	$datos_talla_peso,								
+								'datos_edad_paciente'	=>	PacientePediatrico::CalculoEdad($datos_vista['id_paciente'])
 							];
 
 

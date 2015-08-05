@@ -42,8 +42,8 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Estadísticas <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="#">Pacientes</a></li>
-            <li><a href="#">Médicos</a></li>
-            <li><a href="#">Patologías</a></li>
+            <!-- <li><a href="#">Médicos</a></li> -->
+            <!-- <li><a href="#">Patologías</a></li> -->
           </ul>
         </li>        
       </ul>

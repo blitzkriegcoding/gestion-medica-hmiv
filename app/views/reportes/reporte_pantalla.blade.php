@@ -48,7 +48,7 @@
 				<strong>Edad:</strong>				
 			</td>
 			<td>
-				XX
+				{{ $datos_edad_paciente }}
 			</td>
 			<td style="padding-left: 10px">			
 				<strong>Sexo:</strong>			
@@ -163,11 +163,54 @@
 								{{ $d->especialidad }}
 							</td>
 							<td class="text-center">			
-								{{ $d->asistio_consulta }}
+								<?php
+									if(empty($d->asistio_consulta))
+										{
+											echo "SIN CONFIRMACIÓN";
+										}
+									else
+										{
+											switch($d->asistio_consulta)
+												{
+													case 'N':
+														echo "NO ASISTIÓ";
+													break;
+
+													case 'S':
+														echo "NO ASISTIÓ";
+													break;
+												}
+
+										}
+								?>
+								
 							</td>							
-							<td>
-								{{ $d->diagnostico_consulta }}
-							</td>			
+							<td class="text-center">
+								
+								<?php
+								#$d->diagnostico_consulta
+									if(empty($d->asistio_consulta))
+										{
+											echo "NO APLICA";
+										}
+									else
+										{
+											switch($d->asistio_consulta)
+												{
+													case 'N':
+														echo "NO ASISTIÓ";
+													break;
+
+													case 'S':
+														echo $d->diagnostico_consulta;
+													break;
+												}
+
+										}
+								?>
+
+							</td>
+
 						</tr>
 			<?php
 					endforeach;

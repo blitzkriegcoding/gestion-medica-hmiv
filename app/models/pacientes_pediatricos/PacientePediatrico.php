@@ -63,7 +63,7 @@ class PacientePediatrico extends \Eloquent {
 						       'days','días'),
 						    'day','día') as edad"))
                      ->where('id_paciente', '=', $id_paciente_pediatrico)                     
-                     ->get();
+                     ->pluck('edad');
 		}
 	public static function crear_examenes_paciente($input)
 		{

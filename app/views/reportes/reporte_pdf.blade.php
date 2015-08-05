@@ -48,7 +48,7 @@
 				<strong>Edad:</strong>				
 			</td>
 			<td>
-				XX
+				{{ $datos_edad_paciente }}
 			</td>
 			<td style="padding-left: 10px">			
 				<strong>Sexo:</strong>			
