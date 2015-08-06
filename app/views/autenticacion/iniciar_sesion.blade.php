@@ -12,14 +12,26 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <h1 class="text-center login-title">Inicio de Sesión<br>
+            <h1 class="text-center login-title"><br>
             Sistema de Gestión Médica<br> Hospital Materno Infantil de El Valle
             </h1>
             <div class="account-wall">
-                <img class="profile-img" src="{{ asset('img/logo_grande_redondo_icono_brand.png')}}"alt="">
-                <form class="form-signin">
-                <input type="text" class="form-control" placeholder="Su usuario" required autofocus>
-                <input type="password" class="form-control" placeholder="Su contraseña" required>
+                <div class="text-center">
+                    <h4>
+                        Inicio de Sesión
+                    </h4>                    
+                </div>
+                <img class="profile-img" src="{{ asset('img/logo_grande_redondo_icono_brand.png')}}" alt="">
+                @if(Session::has('error_message'))
+                    <div class="text-center text text-danger">
+                        <h4>
+                        {{ Session::get('error_message') }}
+                        </h4>
+                    </div>
+                @endif                
+                <form class="form-signin" action="usuarios/iniciar_sesion" method="post" >
+                <input type="text" class="form-control" name="usuario" placeholder="Su usuario" required autofocus>
+                <input type="password" class="form-control" name="password" placeholder="Su contraseña" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
 {{--                 <label class="checkbox pull-left">
                     <input type="checkbox" value="remember-me">
@@ -28,9 +40,13 @@
                 {{-- <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span> --}}
                 </form>
             </div>
+            
             {{-- <a href="#" class="text-center new-account">Create an account </a> --}}
         </div>
     </div>
+
+            
+
 </div>	
 </body>
 </html>

@@ -36,16 +36,16 @@ App::after(function($request, $response)
 Route::filter('auth', function()
 {
 	if (Auth::guest())
-	{
-		if (Request::ajax())
 		{
-			return Response::make('Unauthorized', 401);
+			if (Request::ajax())
+				{
+					return Response::make('Unauthorized', 401);
+				}
+			else
+				{
+					return Redirect::guest('/');
+				}
 		}
-		else
-		{
-			return Redirect::guest('login');
-		}
-	}
 });
 
 
@@ -88,3 +88,138 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/*FILTROS BASADOS EN ENTRUST PARA EL ACCESO A OPCIONES DEL SISTEMA*/
+
+///PACIENTES PEDIATRICOS
+Route::filter('nuevo_paciente', function()
+	{
+	    if (!Entrust::can('nuevo_paciente') )
+			{	        
+				return Redirect::to('principal')->with('error_message', 'No esta autorizado para acceder a esa opción');
+		    }
+	});
+
+Route::filter('busqueda_paciente', function()
+	{
+	    if (!Entrust::can('busqueda_paciente') )
+		    {
+		        return Redirect::to('principal')->with('error_message', 'No esta autorizado para acceder a esa opción');
+		    }
+	});
+
+Route::filter('modificacion_paciente', function()
+	{
+	    if (!Entrust::can('modificacion_paciente') )
+		    {
+		        return Redirect::to('principal')->with('error_message', 'No esta autorizado para acceder a esa opción');
+		    }
+	});
+
+Route::filter('baja_paciente', function()
+	{
+	    if (!Entrust::can('baja_paciente') )
+		    {
+		        return Redirect::to('principal')->with('error_message', 'No esta autorizado para acceder a esa opción');
+		    }
+	});
+
+///FIN PACIENTES PEDIATRICOS
+
+///HISTORIAS MEDICAS
+Route::filter('creacion_historia', function()
+	{
+	    if (!Entrust::can('creacion_historia') )
+		    {
+		        return Redirect::to('principal')->with('error_message', 'No esta autorizado para acceder a esa opción');
+		    }
+	});
+
+Route::filter('busqueda_historia', function()
+	{
+	    if (!Entrust::can('busqueda_historia') )
+		    {
+		        return Redirect::to('principal')->with('error_message', 'No esta autorizado para acceder a esa opción');
+		    }
+	});
+
+Route::filter('reporte_pantalla', function()
+	{
+	    if (!Entrust::can('reporte_pantalla') )
+		    {
+		        return Redirect::to('principal')->with('error_message', 'No esta autorizado para acceder a esa opción');
+		    }
+	});
+
+Route::filter('reporte_pdf', function()
+	{
+	    if (!Entrust::can('reporte_pdf') )
+		    {
+		        return Redirect::to('principal')->with('error_message', 'No esta autorizado para acceder a esa opción');
+		    }
+	});
+///FIN HISTORIAS MEDICAS
+
+////MEDICOS
+Route::filter('nuevo_medico', function()
+	{
+	    if (!Entrust::can('nuevo_medico') )
+			{	        
+				return Redirect::to('principal')->with('error_message', 'No esta autorizado para acceder a esa opción');
+		    }
+	});
+
+Route::filter('busqueda_medico', function()
+	{
+	    if (!Entrust::can('busqueda_medico') )
+			{	        
+				return Redirect::to('principal')->with('error_message', 'No esta autorizado para acceder a esa opción');
+		    }
+	});
+
+Route::filter('modificacion_medico', function()
+	{
+	    if (!Entrust::can('modificacion_medico') )
+			{	        
+				return Redirect::to('principal')->with('error_message', 'No esta autorizado para acceder a esa opción');
+		    }
+	});
+
+////FIN MEDICOS
+
+//ESTADISTICAS
+Route::filter('estadisticas_pacientes', function()
+	{
+	    if (!Entrust::can('estadisticas_pacientes'))
+		    {
+		        return Redirect::to('principal')->with('error_message', 'No esta autorizado para acceder a esa opción');
+		    }
+	});
+//FIN ESTADISTICAS
+/*
+
+Route::filter('crear_usuarios', function()
+	{
+	    if (!Entrust::can('crear_roles') )
+		    {
+		        return Redirect::guest('/');
+		    }
+	});
+
+Route::filter('editar_usuarios', function()
+	{
+	    if (!Entrust::can('editar_roles') )
+	    {
+	        return Redirect::guest('/');
+	    }
+	});
+
+Route::filter('eliminar_usuarios', function()
+	{
+	    if (!Entrust::can('eliminar_roles') )
+	    {
+	        return Redirect::guest('/');
+	    }
+	});
+
+*/

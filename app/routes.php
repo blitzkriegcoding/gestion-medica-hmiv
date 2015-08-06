@@ -10,30 +10,31 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+
 /**************************RUTAS INICIO SESION********************************/
 Route::get('/',function() 
 		{
-			return View::make('InicioSesion');
+			return View::make('autenticacion.iniciar_sesion');
 		}
 	);
 Route::get('/iniciar_sesion',function() 
 		{
-			return View::make('InicioSesion');
+			return View::make('autenticacion.iniciar_sesion');
 		}
 	);
-Route::get('principal', function() 
+Route::get('principal', ['before' => 'auth', function() 
 	{
 		return View::make('bienvenida.bienvenida');
 	}
-);
+]);
 
 /**************************RUTAS PACIENTES PEDIATRICOS********************************/
 
 Route::group(['prefix' => 'pacientes_pediatricos'] ,function()
 	{
 		/*TODOS LOS GET*/
-		Route::get('creacion_pacientes_pediatricos',									['uses'=>	'PacientesPediatricosController@nuevo_paciente_pediatrico'] );
-		Route::get('creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}',	['uses'	=>	'ExamenesPediatricosController@crear_examenes_medicos_pediatricos']);
+		Route::get('creacion_pacientes_pediatricos',									['before' => 'auth|nuevo_paciente',  'uses'=>	'PacientesPediatricosController@nuevo_paciente_pediatrico'] );
+		Route::get('creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}',	['before' => 'auth', 'uses'	=>	'ExamenesPediatricosController@crear_examenes_medicos_pediatricos']);
 		
 		/*TODOS LOS POST*/
 		Route::post('crear_paciente_pediatrico',		['uses'	=>	'PacientesPediatricosController@crear_paciente_pediatrico']);
@@ -106,7 +107,7 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 Route::group(['prefix' => 'medicos'], function()
 	{
 		/*TODOS LOS GET*/
-		Route::get('creacion_medicos', 		['uses'	=>	'MedicosController@crear_nuevo_medico']);
+		Route::get('creacion_medicos', 		['before' => 'auth|nuevo_medico', 'uses'	=>	'MedicosController@crear_nuevo_medico']);
 
 		/*TODOS LOS POST*/
 		Route::post('nuevo_medico',			['uses' => 	'MedicosController@nuevo_medico']);
@@ -122,10 +123,10 @@ Route::group(['prefix' => 'medicos'], function()
 Route::group(['prefix' => 'busquedas'], function()
 	{
 		/*TODOS LOS GETS*/
-		Route::get('busqueda_nueva', 					['uses' => 'BusquedasController@crear_nueva_busqueda']);
-		Route::get('busqueda_historia_medica', 			['uses' => 'BusquedasController@busqueda_historia_medica']);
-		Route::get('reporte_pantalla/{id_historia}', 	['uses' => 'BusquedasController@reporte_pantalla'])->where('id_historia','[0-9]+');
-		Route::get('reporte_pdf/{id_historia}', 		['uses' => 'BusquedasController@reporte_pdf'])->where('id_historia','[0-9]+');
+		Route::get('busqueda_nueva', 					['before' => 'auth|busqueda_paciente'	, 'uses' => 'BusquedasController@crear_nueva_busqueda']);
+		Route::get('busqueda_historia_medica', 			['before' => 'auth|busqueda_historia'	, 'uses' => 'BusquedasController@busqueda_historia_medica']);
+		Route::get('reporte_pantalla/{id_historia}', 	['before' => 'auth|reporte_pantalla'	, 'uses' => 'BusquedasController@reporte_pantalla'])->where('id_historia','[0-9]+');
+		Route::get('reporte_pdf/{id_historia}', 		['before' => 'auth|reporte_pdf'			, 'uses' => 'BusquedasController@reporte_pdf'])->where('id_historia','[0-9]+');
 
 		
 		/*TODOS LOS POST*/
@@ -159,8 +160,20 @@ Route::get('crear_perfil', function()
 
 	}
 );
-
 /*************************************************///
+
+/*RUTAS DE AUTENTICACION*/
+Route::group(['prefix' => 'usuarios'], function() 
+	{	
+		Route::get('cerrar_sesion', 	['as' => 'usuarios.cerrar_sesion', 	'uses' => 'AuthController@cerrar_sesion']);
+		Route::post('iniciar_sesion', 	['as' => 'usuarios.iniciar_sesion', 'uses' => 'AuthController@iniciar_sesion']);
+	});
+
+
+
+
+
+/*FIN RUTAS DE AUTENTICACION*/
 
 // Confide routes
 // Route::get('users/create', 'UsersController@create');

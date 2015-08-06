@@ -1,10 +1,29 @@
-<?php $__env->startSection('formularios'); ?>
-	<div class="container-fluid" style="width:100%; margin:0px auto;">
-		<h2 class="text-center">
-			Bienvenid@ al Sistema de Gestión Médica del<br>
-			Hospital Materno Infantil de El Valle
-		</h2>	
-	</div>
+<?php $__env->startSection('formularios'); ?>	
+<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+			<h2 class="text-center">
+				Bienvenid@ al Sistema de Gestión Médica del<br>
+				Hospital Materno Infantil de El Valle
+			</h2>
+			<?php if(Session::has('error_message')): ?>
+                <br><br>
+                <div class="col-xs-3"></div>                
+                <div class="col-xs-6 text-center alert alert-danger">
+                    <h4>
+                    	<?php echo Session::get('error_message'); ?>
+
+                    </h4>
+                </div>                
+                <div class="col-xs-3"></div>
+            <?php endif; ?>			
+		
+	
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
