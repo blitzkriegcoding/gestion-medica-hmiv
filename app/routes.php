@@ -162,18 +162,22 @@ Route::get('crear_perfil', function()
 );
 /*************************************************///
 
-/*RUTAS DE AUTENTICACION*/
+/*****RUTAS DE AUTENTICACION Y CULMINACION DE SESION******/
 Route::group(['prefix' => 'usuarios'], function() 
 	{	
 		Route::get('cerrar_sesion', 	['as' => 'usuarios.cerrar_sesion', 	'uses' => 'AuthController@cerrar_sesion']);
 		Route::post('iniciar_sesion', 	['as' => 'usuarios.iniciar_sesion', 'uses' => 'AuthController@iniciar_sesion']);
 	});
 
-
-
-
-
 /*FIN RUTAS DE AUTENTICACION*/
+
+/****RUTAS DE REPORTES ESTADISTICOS *****/
+Route::group(['prefix'	=>'estadisticas'], function()	
+		{
+			Route::get('principal',['uses' => 'EstadisticasPacientesController@reportes_graficos']);
+
+		});
+/****************************************/
 
 // Confide routes
 // Route::get('users/create', 'UsersController@create');

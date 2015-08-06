@@ -191,6 +191,7 @@ return array(
     'EspecialidadesMedicas' => $baseDir . '/app/models/modelos_complementarios/EspecialidadesMedicas.php',
     'EspecialidadesMedicasController' => $baseDir . '/app/controllers/medicos/EspecialidadesMedicasController.php',
     'EspecialidadesMedicasGaleno' => $baseDir . '/app/models/medicos/EspecialidadesMedicasGaleno.php',
+    'EstadisticasPacientesController' => $baseDir . '/app/controllers/estadisticas/EstadisticasPacientesController.php',
     'Estado' => $baseDir . '/app/models/modelos_ubicaciones/Estado.php',
     'EstadoCivil' => $baseDir . '/app/models/modelos_complementarios/EstadoCivil.php',
     'ExamenFisicoPediatrico' => $baseDir . '/app/models/examenes_pediatricos_diversos/ExamenFisicoPediatrico.php',
