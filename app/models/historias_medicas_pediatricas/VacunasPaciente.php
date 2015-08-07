@@ -162,9 +162,9 @@ class VacunasPaciente extends \Eloquent {
 						'mensaje'	=>	'Vacuna borrada con éxito',
 						'clase'		=>	'alert alert-success fade in',
 						'bandera'	=>	2
-					];			
+					];
+		}
 
-		}		
 
 
 }

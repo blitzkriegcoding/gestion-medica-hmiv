@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <?php echo $__env->make('includes.head_estadisticas', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<body>
+  <?php echo $__env->make('includes.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+  <!--Contenido del modulo -->
+    <div class="container-fluid" style="height:35em; margin:0px auto;">
+        <div class="content col-xs-12" id="content" style="padding-top:30px;">
+          <?php echo $__env->yieldContent('formularios'); ?>
+        </div>
+    </div>
+    <!-- /.container -->
+    <footer class="row" align="center">
+        <?php echo $__env->make('includes.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    </footer>    
+    <?php echo $__env->make('includes.footer_estadisticas', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->yieldContent('controles_adicionales'); ?>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->    
+  </body>
+</html>

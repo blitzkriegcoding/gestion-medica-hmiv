@@ -168,14 +168,19 @@ Route::group(['prefix' => 'usuarios'], function()
 		Route::get('cerrar_sesion', 	['as' => 'usuarios.cerrar_sesion', 	'uses' => 'AuthController@cerrar_sesion']);
 		Route::post('iniciar_sesion', 	['as' => 'usuarios.iniciar_sesion', 'uses' => 'AuthController@iniciar_sesion']);
 	});
-
-/*FIN RUTAS DE AUTENTICACION*/
+/***************FIN RUTAS DE AUTENTICACION****************/
 
 /****RUTAS DE REPORTES ESTADISTICOS *****/
 Route::group(['prefix'	=>'estadisticas'], function()	
 		{
-			Route::get('principal',['uses' => 'EstadisticasPacientesController@reportes_graficos']);
+			Route::get('principal',['before' => 'auth|estadisticas_pacientes', 'uses' => 'EstadisticasPacientesController@reportes_graficos']);
 
+
+			/*CONSULTAS VIA AJAX*/
+			Route::get('distribucion_genero',['uses' => 'EstadisticasPacientesController@distribucion_genero']);			
+			Route::get('distribucion_patologias',['uses' => 'EstadisticasPacientesController@distribucion_patologias']);			
+			Route::get('distribucion_pais_nacimiento',['uses' => 'EstadisticasPacientesController@distribucion_pais_nacimiento']);			
+			Route::get('distribucion_pacientes_alergicos',['uses' => 'EstadisticasPacientesController@distribucion_pacientes_alergicos']);			
 		});
 /****************************************/
 

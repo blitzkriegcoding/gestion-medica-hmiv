@@ -143,8 +143,27 @@ class AlergiasPacientePediatrico extends \Eloquent {
 						'clase'		=>	'alert alert-success',
 						'bandera'	=>	2
 					];
+		}
 
+	public static function distribucionPacientesAlergicos()	
+		{
+			$pacientes_alergicos_json = [];
 
+			$pacientes_alergicos = DB::table('alergias_historia_pediatrica')
+			                     ->select(DB::raw('count(alergias.alergia) as cant_alergia, alergias.alergia as ale'))	                     
+				                     ->join('historia_paciente_pediatrico','alergias_historia_pediatrica.id_historia_medica','=', 'historia_paciente_pediatrico.id_historia_medica')
+					                     ->join('alergias','alergias_historia_pediatrica.id_alergia','=','alergias.id_alergia')	
+					                     	->groupBy('alergias.alergia')
+					                     		->get();
+
+			foreach($pacientes_alergicos as $d):
+
+	 			$fila[0] = $d->ale;
+	 			$fila[1] = $d->cant_alergia;
+	 			array_push($pacientes_alergicos_json, $fila);
+	 			
+			endforeach;
+			return json_encode($pacientes_alergicos_json, JSON_NUMERIC_CHECK);				
 		}
 
 

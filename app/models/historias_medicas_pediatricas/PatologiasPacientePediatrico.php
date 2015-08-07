@@ -1,5 +1,13 @@
 <?php
 
+/*
+	06/08/2015 -10:30
+	TE EXTRAÑO <3
+	TE QUIERO <3
+	ME HACES FALTA <3 
+
+*/
+
 class PatologiasPacientePediatrico extends \Eloquent {
 	protected $fillable = ['id_patologia','id_historia_medica'];
 	public $primaryKey 	= 'id_patologia_historia';
@@ -135,7 +143,32 @@ public static function cargarPatologiaNueva($input)
 
 
 		}
+	public static function distribucionPacientePatologias()	
+		{
+				$pacientes_genero_json = [];
+
+				$pacientes_patologias = DB::table('patologias_historia_pediatrica')
+				                     ->select(DB::raw('count(patologias.patologia) as cant_patologias, patologias.patologia as pat'))	                     
+					                     ->join('historia_paciente_pediatrico','patologias_historia_pediatrica.id_historia_medica','=', 'historia_paciente_pediatrico.id_historia_medica')
+						                     ->join('patologias','patologias_historia_pediatrica.id_patologia','=','patologias.id_patologia')	
+						                     	->groupBy('patologias.patologia')
+						                     		->get();
+
+				foreach($pacientes_patologias as $d):
+
+		 			$fila[0] = $d->pat;
+		 			$fila[1] = $d->cant_patologias;
+		 			array_push($pacientes_genero_json, $fila);
+					 		
+
+				endforeach;
+				return json_encode($pacientes_genero_json, JSON_NUMERIC_CHECK);
+
+
+		}
 
 
 
 }
+
+

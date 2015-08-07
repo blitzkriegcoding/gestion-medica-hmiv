@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.master_estadisticas')
 @section('formularios')
 	@include('reportes.reportes_estadisticas_pacientes')	
 @stop
 @section('controles_adicionales')
-	{{-- @include('includes.validaciones_examenes_medicos') --}}
+	@include('includes.implementacion_highcharts')
 @stop

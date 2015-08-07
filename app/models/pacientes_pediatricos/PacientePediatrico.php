@@ -597,7 +597,115 @@ class PacientePediatrico extends \Eloquent {
 			endforeach;
 
 			return Response::json($datos_paciente_json);
-
 		}
+
+		public static function distribucionPacientesGenero()
+			{
+				$pacientes_genero_json = [];
+				$fila = [];
+				$pacientes_genero = DB::table('pacientes_pediatricos')
+				                     ->select(DB::raw('count(sexo) as cantidad_genero, sexo'))	                     
+				                     ->groupBy('sexo')
+				                     ->get();
+
+
+
+				foreach($pacientes_genero as $d):
+				 	switch($d->sexo)
+					 	{
+					 		case 'F':
+					 			$fila[0] = 'NIÑA';
+					 			$fila[1] = $d->cantidad_genero;
+					 			array_push($pacientes_genero_json, $fila);
+					 		break;
+
+					 		case 'M':
+					 			$fila[0] = 'NIÑO';
+					 			$fila[1] = $d->cantidad_genero;
+					 			array_push($pacientes_genero_json, $fila);				 			
+					 			
+					 		break;
+					 	}
+				endforeach;
+				return json_encode($pacientes_genero_json, JSON_NUMERIC_CHECK);
+			}
+		public static function distribucionPacientesProcedencia()
+			{
+				// $pacientes_genero_json = [];
+				// $fila = [];
+				// $pacientes_genero = DB::table('pacientes_pediatricos')
+				//                      ->select(DB::raw('count(estado.estado) as cantidad_estado, estado.estado'))	                     
+				//                      ->groupBy('sexo')
+				//                      ->get();
+
+
+
+				// foreach($pacientes_genero as $d):
+				//  	switch($d->sexo)
+				// 	 	{
+				// 	 		case 'F':
+				// 	 			$fila[0] = 'NIÑA';
+				// 	 			$fila[1] = $d->cantidad_genero;
+				// 	 			array_push($pacientes_genero_json, $fila);
+				// 	 		break;
+
+				// 	 		case 'M':
+				// 	 			$fila[0] = 'NIÑO';
+				// 	 			$fila[1] = $d->cantidad_genero;
+				// 	 			array_push($pacientes_genero_json, $fila);				 			
+					 			
+				// 	 		break;
+				// 	 	}
+				// endforeach;
+				// return json_encode($pacientes_genero_json, JSON_NUMERIC_CHECK);				
+
+			}
+		public static function distribucionPacientesPaisNacimiento()
+			{
+				$pacientes_pais_json = [];
+				$fila = [];
+				$pacientes_pais = DB::table('pacientes_pediatricos')
+				                     ->select(DB::raw('count(paises.pais) as cantidad_estado, paises.pais as pais_origen'))	                     
+				                     	->join('paises','pacientes_pediatricos.id_pais','=','paises.id_pais')
+					                     ->groupBy('paises.pais')
+					                     ->get();
+
+
+
+				foreach($pacientes_pais as $d):
+
+		 			$fila[0] = $d->pais_origen;
+			 		$fila[1] = $d->cantidad_estado;
+			 		array_push($pacientes_pais_json, $fila);
+
+				endforeach;
+				return json_encode($pacientes_pais_json, JSON_NUMERIC_CHECK);					
+
+			}
+	public static function distribucionPacientesVacunados()
+		{
+				$pacientes_vacunados_json = [];
+
+				$pacientes_vacunados = DB::table('pacientes_pediatricos')
+				                     ->select(DB::raw('count(patologias.patologia) as cant_patologias, patologias.patologia as pat'))	                     
+					                     ->join('historia_paciente_pediatrico','patologias_historia_pediatrica.id_historia_medica','=', 'historia_paciente_pediatrico.id_historia_medica')
+						                     ->join('patologias','patologias_historia_pediatrica.id_patologia','=','patologias.id_patologia')	
+						                     	->groupBy('patologias.patologia')
+						                     		->get();
+
+				foreach($pacientes_vacunados as $d):
+
+		 			$fila[0] = $d->pat;
+		 			$fila[1] = $d->cant_patologias;
+		 			array_push($pacientes_vacunados_json, $fila);
+					 		
+
+				endforeach;
+				return json_encode($pacientes_vacunados_json, JSON_NUMERIC_CHECK);			
+
+		}			
+
+
+
 
 }
