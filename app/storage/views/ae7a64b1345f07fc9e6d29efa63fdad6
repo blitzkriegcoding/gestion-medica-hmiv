@@ -121,10 +121,11 @@
 			            <th class="text-center">N°</th>
 			            <th class="text-center">Nombres y Apellidos</th>
 			            <th class="text-center">Cédula</th>
-			            <th class="text-center">Fecha de nacimiento</th>
-			            <th class="text-center">Código de Historia</th>
+			            <th class="text-center">Nacimiento</th>
+			            <th class="text-center">Cód. Historia</th>
 			            <th class="text-center">Representante</th>
 			            <th class="text-center">Detalle</th> 
+			            <th class="text-center">Ingreso</th> 
 			        </tr>
 			    </thead>
 			    <tbody class="text-center">

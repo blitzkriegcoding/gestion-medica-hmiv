@@ -139,7 +139,7 @@ $(document).ready(function()
 	                plotShadow: false
 	            },
 	            title: {
-	                text: 'Distribución según país de nacimiento de pacientes pediátricos durante el año 2015'
+	                text: 'Distribución de alérgias en pacientes pediátricos'
 	            },
 	            tooltip: {
 	                formatter: function() {
@@ -170,10 +170,52 @@ $(document).ready(function()
 	            }]
 	        }
 	        
-	        $.getJSON("../estadisticas/distribucion_pais_nacimiento", function(json) {
+	        $.getJSON("../estadisticas/distribucion_pacientes_alergicos", function(json) {
 				options_alergias.series[0].data = json;
 	        	chart = new Highcharts.Chart(options_alergias);
 	        });
-
+	var options_historias = {
+				chart: {
+	                renderTo: 'distribucion_pacientes_historias',
+	                plotBackgroundColor: null,
+	                plotBorderWidth: null,
+	                plotShadow: false
+	            },
+	            title: {
+	                text: 'Relación Pacientes registrados/Apertura de historias'
+	            },
+	            tooltip: {
+	                formatter: function() {
+	                    return '<b>'+ this.point.name +'</b>: '+ this.y +' PACIENTE(S)';
+	                }
+	            },
+	            plotOptions: {
+	                pie: {
+	                    allowPointSelect: true,
+	                    cursor: 'pointer',
+	                    size: '75%',
+	                    /*colors: ['#4183D7','#F64747'],*/
+	                    dataLabels: {
+	                        enabled: true,
+	                        color: '#000000',
+	                        connectorColor: '#000000',
+	                        formatter: function() {
+	                        	
+	                            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(2) +' %';
+	                        }
+	                    }
+	                }
+	            },
+	            series: [{
+	                type: 'pie',
+	                name: 'Browser share',
+	                data: []
+	            }]
+	        }
+	        
+	        $.getJSON("../estadisticas/distribucion_pacientes_historias", function(json) {
+				options_historias.series[0].data = json;
+	        	chart = new Highcharts.Chart(options_historias);
+	        });
 		//FIN DOCUMENT READY
 	});

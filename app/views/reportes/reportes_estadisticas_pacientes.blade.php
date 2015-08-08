@@ -37,7 +37,7 @@
 		<br>
 		<br>
 		<div class="col-xs-3"></div>
-		<div class="col-xs-6" id="distribucion_pacientes_vacunados" style="height: 400px">		
+		<div class="col-xs-6" id="distribucion_pacientes_historias" style="height: 400px">		
 		</div>	
 		<div class="col-xs-3"></div>
 	</div>	

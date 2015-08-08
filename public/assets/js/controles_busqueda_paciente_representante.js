@@ -47,7 +47,7 @@ $(document).ready( function ()
                             ajax: 
                                     {
                                         "type"    : "POST",
-                                        "url"     : "http://localhost/hmiv/public/busquedas/generar_busqueda",
+                                        "url"     : "../busquedas/generar_busqueda",
                                         "dataSrc" : "",
                                         "data"    : function (d)
                                                         {
@@ -75,6 +75,7 @@ $(document).ready( function ()
                                           { "data" : "cod_histo"  },
                                           { "data" : "represent"  },
                                           { "data" : "opciones"   },
+                                          { "data" : "ingreso"   },
                                         ],
                       })
                   

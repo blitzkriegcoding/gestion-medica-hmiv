@@ -10,7 +10,6 @@ class BusquedasController extends \BaseController
 			{
 				
 				$respuesta = PacientePediatrico::generarBusquedaPaciente(Input::all());
-
 				return $respuesta;
 
 			}

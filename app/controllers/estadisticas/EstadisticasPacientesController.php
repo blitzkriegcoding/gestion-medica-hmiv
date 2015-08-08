@@ -19,9 +19,9 @@ class EstadisticasPacientesController extends \BaseController
 			{
 				return PacientePediatrico::distribucionPacientesPaisNacimiento();
 			}
-		public function distribucion_pacientes_vacunados()	
+		public function distribucion_pacientes_historias()	
 			{
-				return VacunasPaciente::distribucionPacientesVacunados();
+				return PacientePediatrico::distribucionPacientesHistoria();
 			}
 		public function distribucion_pacientes_alergicos()
 			{

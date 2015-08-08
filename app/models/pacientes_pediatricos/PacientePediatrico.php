@@ -591,7 +591,8 @@ class PacientePediatrico extends \Eloquent {
 												'fecha_nac'	=>	/*$d->fn_pac*/$fecha_nacimiento->format('d/m/Y'),
 												'cod_histo'	=>	$d->cod_his_med,
 												'represent'	=>	($d->p_nombre_rep." ".$d->s_nombre_rep." ".$d->p_apellido_rep."".$d->s_apellido_rep),
-												'opciones'	=>	"<a href='".asset('/historias_medicas_pediatricas/historia_medica_paciente/'.$d->id_paciente)."' class='btn btn-success' id='".$d->id_historia_medica."'>Ver detalles</a>"
+												'opciones'	=>	"<a href='".asset('/historias_medicas_pediatricas/historia_medica_paciente/'.$d->id_paciente)."' class='btn btn-success' id='".$d->id_historia_medica."'>Ver detalles</a>",
+												'ingreso'	=>	"<a href='".asset('/pacientes_pediatricos/nuevo_ingreso_paciente_existente/'.$d->id_paciente)."' class='btn btn-primary' id='".$d->id_historia_medica."'>Ingresar</a>",
 
 											];
 			endforeach;
@@ -682,26 +683,25 @@ class PacientePediatrico extends \Eloquent {
 				return json_encode($pacientes_pais_json, JSON_NUMERIC_CHECK);					
 
 			}
-	public static function distribucionPacientesVacunados()
+	public static function distribucionPacientesHistoria()
 		{
-				$pacientes_vacunados_json = [];
+				$pacientes_historias_json = [];
 
-				$pacientes_vacunados = DB::table('pacientes_pediatricos')
-				                     ->select(DB::raw('count(patologias.patologia) as cant_patologias, patologias.patologia as pat'))	                     
-					                     ->join('historia_paciente_pediatrico','patologias_historia_pediatrica.id_historia_medica','=', 'historia_paciente_pediatrico.id_historia_medica')
-						                     ->join('patologias','patologias_historia_pediatrica.id_patologia','=','patologias.id_patologia')	
-						                     	->groupBy('patologias.patologia')
+				$pacientes_historias = DB::table('pacientes_pediatricos')
+				                     ->select(DB::raw(' \'hola\', count(distinct (pacientes_pediatricos.id_paciente)) as cant_pacientes, 
+				                     						count(historia_paciente_pediatrico.id_historia_medica) as cant_historias'))	  
+				                     				->leftJoin('historia_paciente_pediatrico','pacientes_pediatricos.id_paciente','=','historia_paciente_pediatrico.id_paciente')
 						                     		->get();
 
-				foreach($pacientes_vacunados as $d):
-
-		 			$fila[0] = $d->pat;
-		 			$fila[1] = $d->cant_patologias;
-		 			array_push($pacientes_vacunados_json, $fila);
-					 		
-
+				foreach($pacientes_historias as $d):
+		 			$fila[0] = "CANTIDAD PACIENTES";
+		 			$fila[1] = $d->cant_pacientes;
+		 			array_push($pacientes_historias_json, $fila);
+		 			$fila[0] = "CANTIDAD HISTORIAS";
+		 			$fila[1] = $d->cant_historias;
+		 			array_push($pacientes_historias_json, $fila);
 				endforeach;
-				return json_encode($pacientes_vacunados_json, JSON_NUMERIC_CHECK);			
+				return json_encode($pacientes_historias_json, JSON_NUMERIC_CHECK);			
 
 		}			
 

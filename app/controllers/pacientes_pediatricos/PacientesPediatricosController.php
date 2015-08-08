@@ -28,4 +28,12 @@ class PacientesPediatricosController extends \BaseController {
 					return Redirect::to('/pacientes_pediatricos/creacion_pacientes_pediatricos')->with(['mensaje'=>$respuesta['mensaje'],'estilo'=>$respuesta['estilo'],'bandera'=>$respuesta['bandera']  ]);
 				}
 		}
+	public function nuevo_ingreso_paciente_existente($id_paciente_pediatrico)
+		{
+			Session::put('id_paciente_pediatrico',$id_paciente_pediatrico);
+			$datos_paciente = HistoriaMedicaPediatrica::datosPacienteHistoria();
+
+			return View::make('pacientes_pediatricos.crear_ingreso_paciente_pediatrico_existente')->with(['datos_paciente' => $datos_paciente]);
+
+		}
 }

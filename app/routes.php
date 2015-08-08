@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
-
 /**************************RUTAS INICIO SESION********************************/
 Route::get('/',function() 
 		{
@@ -33,7 +22,10 @@ Route::get('principal', ['before' => 'auth', function()
 Route::group(['prefix' => 'pacientes_pediatricos'] ,function()
 	{
 		/*TODOS LOS GET*/
-		Route::get('creacion_pacientes_pediatricos',									['before' => 'auth|nuevo_paciente',  'uses'=>	'PacientesPediatricosController@nuevo_paciente_pediatrico'] );
+		Route::get('creacion_pacientes_pediatricos',		['before' => 'auth|nuevo_paciente',  'uses'=>	'PacientesPediatricosController@nuevo_paciente_pediatrico'] );
+		#Route::get('nuevo_ingreso_paciente_existente',		['before' => 'auth|nuevo_paciente_existente',  'uses'=>	'PacientesPediatricosController@nuevo_ingreso_paciente_existente'] );
+		Route::get('nuevo_ingreso_paciente_existente/{id_paciente_pediatrico}',		['before' => 'auth',  'uses'=>	'PacientesPediatricosController@nuevo_ingreso_paciente_existente'] )->where('id_paciente_pediatrico','[0-9]+');;
+		
 		Route::get('creacion_examenes_medicos_pediatricos/{id_paciente_pediatrico}',	['before' => 'auth', 'uses'	=>	'ExamenesPediatricosController@crear_examenes_medicos_pediatricos']);
 		
 		/*TODOS LOS POST*/
@@ -107,7 +99,7 @@ Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 Route::group(['prefix' => 'medicos'], function()
 	{
 		/*TODOS LOS GET*/
-		Route::get('creacion_medicos', 		['before' => 'auth|nuevo_medico', 'uses'	=>	'MedicosController@crear_nuevo_medico']);
+		Route::get('creacion_medicos', 		['before' => 'auth|nuevo_medico',  'uses'	=>	'MedicosController@crear_nuevo_medico']);
 
 		/*TODOS LOS POST*/
 		Route::post('nuevo_medico',			['uses' => 	'MedicosController@nuevo_medico']);
@@ -173,14 +165,14 @@ Route::group(['prefix' => 'usuarios'], function()
 /****RUTAS DE REPORTES ESTADISTICOS *****/
 Route::group(['prefix'	=>'estadisticas'], function()	
 		{
-			Route::get('principal',['before' => 'auth|estadisticas_pacientes', 'uses' => 'EstadisticasPacientesController@reportes_graficos']);
-
+			Route::get('principal',['before' => 'auth|estadisticas_pacientes', 'as'=>'estadisticas.principal','uses' => 'EstadisticasPacientesController@reportes_graficos']);
 
 			/*CONSULTAS VIA AJAX*/
 			Route::get('distribucion_genero',['uses' => 'EstadisticasPacientesController@distribucion_genero']);			
 			Route::get('distribucion_patologias',['uses' => 'EstadisticasPacientesController@distribucion_patologias']);			
 			Route::get('distribucion_pais_nacimiento',['uses' => 'EstadisticasPacientesController@distribucion_pais_nacimiento']);			
 			Route::get('distribucion_pacientes_alergicos',['uses' => 'EstadisticasPacientesController@distribucion_pacientes_alergicos']);			
+			Route::get('distribucion_pacientes_historias',['uses' => 'EstadisticasPacientesController@distribucion_pacientes_historias']);			
 		});
 /****************************************/
 
