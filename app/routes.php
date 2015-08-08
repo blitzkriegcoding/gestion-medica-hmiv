@@ -44,8 +44,8 @@ Route::group(['prefix' => 'pacientes_pediatricos'] ,function()
 Route::group(['prefix' => 'historias_medicas_pediatricas'], function()
 	{
 		/*TODOS LOS GET*/
-		Route::get('creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',		['uses'	=>	'HistoriaMedicaPediatricaController@nueva_historia_medica_pediatrica']);		
-		Route::get('creacion_historia_medica_federada/{id_paciente_pediatrico}',		['uses' =>	'HistoriaMedicaFederadaController@nueva_historia_medica_federada']);
+		Route::get('creacion_historia_medica_pediatrica/{id_paciente_pediatrico}',		['before' =>'auth|creacion_historia',  	'uses'	=>	'HistoriaMedicaPediatricaController@nueva_historia_medica_pediatrica']);		
+		Route::get('creacion_historia_medica_federada/{id_paciente_pediatrico}',		['before' =>'auth|creacion_historia',	'uses' =>	'HistoriaMedicaFederadaController@nueva_historia_medica_federada']);
 		Route::get('recargar_historico_consultas',										['uses'	=>  'HistoriaMedicaFederadaController@recargar_historico_consultas'] );
 		Route::get('obtener_historico_vacunas',											['uses' =>	'HistoriaMedicaFederadaController@obtener_historico_vacunas' ]);
 		Route::get('obtener_patologias_paciente',										['uses' =>	'HistoriaMedicaFederadaController@obtener_patologias_paciente' ]);
